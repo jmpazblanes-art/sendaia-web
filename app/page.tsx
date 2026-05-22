@@ -27,42 +27,42 @@ const SERVICIOS = [
     title: 'Agente de Voz y WhatsApp 24/7',
     desc: 'Nunca más una llamada sin contestar. El agente atiende, filtra y agenda visitas automáticamente.',
     roi: '-80% llamadas perdidas',
-    color: '#6c63ff',
+    color: '#D4AF37',
   },
   {
     icon: FileText,
     title: 'Automatización de Facturación',
     desc: 'Extrae, registra y procesa facturas y albaranes sin que tu equipo toque un teclado.',
     roi: '-5h/semana en back-office',
-    color: '#a78bfa',
+    color: '#E7C86A',
   },
   {
     icon: Mail,
     title: 'Agente de Email con IA',
     desc: 'Clasifica, prioriza y redacta borradores. Tu bandeja de entrada deja de ser un caos.',
     roi: '30% tiempo recuperado',
-    color: '#60a5fa',
+    color: '#C9A227',
   },
   {
     icon: RefreshCw,
     title: 'Reactivación de Clientes',
     desc: 'Detecta clientes dormidos y lanza secuencias personalizadas de seguimiento automático.',
     roi: '+25% ventas recurrentes',
-    color: '#34d399',
+    color: '#F0D060',
   },
   {
     icon: Bot,
     title: 'Agente Documental (PDFs)',
     desc: 'Lee contratos, informes y formularios. Extrae los datos que necesitas en segundos.',
     roi: '-90% tiempo extracción datos',
-    color: '#f59e0b',
+    color: '#B8960C',
   },
   {
     icon: Brain,
     title: 'Soluciones a Medida',
     desc: 'Si tu proceso no encaja en un molde estándar, lo diseñamos contigo desde cero.',
     roi: 'Presupuesto personalizado',
-    color: '#f43f5e',
+    color: '#E2B83A',
   },
 ]
 
@@ -278,7 +278,7 @@ export default function Home() {
           >
             <span
               className="mb-6 inline-block rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-widest"
-              style={{ background: 'rgba(108,99,255,0.18)', color: 'var(--accent-light)', border: '1px solid rgba(108,99,255,0.3)' }}
+              style={{ background: 'rgba(212,175,55,0.18)', color: 'var(--accent-light)', border: '1px solid rgba(212,175,55,0.3)' }}
             >
               Automatización con IA para PYMEs
             </span>
@@ -316,7 +316,7 @@ export default function Home() {
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-2 rounded-full px-8 py-4 text-sm font-bold text-white transition-all hover:scale-105 hover:shadow-lg"
-              style={{ background: 'var(--accent)', boxShadow: '0 0 30px rgba(108,99,255,0.4)' }}
+              style={{ background: 'var(--accent)', boxShadow: '0 0 30px rgba(212,175,55,0.4)' }}
             >
               Agenda tu diagnóstico gratuito <ArrowRight className="h-4 w-4" />
             </a>
@@ -376,7 +376,7 @@ export default function Home() {
             </FadeIn>
 
             <FadeIn delay={0.2}>
-              <div className="relative overflow-hidden rounded-3xl" style={{ border: '1px solid rgba(108,99,255,0.3)' }}>
+              <div className="relative overflow-hidden rounded-3xl" style={{ border: '1px solid rgba(212,175,55,0.3)' }}>
                 <Image
                   src="/images/dashboard.png"
                   alt="Dashboard SendaIA automatizado"
@@ -458,7 +458,7 @@ export default function Home() {
               <FadeIn key={m.label} delay={i * 0.1}>
                 <div
                   className="rounded-2xl p-8 text-center"
-                  style={{ background: 'var(--card)', border: '1px solid rgba(108,99,255,0.2)', boxShadow: '0 0 40px rgba(108,99,255,0.08)' }}
+                  style={{ background: 'var(--card)', border: '1px solid rgba(212,175,55,0.2)', boxShadow: '0 0 40px rgba(212,175,55,0.08)' }}
                 >
                   <p className="text-4xl font-black sm:text-5xl gradient-text">
                     <Counter value={m.value} suffix={m.suffix} prefix={m.prefix} />
@@ -506,7 +506,7 @@ export default function Home() {
               exit={{ opacity: 0, y: -16 }}
               transition={{ duration: 0.4 }}
               className="overflow-hidden rounded-3xl"
-              style={{ border: '1px solid rgba(108,99,255,0.25)', boxShadow: '0 0 60px rgba(108,99,255,0.15)' }}
+              style={{ border: '1px solid rgba(212,175,55,0.25)', boxShadow: '0 0 60px rgba(212,175,55,0.15)' }}
             >
               <div className="p-6 pb-0" style={{ background: 'var(--card)' }}>
                 <p className="font-bold text-lg">{DEMOS[activeTab].title}</p>
@@ -581,7 +581,7 @@ export default function Home() {
           <div className="relative grid gap-6 lg:grid-cols-4">
             <div
               className="absolute top-10 left-0 right-0 h-px hidden lg:block"
-              style={{ background: 'linear-gradient(to right, transparent, rgba(108,99,255,0.4), rgba(167,139,250,0.4), transparent)' }}
+              style={{ background: 'linear-gradient(to right, transparent, rgba(212,175,55,0.4), rgba(231,200,106,0.4), transparent)' }}
             />
             {PASOS.map((p, i) => (
               <FadeIn key={p.n} delay={i * 0.12}>
@@ -615,7 +615,7 @@ export default function Home() {
                 />
                 <div
                   className="absolute inset-0"
-                  style={{ background: 'linear-gradient(135deg, rgba(5,5,16,0.93) 0%, rgba(108,99,255,0.6) 100%)' }}
+                  style={{ background: 'linear-gradient(135deg, rgba(5,5,16,0.93) 0%, rgba(212,175,55,0.6) 100%)' }}
                 />
               </div>
 
@@ -634,7 +634,7 @@ export default function Home() {
                     target="_blank"
                     rel="noreferrer"
                     className="inline-flex items-center gap-2 rounded-full px-8 py-4 text-sm font-bold text-white transition-all hover:scale-105"
-                    style={{ background: 'var(--accent)', boxShadow: '0 0 40px rgba(108,99,255,0.5)' }}
+                    style={{ background: 'var(--accent)', boxShadow: '0 0 40px rgba(212,175,55,0.5)' }}
                   >
                     Quiero el diagnóstico gratuito <ArrowRight className="h-4 w-4" />
                   </a>
