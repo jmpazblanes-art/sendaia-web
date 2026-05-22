@@ -350,10 +350,10 @@ export default function Home() {
               <a href="tel:+34630310451" className="hover:text-white transition-colors">
                 630310451
               </a>
-              <a href="https://instagram.com" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">
+              <a href="https://www.instagram.com/sendaia.es" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">
                 Instagram
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">
+              <a href="https://www.linkedin.com/company/sendaia" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">
                 LinkedIn
               </a>
             </div>
