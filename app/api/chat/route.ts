@@ -4,16 +4,14 @@ export async function POST(request: Request) {
   try {
     const { messages, system } = await request.json()
 
-    const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+    const res = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
+        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
         'Content-Type': 'application/json',
-        'HTTP-Referer': 'https://sendaia.es',
-        'X-Title': 'SendaIA Chatbot',
       },
       body: JSON.stringify({
-        model: 'anthropic/claude-haiku-4-5',
+        model: 'gpt-4o-mini',
         max_tokens: 200,
         messages: [
           { role: 'system', content: system },
