@@ -494,6 +494,69 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── DEMO EN VIVO ── */}
+      <section className="py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-6">
+          <FadeIn>
+            <div
+              className="relative overflow-hidden rounded-3xl p-8 sm:p-12 flex flex-col sm:flex-row items-center gap-8"
+              style={{ background: 'var(--card)', border: '1px solid rgba(212,175,55,0.35)', boxShadow: '0 0 60px rgba(212,175,55,0.1)' }}
+            >
+              <div className="flex-1">
+                <span
+                  className="mb-4 inline-block rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-widest"
+                  style={{ background: 'rgba(212,175,55,0.15)', color: 'var(--accent-light)' }}
+                >
+                  Demo interactiva en vivo
+                </span>
+                <h2 className="mt-2 text-2xl font-black sm:text-3xl">
+                  Sube una factura en PDF.<br />
+                  <span className="gradient-text">La IA extrae los datos en segundos.</span>
+                </h2>
+                <p className="mt-4 text-sm leading-7" style={{ color: 'rgba(245,245,245,0.65)' }}>
+                  Sin instalar nada. Sin formularios. Arrastra el PDF y ve cómo el sistema identifica número, fecha, importe, IVA y empresa — listo para tu contabilidad.
+                </p>
+                <a
+                  href="https://demo-pedidos-legumbre-espino.vercel.app/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-6 inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-bold text-black transition-all hover:scale-105 hover:shadow-lg"
+                  style={{ background: 'var(--accent)', boxShadow: '0 0 30px rgba(212,175,55,0.3)' }}
+                >
+                  Probar demo ahora <ArrowRight className="h-4 w-4" />
+                </a>
+              </div>
+              <div
+                className="w-full sm:w-72 shrink-0 rounded-2xl overflow-hidden"
+                style={{ border: '1px solid rgba(212,175,55,0.2)' }}
+              >
+                <div className="p-4 text-xs font-mono space-y-2" style={{ background: '#0a0a0a' }}>
+                  <p style={{ color: 'rgba(245,245,245,0.35)' }}>📄 factura_proveedor_mayo.pdf</p>
+                  <div className="h-px" style={{ background: 'rgba(212,175,55,0.15)' }} />
+                  <div className="space-y-1.5">
+                    {[
+                      ['Nº factura', 'F-2026-0483'],
+                      ['Fecha', '15/05/2026'],
+                      ['Empresa', 'Suministros García SL'],
+                      ['Base imp.', '1.240,00 €'],
+                      ['IVA 21%', '260,40 €'],
+                      ['Total', '1.500,40 €'],
+                    ].map(([k, v]) => (
+                      <div key={k} className="flex justify-between">
+                        <span style={{ color: 'rgba(245,245,245,0.4)' }}>{k}</span>
+                        <span className="font-semibold" style={{ color: 'var(--accent-light)' }}>{v}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="h-px" style={{ background: 'rgba(212,175,55,0.15)' }} />
+                  <p className="text-center text-xs" style={{ color: '#4ade80' }}>✓ Extraído automáticamente</p>
+                </div>
+              </div>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
       {/* ── DEMOS EN VÍDEO ── */}
       <section id="demos" className="py-20 sm:py-28" style={{ background: 'rgba(13,13,26,0.6)' }}>
         <div className="mx-auto max-w-7xl px-6">
