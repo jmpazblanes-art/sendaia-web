@@ -11,6 +11,7 @@ import {
   FileText,
   Mail,
   MessageCircle,
+  Mic,
   Phone,
   PhoneCall,
   RefreshCw,
@@ -332,6 +333,90 @@ Ubicación: Granada, España
 Cuando alguien quiera el diagnóstico gratuito, diles que rellenen el formulario de la página o que llamen al 858 215 026.
 
 Responde siempre en español, de forma directa y profesional. Máximo 3 frases por respuesta.`
+
+function VoiceAgent() {
+  const [status, setStatus] = useState<'idle' | 'connecting' | 'active' | 'error'>('idle')
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const retellClientRef = useRef<any>(null)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [RetellWebClient, setRetellWebClient] = useState<any>(null)
+
+  useEffect(() => {
+    import('retell-client-js-sdk').then((mod) => {
+      setRetellWebClient(() => mod.RetellWebClient)
+    })
+  }, [])
+
+  async function startCall() {
+    if (!RetellWebClient) return
+    setStatus('connecting')
+    try {
+      const res = await fetch('/api/voice', { method: 'POST' })
+      const data = await res.json()
+      if (!data.access_token) throw new Error('No token')
+
+      const client = new RetellWebClient()
+      retellClientRef.current = client
+
+      client.on('call_started', () => setStatus('active'))
+      client.on('call_ended', () => { setStatus('idle'); retellClientRef.current = null })
+      client.on('error', () => { setStatus('error'); retellClientRef.current = null })
+
+      await client.startCall({ accessToken: data.access_token })
+    } catch {
+      setStatus('error')
+      setTimeout(() => setStatus('idle'), 3000)
+    }
+  }
+
+  function endCall() {
+    retellClientRef.current?.stopCall()
+    setStatus('idle')
+    retellClientRef.current = null
+  }
+
+  const label = { idle: 'Habla con el agente', connecting: 'Conectando…', active: 'Colgar', error: 'Error — inténtalo de nuevo' }
+  const isActive = status === 'active'
+  const isPulsing = status === 'connecting' || status === 'active'
+
+  return (
+    <div className="fixed bottom-28 right-6 z-50 flex flex-col items-end gap-2">
+      <AnimatePresence>
+        {status !== 'idle' && (
+          <motion.div
+            initial={{ opacity: 0, y: 8, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 8, scale: 0.95 }}
+            className="mb-1 rounded-2xl px-4 py-2 text-sm font-medium shadow-lg"
+            style={{ background: 'var(--card)', border: '1px solid var(--border)', color: 'var(--foreground)' }}
+          >
+            {label[status]}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <motion.button
+        onClick={isActive ? endCall : startCall}
+        disabled={status === 'connecting'}
+        whileHover={{ scale: 1.08 }}
+        whileTap={{ scale: 0.95 }}
+        className="relative flex h-14 w-14 items-center justify-center rounded-full shadow-xl transition-all disabled:opacity-70"
+        style={{ background: isActive ? '#ef4444' : 'linear-gradient(135deg, #D4AF37, #E7C86A)', color: '#080808' }}
+        title="Hablar con el agente de voz"
+      >
+        {isPulsing && (
+          <motion.span
+            className="absolute inset-0 rounded-full"
+            animate={{ scale: [1, 1.4, 1], opacity: [0.5, 0, 0.5] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+            style={{ background: isActive ? '#ef4444' : '#D4AF37' }}
+          />
+        )}
+        {isActive ? <PhoneCall size={22} className="relative z-10" /> : <Mic size={22} className="relative z-10" />}
+      </motion.button>
+    </div>
+  )
+}
 
 function Chatbot() {
   const [open, setOpen] = useState(false)
@@ -940,6 +1025,7 @@ export default function Home() {
         </div>
       </section>
 
+      <VoiceAgent />
       <Chatbot />
 
       {/* ── FOOTER ── */}
