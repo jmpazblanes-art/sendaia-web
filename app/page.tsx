@@ -652,14 +652,20 @@ export default function Home() {
           </motion.div>
         </div>
 
-        <button
+        <motion.button
           onClick={toggleMute}
-          className="absolute bottom-8 right-8 z-10 rounded-full p-3 transition-all hover:scale-110"
-          style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)' }}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.5 }}
+          className="absolute bottom-8 right-8 z-10 flex items-center gap-2 rounded-full px-4 py-2.5 transition-all hover:scale-105"
+          style={{ background: 'rgba(212,175,55,0.15)', border: '1px solid rgba(212,175,55,0.4)', backdropFilter: 'blur(8px)' }}
           aria-label={muted ? 'Activar sonido' : 'Silenciar'}
         >
-          {muted ? <VolumeX className="h-5 w-5 text-white" /> : <Volume2 className="h-5 w-5 text-white" />}
-        </button>
+          {muted
+            ? <><VolumeX className="h-4 w-4" style={{ color: 'var(--accent-light)' }} /><span className="text-xs font-medium" style={{ color: 'var(--accent-light)' }}>Activar sonido</span></>
+            : <><Volume2 className="h-4 w-4" style={{ color: 'var(--accent-light)' }} /><span className="text-xs font-medium" style={{ color: 'var(--accent-light)' }}>Silenciar</span></>
+          }
+        </motion.button>
       </section>
 
       {/* ── EL PROBLEMA ── */}
