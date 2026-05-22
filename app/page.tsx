@@ -880,8 +880,8 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-6">
           <FadeIn className="mb-16 text-center">
             <p className="mb-4 text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--accent-light)' }}>Cómo funciona</p>
-            <h2 className="text-3xl font-black sm:text-5xl">De cero a automatizado<br />
-              <span className="gradient-text">en 7 días</span>
+            <h2 className="text-3xl font-black sm:text-5xl">Así funciona<br />
+              <span className="gradient-text">el proceso</span>
             </h2>
           </FadeIn>
 
