@@ -613,7 +613,7 @@ export default function Home() {
             className="text-5xl font-black leading-tight tracking-tight sm:text-6xl lg:text-7xl"
           >
             Recupera{' '}
-            <span className="gradient-text">15 horas semanales</span>
+            <span className="gradient-text">horas cada semana</span>
             <br />con Agentes de IA
           </motion.h1>
 
