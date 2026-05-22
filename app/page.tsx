@@ -539,7 +539,7 @@ export default function Home() {
             className="mx-auto mt-6 max-w-2xl text-lg leading-8"
             style={{ color: 'rgba(245,245,245,0.75)' }}
           >
-            Implementado en 7 días. Sin código. Sin interrumpir tu negocio.
+            Sin código. Sin interrumpir tu negocio. A tu ritmo.
           </motion.p>
 
           <motion.div
