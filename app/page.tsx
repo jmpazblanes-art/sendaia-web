@@ -728,11 +728,11 @@ export default function Home() {
                     Quiero el diagnóstico gratuito <ArrowRight className="h-4 w-4" />
                   </a>
                   <a
-                    href="tel:+34630310451"
+                    href="tel:+34858215026"
                     className="inline-flex items-center gap-2 rounded-full border px-8 py-4 text-sm font-semibold text-white transition-all hover:bg-white/10"
                     style={{ borderColor: 'rgba(255,255,255,0.3)' }}
                   >
-                    <Phone className="h-4 w-4" /> 630 310 451
+                    <Phone className="h-4 w-4" /> 858 215 026
                   </a>
                 </div>
               </div>
@@ -758,8 +758,8 @@ export default function Home() {
               </p>
             </div>
             <div className="flex flex-wrap gap-6 text-sm" style={{ color: 'rgba(245,245,245,0.55)' }}>
-              <a href="tel:+34630310451" className="transition-colors hover:text-white flex items-center gap-2">
-                <Phone className="h-4 w-4" /> 630 310 451
+              <a href="tel:+34858215026" className="transition-colors hover:text-white flex items-center gap-2">
+                <Phone className="h-4 w-4" /> 858 215 026
               </a>
               <a
                 href="https://www.instagram.com/sendaia.es"
