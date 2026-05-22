@@ -66,11 +66,27 @@ const SERVICIOS = [
   },
 ]
 
-const METRICAS = [
-  { value: 340, suffix: '+', label: 'PYMEs automatizadas' },
-  { value: 80, suffix: '%', prefix: '-', label: 'Llamadas sin atender' },
-  { value: 7, suffix: ' días', label: 'Implementación media' },
-  { value: 30000, suffix: '€/año', label: 'Ahorro medio por cliente' },
+const PILARES = [
+  {
+    titulo: 'Implementación en días',
+    detalle: 'No meses. No pilotos eternos. En producción desde la primera semana.',
+    icon: Zap,
+  },
+  {
+    titulo: 'Sin equipo técnico',
+    detalle: 'Tu equipo no necesita saber nada de tecnología. Nosotros lo montamos todo.',
+    icon: Brain,
+  },
+  {
+    titulo: 'Sistemas a medida',
+    detalle: 'No revendemos software. Diseñamos el sistema que encaja con tu operativa real.',
+    icon: RefreshCw,
+  },
+  {
+    titulo: 'Resultados medibles',
+    detalle: 'Menos tareas manuales, más control. Lo ves desde el primer día.',
+    icon: FileText,
+  },
 ]
 
 const DEMOS = [
@@ -445,25 +461,32 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── ROI EN NÚMEROS ── */}
+      {/* ── POR QUÉ SENDAIA ── */}
       <section className="py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-6">
           <FadeIn className="mb-16 text-center">
-            <p className="mb-4 text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--accent-light)' }}>Resultados reales</p>
-            <h2 className="text-3xl font-black sm:text-5xl">Los números no mienten</h2>
+            <p className="mb-4 text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--accent-light)' }}>Por qué SendaIA</p>
+            <h2 className="text-3xl font-black sm:text-5xl">
+              La diferencia no es trabajar más.<br />
+              <span className="gradient-text">Es tener sistemas.</span>
+            </h2>
           </FadeIn>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {METRICAS.map((m, i) => (
-              <FadeIn key={m.label} delay={i * 0.1}>
+            {PILARES.map((p, i) => (
+              <FadeIn key={p.titulo} delay={i * 0.1}>
                 <div
-                  className="rounded-2xl p-8 text-center"
-                  style={{ background: 'var(--card)', border: '1px solid rgba(212,175,55,0.2)', boxShadow: '0 0 40px rgba(212,175,55,0.08)' }}
+                  className="rounded-2xl p-8 h-full flex flex-col"
+                  style={{ background: 'var(--card)', border: '1px solid rgba(212,175,55,0.2)', boxShadow: '0 0 40px rgba(212,175,55,0.06)' }}
                 >
-                  <p className="text-4xl font-black sm:text-5xl gradient-text">
-                    <Counter value={m.value} suffix={m.suffix} prefix={m.prefix} />
-                  </p>
-                  <p className="mt-3 text-sm" style={{ color: 'rgba(245,245,245,0.55)' }}>{m.label}</p>
+                  <div
+                    className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl"
+                    style={{ background: 'rgba(212,175,55,0.12)', color: 'var(--accent)' }}
+                  >
+                    <p.icon className="h-5 w-5" />
+                  </div>
+                  <h3 className="mb-3 font-bold text-lg gradient-text">{p.titulo}</h3>
+                  <p className="text-sm leading-6 flex-1" style={{ color: 'rgba(245,245,245,0.6)' }}>{p.detalle}</p>
                 </div>
               </FadeIn>
             ))}
@@ -624,8 +647,11 @@ export default function Home() {
                 <h2 className="text-3xl font-black sm:text-5xl mb-6">
                   ¿Listo para recuperar tu tiempo?
                 </h2>
-                <p className="mx-auto max-w-xl text-lg mb-10" style={{ color: 'rgba(245,245,245,0.75)' }}>
-                  30 minutos de diagnóstico gratuito. Sin compromiso. Sin tecnicismos. Solo te decimos qué procesos puedes automatizar esta semana.
+                <p className="mx-auto max-w-xl text-lg mb-4" style={{ color: 'rgba(245,245,245,0.75)' }}>
+                  30 minutos de diagnóstico. Analizamos tu operativa real y te decimos qué procesos se pueden automatizar ahora mismo.
+                </p>
+                <p className="mx-auto max-w-xl text-sm mb-10 font-semibold" style={{ color: 'var(--accent-light)' }}>
+                  Sin compromiso. Sin tecnicismos. Sin promesas mágicas.
                 </p>
 
                 <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">

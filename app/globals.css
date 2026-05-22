@@ -2,12 +2,12 @@
 
 :root {
   color-scheme: dark;
-  --background: #050510;
-  --foreground: #f5f5f5;
-  --accent: #6c63ff;
-  --accent-light: #a78bfa;
-  --accent-glow: rgba(108, 99, 255, 0.25);
-  --card: #0d0d1a;
+  --background: #080808;
+  --foreground: #f5f5f0;
+  --accent: #D4AF37;
+  --accent-light: #E7C86A;
+  --accent-glow: rgba(212, 175, 55, 0.25);
+  --card: #111111;
   --border: rgba(255, 255, 255, 0.08);
 }
 
@@ -30,7 +30,7 @@ body {
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #6c63ff 0%, #a78bfa 50%, #60a5fa 100%);
+  background: linear-gradient(135deg, #D4AF37 0%, #E7C86A 50%, #F5E08A 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
