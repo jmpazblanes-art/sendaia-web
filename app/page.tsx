@@ -3,20 +3,21 @@
 import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { motion, useInView, AnimatePresence } from 'framer-motion'
+import { motion, useInView, AnimatePresence, useScroll, useSpring, useMotionValue, useMotionTemplate } from 'framer-motion'
 import {
   ArrowRight,
   Bot,
   Brain,
   FileText,
   Mail,
-  MessageCircle,
-  Mic,
   Phone,
   PhoneCall,
   RefreshCw,
+  Send,
+  Sparkles,
   Volume2,
   VolumeX,
+  X,
   Zap,
 } from 'lucide-react'
 
@@ -164,6 +165,37 @@ const PASOS = [
   },
 ]
 
+const HERO_PARTICLES = [
+  { left: '12%', top: '22%', size: 3, duration: 4.2, delay: 0 },
+  { left: '88%', top: '18%', size: 2, duration: 5.1, delay: 0.7 },
+  { left: '7%', top: '68%', size: 4, duration: 3.6, delay: 1.1 },
+  { left: '78%', top: '72%', size: 2, duration: 4.8, delay: 0.4 },
+  { left: '48%', top: '12%', size: 3, duration: 5.5, delay: 0.9 },
+  { left: '62%', top: '88%', size: 2, duration: 4.0, delay: 1.5 },
+  { left: '33%', top: '52%', size: 3, duration: 5.2, delay: 0.2 },
+  { left: '92%', top: '45%', size: 2, duration: 3.9, delay: 1.3 },
+  { left: '22%', top: '82%', size: 2, duration: 4.6, delay: 0.6 },
+  { left: '70%', top: '35%', size: 3, duration: 4.3, delay: 1.8 },
+]
+
+const METRICAS = [
+  { value: 15, suffix: 'h/sem', prefix: '+', label: 'Horas recuperadas de media' },
+  { value: 80, suffix: '%', prefix: '−', label: 'Reducción llamadas perdidas' },
+  { value: 7, suffix: ' días', prefix: '', label: 'Tiempo hasta producción' },
+  { value: 25, suffix: '%', prefix: '+', label: 'Más ventas recurrentes' },
+]
+
+const TICKER_ITEMS = [
+  '−80% llamadas perdidas',
+  '+25% ventas recurrentes',
+  '−5h/semana back-office',
+  '−90% tiempo extracción datos',
+  'En producción en 7 días',
+  '30% tiempo recuperado',
+  'Sin código. Sin interrumpir tu negocio',
+  'Agentes IA 24/7',
+]
+
 // ─────────────── UTILS ───────────────
 
 function useCounter(to: number, isInView: boolean) {
@@ -223,6 +255,222 @@ function FadeIn({
 }
 
 // ─────────────── PAGE ───────────────
+
+// ─────────────── EFECTOS GLOBALES ───────────────
+
+function NeuralField() {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const dpr = Math.min(window.devicePixelRatio || 1, 2)
+    let w = 0, h = 0, raf = 0
+    const mouse = { x: -9999, y: -9999 }
+
+    type Node = { x: number; y: number; vx: number; vy: number; r: number }
+    let nodes: Node[] = []
+
+    function build() {
+      w = window.innerWidth
+      h = window.innerHeight
+      canvas!.width = w * dpr
+      canvas!.height = h * dpr
+      canvas!.style.width = w + 'px'
+      canvas!.style.height = h + 'px'
+      ctx!.setTransform(dpr, 0, 0, dpr, 0, 0)
+      const count = Math.min(120, Math.max(46, Math.floor((w * h) / 13000)))
+      nodes = Array.from({ length: count }, () => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        r: Math.random() * 1.6 + 0.8,
+      }))
+    }
+
+    const LINK = 165
+    const MOUSE_LINK = 230
+
+    function frame() {
+      ctx!.clearRect(0, 0, w, h)
+
+      for (const n of nodes) {
+        n.x += n.vx
+        n.y += n.vy
+        if (n.x < 0 || n.x > w) n.vx *= -1
+        if (n.y < 0 || n.y > h) n.vy *= -1
+        const dx = mouse.x - n.x
+        const dy = mouse.y - n.y
+        const d = Math.hypot(dx, dy)
+        if (d < 150 && d > 0.1) {
+          n.x += (dx / d) * 0.45
+          n.y += (dy / d) * 0.45
+        }
+      }
+
+      for (let i = 0; i < nodes.length; i++) {
+        const a = nodes[i]
+        for (let j = i + 1; j < nodes.length; j++) {
+          const b = nodes[j]
+          const dist = Math.hypot(a.x - b.x, a.y - b.y)
+          if (dist < LINK) {
+            const o = (1 - dist / LINK) * 0.7
+            ctx!.strokeStyle = `rgba(212,175,55,${o})`
+            ctx!.lineWidth = 0.8
+            ctx!.beginPath()
+            ctx!.moveTo(a.x, a.y)
+            ctx!.lineTo(b.x, b.y)
+            ctx!.stroke()
+          }
+        }
+        const dm = Math.hypot(a.x - mouse.x, a.y - mouse.y)
+        if (dm < MOUSE_LINK) {
+          const o = (1 - dm / MOUSE_LINK) * 0.85
+          ctx!.strokeStyle = `rgba(245,224,138,${o})`
+          ctx!.lineWidth = 1
+          ctx!.beginPath()
+          ctx!.moveTo(a.x, a.y)
+          ctx!.lineTo(mouse.x, mouse.y)
+          ctx!.stroke()
+        }
+      }
+
+      for (const n of nodes) {
+        const near = Math.hypot(n.x - mouse.x, n.y - mouse.y) < MOUSE_LINK
+        ctx!.beginPath()
+        ctx!.arc(n.x, n.y, near ? n.r + 0.8 : n.r, 0, Math.PI * 2)
+        ctx!.fillStyle = near ? 'rgba(245,224,138,1)' : 'rgba(231,200,106,0.85)'
+        if (near) {
+          ctx!.shadowColor = 'rgba(245,224,138,0.9)'
+          ctx!.shadowBlur = 8
+        } else {
+          ctx!.shadowBlur = 0
+        }
+        ctx!.fill()
+      }
+      ctx!.shadowBlur = 0
+
+      raf = requestAnimationFrame(frame)
+    }
+
+    const onMove = (e: MouseEvent) => { mouse.x = e.clientX; mouse.y = e.clientY }
+    const onLeave = () => { mouse.x = -9999; mouse.y = -9999 }
+    const onResize = () => { build() }
+    const onVisibility = () => {
+      if (document.hidden) cancelAnimationFrame(raf)
+      else if (!reduce) raf = requestAnimationFrame(frame)
+    }
+
+    build()
+    window.addEventListener('mousemove', onMove)
+    window.addEventListener('mouseleave', onLeave)
+    window.addEventListener('resize', onResize)
+    document.addEventListener('visibilitychange', onVisibility)
+
+    if (reduce) frame()
+    else raf = requestAnimationFrame(frame)
+
+    return () => {
+      cancelAnimationFrame(raf)
+      window.removeEventListener('mousemove', onMove)
+      window.removeEventListener('mouseleave', onLeave)
+      window.removeEventListener('resize', onResize)
+      document.removeEventListener('visibilitychange', onVisibility)
+    }
+  }, [])
+
+  return (
+    <canvas
+      ref={canvasRef}
+      aria-hidden
+      className="pointer-events-none fixed inset-0"
+      style={{ zIndex: -1, opacity: 1 }}
+    />
+  )
+}
+
+function ScrollProgress() {
+  const { scrollYProgress } = useScroll()
+  const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30, restDelta: 0.001 })
+  return (
+    <motion.div
+      className="fixed top-0 left-0 right-0 z-[200] h-0.5 origin-left"
+      style={{ scaleX, background: 'linear-gradient(to right, #D4AF37, #E7C86A, #F5E08A)' }}
+    />
+  )
+}
+
+function CursorSpotlight() {
+  const mouseX = useMotionValue(-999)
+  const mouseY = useMotionValue(-999)
+  const springX = useSpring(mouseX, { stiffness: 60, damping: 20 })
+  const springY = useSpring(mouseY, { stiffness: 60, damping: 20 })
+  const background = useMotionTemplate`radial-gradient(700px circle at ${springX}px ${springY}px, rgba(212,175,55,0.055) 0%, transparent 65%)`
+
+  useEffect(() => {
+    const update = (e: MouseEvent) => { mouseX.set(e.clientX); mouseY.set(e.clientY) }
+    window.addEventListener('mousemove', update)
+    return () => window.removeEventListener('mousemove', update)
+  }, [mouseX, mouseY])
+
+  return (
+    <motion.div
+      className="pointer-events-none fixed inset-0 z-30 hidden md:block"
+      style={{ background }}
+    />
+  )
+}
+
+function Ticker() {
+  const doubled = [...TICKER_ITEMS, ...TICKER_ITEMS]
+  return (
+    <div
+      className="overflow-hidden py-4 border-y"
+      style={{ borderColor: 'rgba(212,175,55,0.18)', background: 'rgba(212,175,55,0.04)' }}
+    >
+      <div className="ticker-track flex gap-14 whitespace-nowrap w-max">
+        {doubled.map((item, i) => (
+          <span key={i} className="inline-flex items-center gap-2 text-sm font-semibold" style={{ color: 'var(--accent-light)' }}>
+            <span style={{ color: 'var(--accent)', opacity: 0.7 }}>✦</span>
+            {item}
+          </span>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function MetricasStrip() {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-80px' })
+  return (
+    <section ref={ref} className="py-16" style={{ background: 'rgba(5,5,16,0.7)' }}>
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-10 text-center">
+          {METRICAS.map((m, i) => (
+            <motion.div
+              key={m.label}
+              initial={{ opacity: 0, y: 28 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.65, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] }}
+              className="space-y-2"
+            >
+              <div className="text-4xl sm:text-5xl font-black gradient-text tabular-nums">
+                <Counter value={m.value} suffix={m.suffix} prefix={m.prefix} />
+              </div>
+              <p className="text-sm font-medium" style={{ color: 'rgba(245,245,245,0.5)' }}>{m.label}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
 
 // ─────────────── FORMULARIO ───────────────
 
@@ -309,127 +557,90 @@ function ContactForm() {
 
 // ─────────────── CHATBOT ───────────────
 
-const CHAT_SYSTEM = `Eres el asistente virtual de SendaIA. SendaIA diseña e implementa sistemas de automatización con inteligencia artificial para PYMEs españolas.
+const CHAT_SYSTEM = `Eres Aria, la asesora virtual de SendaIA. No eres un bot de FAQ: eres una consultora que de verdad AYUDA y resuelve dudas en la propia conversación. SendaIA diseña e implementa sistemas de automatización con inteligencia artificial para PYMEs españolas (con base en Granada).
 
-Lo que hace SendaIA:
-- Agentes de voz IA que atienden llamadas 24/7 (Retell AI + Zadarma)
-- Automatización de facturación y backoffice (lectura de PDFs, facturas, documentos)
-- Agente de email: clasifica, prioriza y redacta borradores
-- Reactivación automática de clientes dormidos
-- Agente documental: extrae datos de PDFs y contratos
-- CRM adaptado al negocio real
-- Integraciones: Google Sheets, Calendar, Drive, WhatsApp Business, APIs
+## Tu objetivo
+Que la persona salga del chat habiendo entendido EXACTAMENTE cómo la IA puede ayudar a su caso concreto, qué solución encaja y cómo funcionaría. Aporta valor real antes de pedir nada. NUNCA respondas "ponte en contacto con nosotros" o "solicita información" como salida fácil: eso es justo lo que NO debes hacer. Responde tú.
 
-Proceso: diagnóstico gratuito (30 min) → configuración → integración → en producción en 7 días.
+## Cómo conversar
+1. Si te cuentan su negocio o su problema, primero entiéndelo: haz 1 pregunta breve si te falta info clave (sector, qué tarea les quita tiempo, volumen aproximado).
+2. Recomienda la solución concreta que encaja y explica en 2-3 pasos sencillos cómo funcionaría en SU caso. Sé específica, usa su sector.
+3. Cierra con el siguiente paso natural: el diagnóstico gratuito de 30 min (donde se afina todo y se da el presupuesto). Ofrece recoger aquí mismo su nombre + email o teléfono para que el equipo le contacte.
 
-Filosofía: "La diferencia no es trabajar más. Es tener sistemas." No prometemos resultados mágicos. Sin tecnicismos.
+## Captura de contacto (IMPORTANTE)
+Tienes una herramienta llamada "registrar_lead". En cuanto el usuario te dé su nombre y un email o teléfono mostrando interés, LLÁMALA para registrarlo en el CRM (no digas que lo harás "manualmente" ni le mandes solo al formulario: regístralo tú). Si te falta el nombre o el contacto, pídelo de forma natural antes de registrar. Tras registrarlo, confírmalo con calidez y dile que el equipo le contactará en menos de 24 h. Si la herramienta falla, discúlpate y ofrece el teléfono 858 215 026 o el formulario de la web.
 
-Teléfono agente de voz: 858 215 026
-Email: info@sendaia.es
-Instagram: instagram.com/sendaia.es
-LinkedIn: linkedin.com/company/sendaia
-Ubicación: Granada, España
+## Qué hace SendaIA (recomienda lo que encaje)
+- Agente de voz IA que atiende llamadas 24/7, filtra y agenda citas (Retell + Zadarma). Ideal para clínicas, inmobiliarias, despachos que pierden llamadas.
+- Agente de WhatsApp/web que responde, cualifica leads y agenda sin intervención humana.
+- Automatización documental / facturas: lee PDFs y extrae datos (nº, fecha, importe, IVA) a Excel/Sheets o contabilidad.
+- Agente de email: clasifica, prioriza y redacta borradores.
+- Reactivación de clientes dormidos con secuencias automáticas.
+- CRM y automatizaciones a medida (n8n). Integra Google Sheets, Calendar, Drive, WhatsApp Business, APIs.
 
-Cuando alguien quiera el diagnóstico gratuito, diles que rellenen el formulario de la página o que llamen al 858 215 026.
+## Precios — IMPORTANTE
+NUNCA des cifras, rangos ni "desde X€". El presupuesto siempre es personalizado y lo da el equipo tras conocer el caso, porque depende del alcance real. Si te preguntan el precio, explícalo con naturalidad y sin incomodar: cada proyecto se presupuesta a medida en el diagnóstico gratuito (sin compromiso), el presupuesto se cierra antes de empezar, no hay costes ocultos ni permanencia que ate. Lo que sí puedes decir: que se trabaja con un setup inicial + un mantenimiento mensual opcional, y que la auditoría inicial es sin compromiso. Reconduce siempre al diagnóstico para darle un número ajustado a su caso. No inventes precios bajo ningún concepto.
 
-Responde siempre en español, de forma directa y profesional. Máximo 3 frases por respuesta.`
+## Proceso
+Diagnóstico gratuito (30 min) → configuración → integración con tus canales → en producción en ~7 días.
 
-function VoiceAgent() {
-  const [status, setStatus] = useState<'idle' | 'connecting' | 'active' | 'error'>('idle')
+## Tono y estilo
+"Autoridad tranquila": cercana, clara, sin humo ni tecnicismos. Nada de promesas mágicas ni de "revolucionar tu negocio". Español de España. Respuestas útiles de 3 a 6 frases (usa alguna lista corta si ayuda). Si no sabes un dato exacto, dilo con honestidad y reconduce al diagnóstico, sin inventar.
+
+## Datos de contacto
+Teléfono / agente de voz: 858 215 026 · Email: info@sendaia.es · Instagram: instagram.com/sendaia.es · LinkedIn: linkedin.com/company/sendaia · Granada, España.`
+
+// Avatar de Aria — orbe dorado vivo, reutilizable en launcher y cabecera
+function AriaAvatar({ size = 44 }: { size?: number }) {
+  return (
+    <span
+      className="relative flex shrink-0 items-center justify-center rounded-full"
+      style={{
+        width: size,
+        height: size,
+        background: 'radial-gradient(circle at 30% 25%, #FBE7A6 0%, #E7C86A 35%, #D4AF37 70%, #A8830F 100%)',
+        boxShadow: 'inset 0 1px 3px rgba(255,255,255,0.6), 0 0 18px rgba(212,175,55,0.45)',
+      }}
+    >
+      <span
+        className="absolute rounded-full"
+        style={{ inset: 3, border: '1px solid rgba(255,255,255,0.35)' }}
+      />
+      <Sparkles size={size * 0.42} strokeWidth={2.2} style={{ color: '#3a2c05' }} />
+    </span>
+  )
+}
+
+function AssistantDock() {
+  // ── Chat (Aria) ──
+  const [open, setOpen] = useState(false)
+  const [messages, setMessages] = useState<{ role: 'user' | 'assistant'; content: string }[]>([
+    { role: 'assistant', content: 'Hola, soy Aria 👋 la asistente IA de SendaIA. Cuéntame qué te gustaría automatizar y te oriento al momento.' }
+  ])
+  const [input, setInput] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [nudge, setNudge] = useState(true)
+  const bottomRef = useRef<HTMLDivElement>(null)
+
+  // ── Voz (Retell) ──
+  const [vStatus, setVStatus] = useState<'idle' | 'connecting' | 'active' | 'error'>('idle')
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const retellClientRef = useRef<any>(null)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [RetellWebClient, setRetellWebClient] = useState<any>(null)
 
   useEffect(() => {
-    import('retell-client-js-sdk').then((mod) => {
-      setRetellWebClient(() => mod.RetellWebClient)
-    })
+    import('retell-client-js-sdk').then((mod) => setRetellWebClient(() => mod.RetellWebClient))
   }, [])
-
-  async function startCall() {
-    if (!RetellWebClient) return
-    setStatus('connecting')
-    try {
-      const res = await fetch('/api/voice', { method: 'POST' })
-      const data = await res.json()
-      if (!data.access_token) throw new Error('No token')
-
-      const client = new RetellWebClient()
-      retellClientRef.current = client
-
-      client.on('call_started', () => setStatus('active'))
-      client.on('call_ended', () => { setStatus('idle'); retellClientRef.current = null })
-      client.on('error', () => { setStatus('error'); retellClientRef.current = null })
-
-      await client.startCall({ accessToken: data.access_token })
-    } catch {
-      setStatus('error')
-      setTimeout(() => setStatus('idle'), 3000)
-    }
-  }
-
-  function endCall() {
-    retellClientRef.current?.stopCall()
-    setStatus('idle')
-    retellClientRef.current = null
-  }
-
-  const label = { idle: 'Habla con el agente', connecting: 'Conectando…', active: 'Colgar', error: 'Error — inténtalo de nuevo' }
-  const isActive = status === 'active'
-  const isPulsing = status === 'connecting' || status === 'active'
-
-  return (
-    <div className="fixed bottom-28 right-6 z-50 flex flex-col items-end gap-2">
-      <AnimatePresence>
-        {status !== 'idle' && (
-          <motion.div
-            initial={{ opacity: 0, y: 8, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 8, scale: 0.95 }}
-            className="mb-1 rounded-2xl px-4 py-2 text-sm font-medium shadow-lg"
-            style={{ background: 'var(--card)', border: '1px solid var(--border)', color: 'var(--foreground)' }}
-          >
-            {label[status]}
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <motion.button
-        onClick={isActive ? endCall : startCall}
-        disabled={status === 'connecting'}
-        whileHover={{ scale: 1.08 }}
-        whileTap={{ scale: 0.95 }}
-        className="relative flex h-14 w-14 items-center justify-center rounded-full shadow-xl transition-all disabled:opacity-70"
-        style={{ background: isActive ? '#ef4444' : 'linear-gradient(135deg, #D4AF37, #E7C86A)', color: '#080808' }}
-        title="Hablar con el agente de voz"
-      >
-        {isPulsing && (
-          <motion.span
-            className="absolute inset-0 rounded-full"
-            animate={{ scale: [1, 1.4, 1], opacity: [0.5, 0, 0.5] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-            style={{ background: isActive ? '#ef4444' : '#D4AF37' }}
-          />
-        )}
-        {isActive ? <PhoneCall size={22} className="relative z-10" /> : <Mic size={22} className="relative z-10" />}
-      </motion.button>
-    </div>
-  )
-}
-
-function Chatbot() {
-  const [open, setOpen] = useState(false)
-  const [messages, setMessages] = useState<{ role: 'user' | 'assistant'; content: string }[]>([
-    { role: 'assistant', content: '¡Hola! Soy el asistente de SendaIA. ¿En qué puedo ayudarte?' }
-  ])
-  const [input, setInput] = useState('')
-  const [loading, setLoading] = useState(false)
-  const bottomRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [messages])
+  }, [messages, open])
+
+  useEffect(() => {
+    const t = setTimeout(() => setNudge(false), 7000)
+    return () => clearTimeout(t)
+  }, [])
 
   const send = async () => {
     const text = input.trim()
@@ -451,33 +662,71 @@ function Chatbot() {
     setLoading(false)
   }
 
+  async function startCall() {
+    if (!RetellWebClient) return
+    setVStatus('connecting')
+    try {
+      const res = await fetch('/api/voice', { method: 'POST' })
+      const data = await res.json()
+      if (!data.access_token) throw new Error('No token')
+      const client = new RetellWebClient()
+      retellClientRef.current = client
+      client.on('call_started', () => setVStatus('active'))
+      client.on('call_ended', () => { setVStatus('idle'); retellClientRef.current = null })
+      client.on('error', () => { setVStatus('error'); retellClientRef.current = null })
+      await client.startCall({ accessToken: data.access_token })
+    } catch {
+      setVStatus('error')
+      setTimeout(() => setVStatus('idle'), 3000)
+    }
+  }
+
+  function endCall() {
+    retellClientRef.current?.stopCall()
+    setVStatus('idle')
+    retellClientRef.current = null
+  }
+
+  const vActive = vStatus === 'active'
+  const vBusy = vStatus === 'connecting' || vStatus === 'active'
+  const vLabel = { idle: 'Habla con nuestro agente', connecting: 'Conectando…', active: 'En llamada · Colgar', error: 'Reintentar' }[vStatus]
+
   return (
     <>
+      {/* ── PANEL DE CHAT DE ARIA ── */}
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            initial={{ opacity: 0, y: 24, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            transition={{ duration: 0.25 }}
-            className="fixed bottom-24 right-6 z-50 w-80 sm:w-96 rounded-2xl overflow-hidden shadow-2xl flex flex-col"
-            style={{ background: 'var(--card)', border: '1px solid rgba(212,175,55,0.3)', maxHeight: '520px' }}
+            exit={{ opacity: 0, y: 24, scale: 0.96 }}
+            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed bottom-28 right-6 z-50 w-[calc(100vw-3rem)] sm:w-96 rounded-3xl overflow-hidden flex flex-col"
+            style={{ background: 'var(--card)', border: '1px solid rgba(212,175,55,0.35)', maxHeight: '70vh', boxShadow: '0 30px 80px rgba(0,0,0,0.55), 0 0 60px rgba(212,175,55,0.12)' }}
           >
-            <div className="flex items-center justify-between px-5 py-4" style={{ background: 'rgba(212,175,55,0.1)', borderBottom: '1px solid rgba(212,175,55,0.2)' }}>
-              <div>
-                <p className="font-bold text-sm">Asistente SendaIA</p>
-                <p className="text-xs" style={{ color: 'var(--accent-light)' }}>● En línea</p>
+            <div className="flex items-center gap-3 px-5 py-4" style={{ background: 'linear-gradient(135deg, rgba(212,175,55,0.18), rgba(212,175,55,0.04))', borderBottom: '1px solid rgba(212,175,55,0.2)' }}>
+              <AriaAvatar size={40} />
+              <div className="flex-1">
+                <p className="font-bold text-sm leading-tight">Aria</p>
+                <p className="text-xs flex items-center gap-1.5" style={{ color: 'var(--accent-light)' }}>
+                  <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                  Asistente IA · responde al instante
+                </p>
               </div>
-              <button onClick={() => setOpen(false)} className="text-white/50 hover:text-white text-lg leading-none">✕</button>
+              <button onClick={() => setOpen(false)} aria-label="Cerrar" className="text-white/50 hover:text-white transition-colors">
+                <X size={18} />
+              </button>
             </div>
+
             <div className="flex-1 overflow-y-auto p-4 space-y-3" style={{ minHeight: 0 }}>
               {messages.map((m, i) => (
-                <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                <div key={i} className={`flex items-end gap-2 ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                  {m.role === 'assistant' && <AriaAvatar size={26} />}
                   <div
-                    className="rounded-2xl px-4 py-2.5 text-sm max-w-[85%]"
+                    className="rounded-2xl px-4 py-2.5 text-sm leading-relaxed max-w-[80%]"
                     style={m.role === 'user'
-                      ? { background: 'var(--accent)', color: '#000' }
-                      : { background: 'rgba(255,255,255,0.07)', color: '#f5f5f0' }
+                      ? { background: 'var(--accent)', color: '#000', borderBottomRightRadius: 4 }
+                      : { background: 'rgba(255,255,255,0.07)', color: '#f5f5f0', borderBottomLeftRadius: 4 }
                     }
                   >
                     {m.content}
@@ -485,46 +734,147 @@ function Chatbot() {
                 </div>
               ))}
               {loading && (
-                <div className="flex justify-start">
-                  <div className="rounded-2xl px-4 py-2.5 text-sm" style={{ background: 'rgba(255,255,255,0.07)', color: 'rgba(245,245,240,0.5)' }}>
-                    Escribiendo...
+                <div className="flex items-end gap-2 justify-start">
+                  <AriaAvatar size={26} />
+                  <div className="rounded-2xl px-4 py-3 flex gap-1" style={{ background: 'rgba(255,255,255,0.07)' }}>
+                    {[0, 1, 2].map(d => (
+                      <motion.span
+                        key={d}
+                        className="h-1.5 w-1.5 rounded-full"
+                        style={{ background: 'var(--accent-light)' }}
+                        animate={{ opacity: [0.3, 1, 0.3], y: [0, -3, 0] }}
+                        transition={{ duration: 0.9, repeat: Infinity, delay: d * 0.15 }}
+                      />
+                    ))}
                   </div>
                 </div>
               )}
               <div ref={bottomRef} />
             </div>
+
             <div className="p-3 flex gap-2" style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
               <input
                 value={input}
                 onChange={e => setInput(e.target.value)}
                 onKeyDown={e => e.key === 'Enter' && send()}
-                placeholder="Escribe tu pregunta..."
-                className="flex-1 rounded-xl px-4 py-2.5 text-sm outline-none"
+                placeholder="Escribe a Aria…"
+                className="flex-1 rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-1 transition-all"
                 style={{ background: 'rgba(255,255,255,0.07)', color: '#f5f5f0', border: '1px solid rgba(255,255,255,0.1)' }}
               />
               <button
                 onClick={send}
                 disabled={loading || !input.trim()}
-                className="rounded-xl px-4 py-2.5 text-sm font-bold text-black transition-all hover:opacity-90 disabled:opacity-40"
+                aria-label="Enviar"
+                className="flex items-center justify-center rounded-xl w-11 text-black transition-all hover:opacity-90 disabled:opacity-40"
                 style={{ background: 'var(--accent)' }}
               >
-                →
+                <Send size={16} />
               </button>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      <motion.button
-        onClick={() => setOpen(o => !o)}
-        whileHover={{ scale: 1.08 }}
-        whileTap={{ scale: 0.95 }}
-        className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full shadow-lg text-black font-bold text-xl"
-        style={{ background: 'var(--accent)', boxShadow: '0 0 30px rgba(212,175,55,0.5)' }}
-        aria-label="Abrir chat"
-      >
-        {open ? '✕' : '💬'}
-      </motion.button>
+      {/* ── DOCK DE ASISTENTES ── */}
+      <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+
+        {/* Agente de voz */}
+        <motion.button
+          onClick={vActive ? endCall : startCall}
+          disabled={vStatus === 'connecting'}
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          whileHover={{ scale: 1.04 }}
+          whileTap={{ scale: 0.97 }}
+          className="group flex items-center gap-3 rounded-full py-2 pl-5 pr-2 backdrop-blur-md disabled:opacity-70"
+          style={{
+            background: vActive ? 'rgba(239,68,68,0.15)' : 'rgba(16,16,18,0.75)',
+            border: `1px solid ${vActive ? 'rgba(239,68,68,0.5)' : 'rgba(212,175,55,0.35)'}`,
+            boxShadow: '0 10px 30px rgba(0,0,0,0.4)',
+          }}
+          title="Llamar al agente de voz IA"
+        >
+          <span className="hidden sm:flex flex-col text-right leading-tight">
+            <span className="text-[13px] font-bold" style={{ color: vActive ? '#fca5a5' : '#f5f5f0' }}>
+              {vActive ? 'En llamada' : 'Agente de voz'}
+            </span>
+            <span className="text-[11px]" style={{ color: vActive ? 'rgba(252,165,165,0.8)' : 'var(--accent-light)' }}>
+              {vStatus === 'connecting' ? 'Conectando…' : vActive ? 'Pulsa para colgar' : 'Llámanos · IA 24/7'}
+            </span>
+          </span>
+          <span
+            className="relative flex h-11 w-11 items-center justify-center rounded-full"
+            style={{ background: vActive ? '#ef4444' : 'linear-gradient(135deg, #D4AF37, #E7C86A)', color: vActive ? '#fff' : '#1a1405' }}
+          >
+            {vBusy && (
+              <motion.span
+                className="absolute inset-0 rounded-full"
+                animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+                style={{ background: vActive ? '#ef4444' : '#D4AF37' }}
+              />
+            )}
+            {vActive ? (
+              <span className="relative z-10 flex items-end gap-[3px] h-4">
+                {[0, 1, 2, 3].map(b => (
+                  <span key={b} className="eq-bar" style={{ animationDelay: `${b * 0.15}s` }} />
+                ))}
+              </span>
+            ) : (
+              <PhoneCall size={20} className="relative z-10" />
+            )}
+          </span>
+        </motion.button>
+
+        {/* Aria — chat IA */}
+        <motion.button
+          onClick={() => { setOpen(o => !o); setNudge(false) }}
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.55, ease: [0.22, 1, 0.36, 1] }}
+          whileHover={{ scale: 1.04 }}
+          whileTap={{ scale: 0.97 }}
+          className="group flex items-center gap-3 rounded-full py-2 pl-5 pr-2 backdrop-blur-md"
+          style={{
+            background: 'rgba(16,16,18,0.75)',
+            border: '1px solid rgba(212,175,55,0.45)',
+            boxShadow: '0 10px 30px rgba(0,0,0,0.4), 0 0 30px rgba(212,175,55,0.15)',
+          }}
+          aria-label="Abrir chat con Aria"
+        >
+          <span className="hidden sm:flex flex-col text-right leading-tight">
+            <span className="text-[13px] font-bold">{open ? 'Cerrar chat' : 'Aria'}</span>
+            <span className="text-[11px] flex items-center justify-end gap-1.5" style={{ color: 'var(--accent-light)' }}>
+              <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400" />
+              Asistente IA · en línea
+            </span>
+          </span>
+          <span className="relative">
+            {nudge && !open && (
+              <motion.span
+                className="absolute -inset-1 rounded-full"
+                animate={{ scale: [1, 1.4, 1], opacity: [0.6, 0, 0.6] }}
+                transition={{ duration: 1.8, repeat: Infinity }}
+                style={{ background: '#D4AF37' }}
+              />
+            )}
+            {open ? (
+              <span className="relative z-10 flex h-11 w-11 items-center justify-center rounded-full" style={{ background: 'linear-gradient(135deg, #D4AF37, #E7C86A)', color: '#1a1405' }}>
+                <X size={20} />
+              </span>
+            ) : (
+              <motion.span
+                className="relative z-10 block"
+                animate={{ scale: [1, 1.05, 1] }}
+                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                <AriaAvatar size={44} />
+              </motion.span>
+            )}
+          </span>
+        </motion.button>
+      </div>
     </>
   )
 }
@@ -542,7 +892,11 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen" style={{ background: 'var(--background)', color: 'var(--foreground)' }}>
+    <main className="min-h-screen" style={{ background: 'transparent', color: 'var(--foreground)' }}>
+      <NeuralField />
+      <div className="grain" />
+      <ScrollProgress />
+      <CursorSpotlight />
 
       {/* ── NAVBAR ── */}
       <nav className="fixed top-0 left-0 right-0 z-50 border-b" style={{ borderColor: 'var(--border)', background: 'rgba(5,5,16,0.85)', backdropFilter: 'blur(16px)' }}>
@@ -592,6 +946,24 @@ export default function Home() {
           style={{ background: 'linear-gradient(to bottom, rgba(5,5,16,0.72) 0%, rgba(5,5,16,0.55) 50%, rgba(5,5,16,0.90) 100%)', zIndex: 1 }}
         />
 
+        {HERO_PARTICLES.map((p, i) => (
+          <motion.div
+            key={i}
+            className="absolute rounded-full pointer-events-none"
+            style={{
+              left: p.left,
+              top: p.top,
+              width: p.size,
+              height: p.size,
+              background: 'var(--accent)',
+              boxShadow: `0 0 ${p.size * 5}px var(--accent)`,
+              zIndex: 2,
+            }}
+            animate={{ y: [0, -22, 0], opacity: [0.2, 0.7, 0.2], scale: [1, 1.5, 1] }}
+            transition={{ duration: p.duration, delay: p.delay, repeat: Infinity, ease: 'easeInOut' }}
+          />
+        ))}
+
         <div className="relative z-10 mx-auto max-w-5xl px-6 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -613,7 +985,7 @@ export default function Home() {
             className="text-5xl font-black leading-tight tracking-tight sm:text-6xl lg:text-7xl"
           >
             Recupera{' '}
-            <span className="gradient-text">horas cada semana</span>
+            <span className="gradient-text-animated">horas cada semana</span>
             <br />con Agentes de IA
           </motion.h1>
 
@@ -667,6 +1039,8 @@ export default function Home() {
           }
         </motion.button>
       </section>
+
+      <Ticker />
 
       {/* ── EL PROBLEMA ── */}
       <section className="py-20 sm:py-28">
@@ -729,6 +1103,8 @@ export default function Home() {
         </div>
       </section>
 
+      <MetricasStrip />
+
       {/* ── SERVICIOS ── */}
       <section id="servicios" className="py-20 sm:py-28" style={{ background: 'rgba(13,13,26,0.6)' }}>
         <div className="mx-auto max-w-7xl px-6">
@@ -744,7 +1120,7 @@ export default function Home() {
             {SERVICIOS.map((s, i) => (
               <FadeIn key={s.title} delay={i * 0.08}>
                 <motion.div
-                  whileHover={{ scale: 1.03, y: -4 }}
+                  whileHover={{ scale: 1.03, y: -6, boxShadow: '0 0 40px rgba(212,175,55,0.18), 0 20px 50px rgba(0,0,0,0.4)', borderColor: 'rgba(212,175,55,0.4)' }}
                   transition={{ type: 'spring', stiffness: 300, damping: 25 }}
                   className="rounded-2xl p-6 h-full flex flex-col"
                   style={{
@@ -941,7 +1317,7 @@ export default function Home() {
             {SECTORES.map((s, i) => (
               <FadeIn key={s.title} delay={i * 0.07}>
                 <motion.div
-                  whileHover={{ y: -4 }}
+                  whileHover={{ y: -6, boxShadow: '0 0 35px rgba(212,175,55,0.14), 0 20px 40px rgba(0,0,0,0.35)' }}
                   transition={{ type: 'spring', stiffness: 300, damping: 25 }}
                   className="group overflow-hidden rounded-2xl"
                   style={{ border: '1px solid var(--border)' }}
@@ -1031,8 +1407,7 @@ export default function Home() {
         </div>
       </section>
 
-      <VoiceAgent />
-      <Chatbot />
+      <AssistantDock />
 
       {/* ── FOOTER ── */}
       <footer className="border-t py-12" style={{ borderColor: 'var(--border)' }}>

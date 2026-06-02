@@ -1,6 +1,19 @@
 
 import type { Metadata } from 'next'
+import { Fraunces, Manrope } from 'next/font/google'
 import './globals.css'
+
+const display = Fraunces({
+  subsets: ['latin'],
+  variable: '--font-display',
+  display: 'swap',
+})
+
+const sans = Manrope({
+  subsets: ['latin'],
+  variable: '--font-sans',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: 'SendaIA — Automatización con IA para empresas',
@@ -13,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="es" className="dark">
+    <html lang="es" className={`dark ${display.variable} ${sans.variable}`}>
       <body className="antialiased">{children}</body>
     </html>
   )

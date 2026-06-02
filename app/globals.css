@@ -2,13 +2,15 @@
 
 :root {
   color-scheme: dark;
-  --background: #080808;
+  --background: #060608;
   --foreground: #f5f5f0;
   --accent: #D4AF37;
   --accent-light: #E7C86A;
   --accent-glow: rgba(212, 175, 55, 0.25);
-  --card: #111111;
+  --card: #101012;
   --border: rgba(255, 255, 255, 0.08);
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-sans: 'Manrope', system-ui, -apple-system, sans-serif;
 }
 
 html {
@@ -19,14 +21,32 @@ html {
 
 body {
   margin: 0;
-  background: var(--background);
+  /* fondo transparente: deja ver el canvas de la red neuronal (html aporta el negro base) */
+  background: transparent;
   color: var(--foreground);
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: var(--font-sans);
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 * {
   box-sizing: border-box;
+}
+
+/* Texto visible en todos los campos — caret dorado */
+input, textarea {
+  color: #f5f5f0;
+  caret-color: var(--accent);
+}
+input::placeholder, textarea::placeholder {
+  color: rgba(245, 245, 240, 0.4);
+}
+
+/* Headlines en serif editorial — autoridad y lujo */
+h1, h2 {
+  font-family: var(--font-display);
+  letter-spacing: -0.025em;
+  font-optical-sizing: auto;
 }
 
 .gradient-text {
@@ -43,6 +63,83 @@ body {
 }
 
 ::selection {
-  background: rgba(108, 99, 255, 0.3);
+  background: rgba(212, 175, 55, 0.3);
   color: #fff;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.gradient-text-animated {
+  background: linear-gradient(135deg, #D4AF37 0%, #E7C86A 25%, #F5E08A 50%, #D4AF37 75%, #E7C86A 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.ticker-track {
+  animation: ticker 30s linear infinite;
+}
+
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+/* Textura de grano sutil — quita el plano digital, da profundidad fílmica */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Barrido de brillo en botones dorados al hover */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+.btn-shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,0.45), transparent);
+  transition: left 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.btn-shine:hover::after {
+  left: 140%;
+}
+
+/* Ecualizador del agente de voz — comunica "esto es voz" de un vistazo */
+@keyframes eq {
+  0%, 100% { transform: scaleY(0.35); }
+  50% { transform: scaleY(1); }
+}
+.eq-bar {
+  width: 2px;
+  height: 14px;
+  border-radius: 2px;
+  background: currentColor;
+  transform-origin: center;
+  animation: eq 1s ease-in-out infinite;
+}
+
+/* Respiración del avatar de Aria */
+@keyframes breathe {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.08); opacity: 1; }
 }
