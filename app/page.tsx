@@ -4,6 +4,10 @@ import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion, useInView, AnimatePresence, useScroll, useSpring, useMotionValue, useMotionTemplate } from 'framer-motion'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { SplitText } from 'gsap/SplitText'
+import { useGSAP } from '@gsap/react'
 import {
   ArrowRight,
   Bot,
@@ -20,6 +24,9 @@ import {
   X,
   Zap,
 } from 'lucide-react'
+
+// Registro de plugins GSAP (una sola vez). Seguro en SSR: GSAP no toca el DOM al registrar.
+gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP)
 
 // ─────────────── DATOS ───────────────
 
@@ -198,36 +205,31 @@ const TICKER_ITEMS = [
 
 // ─────────────── UTILS ───────────────
 
-function useCounter(to: number, isInView: boolean) {
-  const [count, setCount] = useState(0)
-  useEffect(() => {
-    if (!isInView) return
-    let start: number | null = null
-    const duration = 2200
-    const step = (ts: number) => {
-      if (!start) start = ts
-      const progress = Math.min((ts - start) / duration, 1)
-      const eased = 1 - Math.pow(1 - progress, 4)
-      setCount(Math.floor(eased * to))
-      if (progress < 1) requestAnimationFrame(step)
-      else setCount(to)
-    }
-    requestAnimationFrame(step)
-  }, [isInView, to])
-  return count
-}
-
+// Contador animado con GSAP: cuenta de 0 al valor al entrar en viewport (ScrollTrigger).
 function Counter({ value, suffix = '', prefix = '' }: { value: number; suffix?: string; prefix?: string }) {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
-  const count = useCounter(value, inView)
-  return (
-    <span ref={ref}>
-      {prefix}{count.toLocaleString('es-ES')}{suffix}
-    </span>
-  )
+  const ref = useRef<HTMLSpanElement>(null)
+  useGSAP(() => {
+    const el = ref.current
+    if (!el) return
+    const render = (n: number) => { el.textContent = `${prefix}${Math.floor(n).toLocaleString('es-ES')}${suffix}` }
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      render(value)
+      return
+    }
+    const obj = { v: 0 }
+    gsap.to(obj, {
+      v: value,
+      duration: 2,
+      ease: 'power2.out',
+      scrollTrigger: { trigger: el, start: 'top 88%', once: true },
+      onUpdate: () => render(obj.v),
+      onComplete: () => render(value),
+    })
+  }, { scope: ref })
+  return <span ref={ref}>{prefix}0{suffix}</span>
 }
 
+// Reveal al hacer scroll con GSAP ScrollTrigger. Mantiene la misma API que antes (delay, y, className).
 function FadeIn({
   children,
   delay = 0,
@@ -239,18 +241,24 @@ function FadeIn({
   y?: number
   className?: string
 }) {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
+  const ref = useRef<HTMLDivElement>(null)
+  useGSAP(() => {
+    const el = ref.current
+    if (!el) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    gsap.from(el, {
+      opacity: 0,
+      y,
+      duration: 0.8,
+      delay,
+      ease: 'power3.out',
+      scrollTrigger: { trigger: el, start: 'top 85%', once: true },
+    })
+  }, { scope: ref })
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] }}
-      className={className}
-    >
+    <div ref={ref} className={className}>
       {children}
-    </motion.div>
+    </div>
   )
 }
 
@@ -883,6 +891,7 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState(0)
   const [muted, setMuted] = useState(true)
   const heroVideoRef = useRef<HTMLVideoElement>(null)
+  const mainRef = useRef<HTMLElement>(null)
 
   const toggleMute = () => {
     setMuted((m) => {
@@ -891,16 +900,110 @@ export default function Home() {
     })
   }
 
+  // ─────────────── ORQUESTACIÓN GSAP ───────────────
+  useGSAP(() => {
+    const cleanups: Array<() => void> = []
+
+    // Navbar → pill al hacer scroll (se aplica siempre, también con reduced-motion)
+    const navTl = gsap.timeline({
+      scrollTrigger: { trigger: document.documentElement, start: '64px top', toggleActions: 'play none none reverse' },
+    })
+    navTl
+      .to('[data-nav]', { backgroundColor: 'rgba(5,5,16,0)', borderColor: 'rgba(255,255,255,0)', duration: 0.4, ease: 'power2.out' }, 0)
+      .to('[data-nav-inner]', {
+        maxWidth: '60rem',
+        marginTop: '0.6rem',
+        borderRadius: '9999px',
+        paddingTop: '0.55rem',
+        paddingBottom: '0.55rem',
+        backgroundColor: 'rgba(12,12,20,0.92)',
+        borderColor: 'rgba(212,175,55,0.3)',
+        boxShadow: '0 16px 44px rgba(0,0,0,0.5)',
+        duration: 0.4,
+        ease: 'power2.out',
+      }, 0)
+
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduce) return () => cleanups.forEach((fn) => fn())
+
+    // Hero: entrada (badge → sub → CTAs) + SplitText por líneas en el titular.
+    // autoSplit + onSplit = robusto ante carga de la fuente Fraunces y cambios de tamaño.
+    gsap.timeline({ defaults: { ease: 'power3.out' } })
+      .from('[data-hero-badge]', { y: 18, autoAlpha: 0, duration: 0.6 })
+      .from('[data-hero-sub]', { y: 18, autoAlpha: 0, duration: 0.6 }, 0.7)
+      .from('[data-hero-cta]', { y: 18, autoAlpha: 0, duration: 0.6 }, 0.95)
+
+    const split = SplitText.create('[data-hero-title]', {
+      type: 'lines',
+      autoSplit: true,
+      onSplit: (self) => gsap.from(self.lines, {
+        y: 44, autoAlpha: 0, filter: 'blur(10px)', duration: 0.9, stagger: 0.14, ease: 'power3.out', delay: 0.25,
+      }),
+    })
+    cleanups.push(() => split.revert())
+
+    // Hero: parallax del vídeo de fondo
+    gsap.set('[data-hero-video]', { scale: 1.18, transformOrigin: 'center center' })
+    gsap.to('[data-hero-video]', {
+      yPercent: 12,
+      ease: 'none',
+      scrollTrigger: { trigger: '[data-hero-section]', start: 'top top', end: 'bottom top', scrub: true },
+    })
+
+    // Proceso: la línea conectora se dibuja al hacer scroll
+    gsap.from('[data-proceso-line]', {
+      scaleX: 0,
+      transformOrigin: 'left center',
+      ease: 'none',
+      scrollTrigger: { trigger: '[data-proceso]', start: 'top 75%', end: 'bottom 65%', scrub: true },
+    })
+
+    // Tilt 3D en tarjetas de Servicios (solo punteros con hover real)
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      const cards = gsap.utils.toArray<HTMLElement>('[data-tilt]')
+      cards.forEach((card) => {
+        const onEnter = () => gsap.to(card, {
+          y: -8, scale: 1.03,
+          boxShadow: '0 0 40px rgba(212,175,55,0.18), 0 24px 60px rgba(0,0,0,0.45)',
+          borderColor: 'rgba(212,175,55,0.4)',
+          duration: 0.35, ease: 'power2.out',
+        })
+        const onMove = (e: MouseEvent) => {
+          const r = card.getBoundingClientRect()
+          const px = (e.clientX - r.left) / r.width - 0.5
+          const py = (e.clientY - r.top) / r.height - 0.5
+          gsap.to(card, { rotateY: px * 10, rotateX: -py * 10, transformPerspective: 800, transformOrigin: 'center', duration: 0.4, ease: 'power2.out' })
+        }
+        const onLeave = () => gsap.to(card, {
+          y: 0, scale: 1, rotateX: 0, rotateY: 0,
+          boxShadow: '0 0 0 rgba(0,0,0,0)',
+          borderColor: 'rgba(255,255,255,0.08)',
+          duration: 0.5, ease: 'power3.out',
+        })
+        card.addEventListener('mouseenter', onEnter)
+        card.addEventListener('mousemove', onMove)
+        card.addEventListener('mouseleave', onLeave)
+        cleanups.push(() => {
+          card.removeEventListener('mouseenter', onEnter)
+          card.removeEventListener('mousemove', onMove)
+          card.removeEventListener('mouseleave', onLeave)
+        })
+      })
+    }
+
+    return () => cleanups.forEach((fn) => fn())
+  }, { scope: mainRef })
+
   return (
-    <main className="min-h-screen" style={{ background: 'transparent', color: 'var(--foreground)' }}>
+    <main ref={mainRef} className="min-h-screen" style={{ background: 'transparent', color: 'var(--foreground)' }}>
       <NeuralField />
       <div className="grain" />
       <ScrollProgress />
       <CursorSpotlight />
 
       {/* ── NAVBAR ── */}
-      <nav className="fixed top-0 left-0 right-0 z-50 border-b" style={{ borderColor: 'var(--border)', background: 'rgba(5,5,16,0.85)', backdropFilter: 'blur(16px)' }}>
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+      <nav data-nav className="fixed top-0 left-0 right-0 z-50 border-b" style={{ borderColor: 'var(--border)', background: 'rgba(5,5,16,0.85)', backdropFilter: 'blur(16px)' }}>
+        <div data-nav-inner className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 border border-transparent">
           <Link href="/" className="flex items-center">
             <Image
               src="/images/logo.png"
@@ -930,9 +1033,10 @@ export default function Home() {
       </nav>
 
       {/* ── HERO ── */}
-      <section className="relative flex min-h-screen items-center justify-center overflow-hidden pt-20">
+      <section data-hero-section className="relative flex min-h-screen items-center justify-center overflow-hidden pt-20">
         <video
           ref={heroVideoRef}
+          data-hero-video
           src="/videos/hero.mp4"
           autoPlay
           muted
@@ -965,44 +1069,34 @@ export default function Home() {
         ))}
 
         <div className="relative z-10 mx-auto max-w-5xl px-6 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          >
+          <div data-hero-badge>
             <span
               className="mb-6 inline-block rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-widest"
               style={{ background: 'rgba(212,175,55,0.18)', color: 'var(--accent-light)', border: '1px solid rgba(212,175,55,0.3)' }}
             >
               Automatización con IA para PYMEs
             </span>
-          </motion.div>
+          </div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+          <h1
+            data-hero-title
             className="text-5xl font-black leading-tight tracking-tight sm:text-6xl lg:text-7xl"
           >
             Recupera{' '}
             <span className="gradient-text-animated">horas cada semana</span>
             <br />con Agentes de IA
-          </motion.h1>
+          </h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          <p
+            data-hero-sub
             className="mx-auto mt-6 max-w-2xl text-lg leading-8"
             style={{ color: 'rgba(245,245,245,0.75)' }}
           >
             Sin código. Sin interrumpir tu negocio. A tu ritmo.
-          </motion.p>
+          </p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+          <div
+            data-hero-cta
             className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
           >
             <a
@@ -1021,7 +1115,7 @@ export default function Home() {
             >
               Ver cómo funciona ↓
             </Link>
-          </motion.div>
+          </div>
         </div>
 
         <motion.button
@@ -1119,9 +1213,8 @@ export default function Home() {
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {SERVICIOS.map((s, i) => (
               <FadeIn key={s.title} delay={i * 0.08}>
-                <motion.div
-                  whileHover={{ scale: 1.03, y: -6, boxShadow: '0 0 40px rgba(212,175,55,0.18), 0 20px 50px rgba(0,0,0,0.4)', borderColor: 'rgba(212,175,55,0.4)' }}
-                  transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+                <div
+                  data-tilt
                   className="rounded-2xl p-6 h-full flex flex-col"
                   style={{
                     background: 'var(--card)',
@@ -1142,7 +1235,7 @@ export default function Home() {
                   >
                     {s.roi}
                   </div>
-                </motion.div>
+                </div>
               </FadeIn>
             ))}
           </div>
@@ -1352,8 +1445,9 @@ export default function Home() {
             </h2>
           </FadeIn>
 
-          <div className="relative grid gap-6 lg:grid-cols-4">
+          <div data-proceso className="relative grid gap-6 lg:grid-cols-4">
             <div
+              data-proceso-line
               className="absolute top-10 left-0 right-0 h-px hidden lg:block"
               style={{ background: 'linear-gradient(to right, transparent, rgba(212,175,55,0.4), rgba(231,200,106,0.4), transparent)' }}
             />
