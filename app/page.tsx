@@ -8,6 +8,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { SplitText } from 'gsap/SplitText'
 import { useGSAP } from '@gsap/react'
+import { track } from '@/lib/website-events'
 import {
   ArrowRight,
   Bot,
@@ -495,6 +496,10 @@ function ContactForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       })
+      if (res.ok) {
+        // Tracking: el formulario se envió con éxito (sin datos personales en meta).
+        track('form_submit', { form: 'contacto', has_phone: Boolean(form.phone) })
+      }
       setStatus(res.ok ? 'ok' : 'error')
     } catch {
       setStatus('error')
@@ -899,6 +904,11 @@ export default function Home() {
       return !m
     })
   }
+
+  // Tracking: registrar la visita a la home una sola vez.
+  useEffect(() => {
+    track('page_view')
+  }, [])
 
   // ─────────────── ORQUESTACIÓN GSAP ───────────────
   useGSAP(() => {
