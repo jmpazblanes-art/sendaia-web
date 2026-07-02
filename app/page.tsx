@@ -9,6 +9,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { SplitText } from 'gsap/SplitText'
 import { useGSAP } from '@gsap/react'
 import { track } from '@/lib/website-events'
+import WhatsAppButton from './WhatsAppButton'
 import {
   ArrowRight,
   Bot,
@@ -1512,6 +1513,7 @@ export default function Home() {
       </section>
 
       <AssistantDock />
+      <WhatsAppButton />
 
       {/* ── FOOTER ── */}
       <footer className="border-t py-12" style={{ borderColor: 'var(--border)' }}>
