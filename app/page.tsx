@@ -127,32 +127,32 @@ const SECTORES = [
   {
     title: 'Clínicas y Salud',
     desc: 'Recepción, citas, documentación clínica y recordatorios sin saturar al equipo.',
-    icon: Stethoscope,
+    img: '/images/agente-voz-ia-clinica-medica.jpg',
   },
   {
     title: 'Asesorías y Despachos',
     desc: 'Back-office automatizado: facturas, declaraciones y seguimiento de clientes.',
-    icon: Calculator,
+    img: '/images/backoffice-automatizado-facturas-crm.jpg',
   },
   {
     title: 'Inmobiliarias',
     desc: 'Captación de leads, respuesta inmediata y agendado de visitas 24/7.',
-    icon: Building2,
+    img: '/images/agente-voz-ia-clinica-medica.jpg',
   },
   {
     title: 'E-commerce',
     desc: 'Pedidos, incidencias y soporte posventa sin contratar más personal.',
-    icon: ShoppingCart,
+    img: '/images/backoffice-automatizado-facturas-crm.jpg',
   },
   {
     title: 'Restaurantes y Hostelería',
     desc: 'Reservas, consultas y gestión de proveedores automatizados.',
-    icon: UtensilsCrossed,
+    img: '/images/equipo-reunion.jpg',
   },
   {
     title: 'Cualquier PYME',
     desc: 'Si tienes procesos repetitivos, tenemos un agente que los elimina.',
-    icon: Sparkles,
+    img: '/images/dashboard.png',
   },
 ]
 
@@ -1608,21 +1608,19 @@ export default function Home() {
                   className="group overflow-hidden rounded-2xl h-full"
                   style={{ border: '1px solid var(--border)' }}
                 >
+                  {/* Imagen COMPLETA (object-contain): las imágenes llevan texto/logo,
+                      así no se corta nada. aspect cuadrado como el original de la imagen. */}
                   <div
-                    className="relative h-44 overflow-hidden flex items-center justify-center"
-                    style={{ background: 'radial-gradient(circle at 50% 40%, rgba(212,175,55,0.16), rgba(13,13,26,0.2) 70%), linear-gradient(135deg, #12121f 0%, #0b0b16 100%)' }}
+                    className="relative w-full overflow-hidden"
+                    style={{ aspectRatio: '1 / 1', background: '#0b0b16' }}
                   >
-                    {/* halo dorado detrás del icono */}
-                    <div
-                      className="absolute rounded-full transition-transform duration-500 group-hover:scale-110"
-                      style={{ width: 130, height: 130, background: 'radial-gradient(circle, rgba(212,175,55,0.25), transparent 68%)' }}
+                    <Image
+                      src={s.img}
+                      alt={s.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-contain transition-transform duration-500 group-hover:scale-[1.03]"
                     />
-                    <s.icon
-                      className="relative h-14 w-14 transition-transform duration-500 group-hover:scale-110"
-                      style={{ color: 'var(--accent-light)' }}
-                      strokeWidth={1.4}
-                    />
-                    <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(to bottom, transparent 55%, rgba(13,13,26,0.85) 100%)' }} />
                   </div>
                   <div className="p-5" style={{ background: 'var(--card)' }}>
                     <h3 className="font-bold text-lg mb-2">{s.title}</h3>
