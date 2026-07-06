@@ -128,31 +128,65 @@ const SECTORES = [
     title: 'Clínicas y Salud',
     desc: 'Recepción, citas, documentación clínica y recordatorios sin saturar al equipo.',
     img: '/images/agente-voz-ia-clinica-medica.jpg',
+    slug: 'clinicas',
   },
   {
     title: 'Asesorías y Despachos',
     desc: 'Back-office automatizado: facturas, declaraciones y seguimiento de clientes.',
     img: '/images/backoffice-automatizado-facturas-crm.jpg',
+    slug: 'asesorias',
   },
   {
     title: 'Inmobiliarias',
     desc: 'Captación de leads, respuesta inmediata y agendado de visitas 24/7.',
     img: '/images/agente-voz-ia-clinica-medica.jpg',
+    slug: 'inmobiliarias',
   },
   {
     title: 'E-commerce',
     desc: 'Pedidos, incidencias y soporte posventa sin contratar más personal.',
     img: '/images/backoffice-automatizado-facturas-crm.jpg',
+    slug: 'ecommerce',
   },
   {
     title: 'Restaurantes y Hostelería',
     desc: 'Reservas, consultas y gestión de proveedores automatizados.',
     img: '/images/equipo-reunion.jpg',
+    slug: 'restaurantes',
   },
   {
     title: 'Cualquier PYME',
     desc: 'Si tienes procesos repetitivos, tenemos un agente que los elimina.',
     img: '/images/dashboard.png',
+    slug: 'pymes',
+  },
+]
+
+// Casos de estudio (tipo anónimos, cifras honestas). Estructura Reto→Solución→Resultado.
+const CASOS = [
+  {
+    sector: 'Climatización / Instalaciones',
+    title: 'De hojas de Excel sueltas a un ERP que cuadra solo',
+    reto: 'Una empresa de climatización llevaba obras, horas y facturas de proveedor en Excels dispersos. Cada factura se imputaba a mano a su obra; los descuadres aparecían meses después y nadie sabía el margen real de cada proyecto hasta que era tarde.',
+    solucion: 'ERP a medida: las facturas de proveedor entran por correo, la IA extrae cada línea y la liga a su obra automáticamente. Horas sincronizadas desde el sistema de campo. Panel por obra con coste real vs. estimado en vivo.',
+    resultado: 'Facturas cuadrando al céntimo, margen de cada obra visible al instante y cero descuadres silenciosos gracias a alarmas automáticas.',
+    highlight: 'al céntimo',
+  },
+  {
+    sector: 'Peritación / Seguros',
+    title: 'Del informe de 3 horas al informe listo en minutos',
+    reto: 'Un perito de seguros redactaba cada informe a mano en Word: copiar datos del expediente, pegar fotos, rellenar tablas de valoración. Horas por informe, y un error de copiar-pegar podía colarse hasta la compañía.',
+    solucion: 'Una app donde todo el peritaje vive dentro: datos, fotos y valoración. Un botón genera el informe Word completo, con los datos volcados en su sitio y las fotos colocadas, listo para enviar a la aseguradora.',
+    resultado: 'El tiempo por informe pasó de horas a minutos, sin errores de trascripción, y el perito dedica su tiempo a peritar, no a maquetar Word.',
+    highlight: 'de horas a minutos',
+  },
+  {
+    sector: 'Clínica / Servicios con cita',
+    title: 'Un agente de voz que no deja ni una llamada sin atender',
+    reto: 'Una clínica perdía llamadas fuera de horario y en horas punta: recepción no daba abasto, y cada llamada sin coger era una cita —y un ingreso— que se iba a la competencia.',
+    solucion: 'Un agente de voz con IA que atiende 24/7, entiende al paciente, consulta la disponibilidad real y agenda la cita en el momento. Habla natural, no suena a robot, y pasa a una persona si hace falta.',
+    resultado: 'Cero llamadas perdidas fuera de horario y citas agendadas a cualquier hora, sin ampliar el equipo de recepción.',
+    highlight: 'a cualquier hora',
   },
 ]
 
@@ -1192,6 +1226,7 @@ export default function Home() {
           <div className="hidden items-center gap-8 text-sm md:flex" style={{ color: 'rgba(245,245,245,0.65)' }}>
             <NavLink3D href="#servicios">Servicios</NavLink3D>
             <NavLink3D href="#sectores">Sectores</NavLink3D>
+            <NavLink3D href="#casos">Casos</NavLink3D>
             <NavLink3D href="#proceso">Proceso</NavLink3D>
             <NavLink3D href="#contacto">Contacto</NavLink3D>
           </div>
@@ -1602,31 +1637,78 @@ export default function Home() {
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {SECTORES.map((s, i) => (
               <FadeIn key={s.title} delay={i * 0.07}>
-                <motion.div
-                  whileHover={{ y: -6, boxShadow: '0 0 35px rgba(212,175,55,0.14), 0 20px 40px rgba(0,0,0,0.35)' }}
-                  transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-                  className="group overflow-hidden rounded-2xl h-full"
-                  style={{ border: '1px solid var(--border)' }}
-                >
-                  {/* Imagen COMPLETA (object-contain): las imágenes llevan texto/logo,
-                      así no se corta nada. aspect cuadrado como el original de la imagen. */}
-                  <div
-                    className="relative w-full overflow-hidden"
-                    style={{ aspectRatio: '1 / 1', background: '#0b0b16' }}
+                <Link href={`/sectores/${s.slug}`} className="block h-full">
+                  <motion.div
+                    whileHover={{ y: -6, boxShadow: '0 0 35px rgba(212,175,55,0.14), 0 20px 40px rgba(0,0,0,0.35)' }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+                    className="group overflow-hidden rounded-2xl h-full"
+                    style={{ border: '1px solid var(--border)' }}
                   >
-                    <Image
-                      src={s.img}
-                      alt={s.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-contain transition-transform duration-500 group-hover:scale-[1.03]"
-                    />
+                    {/* Imagen COMPLETA (object-contain): las imágenes llevan texto/logo,
+                        así no se corta nada. aspect cuadrado como el original de la imagen. */}
+                    <div
+                      className="relative w-full overflow-hidden"
+                      style={{ aspectRatio: '1 / 1', background: '#0b0b16' }}
+                    >
+                      <Image
+                        src={s.img}
+                        alt={s.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        className="object-contain transition-transform duration-500 group-hover:scale-[1.03]"
+                      />
+                    </div>
+                    <div className="p-5" style={{ background: 'var(--card)' }}>
+                      <h3 className="font-bold text-lg mb-2">{s.title}</h3>
+                      <p className="text-sm leading-6" style={{ color: 'rgba(245,245,245,0.6)' }}>{s.desc}</p>
+                      <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold transition-colors group-hover:gap-2" style={{ color: 'var(--accent-light)' }}>
+                        Ver cómo <ArrowRight className="h-4 w-4" />
+                      </span>
+                    </div>
+                  </motion.div>
+                </Link>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── CASOS DE ESTUDIO ── */}
+      <section id="casos" className="py-20 sm:py-28">
+        <div className="mx-auto max-w-6xl px-6">
+          <FadeIn className="mb-16 text-center">
+            <p className="mb-4 text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--accent-light)' }}>Casos de estudio</p>
+            <h2 className="text-3xl font-black sm:text-5xl">
+              Lo que pasa cuando<br />
+              <span className="gradient-text">el sistema trabaja por ti</span>
+            </h2>
+          </FadeIn>
+
+          <div className="flex flex-col gap-6">
+            {CASOS.map((c, i) => (
+              <FadeIn key={c.title} delay={i * 0.08}>
+                <div
+                  className="relative overflow-hidden rounded-2xl p-7 sm:p-9"
+                  style={{ background: 'var(--card)', border: '1px solid rgba(212,175,55,0.18)' }}
+                >
+                  <div className="absolute left-0 top-0 bottom-0 w-1" style={{ background: 'linear-gradient(to bottom, var(--accent), transparent)' }} />
+                  <p className="mb-2 text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--accent)' }}>{c.sector}</p>
+                  <h3 className="mb-6 text-xl sm:text-2xl font-bold">{c.title}</h3>
+                  <div className="grid gap-5 sm:grid-cols-3">
+                    <div>
+                      <p className="mb-1.5 text-xs font-bold uppercase tracking-wider" style={{ color: '#C0563B' }}>El reto</p>
+                      <p className="text-sm leading-6" style={{ color: 'rgba(245,245,245,0.6)' }}>{c.reto}</p>
+                    </div>
+                    <div>
+                      <p className="mb-1.5 text-xs font-bold uppercase tracking-wider" style={{ color: 'var(--accent-light)' }}>La solución</p>
+                      <p className="text-sm leading-6" style={{ color: 'rgba(245,245,245,0.6)' }}>{c.solucion}</p>
+                    </div>
+                    <div>
+                      <p className="mb-1.5 text-xs font-bold uppercase tracking-wider" style={{ color: '#4B9E7F' }}>El resultado</p>
+                      <p className="text-sm leading-6" style={{ color: 'rgba(245,245,245,0.85)' }}>{c.resultado}</p>
+                    </div>
                   </div>
-                  <div className="p-5" style={{ background: 'var(--card)' }}>
-                    <h3 className="font-bold text-lg mb-2">{s.title}</h3>
-                    <p className="text-sm leading-6" style={{ color: 'rgba(245,245,245,0.6)' }}>{s.desc}</p>
-                  </div>
-                </motion.div>
+                </div>
               </FadeIn>
             ))}
           </div>
