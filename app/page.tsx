@@ -532,6 +532,37 @@ function LogoMolecula3D({ size = 260 }: { size?: number }) {
   return <canvas ref={canvasRef} aria-hidden className="pointer-events-none" style={{ width: size, height: size }} />
 }
 
+// Link de menú con efecto 3D: al pasar el ratón, el texto se inclina en 3D hacia
+// el cursor y se levanta un poco. CSS transforms puros (ligero, va fino en móvil).
+// Envuelve un <Link>: no toca el href ni el scroll. Respeta reduced-motion y solo
+// se activa en punteros con hover real (no en táctil).
+function NavLink3D({ href, children }: { href: string; children: React.ReactNode }) {
+  const ref = useRef<HTMLAnchorElement>(null)
+  const onMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const el = ref.current
+    if (!el) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return
+    const r = el.getBoundingClientRect()
+    const px = (e.clientX - r.left) / r.width - 0.5
+    const py = (e.clientY - r.top) / r.height - 0.5
+    el.style.transform = `perspective(400px) rotateX(${-py * 22}deg) rotateY(${px * 26}deg) translateZ(6px)`
+  }
+  const reset = () => { if (ref.current) ref.current.style.transform = '' }
+  return (
+    <Link
+      ref={ref}
+      href={href}
+      onMouseMove={onMove}
+      onMouseLeave={reset}
+      className="relative inline-block transition-[color,transform] duration-200 ease-out hover:text-white"
+      style={{ transformStyle: 'preserve-3d', willChange: 'transform' }}
+    >
+      {children}
+    </Link>
+  )
+}
+
 function ScrollProgress() {
   const { scrollYProgress } = useScroll()
   const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30, restDelta: 0.001 })
@@ -1154,10 +1185,10 @@ export default function Home() {
             />
           </Link>
           <div className="hidden items-center gap-8 text-sm md:flex" style={{ color: 'rgba(245,245,245,0.65)' }}>
-            <Link href="#servicios" className="transition-colors hover:text-white">Servicios</Link>
-            <Link href="#sectores" className="transition-colors hover:text-white">Sectores</Link>
-            <Link href="#proceso" className="transition-colors hover:text-white">Proceso</Link>
-            <Link href="#contacto" className="transition-colors hover:text-white">Contacto</Link>
+            <NavLink3D href="#servicios">Servicios</NavLink3D>
+            <NavLink3D href="#sectores">Sectores</NavLink3D>
+            <NavLink3D href="#proceso">Proceso</NavLink3D>
+            <NavLink3D href="#contacto">Contacto</NavLink3D>
           </div>
           <a
             href="#contacto"
