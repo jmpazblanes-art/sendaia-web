@@ -404,6 +404,134 @@ function NeuralField() {
   )
 }
 
+// Logo de SendaIA (la molécula: 1 esfera central + 5 satélites unidos por enlaces)
+// reconstruido en 3D real, dorado con luz, girando suave y orientándose al ratón.
+// pointer-events-none: nunca roba el cursor ni tapa nada. Guard reduced-motion.
+function LogoMolecula3D({ size = 260 }: { size?: number }) {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const gl = canvas.getContext('webgl', { antialias: true, alpha: true, premultipliedAlpha: false }) as WebGLRenderingContext | null
+    if (!gl) return
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const dpr = Math.min(window.devicePixelRatio || 1, 2)
+    let raf = 0
+    const target = { x: 0, y: 0 }, cur = { x: 0, y: 0 }
+    let spin = 0
+
+    const compile = (type: number, src: string) => { const s = gl.createShader(type)!; gl.shaderSource(s, src); gl.compileShader(s); return s }
+    const link = (vs: string, fs: string) => { const p = gl.createProgram()!; gl.attachShader(p, compile(gl.VERTEX_SHADER, vs)); gl.attachShader(p, compile(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(p); return p }
+
+    // esfera UV
+    const sphere = (seg: number) => {
+      const pos: number[] = [], nor: number[] = []
+      const P = (xx: number, yy: number) => { const u = xx / seg, v = yy / seg, th = u * Math.PI * 2, ph = v * Math.PI; return [Math.sin(ph) * Math.cos(th), Math.cos(ph), Math.sin(ph) * Math.sin(th)] }
+      for (let y = 0; y < seg; y++) for (let x = 0; x < seg; x++) {
+        const a = P(x, y), b = P(x + 1, y), c = P(x + 1, y + 1), d = P(x, y + 1)
+        ;[a, b, c, a, c, d].forEach(p => { pos.push(p[0], p[1], p[2]); nor.push(p[0], p[1], p[2]) })
+      }
+      return { pos: new Float32Array(pos), nor: new Float32Array(nor), count: pos.length / 3 }
+    }
+    // cilindro (enlace), eje Y de 0 a 1
+    const cylinder = (seg: number) => {
+      const pos: number[] = [], nor: number[] = []
+      for (let i = 0; i < seg; i++) {
+        const a0 = i / seg * Math.PI * 2, a1 = (i + 1) / seg * Math.PI * 2
+        const x0 = Math.cos(a0), z0 = Math.sin(a0), x1 = Math.cos(a1), z1 = Math.sin(a1)
+        const p = [[x0, 0, z0], [x1, 0, z1], [x1, 1, z1], [x0, 0, z0], [x1, 1, z1], [x0, 1, z0]]
+        const n = [[x0, 0, z0], [x1, 0, z1], [x1, 0, z1], [x0, 0, z0], [x1, 0, z1], [x0, 0, z0]]
+        for (let k = 0; k < 6; k++) { pos.push(p[k][0], p[k][1], p[k][2]); nor.push(n[k][0], n[k][1], n[k][2]) }
+      }
+      return { pos: new Float32Array(pos), nor: new Float32Array(nor), count: pos.length / 3 }
+    }
+    const mkBuf = (geo: { pos: Float32Array; nor: Float32Array; count: number }) => {
+      const pb = gl.createBuffer()!; gl.bindBuffer(gl.ARRAY_BUFFER, pb); gl.bufferData(gl.ARRAY_BUFFER, geo.pos, gl.STATIC_DRAW)
+      const nb = gl.createBuffer()!; gl.bindBuffer(gl.ARRAY_BUFFER, nb); gl.bufferData(gl.ARRAY_BUFFER, geo.nor, gl.STATIC_DRAW)
+      return { pb, nb, count: geo.count }
+    }
+    const sphB = mkBuf(sphere(26)), cylB = mkBuf(cylinder(18))
+
+    const vs = 'attribute vec3 pos; attribute vec3 nor; uniform mat4 mvp; uniform mat4 model; varying vec3 vN; varying vec3 vP; void main(){ vN=mat3(model)*nor; vP=(model*vec4(pos,1.0)).xyz; gl_Position=mvp*vec4(pos,1.0); }'
+    const fs = 'precision highp float; varying vec3 vN; varying vec3 vP; uniform vec3 camPos; uniform float emissive;' +
+      'void main(){ vec3 N=normalize(vN); vec3 L1=normalize(vec3(0.6,0.9,0.8)); vec3 L2=normalize(vec3(-0.7,-0.2,0.4)); vec3 V=normalize(camPos-vP);' +
+      ' float d1=max(dot(N,L1),0.0); float d2=max(dot(N,L2),0.0)*0.25;' +
+      ' vec3 H=normalize(L1+V); float spec=pow(max(dot(N,H),0.0),48.0); float fres=pow(1.0-max(dot(N,V),0.0),3.0);' +
+      ' vec3 gold=vec3(0.945,0.784,0.290); vec3 goldLite=vec3(1.0,0.945,0.65); vec3 goldDark=vec3(0.42,0.32,0.10);' +
+      ' vec3 base=mix(goldDark,gold,d1)+goldLite*d2; vec3 col=base*1.15+vec3(spec)*1.1+goldLite*fres*0.7;' +
+      ' col+=gold*0.18; col=mix(col,goldLite,emissive*0.7); gl_FragColor=vec4(col,1.0); }'
+    const prog = link(vs, fs)
+    const aPos = gl.getAttribLocation(prog, 'pos'), aNor = gl.getAttribLocation(prog, 'nor')
+    const uMVP = gl.getUniformLocation(prog, 'mvp'), uModel = gl.getUniformLocation(prog, 'model'), uCam = gl.getUniformLocation(prog, 'camPos'), uEmis = gl.getUniformLocation(prog, 'emissive')
+    gl.enable(gl.DEPTH_TEST)
+
+    const mul = (a: Float32Array, b: Float32Array) => { const o = new Float32Array(16); for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) { let s = 0; for (let k = 0; k < 4; k++) s += a[k * 4 + j] * b[i * 4 + k]; o[i * 4 + j] = s } return o }
+    const persp = (f: number, ar: number, n: number, fa: number) => { const t = 1 / Math.tan(f / 2); return new Float32Array([t / ar, 0, 0, 0, 0, t, 0, 0, 0, 0, (fa + n) / (n - fa), -1, 0, 0, (2 * fa * n) / (n - fa), 0]) }
+    const rotY = (a: number) => { const c = Math.cos(a), s = Math.sin(a); return new Float32Array([c, 0, s, 0, 0, 1, 0, 0, -s, 0, c, 0, 0, 0, 0, 1]) }
+    const rotX = (a: number) => { const c = Math.cos(a), s = Math.sin(a); return new Float32Array([1, 0, 0, 0, 0, c, -s, 0, 0, s, c, 0, 0, 0, 0, 1]) }
+    const trans = (x: number, y: number, z: number) => new Float32Array([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, x, y, z, 1])
+    const scale = (x: number, y: number, z: number) => new Float32Array([x, 0, 0, 0, 0, y, 0, 0, 0, 0, z, 0, 0, 0, 0, 1])
+    const align = (dir: number[]) => {
+      const up = [0, 1, 0]; let d = dir; const dl = Math.hypot(d[0], d[1], d[2]); d = [d[0] / dl, d[1] / dl, d[2] / dl]
+      let ax = [up[1] * d[2] - up[2] * d[1], up[2] * d[0] - up[0] * d[2], up[0] * d[1] - up[1] * d[0]]
+      const s = Math.hypot(ax[0], ax[1], ax[2]), c = up[0] * d[0] + up[1] * d[1] + up[2] * d[2]
+      if (s < 1e-6) return c > 0 ? new Float32Array([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]) : scale(1, -1, 1)
+      ax = [ax[0] / s, ax[1] / s, ax[2] / s]
+      const x = ax[0], y = ax[1], z = ax[2], t = 1 - c
+      return new Float32Array([t * x * x + c, t * x * y + s * z, t * x * z - s * y, 0, t * x * y - s * z, t * y * y + c, t * y * z + s * x, 0, t * x * z + s * y, t * y * z - s * x, t * z * z + c, 0, 0, 0, 0, 1])
+    }
+
+    const CENTER = [0, 0, 0], SAT: number[][] = []
+    const ang = [90, 150, 210, 315, 25], zoff = [0.35, -0.25, 0.2, -0.35, 0.3]
+    for (let i = 0; i < 5; i++) { const a = ang[i] * Math.PI / 180; SAT.push([Math.cos(a) * 1.15, Math.sin(a) * 1.15, zoff[i]]) }
+
+    const onMove = (e: PointerEvent) => { const r = canvas.getBoundingClientRect(); target.x = (e.clientX - r.left) / r.width - 0.5; target.y = (e.clientY - r.top) / r.height - 0.5 }
+    const onLeave = () => { target.x = 0; target.y = 0 }
+    window.addEventListener('pointermove', onMove); canvas.addEventListener('pointerleave', onLeave)
+
+    const resize = () => { canvas.width = Math.floor(size * dpr); canvas.height = Math.floor(size * dpr); canvas.style.width = size + 'px'; canvas.style.height = size + 'px'; gl.viewport(0, 0, canvas.width, canvas.height) }
+    resize()
+
+    const camPos = [0, 0, 5]
+    const drawGeo = (buf: { pb: WebGLBuffer; nb: WebGLBuffer; count: number }, model: Float32Array, mvp: Float32Array, emis: number) => {
+      gl.uniformMatrix4fv(uModel, false, model); gl.uniformMatrix4fv(uMVP, false, mvp); gl.uniform1f(uEmis, emis)
+      gl.bindBuffer(gl.ARRAY_BUFFER, buf.pb); gl.enableVertexAttribArray(aPos); gl.vertexAttribPointer(aPos, 3, gl.FLOAT, false, 0, 0)
+      gl.bindBuffer(gl.ARRAY_BUFFER, buf.nb); gl.enableVertexAttribArray(aNor); gl.vertexAttribPointer(aNor, 3, gl.FLOAT, false, 0, 0)
+      gl.drawArrays(gl.TRIANGLES, 0, buf.count)
+    }
+    const frame = () => {
+      cur.x += (target.x - cur.x) * 0.06; cur.y += (target.y - cur.y) * 0.06
+      if (!reduce) spin += 0.006
+      const ar = canvas.width / canvas.height
+      const proj = persp(0.9, ar, 0.1, 50), view = trans(0, 0, -5)
+      const world = mul(rotX(-cur.y * 0.9 + 0.1), rotY(spin + cur.x * 1.2))
+      gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
+      gl.useProgram(prog); gl.uniform3fv(uCam, camPos)
+      const vp = mul(proj, view)
+      for (let i = 0; i < 5; i++) {
+        const d = [SAT[i][0], SAT[i][1], SAT[i][2]], len = Math.hypot(d[0], d[1], d[2])
+        const m = mul(world, mul(trans(0, 0, 0), mul(align(d), scale(0.055, len, 0.055))))
+        drawGeo(cylB, m, mul(vp, m), 0)
+      }
+      const mc = mul(world, scale(0.42, 0.42, 0.42))
+      drawGeo(sphB, mc, mul(vp, mc), 0.25)
+      for (let j = 0; j < 5; j++) { const ms = mul(world, mul(trans(SAT[j][0], SAT[j][1], SAT[j][2]), scale(0.20, 0.20, 0.20))); drawGeo(sphB, ms, mul(vp, ms), 0.05) }
+      if (!reduce) raf = requestAnimationFrame(frame)
+    }
+    const onVis = () => { if (document.hidden) cancelAnimationFrame(raf); else if (!reduce) raf = requestAnimationFrame(frame) }
+    document.addEventListener('visibilitychange', onVis)
+    if (reduce) frame(); else raf = requestAnimationFrame(frame)
+
+    return () => {
+      cancelAnimationFrame(raf)
+      window.removeEventListener('pointermove', onMove); canvas.removeEventListener('pointerleave', onLeave)
+      document.removeEventListener('visibilitychange', onVis)
+    }
+  }, [size])
+
+  return <canvas ref={canvasRef} aria-hidden className="pointer-events-none" style={{ width: size, height: size }} />
+}
+
 function ScrollProgress() {
   const { scrollYProgress } = useScroll()
   const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30, restDelta: 0.001 })
@@ -1254,15 +1382,33 @@ export default function Home() {
       </section>
 
       {/* ── POR QUÉ SENDAIA ── */}
-      <section className="py-20 sm:py-28">
+      <section className="py-20 sm:py-28 relative" style={{ background: '#06070A' }}>
         <div className="mx-auto max-w-7xl px-6">
-          <FadeIn className="mb-16 text-center">
+          <FadeIn className="mb-8 text-center">
             <p className="mb-4 text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--accent-light)' }}>Por qué SendaIA</p>
             <h2 className="text-3xl font-black sm:text-5xl">
               La diferencia no es trabajar más.<br />
               <span className="gradient-text">Es tener sistemas.</span>
             </h2>
           </FadeIn>
+
+          <div className="mb-14 flex flex-col items-center">
+            <LogoMolecula3D size={260} />
+            <span
+              className="mt-[-12px] text-4xl sm:text-5xl font-black tracking-tight"
+              style={{
+                lineHeight: 1,
+                background: 'linear-gradient(180deg, #FFF0B8 0%, #F5E08A 40%, #D4AF37 100%)',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                color: 'transparent',
+                filter: 'drop-shadow(0 2px 24px rgba(212,175,55,0.45))',
+              }}
+            >
+              SendaIA
+            </span>
+          </div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {PILARES.map((p, i) => (
