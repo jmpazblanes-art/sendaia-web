@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { ArrowRight, Check } from 'lucide-react'
 import { SECTORES_PAGINAS, getSector } from '../contenido'
+import { YouTubeEmbed } from '../youtube-embed'
 
 // genera las 6 rutas estáticas en build
 export function generateStaticParams() {
@@ -102,6 +103,17 @@ export default async function SectorPage({ params }: { params: Promise<{ slug: s
           ))}
         </div>
       </section>
+
+      {/* DEMO EN VÍDEO (si el sector tiene una demo real) */}
+      {s.videoYoutube && (
+        <section className="px-6 pb-8 pt-4">
+          <div className="mx-auto max-w-4xl">
+            <p className="mb-4 text-center text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--accent-light)' }}>Demo real</p>
+            <h2 className="mb-8 text-center text-2xl font-black sm:text-3xl">Míralo funcionando</h2>
+            <YouTubeEmbed id={s.videoYoutube} title={`Demo — ${s.nombre} — SendaIA`} />
+          </div>
+        </section>
+      )}
 
       {/* CIERRE + CTA */}
       <section className="px-6 pb-24 pt-4">

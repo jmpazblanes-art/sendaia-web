@@ -139,25 +139,28 @@ const SECTORES = [
   {
     title: 'Inmobiliarias',
     desc: 'Captación de leads, respuesta inmediata y agendado de visitas 24/7.',
-    img: '/images/agente-voz-ia-clinica-medica.jpg',
+    img: '/images/sector-inmobiliarias.jpg',
+    video: '/images/Inmobiliaria.mp4',
     slug: 'inmobiliarias',
   },
   {
     title: 'E-commerce',
     desc: 'Pedidos, incidencias y soporte posventa sin contratar más personal.',
-    img: '/images/backoffice-automatizado-facturas-crm.jpg',
+    img: '/images/sector-ecommerce.jpg',
+    video: '/images/ecomerece.mp4',
     slug: 'ecommerce',
   },
   {
     title: 'Restaurantes y Hostelería',
     desc: 'Reservas, consultas y gestión de proveedores automatizados.',
-    img: '/images/equipo-reunion.jpg',
+    img: '/images/sector-restaurantes.jpg',
     slug: 'restaurantes',
   },
   {
     title: 'Cualquier PYME',
     desc: 'Si tienes procesos repetitivos, tenemos un agente que los elimina.',
-    img: '/images/dashboard.png',
+    img: '/images/sector-pymes.jpg',
+    video: '/images/Pyme.mp4',
     slug: 'pymes',
   },
 ]
@@ -599,6 +602,91 @@ function NavLink3D({ href, children }: { href: string; children: React.ReactNode
     >
       {children}
     </Link>
+  )
+}
+
+// Media de tarjeta de sector: imagen fija por defecto; si hay vídeo, al pasar el
+// ratón (o al aparecer en móvil) se reproduce el corto encima con fundido. Imagen
+// 16:9 object-cover (las nuevas no llevan texto). El vídeo va muted+loop+playsInline.
+function SectorMedia({ img, video, title }: { img: string; video?: string; title: string }) {
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const onEnter = () => {
+    const v = videoRef.current
+    if (v) { v.currentTime = 0; v.play().catch(() => {}) }
+  }
+  const onLeave = () => {
+    const v = videoRef.current
+    if (v) v.pause()
+  }
+  return (
+    <div
+      className="relative w-full overflow-hidden"
+      style={{ aspectRatio: '16 / 9', background: '#0b0b16' }}
+      onMouseEnter={video ? onEnter : undefined}
+      onMouseLeave={video ? onLeave : undefined}
+    >
+      <Image
+        src={img}
+        alt={title}
+        fill
+        sizes="(max-width: 768px) 100vw, 33vw"
+        className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+      />
+      {video && (
+        <video
+          ref={videoRef}
+          src={video}
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          aria-hidden
+          className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        />
+      )}
+      {/* velo inferior para que el texto de la tarjeta respire */}
+      <div className="absolute inset-x-0 bottom-0 h-1/3 pointer-events-none" style={{ background: 'linear-gradient(to top, rgba(13,13,26,0.6), transparent)' }} />
+      {video && (
+        <span className="absolute right-3 top-3 rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider backdrop-blur-sm" style={{ background: 'rgba(212,175,55,0.85)', color: '#0b0b16' }}>
+          ▶ Ver en acción
+        </span>
+      )}
+    </div>
+  )
+}
+
+// Embed de YouTube con lazy-load: muestra la miniatura + botón play y solo carga
+// el iframe de YouTube al hacer clic (no ralentiza la web hasta que se quiere ver).
+function YouTubeEmbed({ id, title }: { id: string; title: string }) {
+  const [play, setPlay] = useState(false)
+  return (
+    <div className="relative w-full overflow-hidden rounded-2xl" style={{ aspectRatio: '16 / 9', background: '#000', border: '1px solid rgba(212,175,55,0.25)' }}>
+      {play ? (
+        <iframe
+          className="absolute inset-0 h-full w-full"
+          src={`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`}
+          title={title}
+          allow="accelerated-motion; autoplay; encrypted-media; picture-in-picture"
+          allowFullScreen
+        />
+      ) : (
+        <button
+          onClick={() => setPlay(true)}
+          className="group absolute inset-0 h-full w-full"
+          aria-label={`Reproducir: ${title}`}
+        >
+          <img
+            src={`https://i.ytimg.com/vi/${id}/maxresdefault.jpg`}
+            alt={title}
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+          <span className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(6,6,8,0.6), rgba(6,6,8,0.15))' }} />
+          <span className="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full transition-transform duration-300 group-hover:scale-110" style={{ background: 'var(--accent)' }}>
+            <svg width="22" height="26" viewBox="0 0 22 26" fill="none" aria-hidden><path d="M21 13L0 25.99V0L21 13Z" fill="#0b0b16" /></svg>
+          </span>
+        </button>
+      )}
+    </div>
   )
 }
 
@@ -1644,20 +1732,7 @@ export default function Home() {
                     className="group overflow-hidden rounded-2xl h-full"
                     style={{ border: '1px solid var(--border)' }}
                   >
-                    {/* Imagen COMPLETA (object-contain): las imágenes llevan texto/logo,
-                        así no se corta nada. aspect cuadrado como el original de la imagen. */}
-                    <div
-                      className="relative w-full overflow-hidden"
-                      style={{ aspectRatio: '1 / 1', background: '#0b0b16' }}
-                    >
-                      <Image
-                        src={s.img}
-                        alt={s.title}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 33vw"
-                        className="object-contain transition-transform duration-500 group-hover:scale-[1.03]"
-                      />
-                    </div>
+                    <SectorMedia img={s.img} video={(s as { video?: string }).video} title={s.title} />
                     <div className="p-5" style={{ background: 'var(--card)' }}>
                       <h3 className="font-bold text-lg mb-2">{s.title}</h3>
                       <p className="text-sm leading-6" style={{ color: 'rgba(245,245,245,0.6)' }}>{s.desc}</p>
@@ -1712,6 +1787,25 @@ export default function Home() {
               </FadeIn>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── DEMO REAL (vídeo restaurante) ── */}
+      <section id="demo-real" className="py-20 sm:py-28">
+        <div className="mx-auto max-w-4xl px-6">
+          <FadeIn className="mb-10 text-center">
+            <p className="mb-4 text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--accent-light)' }}>Demo real</p>
+            <h2 className="text-3xl font-black sm:text-5xl">
+              Míralo funcionando:<br />
+              <span className="gradient-text">un agente de voz para restaurantes</span>
+            </h2>
+            <p className="mx-auto mt-5 max-w-2xl text-base leading-7" style={{ color: 'rgba(245,245,245,0.65)' }}>
+              No es una promesa. Es nuestro agente atendiendo una reserva de verdad, de principio a fin.
+            </p>
+          </FadeIn>
+          <FadeIn>
+            <YouTubeEmbed id="iPZKD1bkFvE" title="Demo agente de voz para restaurantes — SendaIA" />
+          </FadeIn>
         </div>
       </section>
 

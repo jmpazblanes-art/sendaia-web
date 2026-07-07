@@ -14,6 +14,7 @@ export type Sector = {
   solucion: string
   agentes: { nombre: string; desc: string }[]
   cierre: string
+  videoYoutube?: string // ID de YouTube de una demo real del sector (opcional)
 }
 
 export const SECTORES_PAGINAS: Sector[] = [
@@ -121,6 +122,7 @@ export const SECTORES_PAGINAS: Sector[] = [
       { nombre: 'Gestión de proveedores', desc: 'Pedidos y seguimiento de proveedores automatizados.' },
     ],
     cierre: 'Tu equipo atiende la sala, no el teléfono, y no se pierde ni una reserva por estar ocupados.',
+    videoYoutube: 'iPZKD1bkFvE',
   },
   {
     slug: 'pymes',
