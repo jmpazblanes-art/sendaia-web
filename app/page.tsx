@@ -140,7 +140,7 @@ const SECTORES = [
     title: 'Inmobiliarias',
     desc: 'Captación de leads, respuesta inmediata y agendado de visitas 24/7.',
     img: '/images/sector-inmobiliarias.jpg',
-    video: '/images/Inmobiliaria.mp4',
+    video: '/images/Pyme.mp4',
     slug: 'inmobiliarias',
   },
   {
@@ -160,7 +160,7 @@ const SECTORES = [
     title: 'Cualquier PYME',
     desc: 'Si tienes procesos repetitivos, tenemos un agente que los elimina.',
     img: '/images/sector-pymes.jpg',
-    video: '/images/Pyme.mp4',
+    video: '/images/Inmobiliaria.mp4',
     slug: 'pymes',
   },
 ]
