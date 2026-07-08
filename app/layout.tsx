@@ -1,6 +1,6 @@
 
 import type { Metadata } from 'next'
-import { Fraunces, Manrope } from 'next/font/google'
+import { Fraunces, Manrope, Caveat } from 'next/font/google'
 import './globals.css'
 
 const display = Fraunces({
@@ -12,6 +12,13 @@ const display = Fraunces({
 const sans = Manrope({
   subsets: ['latin'],
   variable: '--font-sans',
+  display: 'swap',
+})
+
+// Fuente manuscrita para el eslogan «Tú disfrutas.» (a juego con el logo)
+const script = Caveat({
+  subsets: ['latin'],
+  variable: '--font-script',
   display: 'swap',
 })
 
@@ -73,9 +80,71 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  // Datos estructurados: le dicen a Google QUÉ es SendaIA y DÓNDE (Granada).
+  // Clave para SEO local y para que ChatGPT/Perplexity puedan citarla.
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Organization',
+        '@id': `${SITE_URL}/#organization`,
+        name: 'SendaIA',
+        url: SITE_URL,
+        logo: `${SITE_URL}/logo-sendaia.png`,
+        description: DESCRIPTION,
+        email: 'info@sendaia.es',
+        telephone: '+34858215026',
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Granada',
+          addressRegion: 'Granada',
+          addressCountry: 'ES',
+        },
+        sameAs: [
+          'https://www.instagram.com/sendaia.es',
+          'https://www.linkedin.com/company/sendaia',
+        ],
+      },
+      {
+        '@type': 'ProfessionalService',
+        '@id': `${SITE_URL}/#localbusiness`,
+        name: 'SendaIA',
+        image: `${SITE_URL}/logo-sendaia.png`,
+        url: SITE_URL,
+        telephone: '+34858215026',
+        email: 'info@sendaia.es',
+        priceRange: '€€',
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Granada',
+          addressRegion: 'Granada',
+          addressCountry: 'ES',
+        },
+        areaServed: [
+          { '@type': 'City', name: 'Granada' },
+          { '@type': 'Country', name: 'España' },
+        ],
+      },
+      {
+        '@type': 'WebSite',
+        '@id': `${SITE_URL}/#website`,
+        url: SITE_URL,
+        name: 'SendaIA',
+        inLanguage: 'es-ES',
+        publisher: { '@id': `${SITE_URL}/#organization` },
+      },
+    ],
+  }
+
   return (
-    <html lang="es" className={`dark ${display.variable} ${sans.variable}`}>
-      <body className="antialiased">{children}</body>
+    <html lang="es" className={`dark ${display.variable} ${sans.variable} ${script.variable}`}>
+      <body className="antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        {children}
+      </body>
     </html>
   )
 }

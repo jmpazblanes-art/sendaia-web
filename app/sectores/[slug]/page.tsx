@@ -18,9 +18,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `${s.nombre} · Automatización con IA — SendaIA`,
     description: s.intro,
+    alternates: { canonical: `https://sendaia.es/sectores/${slug}` },
     openGraph: {
       title: `${s.nombre} · Automatización con IA — SendaIA`,
       description: s.intro,
+      url: `https://sendaia.es/sectores/${slug}`,
       images: ['/logo-sendaia.png'],
     },
   }

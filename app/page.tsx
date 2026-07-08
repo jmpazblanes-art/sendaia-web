@@ -17,6 +17,7 @@ import {
   Building2,
   Calculator,
   FileText,
+  Globe,
   Mail,
   Phone,
   PhoneCall,
@@ -79,6 +80,13 @@ const SERVICIOS = [
     desc: 'Si tu proceso no encaja en un molde estándar, lo diseñamos contigo desde cero.',
     roi: 'Presupuesto personalizado',
     color: '#E2B83A',
+  },
+  {
+    icon: Globe,
+    title: 'Diseño y Desarrollo Web',
+    desc: 'Webs rápidas, cuidadas y con IA integrada. Como esta que estás viendo: la hicimos nosotros.',
+    roi: 'Tu web lista en días',
+    color: '#D4AF37',
   },
 ]
 
@@ -1372,7 +1380,7 @@ export default function Home() {
               className="mb-6 inline-block rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-widest"
               style={{ background: 'rgba(212,175,55,0.18)', color: 'var(--accent-light)', border: '1px solid rgba(212,175,55,0.3)' }}
             >
-              Automatización con IA para PYMEs
+              Automatización con IA para PYMEs · Granada
             </span>
           </div>
 
@@ -1384,6 +1392,22 @@ export default function Home() {
             <span className="gradient-text-animated">horas cada semana</span>
             <br />con Agentes de IA
           </h1>
+
+          {/* Eslogan de marca: «Sistemas que trabajan. Tú disfrutas.» */}
+          <p data-hero-slogan className="mt-5 flex flex-col items-center justify-center gap-0 sm:flex-row sm:gap-3">
+            <span
+              className="text-xl font-semibold uppercase tracking-widest sm:text-2xl"
+              style={{ color: 'rgba(245,245,245,0.9)' }}
+            >
+              Sistemas que trabajan.
+            </span>
+            <span
+              className="font-script text-4xl leading-none sm:text-5xl"
+              style={{ color: 'var(--accent-light)' }}
+            >
+              Tú disfrutas.
+            </span>
+          </p>
 
           <p
             data-hero-sub
@@ -1537,6 +1561,56 @@ export default function Home() {
               </FadeIn>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── ¿TE GUSTA ESTA WEB? LA HICIMOS NOSOTROS ── */}
+      <section id="web" className="py-20 sm:py-28" style={{ background: 'rgba(13,13,26,0.6)' }}>
+        <div className="mx-auto max-w-5xl px-6">
+          <FadeIn>
+            <div
+              className="relative overflow-hidden rounded-3xl p-8 sm:p-14 text-center"
+              style={{
+                background: 'linear-gradient(135deg, rgba(212,175,55,0.10) 0%, rgba(13,13,26,0.4) 60%)',
+                border: '1px solid rgba(212,175,55,0.3)',
+              }}
+            >
+              <div
+                className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl"
+                style={{ background: 'rgba(212,175,55,0.18)', color: 'var(--accent)' }}
+              >
+                <Globe className="h-7 w-7" />
+              </div>
+
+              <p className="mb-3 text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--accent-light)' }}>
+                Diseño y desarrollo web
+              </p>
+              <h2 className="text-3xl font-black sm:text-5xl">
+                ¿Te gusta esta web?
+                <br />
+                <span className="gradient-text">La hicimos nosotros.</span>
+              </h2>
+              <p className="mx-auto mt-6 max-w-2xl text-lg leading-8" style={{ color: 'rgba(245,245,245,0.75)' }}>
+                Diseñamos y programamos webs rápidas, cuidadas y con IA integrada — como esta que estás viendo.
+                Sin plantillas genéricas: tu web, a tu medida, lista en días.
+              </p>
+
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-3 text-sm" style={{ color: 'rgba(245,245,245,0.7)' }}>
+                <span className="rounded-full px-4 py-1.5" style={{ background: 'rgba(212,175,55,0.12)', border: '1px solid rgba(212,175,55,0.25)' }}>Diseño a medida</span>
+                <span className="rounded-full px-4 py-1.5" style={{ background: 'rgba(212,175,55,0.12)', border: '1px solid rgba(212,175,55,0.25)' }}>Chat y voz con IA</span>
+                <span className="rounded-full px-4 py-1.5" style={{ background: 'rgba(212,175,55,0.12)', border: '1px solid rgba(212,175,55,0.25)' }}>Animaciones premium</span>
+                <span className="rounded-full px-4 py-1.5" style={{ background: 'rgba(212,175,55,0.12)', border: '1px solid rgba(212,175,55,0.25)' }}>Lista en días</span>
+              </div>
+
+              <a
+                href="#contacto"
+                className="mt-10 inline-flex items-center gap-2 rounded-full px-8 py-4 text-sm font-bold text-white transition-all hover:scale-105 hover:shadow-lg"
+                style={{ background: 'var(--accent)', boxShadow: '0 0 30px rgba(212,175,55,0.4)' }}
+              >
+                Quiero una web así <ArrowRight className="h-4 w-4" />
+              </a>
+            </div>
+          </FadeIn>
         </div>
       </section>
 
@@ -1892,6 +1966,9 @@ export default function Home() {
               />
               <p className="mt-3 text-sm" style={{ color: 'rgba(245,245,245,0.45)' }}>
                 Automatización administrativa con IA para PYMEs
+              </p>
+              <p className="mt-1 text-sm" style={{ color: 'rgba(245,245,245,0.45)' }}>
+                Granada, España · info@sendaia.es
               </p>
             </div>
             <div className="flex flex-wrap gap-6 text-sm" style={{ color: 'rgba(245,245,245,0.55)' }}>
