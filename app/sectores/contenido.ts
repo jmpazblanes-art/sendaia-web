@@ -53,6 +53,7 @@ export const SECTORES_PAGINAS: Sector[] = [
       respuesta: 'El agente no sustituye a tu doctora ni a tu coordinadora: hace lo que ellas no llegan a hacer, el primer contacto instantáneo y el seguimiento pesado. ¿Qué da más sensación de abandono: que le contesten amable en 30 segundos un domingo por la noche, o que nadie le devuelva la llamada en dos días? El trato humano de verdad lo das tú en la valoración. Y las llamadas de reactivación las escuchas tú antes de activarlas: si no suenan naturales, no se lanzan.',
     },
     cierre: 'Recuperas agenda sobre una base que ya estaba pagada, y tu equipo se dedica al paciente, no a perseguir el teléfono.',
+    videoYoutube: 'FwcY5vLDPmw',
   },
   {
     slug: 'asesorias',

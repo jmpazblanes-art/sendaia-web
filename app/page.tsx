@@ -665,6 +665,63 @@ function SectorMedia({ img, video, title }: { img: string; video?: string; title
 
 // Embed de YouTube con lazy-load: muestra la miniatura + botón play y solo carga
 // el iframe de YouTube al hacer clic (no ralentiza la web hasta que se quiere ver).
+// Demos reales seleccionables. El primero es el que se muestra por defecto
+// (el de mayor impacto: agente de voz + panel completo para clínicas de estética).
+const DEMOS_REALES = [
+  {
+    id: 'FwcY5vLDPmw',
+    tab: 'Clínicas de estética',
+    titulo: 'un agente de voz para clínicas de estética',
+    sub: 'No es una promesa. Es nuestro agente atendiendo llamadas y agendando citas de verdad, en el panel de la clínica.',
+  },
+  {
+    id: 'iPZKD1bkFvE',
+    tab: 'Restaurantes',
+    titulo: 'un agente de voz para restaurantes',
+    sub: 'No es una promesa. Es nuestro agente atendiendo una reserva de verdad, de principio a fin.',
+  },
+]
+
+function DemoSelector() {
+  const [activa, setActiva] = useState(0)
+  const demo = DEMOS_REALES[activa]
+  return (
+    <>
+      <FadeIn className="mb-8 text-center">
+        <p className="mb-4 text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--accent-light)' }}>Demo real</p>
+        <h2 className="text-3xl font-black sm:text-5xl">
+          Míralo funcionando:<br />
+          <span className="gradient-text">{demo.titulo}</span>
+        </h2>
+        <p className="mx-auto mt-5 max-w-2xl text-base leading-7" style={{ color: 'rgba(245,245,245,0.65)' }}>
+          {demo.sub}
+        </p>
+      </FadeIn>
+
+      {/* Pestañas seleccionables */}
+      <div className="mb-6 flex flex-wrap items-center justify-center gap-3">
+        {DEMOS_REALES.map((d, i) => (
+          <button
+            key={d.id}
+            onClick={() => setActiva(i)}
+            className="rounded-full px-5 py-2.5 text-sm font-semibold transition-all"
+            style={activa === i
+              ? { background: 'var(--accent)', color: '#0b0b16' }
+              : { background: 'rgba(255,255,255,0.06)', color: 'rgba(245,245,245,0.7)', border: '1px solid rgba(255,255,255,0.12)' }}
+          >
+            {d.tab}
+          </button>
+        ))}
+      </div>
+
+      {/* El key fuerza a remontar el embed al cambiar de demo (resetea el play) */}
+      <FadeIn key={demo.id}>
+        <YouTubeEmbed id={demo.id} title={`Demo — ${demo.tab} — SendaIA`} />
+      </FadeIn>
+    </>
+  )
+}
+
 function YouTubeEmbed({ id, title }: { id: string; title: string }) {
   const [play, setPlay] = useState(false)
   return (
@@ -1864,22 +1921,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── DEMO REAL (vídeo restaurante) ── */}
+      {/* ── DEMO REAL (selector de demos: clínicas + restaurantes) ── */}
       <section id="demo-real" className="py-20 sm:py-28">
         <div className="mx-auto max-w-4xl px-6">
-          <FadeIn className="mb-10 text-center">
-            <p className="mb-4 text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--accent-light)' }}>Demo real</p>
-            <h2 className="text-3xl font-black sm:text-5xl">
-              Míralo funcionando:<br />
-              <span className="gradient-text">un agente de voz para restaurantes</span>
-            </h2>
-            <p className="mx-auto mt-5 max-w-2xl text-base leading-7" style={{ color: 'rgba(245,245,245,0.65)' }}>
-              No es una promesa. Es nuestro agente atendiendo una reserva de verdad, de principio a fin.
-            </p>
-          </FadeIn>
-          <FadeIn>
-            <YouTubeEmbed id="iPZKD1bkFvE" title="Demo agente de voz para restaurantes — SendaIA" />
-          </FadeIn>
+          <DemoSelector />
         </div>
       </section>
 
