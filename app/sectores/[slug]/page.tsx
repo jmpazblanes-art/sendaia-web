@@ -82,6 +82,31 @@ export default async function SectorPage({ params }: { params: Promise<{ slug: s
         </div>
       </section>
 
+      {/* GANCHOS — cada dolor con su propio pitch (problema → solución → cifra) */}
+      {s.ganchos && s.ganchos.length > 0 && (
+        <section className="px-6 py-16 sm:py-20">
+          <div className="mx-auto max-w-5xl">
+            <p className="mb-3 text-center text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--accent-light)' }}>Cómo lo resolvemos</p>
+            <h2 className="mb-12 text-center text-2xl font-black sm:text-4xl">Tres formas de darte la vuelta al problema</h2>
+            <div className="space-y-6">
+              {s.ganchos.map((g, i) => (
+                <div key={g.gancho} className="rounded-3xl p-8 sm:p-10" style={{ background: 'var(--card)', border: '1px solid rgba(212,175,55,0.2)' }}>
+                  <div className="flex items-start gap-4">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-sm font-black" style={{ background: 'rgba(212,175,55,0.15)', color: 'var(--accent)' }}>{i + 1}</span>
+                    <div>
+                      <h3 className="mb-4 text-xl font-black sm:text-2xl gradient-text">{g.gancho}</h3>
+                      <p className="mb-3 text-sm leading-6" style={{ color: 'rgba(245,245,245,0.55)' }}><span className="font-semibold" style={{ color: '#C0563B' }}>El problema:</span> {g.problema}</p>
+                      <p className="mb-4 text-sm leading-6" style={{ color: 'rgba(245,245,245,0.75)' }}><span className="font-semibold" style={{ color: 'var(--accent-light)' }}>La solución:</span> {g.solucion}</p>
+                      <p className="inline-block rounded-full px-4 py-1.5 text-sm font-semibold" style={{ background: 'rgba(212,175,55,0.12)', color: 'var(--accent)' }}>{g.cifra}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* SOLUCIÓN */}
       <section className="px-6 py-16 sm:py-20">
         <div className="mx-auto max-w-4xl text-center">
@@ -105,6 +130,27 @@ export default async function SectorPage({ params }: { params: Promise<{ slug: s
           ))}
         </div>
       </section>
+
+      {/* RETORNO — cálculo honesto de lo que gana el cliente */}
+      {s.retorno && (
+        <section className="px-6 pb-4 pt-2">
+          <div className="mx-auto max-w-3xl rounded-3xl p-8 sm:p-10" style={{ background: 'linear-gradient(135deg, rgba(212,175,55,0.10) 0%, rgba(13,13,26,0.4) 60%)', border: '1px solid rgba(212,175,55,0.3)' }}>
+            <p className="mb-2 text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--accent-light)' }}>Qué ganas tú</p>
+            <h3 className="mb-3 text-xl font-black sm:text-2xl gradient-text">{s.retorno.titulo}</h3>
+            <p className="text-base leading-7" style={{ color: 'rgba(245,245,245,0.75)' }}>{s.retorno.texto}</p>
+          </div>
+        </section>
+      )}
+
+      {/* OBJECIÓN — la duda típica del sector, ya resuelta */}
+      {s.objecion && (
+        <section className="px-6 pb-8 pt-6">
+          <div className="mx-auto max-w-3xl rounded-2xl p-8" style={{ background: 'var(--card)', border: '1px solid var(--border)' }}>
+            <p className="mb-3 text-lg font-bold" style={{ color: 'rgba(245,245,245,0.9)' }}>{s.objecion.pregunta}</p>
+            <p className="text-base leading-7" style={{ color: 'rgba(245,245,245,0.65)' }}>{s.objecion.respuesta}</p>
+          </div>
+        </section>
+      )}
 
       {/* DEMO EN VÍDEO (si el sector tiene una demo real) */}
       {s.videoYoutube && (
