@@ -680,6 +680,12 @@ const DEMOS_REALES = [
     titulo: 'un agente de voz para restaurantes',
     sub: 'No es una promesa. Es nuestro agente atendiendo una reserva de verdad, de principio a fin.',
   },
+  {
+    id: 'w2PAe8R_3IY',
+    tab: 'Inmobiliarias',
+    titulo: 'un agente de voz para inmobiliarias',
+    sub: 'No es una promesa. Es nuestro agente captando leads, resolviendo la cartera de inmuebles y agendando visitas de verdad, en el panel de la inmobiliaria.',
+  },
 ]
 
 function DemoSelector() {

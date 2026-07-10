@@ -111,6 +111,7 @@ export const SECTORES_PAGINAS: Sector[] = [
       { nombre: 'Agenda de visitas', desc: 'Cuadra y confirma visitas sin llamadas de ida y vuelta.' },
       { nombre: 'Reactivación de leads fríos', desc: 'Vuelve a tocar por WhatsApp la base de contactos que dabas por perdidos.' },
     ],
+    videoYoutube: 'w2PAe8R_3IY',
     objecion: {
       pregunta: '"La gente compra una casa hablando con una persona, no con un robot."',
       respuesta: 'Totalmente de acuerdo: la operación la cierras tú. El asistente no vende la casa, hace lo que tú no puedes a las 23:00: coge el lead antes que la competencia, ve si es serio y te deja la visita agendada. El trato personal empieza en la visita, y a esa visita llegas tú. El 78% de los compradores cierra con la primera agencia que le responde: la pregunta no es si el bot espanta clientes, es cuántos estás regalando ahora por no ser el primero.',
