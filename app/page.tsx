@@ -1391,8 +1391,6 @@ export default function Home() {
           </div>
           <a
             href="#contacto"
-            target="_blank"
-            rel="noreferrer"
             className="rounded-full px-5 py-2.5 text-sm font-semibold text-white transition-all hover:opacity-90"
             style={{ background: 'var(--accent)' }}
           >
@@ -1486,8 +1484,6 @@ export default function Home() {
           >
             <a
               href="#contacto"
-              target="_blank"
-              rel="noreferrer"
               className="inline-flex items-center gap-2 rounded-full px-8 py-4 text-sm font-bold text-white transition-all hover:scale-105 hover:shadow-lg"
               style={{ background: 'var(--accent)', boxShadow: '0 0 30px rgba(212,175,55,0.4)' }}
             >
