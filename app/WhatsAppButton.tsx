@@ -2,9 +2,10 @@
 
 import { track } from '@/lib/website-events'
 
-// Botón flotante de WhatsApp. Enlace directo (wa.me) al número de SendaIA —
-// no necesita WhatsApp Business ni API, es un simple deep-link.
-const WHATSAPP_NUMBER = '34630310451' // España +34
+// Botón flotante de WhatsApp. Enlace directo (wa.me) al AGENTE de SendaIA
+// (Cloud API + Hermes) — contesta 24/7 y avisa a Pachi por Telegram si detecta
+// un lead caliente. Antes iba al móvil personal de Pachi (34630310451).
+const WHATSAPP_NUMBER = '34627256996' // Número del agente SendaIA
 const PREFILL = 'Hola, me gustaría saber más sobre la automatización con IA de SendaIA.'
 
 export default function WhatsAppButton() {
