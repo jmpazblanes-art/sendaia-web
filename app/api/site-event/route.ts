@@ -12,9 +12,17 @@ export async function POST(request: Request) {
   try {
     const body = await request.json()
 
+    // El webhook del CRM exige token desde el 28-jul-2026 (antes aceptaba cualquier
+    // POST anónimo). Va en cabecera y sólo desde este handler de SERVIDOR, así que
+    // el secreto no llega nunca al navegador.
     const res = await fetch(CRM_SITE_EVENT_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        ...(process.env.CRM_WEBHOOK_SECRET
+          ? { 'x-webhook-token': process.env.CRM_WEBHOOK_SECRET }
+          : {}),
+      },
       body: JSON.stringify(body),
     })
 
