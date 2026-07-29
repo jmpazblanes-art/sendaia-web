@@ -131,16 +131,19 @@ const DEMOS = [
     title: 'Agente Documental',
     desc: 'Extrae datos de facturas y PDFs en tiempo real.',
     src: '/videos/video-1.mp4',
+    poster: '/images/demo-1-poster.jpg',
   },
   {
     title: 'Agente Email',
     desc: 'Clasifica y responde emails con IA.',
     src: '/videos/video-2.mp4',
+    poster: '/images/demo-2-poster.jpg',
   },
   {
     title: 'Agente WhatsApp',
     desc: 'Atiende y agenda por WhatsApp sin intervención humana.',
     src: '/videos/video-3.mp4',
+    poster: '/images/demo-3-poster.jpg',
   },
 ]
 
@@ -190,27 +193,30 @@ const SECTORES = [
 const CASOS = [
   {
     sector: 'Climatización / Instalaciones',
+    contexto: 'Instaladora de climatización · 83 trabajadores · Granada · en marcha desde mayo de 2026',
     title: 'De hojas de Excel sueltas a un ERP que cuadra solo',
-    reto: 'Una empresa de climatización llevaba obras, horas y facturas de proveedor en Excels dispersos. Cada factura se imputaba a mano a su obra; los descuadres aparecían meses después y nadie sabía el margen real de cada proyecto hasta que era tarde.',
+    reto: 'Llevaban obras, horas y facturas de proveedor en Excels dispersos. Cada factura se imputaba a mano a su obra; los descuadres aparecían meses después y nadie sabía el margen real de cada proyecto hasta que era tarde.',
     solucion: 'ERP a medida: las facturas de proveedor entran por correo, la IA extrae cada línea y la liga a su obra automáticamente. Horas sincronizadas desde el sistema de campo. Panel por obra con coste real vs. estimado en vivo.',
-    resultado: 'Facturas cuadrando al céntimo, margen de cada obra visible al instante y cero descuadres silenciosos gracias a alarmas automáticas.',
-    highlight: 'al céntimo',
+    resultado: 'En sus primeros tres meses el sistema ha procesado 932 facturas de proveedor (1.848 líneas de gasto) repartidas entre 388 obras, con el margen de cada una visible al instante y alarmas cuando algo no cuadra.',
+    highlight: '932 facturas',
   },
   {
     sector: 'Peritación / Seguros',
+    contexto: 'Perito de seguros · trabaja para 5 compañías · 165 informes suyos analizados por el sistema',
     title: 'Del informe de 3 horas al informe listo en minutos',
-    reto: 'Un perito de seguros redactaba cada informe a mano en Word: copiar datos del expediente, pegar fotos, rellenar tablas de valoración. Horas por informe, y un error de copiar-pegar podía colarse hasta la compañía.',
+    reto: 'Redactaba cada informe a mano en Word: copiar datos del expediente, pegar fotos, rellenar tablas de valoración. Horas por informe, y un error de copiar-pegar podía colarse hasta la compañía.',
     solucion: 'Una app donde todo el peritaje vive dentro: datos, fotos y valoración. Un botón genera el informe Word completo, con los datos volcados en su sitio y las fotos colocadas, listo para enviar a la aseguradora.',
     resultado: 'El tiempo por informe pasó de horas a minutos, sin errores de trascripción, y el perito dedica su tiempo a peritar, no a maquetar Word.',
     highlight: 'de horas a minutos',
   },
   {
     sector: 'Clínica / Servicios con cita',
+    contexto: 'Agente en funcionamiento · pruébalo tú mismo llamando al 858 215 026',
     title: 'Un agente de voz que no deja ni una llamada sin atender',
-    reto: 'Una clínica perdía llamadas fuera de horario y en horas punta: recepción no daba abasto, y cada llamada sin coger era una cita —y un ingreso— que se iba a la competencia.',
+    reto: 'Una clínica pierde llamadas fuera de horario y en horas punta: recepción no da abasto, y cada llamada sin coger es una cita —y un ingreso— que se va a la competencia.',
     solucion: 'Un agente de voz con IA que atiende 24/7, entiende al paciente, consulta la disponibilidad real y agenda la cita en el momento. Habla natural, no suena a robot, y pasa a una persona si hace falta.',
-    resultado: 'Cero llamadas perdidas fuera de horario y citas agendadas a cualquier hora, sin ampliar el equipo de recepción.',
-    highlight: 'a cualquier hora',
+    resultado: 'Está funcionando y puedes comprobarlo ahora mismo: llama y pide una cita. Contesta, te entiende y la agenda. Es la mejor prueba que te podemos dar.',
+    highlight: 'llama y compruébalo',
   },
 ]
 
@@ -662,6 +668,9 @@ function SectorMedia({ img, video, title }: { img: string; video?: string; title
         sizes="(max-width: 768px) 100vw, 33vw"
         className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
       />
+      {/* preload="none": estos vídeos solo se ven al pasar el ratón por encima, algo
+          que en móvil no ocurre nunca. Con "metadata" el navegador iba a buscarlos
+          igual (2,5 MB cada uno) para gente que jamás los vería. */}
       {video && (
         <video
           ref={videoRef}
@@ -669,7 +678,7 @@ function SectorMedia({ img, video, title }: { img: string; video?: string; title
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="none"
           aria-hidden
           className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
         />
@@ -1345,6 +1354,16 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState(0)
   const [muted, setMuted] = useState(true)
   const heroVideoRef = useRef<HTMLVideoElement>(null)
+  // El vídeo del hero (5 MB) solo se monta en pantallas grandes. Arranca en false
+  // para que el HTML servido nunca lo incluya: en móvil no llega a descargarse.
+  const [isDesktop, setIsDesktop] = useState(false)
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 768px)')
+    const sync = () => setIsDesktop(mq.matches && !window.matchMedia('(prefers-reduced-data: reduce)').matches)
+    sync()
+    mq.addEventListener('change', sync)
+    return () => mq.removeEventListener('change', sync)
+  }, [])
   const mainRef = useRef<HTMLElement>(null)
 
   const toggleMute = () => {
@@ -1492,17 +1511,32 @@ export default function Home() {
 
       {/* ── HERO ── */}
       <section data-hero-section className="relative flex min-h-screen items-center justify-center overflow-hidden pt-20">
-        <video
-          ref={heroVideoRef}
-          data-hero-video
-          src="/videos/hero.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
+        {/* C-10: el hero cargaba 5 MB de vídeo también en móvil, sin poster, así que
+            en 4G la primera pantalla salía negra justo donde se decide si seguir
+            leyendo. Ahora: poster de 40 KB que se ve al instante, y el vídeo solo se
+            descarga en pantallas grandes (`isDesktop`) — en móvil se queda la imagen. */}
+        <img
+          src="/images/hero-poster.jpg"
+          alt=""
+          aria-hidden
           className="absolute inset-0 h-full w-full object-cover"
           style={{ zIndex: 0 }}
         />
+        {isDesktop && (
+          <video
+            ref={heroVideoRef}
+            data-hero-video
+            src="/videos/hero.mp4"
+            poster="/images/hero-poster.jpg"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="none"
+            className="absolute inset-0 h-full w-full object-cover"
+            style={{ zIndex: 0 }}
+          />
+        )}
         <div
           className="absolute inset-0"
           style={{ background: 'linear-gradient(to bottom, rgba(5,5,16,0.72) 0%, rgba(5,5,16,0.55) 50%, rgba(5,5,16,0.90) 100%)', zIndex: 1 }}
@@ -1624,6 +1658,23 @@ export default function Home() {
               Echa la cuenta con tus propios números: 2 h al día × 5 días × 44 semanas.
               Ese tiempo lo paga tu equipo haciendo trabajo de máquina, y no aparece en
               ninguna factura.
+            </p>
+            {/* Dato de sector CON FUENTE citada: no es un resultado nuestro, es el coste
+                que tiene el problema en el mercado. Con fuente pasa de eslogan a hecho. */}
+            <p className="mx-auto mt-4 max-w-2xl text-xs leading-6" style={{ color: 'rgba(245,245,245,0.42)' }}>
+              Solo en facturas: procesar una a mano cuesta de media 12,88 $ frente a los
+              2,78 $ de un proceso automatizado, y se tarda 17,4 días en tramitarla frente
+              a 3,1.{' '}
+              <a
+                href="https://www.medius.com/resources/guides-reports/ardent-partners-accounts-payable-metrics-that-matter/"
+                target="_blank"
+                rel="noreferrer"
+                className="underline"
+                style={{ color: 'rgba(245,245,245,0.55)' }}
+              >
+                Ardent Partners, AP Metrics that Matter
+              </a>
+              .
             </p>
           </FadeIn>
 
@@ -1935,14 +1986,19 @@ export default function Home() {
                 <p className="font-bold text-lg">{DEMOS[activeTab].title}</p>
                 <p className="mt-1 text-sm" style={{ color: 'rgba(245,245,245,0.6)' }}>{DEMOS[activeTab].desc}</p>
               </div>
+              {/* C-10: este vídeo (9,1 MB) se descargaba y reproducía solo al cargar la
+                  página, aunque el visitante estuviera arriba del todo y no llegara nunca
+                  hasta aquí. Ahora muestra su poster (20 KB) y solo baja el vídeo cuando
+                  el usuario le da al play, que es cuando de verdad lo quiere ver. */}
               <video
                 key={DEMOS[activeTab].src}
                 src={DEMOS[activeTab].src}
-                autoPlay
+                poster={DEMOS[activeTab].poster}
                 muted
                 loop
                 playsInline
                 controls
+                preload="none"
                 className="w-full aspect-video"
                 style={{ background: '#000' }}
               />
@@ -2008,7 +2064,10 @@ export default function Home() {
                 >
                   <div className="absolute left-0 top-0 bottom-0 w-1" style={{ background: 'linear-gradient(to bottom, var(--accent), transparent)' }} />
                   <p className="mb-2 text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--accent)' }}>{c.sector}</p>
-                  <h3 className="mb-6 text-xl sm:text-2xl font-bold">{c.title}</h3>
+                  <h3 className="mb-2 text-xl sm:text-2xl font-bold">{c.title}</h3>
+                  {/* Ancla del caso: sin tamaño de empresa ni fecha, un caso anónimo
+                      es indistinguible de uno inventado. Anonimizar sí, ser genérico no. */}
+                  <p className="mb-6 text-xs" style={{ color: 'rgba(245,245,245,0.42)' }}>{c.contexto}</p>
                   <div className="grid gap-5 sm:grid-cols-3">
                     <div>
                       <p className="mb-1.5 text-xs font-bold uppercase tracking-wider" style={{ color: '#C0563B' }}>El reto</p>
