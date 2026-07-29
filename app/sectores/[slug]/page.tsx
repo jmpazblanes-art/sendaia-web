@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation'
 import { ArrowRight, Check } from 'lucide-react'
 import { SECTORES_PAGINAS, getSector } from '../contenido'
 import { YouTubeEmbed } from '../youtube-embed'
+import { TrackView } from '../track-view'
 
 // genera las 6 rutas estáticas en build
 export function generateStaticParams() {
@@ -35,6 +36,7 @@ export default async function SectorPage({ params }: { params: Promise<{ slug: s
 
   return (
     <main style={{ background: '#060608', color: '#f5f5f5', minHeight: '100vh' }}>
+      <TrackView slug={s.slug} />
       {/* NAVBAR simple */}
       <nav className="fixed top-0 left-0 right-0 z-50 border-b" style={{ borderColor: 'var(--border)', background: 'rgba(5,5,16,0.85)', backdropFilter: 'blur(16px)' }}>
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
