@@ -39,40 +39,55 @@ gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP)
 
 // ─────────────── DATOS ───────────────
 
+// Demo de extracción de facturas.
+//
+// ⚠️ PENDIENTE DE UN PASO MANUAL (29-jul-2026). El destino bueno es
+// `demo-facturas.sendaia.es` — ya dado de alta en el proyecto de Vercel
+// `demo-pedidos-legumbre-espino` — pero el DNS de sendaia.es lo gestiona
+// Hostinger, así que falta crear allí el registro:
+//
+//     Tipo: CNAME · Nombre: demo-facturas · Valor: cname.vercel-dns.com
+//
+// Hasta que ese registro exista, el subdominio NO resuelve (verificado: no hay
+// DNS). Por eso se mantiene la URL antigua: un enlace feo convierte más que un
+// enlace roto. En cuanto el CNAME esté, basta con cambiar esta constante por
+// 'https://demo-facturas.sendaia.es/' y desplegar.
+const DEMO_FACTURAS_URL = 'https://demo-pedidos-legumbre-espino.vercel.app/'
+
 const SERVICIOS = [
   {
     icon: PhoneCall,
     title: 'Agente de Voz y WhatsApp 24/7',
     desc: 'Nunca más una llamada sin contestar. El agente atiende, filtra y agenda visitas automáticamente.',
-    roi: '-80% llamadas perdidas',
+    roi: 'Ninguna llamada sin atender',
     color: '#D4AF37',
   },
   {
     icon: FileText,
     title: 'Automatización de Facturación',
     desc: 'Extrae, registra y procesa facturas y albaranes sin que tu equipo toque un teclado.',
-    roi: '-5h/semana en back-office',
+    roi: 'Back-office que se hace solo',
     color: '#E7C86A',
   },
   {
     icon: Mail,
     title: 'Agente de Email con IA',
     desc: 'Clasifica, prioriza y redacta borradores. Tu bandeja de entrada deja de ser un caos.',
-    roi: '30% tiempo recuperado',
+    roi: 'Tu equipo, fuera del papeleo',
     color: '#C9A227',
   },
   {
     icon: RefreshCw,
     title: 'Reactivación de Clientes',
     desc: 'Detecta clientes dormidos y lanza secuencias personalizadas de seguimiento automático.',
-    roi: '+25% ventas recurrentes',
+    roi: 'Clientes que vuelven sin perseguirlos',
     color: '#F0D060',
   },
   {
     icon: Bot,
     title: 'Agente Documental (PDFs)',
     desc: 'Lee contratos, informes y formularios. Extrae los datos que necesitas en segundos.',
-    roi: '-90% tiempo extracción datos',
+    roi: 'Del PDF a tu sistema, sin teclear',
     color: '#B8960C',
   },
   {
@@ -238,22 +253,28 @@ const HERO_PARTICLES = [
   { left: '70%', top: '35%', size: 3, duration: 4.3, delay: 1.8 },
 ]
 
+// ⚠️ Estas cifras NO son resultados medidos de clientes (29-jul-2026, decisión de
+// José María: "de momento no tengo reales"). Se presentan como el OBJETIVO del
+// sistema y con etiquetas que no afirman un histórico que no existe. En cuanto
+// haya datos reales de Aircontec/PeritApp, sustituir y citar el caso.
 const METRICAS = [
-  { value: 15, suffix: 'h/sem', prefix: '+', label: 'Horas recuperadas de media' },
-  { value: 80, suffix: '%', prefix: '−', label: 'Reducción llamadas perdidas' },
-  { value: 7, suffix: ' días', prefix: '', label: 'Tiempo hasta producción' },
-  { value: 25, suffix: '%', prefix: '+', label: 'Más ventas recurrentes' },
+  { value: 15, suffix: 'h/sem', prefix: '+', label: 'Horas que buscamos recuperarte' },
+  { value: 24, suffix: '/7', prefix: '', label: 'Atención sin horario' },
+  { value: 7, suffix: ' días', prefix: '', label: 'Del sí a producción' },
+  { value: 0, suffix: '€', prefix: '', label: 'Coste del diagnóstico' },
 ]
 
+// Sin porcentajes inventados: se dice QUÉ hace el sistema, no cuánto mejora, hasta
+// tener cifras reales de clientes que podamos citar con su caso.
 const TICKER_ITEMS = [
-  '−80% llamadas perdidas',
-  '+25% ventas recurrentes',
-  '−5h/semana back-office',
-  '−90% tiempo extracción datos',
+  'Llamadas atendidas 24/7',
+  'Facturas leídas solas',
+  'Citas agendadas sin llamar',
+  'Datos extraídos de PDF en segundos',
   'En producción en 7 días',
-  '30% tiempo recuperado',
   'Sin código. Sin interrumpir tu negocio',
-  'Agentes IA 24/7',
+  'Agentes IA que trabajan solos',
+  'Diagnóstico gratuito',
 ]
 
 // ─────────────── UTILS ───────────────
@@ -1583,10 +1604,18 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-6">
           <FadeIn className="text-center mb-16">
             <p className="mb-4 text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--accent-light)' }}>El problema real</p>
-            <h2 className="text-3xl font-black sm:text-5xl">Las PYMEs pierden{' '}
-              <span className="gradient-text">30.000€/año</span>
-              <br />en tareas repetitivas
+            {/* Antes: "Las PYMEs pierden 30.000€/año" — un dato de sector sin fuente,
+                en una web que promete "sin promesas mágicas". Se sustituye por un
+                cálculo propio con el supuesto a la vista: el lector puede rehacerlo. */}
+            <h2 className="text-3xl font-black sm:text-5xl">
+              Dos horas al día de administración<br />
+              son <span className="gradient-text">más de 400 horas al año</span>
             </h2>
+            <p className="mx-auto mt-5 max-w-2xl text-sm leading-7" style={{ color: 'rgba(245,245,245,0.6)' }}>
+              Echa la cuenta con tus propios números: 2 h al día × 5 días × 44 semanas.
+              Ese tiempo lo paga tu equipo haciendo trabajo de máquina, y no aparece en
+              ninguna factura.
+            </p>
           </FadeIn>
 
           <div className="grid gap-8 lg:grid-cols-2 items-center">
@@ -1631,7 +1660,7 @@ export default function Home() {
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: 'var(--accent-light)' }}>Con SendaIA</p>
                     <ul className="space-y-1 text-sm" style={{ color: 'rgba(245,245,245,0.8)' }}>
-                      {['Agentes trabajando 24/7', 'Cero tareas repetitivas en tu equipo', 'Datos procesados en segundos', '15+ horas semanales recuperadas'].map((t) => (
+                      {['Agentes trabajando 24/7', 'Cero tareas repetitivas en tu equipo', 'Datos procesados en segundos', 'Tu semana, de vuelta'].map((t) => (
                         <li key={t} className="flex items-start gap-2">
                           <Check className="mt-0.5 h-4 w-4 shrink-0" style={{ color: 'var(--accent)' }} aria-hidden="true" />
                           <span>{t}</span>
@@ -1815,11 +1844,7 @@ export default function Home() {
                   Sin instalar nada. Sin formularios. Arrastra el PDF y ve cómo el sistema identifica número, fecha, importe, IVA y empresa — listo para tu contabilidad.
                 </p>
                 <a
-                  // ⚠️ A-02 (auditoría 29-jul): apunta a un dominio de despliegue temporal
-                  // con el nombre de OTRO cliente. Mover a demo.sendaia.es requiere publicar
-                  // la demo bajo dominio propio — decisión de José María, pendiente.
-                  // Mientras tanto se mide el clic para saber si alguien la usa.
-                  href="https://demo-pedidos-legumbre-espino.vercel.app/"
+                  href={DEMO_FACTURAS_URL}
                   target="_blank"
                   rel="noreferrer"
                   onClick={() => track('cta_click', { cta: 'demo_facturas' })}
