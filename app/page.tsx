@@ -16,6 +16,7 @@ import {
   Brain,
   Building2,
   Calculator,
+  Check,
   FileText,
   Globe,
   Mail,
@@ -278,7 +279,10 @@ function Counter({ value, suffix = '', prefix = '' }: { value: number; suffix?: 
       onComplete: () => render(value),
     })
   }, { scope: ref })
-  return <span ref={ref}>{prefix}0{suffix}</span>
+  // El HTML servido lleva YA el valor final: si el JS no carga, si el observer no
+  // dispara o si el rastreador de Google lee el HTML en crudo, se ve la cifra real
+  // y no un 0. La animación (arriba) sobrescribe este texto y cuenta desde 0.
+  return <span ref={ref}>{`${prefix}${value.toLocaleString('es-ES')}${suffix}`}</span>
 }
 
 // Reveal al hacer scroll con GSAP ScrollTrigger. Mantiene la misma API que antes (delay, y, className).
@@ -844,6 +848,7 @@ function MetricasStrip() {
 function ContactForm() {
   const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' })
   const [status, setStatus] = useState<'idle' | 'loading' | 'ok' | 'error'>('idle')
+  const [acepta, setAcepta] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -911,14 +916,35 @@ function ContactForm() {
           style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#f5f5f0' }}
         />
       </div>
+      {/* Consentimiento RGPD: obligatorio, SIN premarcar (art. 4.11 RGPD — el
+          consentimiento tiene que ser una acción afirmativa del usuario). */}
+      <label className="flex items-start gap-3 text-xs leading-5" style={{ color: 'rgba(245,245,245,0.6)' }}>
+        <input
+          type="checkbox"
+          required
+          checked={acepta}
+          onChange={(e) => setAcepta(e.target.checked)}
+          className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-[#d4af37]"
+        />
+        <span>
+          He leído y acepto la{' '}
+          <Link href="/privacidad" target="_blank" className="underline" style={{ color: 'var(--accent-light)' }}>
+            política de privacidad
+          </Link>
+          . Usaremos tus datos solo para responderte.
+        </span>
+      </label>
       <button
         type="submit"
-        disabled={status === 'loading'}
+        disabled={status === 'loading' || !acepta}
         className="w-full rounded-full py-4 text-sm font-bold text-black transition-all hover:opacity-90 disabled:opacity-50"
         style={{ background: 'var(--accent)' }}
       >
         {status === 'loading' ? 'Enviando...' : 'Quiero el diagnóstico gratuito →'}
       </button>
+      <p className="text-center text-xs" style={{ color: 'rgba(245,245,245,0.45)' }}>
+        Te respondemos en menos de 24 h laborables.
+      </p>
       {status === 'error' && (
         <p className="text-xs text-center text-red-400">Error al enviar. Llámanos al 858 215 026.</p>
       )}
@@ -983,6 +1009,32 @@ function AriaAvatar({ size = 44 }: { size?: number }) {
 }
 
 function AssistantDock() {
+  // ¿Está la sección de contacto en pantalla? Si lo está, el dock se aparta para
+  // no taparle al visitante el formulario (ni el enlace a la privacidad).
+  // Se aparta en DOS sitios: sobre el hero (tapaba "Agenda tu diagnóstico" y
+  // "Ver cómo funciona") y sobre el formulario de contacto. En medio sí se ve.
+  // Por scroll y no con IntersectionObserver: el dock se monta antes que el hero,
+  // así que al correr el efecto los nodos aún no existen y el observer se quedaba
+  // sin observar nada (dejaba el dock oculto en toda la página).
+  const [contactoVisible, setContactoVisible] = useState(true)
+  useEffect(() => {
+    const calcular = () => {
+      const y = window.scrollY
+      const alto = window.innerHeight
+      const doc = document.documentElement.scrollHeight
+      const enHero = y < alto * 0.5
+      const enContacto = y + alto > doc - alto * 1.15
+      setContactoVisible(enHero || enContacto)
+    }
+    calcular()
+    window.addEventListener('scroll', calcular, { passive: true })
+    window.addEventListener('resize', calcular)
+    return () => {
+      window.removeEventListener('scroll', calcular)
+      window.removeEventListener('resize', calcular)
+    }
+  }, [])
+
   // ── Chat (Aria) ──
   const [open, setOpen] = useState(false)
   const [messages, setMessages] = useState<{ role: 'user' | 'assistant'; content: string }[]>([
@@ -1147,7 +1199,16 @@ function AssistantDock() {
       </AnimatePresence>
 
       {/* ── DOCK DE ASISTENTES ── */}
-      <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+      {/* Los flotantes tapaban el formulario en móvil (el enlace a la política de
+          privacidad y el aviso de las 24 h). Cuando la sección de contacto está en
+          pantalla se apartan: ahí el visitante ya está convirtiendo, no hace falta
+          ofrecerle otras tres puertas. */}
+      <div
+        className={`fixed right-4 sm:right-6 z-50 flex flex-col items-end gap-3 transition-all duration-300 ${
+          contactoVisible ? 'pointer-events-none opacity-0 translate-y-4' : 'opacity-100'
+        }`}
+        style={{ bottom: 'calc(1.5rem + env(safe-area-inset-bottom, 0px))' }}
+      >
 
         {/* Agente de voz */}
         <motion.button
@@ -1541,11 +1602,16 @@ export default function Home() {
                 <div className="absolute inset-0 flex items-end p-6" style={{ background: 'linear-gradient(to top, rgba(5,5,16,0.9) 0%, transparent 60%)' }}>
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-widest text-red-400 mb-1">Sin automatización</p>
+                    {/* Iconos Lucide en vez de emoji: el brand kit los prohíbe en producto
+                        y cada sistema operativo los dibuja distinto (en Windows rompen la
+                        alineación). Gris apagado para la columna del problema. */}
                     <ul className="space-y-1 text-sm" style={{ color: 'rgba(245,245,245,0.8)' }}>
-                      <li>❌ Llamadas sin atender cada día</li>
-                      <li>❌ Emails sin leer acumulándose</li>
-                      <li>❌ Facturas introducidas a mano</li>
-                      <li>❌ Tu equipo haciendo trabajo de máquina</li>
+                      {['Llamadas sin atender cada día', 'Emails sin leer acumulándose', 'Facturas introducidas a mano', 'Tu equipo haciendo trabajo de máquina'].map((t) => (
+                        <li key={t} className="flex items-start gap-2">
+                          <X className="mt-0.5 h-4 w-4 shrink-0" style={{ color: 'rgba(245,245,245,0.45)' }} aria-hidden="true" />
+                          <span>{t}</span>
+                        </li>
+                      ))}
                     </ul>
                   </div>
                 </div>
@@ -1565,10 +1631,12 @@ export default function Home() {
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: 'var(--accent-light)' }}>Con SendaIA</p>
                     <ul className="space-y-1 text-sm" style={{ color: 'rgba(245,245,245,0.8)' }}>
-                      <li>✅ Agentes trabajando 24/7</li>
-                      <li>✅ Cero tareas repetitivas en tu equipo</li>
-                      <li>✅ Datos procesados en segundos</li>
-                      <li>✅ 15+ horas semanales recuperadas</li>
+                      {['Agentes trabajando 24/7', 'Cero tareas repetitivas en tu equipo', 'Datos procesados en segundos', '15+ horas semanales recuperadas'].map((t) => (
+                        <li key={t} className="flex items-start gap-2">
+                          <Check className="mt-0.5 h-4 w-4 shrink-0" style={{ color: 'var(--accent)' }} aria-hidden="true" />
+                          <span>{t}</span>
+                        </li>
+                      ))}
                     </ul>
                   </div>
                 </div>
@@ -1747,9 +1815,14 @@ export default function Home() {
                   Sin instalar nada. Sin formularios. Arrastra el PDF y ve cómo el sistema identifica número, fecha, importe, IVA y empresa — listo para tu contabilidad.
                 </p>
                 <a
+                  // ⚠️ A-02 (auditoría 29-jul): apunta a un dominio de despliegue temporal
+                  // con el nombre de OTRO cliente. Mover a demo.sendaia.es requiere publicar
+                  // la demo bajo dominio propio — decisión de José María, pendiente.
+                  // Mientras tanto se mide el clic para saber si alguien la usa.
                   href="https://demo-pedidos-legumbre-espino.vercel.app/"
                   target="_blank"
                   rel="noreferrer"
+                  onClick={() => track('cta_click', { cta: 'demo_facturas' })}
                   className="mt-6 inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-bold text-black transition-all hover:scale-105 hover:shadow-lg"
                   style={{ background: 'var(--accent)', boxShadow: '0 0 30px rgba(212,175,55,0.3)' }}
                 >
@@ -2040,8 +2113,15 @@ export default function Home() {
               </a>
             </div>
           </div>
-          <div className="mt-8 border-t pt-6" style={{ borderColor: 'var(--border)', color: 'rgba(245,245,245,0.3)', fontSize: '0.75rem' }}>
-            © 2026 SendaIA · Todos los derechos reservados
+          {/* Enlaces legales exigibles (LSSI-CE / RGPD) + razón social y NIF: además de
+              obligatorio, es señal de solvencia para quien va a dejar sus datos. */}
+          <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 border-t pt-6 text-xs" style={{ borderColor: 'var(--border)', color: 'rgba(245,245,245,0.5)' }}>
+            <Link href="/aviso-legal" className="transition-colors hover:text-white">Aviso legal</Link>
+            <Link href="/privacidad" className="transition-colors hover:text-white">Política de privacidad</Link>
+            <Link href="/cookies" className="transition-colors hover:text-white">Política de cookies</Link>
+          </div>
+          <div className="mt-4 pb-2" style={{ color: 'rgba(245,245,245,0.3)', fontSize: '0.75rem' }}>
+            © 2026 SendaIA · Ana Isabel Quesada Martínez · NIF 44267995X · Todos los derechos reservados
           </div>
         </div>
       </footer>

@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { track } from '@/lib/website-events'
 
 // Botón flotante de WhatsApp. Enlace directo (wa.me) al AGENTE de SendaIA
@@ -11,6 +12,30 @@ const PREFILL = 'Hola, me gustaría saber más sobre la automatización con IA d
 export default function WhatsAppButton() {
   const href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(PREFILL)}`
 
+  // Se aparta cuando la sección de contacto está en pantalla: en móvil se montaba
+  // encima del texto legal del footer y del aviso de respuesta en 24 h.
+  // Por scroll y no con IntersectionObserver: este botón se monta antes que el
+  // hero, así que al correr el efecto los nodos aún no existen y el observer se
+  // quedaba sin observar nada (lo dejaba oculto para siempre).
+  const [oculto, setOculto] = useState(true)
+  useEffect(() => {
+    const calcular = () => {
+      const y = window.scrollY
+      const alto = window.innerHeight
+      const doc = document.documentElement.scrollHeight
+      const enHero = y < alto * 0.5
+      const enContacto = y + alto > doc - alto * 1.15
+      setOculto(enHero || enContacto)
+    }
+    calcular()
+    window.addEventListener('scroll', calcular, { passive: true })
+    window.addEventListener('resize', calcular)
+    return () => {
+      window.removeEventListener('scroll', calcular)
+      window.removeEventListener('resize', calcular)
+    }
+  }, [])
+
   return (
     <a
       href={href}
@@ -21,7 +46,9 @@ export default function WhatsAppButton() {
       style={{
         position: 'fixed',
         left: '20px',
-        bottom: '20px',
+        // Se sube sobre la zona segura del iPhone: pegado a 20px se montaba encima
+        // del texto legal del footer ("Todos los derechos reservados") en móvil.
+        bottom: 'calc(20px + env(safe-area-inset-bottom, 0px))',
         zIndex: 50,
         width: '56px',
         height: '56px',
@@ -31,7 +58,9 @@ export default function WhatsAppButton() {
         alignItems: 'center',
         justifyContent: 'center',
         boxShadow: '0 8px 24px rgba(37,211,102,0.4)',
-        transition: 'transform 0.2s ease',
+        transition: 'transform 0.2s ease, opacity 0.3s ease',
+        opacity: oculto ? 0 : 1,
+        pointerEvents: oculto ? 'none' : 'auto',
       }}
       onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.08)')}
       onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}

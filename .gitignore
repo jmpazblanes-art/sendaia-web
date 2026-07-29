@@ -6,3 +6,4 @@ out
 *.tsbuildinfo
 .qa-reports/
 public/.DS_Store
+.DS_Store
