@@ -39,20 +39,15 @@ gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP)
 
 // ─────────────── DATOS ───────────────
 
-// Demo de extracción de facturas.
+// Demo de extracción de facturas, servida bajo dominio propio.
 //
-// ⚠️ PENDIENTE DE UN PASO MANUAL (29-jul-2026). El destino bueno es
-// `demo-facturas.sendaia.es` — ya dado de alta en el proyecto de Vercel
-// `demo-pedidos-legumbre-espino` — pero el DNS de sendaia.es lo gestiona
-// Hostinger, así que falta crear allí el registro:
-//
-//     Tipo: CNAME · Nombre: demo-facturas · Valor: cname.vercel-dns.com
-//
-// Hasta que ese registro exista, el subdominio NO resuelve (verificado: no hay
-// DNS). Por eso se mantiene la URL antigua: un enlace feo convierte más que un
-// enlace roto. En cuanto el CNAME esté, basta con cambiar esta constante por
-// 'https://demo-facturas.sendaia.es/' y desplegar.
-const DEMO_FACTURAS_URL = 'https://demo-pedidos-legumbre-espino.vercel.app/'
+// El visitante ya no ve un dominio de despliegue de Vercel con el nombre de otro
+// cliente: entra por sendaia.es/demo/facturas, y el redirect vive en
+// `next.config.ts`. Se hizo así porque el subdominio demo-facturas.sendaia.es
+// necesita un CNAME en Hostinger (ahí apuntan los nameservers del dominio) y esa
+// vía estaba cerrada. Cuando ese CNAME exista, solo cambia el destino del
+// redirect: este enlace NO hay que tocarlo.
+const DEMO_FACTURAS_URL = '/demo/facturas'
 
 const SERVICIOS = [
   {

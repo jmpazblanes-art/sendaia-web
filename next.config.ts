@@ -19,6 +19,16 @@ const nextConfig: NextConfig = {
         destination: 'https://sendaia.es/:path*',
         permanent: true,
       },
+      // A-02: la demo de facturas se enlaza desde sendaia.es/demo/facturas en vez de
+      // exponer el dominio de despliegue de Vercel. No requiere tocar DNS —el
+      // subdominio demo-facturas.sendaia.es necesitaría un CNAME en Hostinger, que
+      // es donde apuntan los nameservers—. Temporal (307): cuando exista el CNAME,
+      // el destino pasa a ser demo-facturas.sendaia.es sin romper el enlace.
+      {
+        source: '/demo/facturas',
+        destination: 'https://demo-pedidos-legumbre-espino.vercel.app/',
+        permanent: false,
+      },
     ]
   },
   images: {
