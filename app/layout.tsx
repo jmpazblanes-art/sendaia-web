@@ -53,20 +53,14 @@ export const metadata: Metadata = {
     siteName: 'SendaIA',
     title: TITLE,
     description: DESCRIPTION,
-    images: [
-      {
-        url: '/logo-sendaia.png',
-        width: 1200,
-        height: 630,
-        alt: 'SendaIA — Automatización con IA',
-      },
-    ],
+    // La imagen la genera `app/opengraph-image.tsx` con las medidas correctas
+    // (1200×630). Antes se declaraba aquí logo-sendaia.png con ese tamaño, pero
+    // el archivo real es 1536×1024 y las plataformas lo recortaban.
   },
   twitter: {
     card: 'summary_large_image',
     title: TITLE,
     description: DESCRIPTION,
-    images: ['/logo-sendaia.png'],
   },
   robots: {
     index: true,

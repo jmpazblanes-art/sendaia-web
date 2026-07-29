@@ -97,14 +97,11 @@ const SERVICIOS = [
     roi: 'Presupuesto personalizado',
     color: '#E2B83A',
   },
-  {
-    icon: Globe,
-    title: 'Diseño y Desarrollo Web',
-    desc: 'Webs rápidas, cuidadas y con IA integrada. Como esta que estás viendo: la hicimos nosotros.',
-    roi: 'Tu web lista en días',
-    color: '#D4AF37',
-  },
 ]
+// B-08: "Diseño y Desarrollo Web" estaba aquí dentro, como séptima tarjeta bajo un
+// titular que dice "6 agentes" — y competía con la oferta principal en el mismo
+// scroll. Sigue vendiéndose en su propia sección, más abajo, donde no interrumpe
+// el embudo de automatización.
 
 const PILARES = [
   {
@@ -875,10 +872,22 @@ function ContactForm() {
     e.preventDefault()
     setStatus('loading')
     try {
+      // Origen del lead: sin esto llegabas a la llamada sin saber si vino de un
+      // anuncio, de una página de sector o de una búsqueda. Solo procedencia,
+      // ningún dato personal añadido.
+      const params = new URLSearchParams(window.location.search)
+      const origen = {
+        utm_source: params.get('utm_source') || undefined,
+        utm_medium: params.get('utm_medium') || undefined,
+        utm_campaign: params.get('utm_campaign') || undefined,
+        landing: window.location.pathname,
+        referrer: document.referrer || undefined,
+      }
+
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, origen }),
       })
       if (res.ok) {
         // Tracking: el formulario se envió con éxito (sin datos personales en meta).

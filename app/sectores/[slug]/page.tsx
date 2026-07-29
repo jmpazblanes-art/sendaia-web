@@ -24,7 +24,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       title: `${s.nombre} · Automatización con IA — SendaIA`,
       description: s.intro,
       url: `https://sendaia.es/sectores/${slug}`,
-      images: ['/logo-sendaia.png'],
+      // Sin `images`: hereda la tarjeta 1200×630 generada en app/opengraph-image.tsx.
+      // Antes apuntaba a logo-sendaia.png, que es 1536×1024 y sale recortado.
     },
   }
 }
@@ -37,6 +38,28 @@ export default async function SectorPage({ params }: { params: Promise<{ slug: s
   return (
     <main style={{ background: '#060608', color: '#f5f5f5', minHeight: '100vh' }}>
       <TrackView slug={s.slug} />
+      {/* Datos estructurados por sector: le dicen a Google (y a ChatGPT/Perplexity)
+          QUÉ servicio es y para quién, en una página que ya está escrita para ese
+          público. El Organization/LocalBusiness global vive en app/layout.tsx. */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Service',
+            name: `Automatización con IA para ${s.nombre.toLowerCase()}`,
+            description: s.intro,
+            serviceType: 'Automatización de procesos con inteligencia artificial',
+            url: `https://sendaia.es/sectores/${s.slug}`,
+            provider: { '@id': 'https://sendaia.es/#organization' },
+            areaServed: [
+              { '@type': 'City', name: 'Granada' },
+              { '@type': 'Country', name: 'España' },
+            ],
+            audience: { '@type': 'BusinessAudience', name: s.nombre },
+          }),
+        }}
+      />
       {/* NAVBAR simple */}
       <nav className="fixed top-0 left-0 right-0 z-50 border-b" style={{ borderColor: 'var(--border)', background: 'rgba(5,5,16,0.85)', backdropFilter: 'blur(16px)' }}>
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
