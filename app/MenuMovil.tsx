@@ -99,8 +99,15 @@ export default function MenuMovil() {
             ref={panel}
             role="dialog"
             aria-label="Secciones"
-            className="absolute left-0 top-0 flex h-full w-[82%] max-w-xs flex-col border-r"
-            style={{ background: '#0b0b16', borderColor: 'rgba(212,175,55,0.25)' }}
+            className="absolute inset-y-0 left-0 flex w-[82%] max-w-xs flex-col border-r"
+            // La altura va aquí y no con h-full: el contenedor es `fixed inset-0`
+            // pero `h-full` sobre él dejaba el panel en 78px (solo la cabecera) y
+            // los enlaces caían fuera, encima del hero e ilegibles.
+            style={{
+              background: '#0b0b16',
+              borderColor: 'rgba(212,175,55,0.25)',
+              height: '100dvh',
+            }}
           >
             <div
               className="flex items-center justify-between border-b px-5 py-4"
