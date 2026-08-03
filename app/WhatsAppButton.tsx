@@ -4,13 +4,34 @@ import { useEffect, useState } from 'react'
 import { track } from '@/lib/website-events'
 
 // Botón flotante de WhatsApp. Enlace directo (wa.me) al AGENTE de SendaIA
-// (Cloud API + Hermes) — contesta 24/7 y avisa a Pachi por Telegram si detecta
-// un lead caliente. Antes iba al móvil personal de Pachi (34630310451).
+// (Cloud API, cerebro propio en whatsapp-sendaia.vercel.app — ya NO pasa por
+// Hermes desde el 03-ago-2026). Contesta 24/7, cruza al que escribe con su
+// ficha del CRM y avisa a Pachi por Telegram si detecta un lead caliente.
+// Antes iba al móvil personal de Pachi (34630310451).
 const WHATSAPP_NUMBER = '34627256996' // Número del agente SendaIA
 const PREFILL = 'Hola, me gustaría saber más sobre la automatización con IA de SendaIA.'
 
 export default function WhatsAppButton() {
-  const href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(PREFILL)}`
+  // El mensaje lleva de qué sección venía el visitante, para que el agente
+  // arranque la conversación sabiendo qué estaba mirando en vez de desde cero.
+  // Va como texto natural: es lo único que WhatsApp deja prerrellenar.
+  const [href, setHref] = useState(
+    `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(PREFILL)}`,
+  )
+  useEffect(() => {
+    const seccion = document.querySelector<HTMLElement>(
+      'section[id]:not([id=""])',
+    )
+    const desde =
+      new URLSearchParams(window.location.search).get('utm_source') ??
+      (window.location.pathname !== '/' ? window.location.pathname.slice(1) : null) ??
+      seccion?.id ??
+      null
+    const texto = desde
+      ? `${PREFILL} (Vengo de la web, sección: ${desde})`
+      : PREFILL
+    setHref(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(texto)}`)
+  }, [])
 
   // Se aparta cuando la sección de contacto está en pantalla: en móvil se montaba
   // encima del texto legal del footer y del aviso de respuesta en 24 h.
