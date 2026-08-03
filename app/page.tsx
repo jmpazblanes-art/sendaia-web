@@ -9,6 +9,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { SplitText } from 'gsap/SplitText'
 import { useGSAP } from '@gsap/react'
 import { track } from '@/lib/website-events'
+import MenuMovil from './MenuMovil'
 import WhatsAppButton from './WhatsAppButton'
 import {
   ArrowRight,
@@ -1476,7 +1477,10 @@ export default function Home() {
 
       {/* ── NAVBAR ── */}
       <nav data-nav className="fixed top-0 left-0 right-0 z-50 border-b" style={{ borderColor: 'var(--border)', background: 'rgba(5,5,16,0.85)', backdropFilter: 'blur(16px)' }}>
-        <div data-nav-inner className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 border border-transparent">
+        <div data-nav-inner className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-5 py-4 sm:px-6 border border-transparent">
+          {/* Menú de secciones: en móvil la barra de enlaces se oculta, así que
+              sin esto no había forma de saltar de sección (lo vio Ana, 03-ago). */}
+          <MenuMovil />
           <Link href="/" className="flex items-center">
             <Image
               src="/images/logo.png"
@@ -1484,7 +1488,7 @@ export default function Home() {
               width={160}
               height={48}
               priority
-              className="h-10 w-auto object-contain"
+              className="h-8 w-auto object-contain sm:h-10"
             />
           </Link>
           <div className="hidden items-center gap-8 text-sm md:flex" style={{ color: 'rgba(245,245,245,0.65)' }}>
@@ -1496,10 +1500,12 @@ export default function Home() {
           </div>
           <a
             href="#contacto"
-            className="rounded-full px-5 py-2.5 text-sm font-semibold text-white transition-all hover:opacity-90"
+            className="whitespace-nowrap rounded-full px-4 py-2.5 text-xs font-semibold text-white transition-all hover:opacity-90 sm:px-5 sm:text-sm"
             style={{ background: 'var(--accent)' }}
           >
-            Diagnóstico gratuito
+            {/* En móvil el texto completo empujaba al logo y al menú fuera de sitio */}
+            <span className="sm:hidden">Diagnóstico</span>
+            <span className="hidden sm:inline">Diagnóstico gratuito</span>
           </a>
         </div>
       </nav>
@@ -1558,16 +1564,19 @@ export default function Home() {
         <div className="relative z-10 mx-auto max-w-5xl px-6 text-center">
           <div data-hero-badge>
             <span
-              className="mb-6 inline-block rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-widest"
+              className="mb-4 inline-block rounded-full px-4 py-1.5 text-[0.7rem] font-semibold uppercase tracking-widest sm:mb-6 sm:text-xs"
               style={{ background: 'rgba(212,175,55,0.18)', color: 'var(--accent-light)', border: '1px solid rgba(212,175,55,0.3)' }}
             >
               Automatización con IA para PYMEs · Granada
             </span>
           </div>
 
+          {/* En móvil el título iba a 5xl y, con el eslogan y el subtítulo, empujaba
+              los botones fuera de la pantalla (medido en iPhone 13: el CTA caía en
+              y=730 con una ventana de 664px, así que no se podía ni tocar). */}
           <h1
             data-hero-title
-            className="text-5xl font-black leading-tight tracking-tight sm:text-6xl lg:text-7xl"
+            className="text-[2.6rem] font-black leading-[1.08] tracking-tight sm:text-6xl lg:text-7xl"
           >
             Recupera{' '}
             <span className="gradient-text-animated">horas cada semana</span>
@@ -1575,15 +1584,15 @@ export default function Home() {
           </h1>
 
           {/* Eslogan de marca: «Sistemas que trabajan. Tú disfrutas.» */}
-          <p data-hero-slogan className="mt-5 flex flex-col items-center justify-center gap-0 sm:flex-row sm:gap-3">
+          <p data-hero-slogan className="mt-3 flex flex-col items-center justify-center gap-0 sm:mt-5 sm:flex-row sm:gap-3">
             <span
-              className="text-xl font-semibold uppercase tracking-widest sm:text-2xl"
+              className="text-base font-semibold uppercase tracking-widest sm:text-2xl"
               style={{ color: 'rgba(245,245,245,0.9)' }}
             >
               Sistemas que trabajan.
             </span>
             <span
-              className="font-script text-4xl leading-none sm:text-5xl"
+              className="font-script text-3xl leading-none sm:text-5xl"
               style={{ color: 'var(--accent-light)' }}
             >
               Tú disfrutas.
@@ -1592,7 +1601,7 @@ export default function Home() {
 
           <p
             data-hero-sub
-            className="mx-auto mt-6 max-w-2xl text-lg leading-8"
+            className="mx-auto mt-4 max-w-2xl text-base leading-7 sm:mt-6 sm:text-lg sm:leading-8"
             style={{ color: 'rgba(245,245,245,0.75)' }}
           >
             Sin código. Sin interrumpir tu negocio. A tu ritmo.
@@ -1600,7 +1609,7 @@ export default function Home() {
 
           <div
             data-hero-cta
-            className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
+            className="mt-6 flex flex-col items-center justify-center gap-3 sm:mt-10 sm:flex-row sm:gap-4"
           >
             <a
               href="#contacto"
@@ -1801,7 +1810,7 @@ export default function Home() {
                 <br />
                 <span className="gradient-text">La hicimos nosotros.</span>
               </h2>
-              <p className="mx-auto mt-6 max-w-2xl text-lg leading-8" style={{ color: 'rgba(245,245,245,0.75)' }}>
+              <p className="mx-auto mt-4 max-w-2xl text-base leading-7 sm:mt-6 sm:text-lg sm:leading-8" style={{ color: 'rgba(245,245,245,0.75)' }}>
                 Diseñamos y programamos webs rápidas, cuidadas y con IA integrada — como esta que estás viendo.
                 Sin plantillas genéricas: tu web, a tu medida, lista en días.
               </p>
