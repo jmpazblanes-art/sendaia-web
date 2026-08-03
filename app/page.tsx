@@ -1633,7 +1633,10 @@ export default function Home() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.5 }}
-          className="absolute bottom-8 right-8 z-10 flex items-center gap-2 rounded-full px-4 py-2.5 transition-all hover:scale-105"
+          // En móvil se sube a la esquina superior: abajo se montaba justo encima
+          // de "Ver cómo funciona" y se comía el botón (visto en captura, no en
+          // la medición: el elemento existía y era pulsable, pero quedaba tapado).
+          className="absolute right-4 top-24 z-10 flex items-center gap-2 rounded-full px-3 py-2 transition-all hover:scale-105 sm:bottom-8 sm:right-8 sm:top-auto sm:px-4 sm:py-2.5"
           style={{ background: 'rgba(212,175,55,0.15)', border: '1px solid rgba(212,175,55,0.4)', backdropFilter: 'blur(8px)' }}
           aria-label={muted ? 'Activar sonido' : 'Silenciar'}
         >
