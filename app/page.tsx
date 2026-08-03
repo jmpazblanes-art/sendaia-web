@@ -1077,6 +1077,15 @@ function AssistantDock() {
   ])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
+  // Identifica la conversación sin pedirle el teléfono al visitante.
+  const [sesionChat] = useState(() => {
+    if (typeof window === 'undefined') return 'servidor'
+    const g = sessionStorage.getItem('sendaia_chat_sesion')
+    if (g) return g
+    const n = Math.random().toString(36).slice(2) + Date.now().toString(36)
+    sessionStorage.setItem('sendaia_chat_sesion', n)
+    return n
+  })
   const [nudge, setNudge] = useState(true)
   const bottomRef = useRef<HTMLDivElement>(null)
 
@@ -1107,15 +1116,24 @@ function AssistantDock() {
     setMessages(prev => [...prev, { role: 'user', content: text }])
     setLoading(true)
     try {
-      const res = await fetch('/api/chat', {
+      // Aria habla con el MISMO cerebro que el agente de WhatsApp (03-ago-2026):
+      // mismo prompt comercial, misma regla de no dar precios, y puede consultar
+      // huecos reales y cerrar una cita en el calendario. Antes usaba /api/chat
+      // (gpt-4o-mini con prompt propio), que no tenía memoria ni herramientas.
+      const res = await fetch('https://whatsapp-sendaia.vercel.app/api/chat-web', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: [...messages, { role: 'user', content: text }], system: CHAT_SYSTEM }),
+        body: JSON.stringify({
+          mensaje: text,
+          sesion: sesionChat,
+          // El saludo de bienvenida no lo dijo el visitante: fuera del historial.
+          historial: messages.slice(1).map(m => ({ rol: m.role, contenido: m.content })),
+        }),
       })
       const data = await res.json()
-      setMessages(prev => [...prev, { role: 'assistant', content: data.content || 'Lo siento, no pude procesar tu mensaje.' }])
+      setMessages(prev => [...prev, { role: 'assistant', content: data.respuesta || 'Lo siento, no pude procesar tu mensaje.' }])
     } catch {
-      setMessages(prev => [...prev, { role: 'assistant', content: 'Error de conexión. Llámanos al 858 215 026.' }])
+      setMessages(prev => [...prev, { role: 'assistant', content: 'Error de conexión. Escríbenos por WhatsApp al 627 25 69 96 o llámanos al 858 215 026.' }])
     }
     setLoading(false)
   }
