@@ -12,4 +12,4 @@ export const TITULAR = {
   dominio: 'sendaia.es',
 } as const
 
-export const ULTIMA_ACTUALIZACION = '29 de julio de 2026'
+export const ULTIMA_ACTUALIZACION = '12 de agosto de 2026'

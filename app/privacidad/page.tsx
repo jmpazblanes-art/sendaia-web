@@ -44,6 +44,27 @@ export default function PrivacidadPage() {
         útiles. Esta información no se usa para identificarte personalmente.
       </p>
 
+      <H2>Datos bancarios de los clientes de nuestras aplicaciones</H2>
+      <p>
+        Algunas de las aplicaciones que desarrollamos y mantenemos para nuestros clientes —por
+        ejemplo, herramientas de gestión para asesorías— incorporan una función de{' '}
+        <strong>conciliación bancaria</strong>. Cuando el titular de una cuenta autoriza expresamente
+        esa función, se accede a los <strong>movimientos y saldos de la cuenta en modo de solo
+        lectura</strong>, con el único fin de casarlos con la contabilidad. En ningún caso se pueden
+        ordenar pagos, transferencias ni ninguna otra operación sobre la cuenta.
+      </p>
+      <p>
+        El acceso se realiza a través de un proveedor autorizado de servicios de información sobre
+        cuentas conforme a la normativa de servicios de pago (PSD2), y{' '}
+        <strong>requiere siempre el consentimiento del titular</strong>, otorgado ante su propia
+        entidad bancaria y revocable en cualquier momento. SendaIA no almacena las credenciales de
+        acceso a la banca electrónica: la autenticación se realiza siempre frente al banco.
+      </p>
+      <p>
+        Base jurídica: el <em>consentimiento</em> del titular (art. 6.1.a RGPD) y la ejecución del
+        contrato de prestación de servicios con la empresa cliente (art. 6.1.b RGPD).
+      </p>
+
       <H2>Para qué usamos tus datos y con qué legitimación</H2>
       <ul className="space-y-2">
         <li>
@@ -71,6 +92,12 @@ export default function PrivacidadPage() {
         legalmente exigibles para atender posibles responsabilidades. Si no llega a existir relación
         comercial, se suprimen en el plazo máximo de un año desde el último contacto.
       </p>
+      <p>
+        Los <strong>movimientos bancarios</strong> obtenidos para la conciliación se conservan
+        mientras la empresa cliente mantenga activa esa función y durante los plazos que exige la
+        normativa contable y fiscal. Si el titular revoca la autorización ante su banco, el acceso
+        cesa de inmediato.
+      </p>
 
       <H2>Destinatarios y encargados del tratamiento</H2>
       <p>
@@ -83,6 +110,12 @@ export default function PrivacidadPage() {
         <li><strong>Supabase</strong> — base de datos donde se almacenan las solicitudes de contacto.</li>
         <li><strong>Google (Gmail / Workspace)</strong> — correo electrónico.</li>
         <li><strong>Proveedores de IA conversacional</strong> — para el asistente de chat y el agente de voz.</li>
+        <li>
+          <strong>Enable Banking Oy</strong> (Finlandia) — proveedor autorizado de servicios de
+          información sobre cuentas (PSD2), únicamente para la función de conciliación bancaria
+          descrita más arriba y cuando el titular la ha autorizado.
+        </li>
+        <li><strong>Resend</strong> — envío de los correos que generan nuestras aplicaciones.</li>
       </ul>
       <p>
         Algunos de estos proveedores pueden tratar datos fuera del Espacio Económico Europeo. En esos
