@@ -1,0 +1,63 @@
+name: Vigilar que producción sirve el código de main
+
+# Origen (17-ago-2026): sendaia.es sirvió 6 días una web de mayo (sin
+# WhatsApp/Aria/agente de voz) porque un deploy de `main` desactualizada pisó
+# en silencio el bueno. HTTP 200 todo el rato: nadie lo notó hasta que Pachi
+# abrió la web. Este check compara el HTML real de producción contra el
+# commit de main y avisa por Telegram si un elemento clave falta.
+# Ver bug_sendaia_web_main_desincronizada_pisaba_produccion en el cerebro.
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    # 08:13 UTC (~10:13 en verano CEST) — hora floja, no en punto a propósito
+    - cron: '13 8 * * *'
+  workflow_dispatch: {}
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Esperar a que el deploy de Vercel se propague (solo en push)
+        if: github.event_name == 'push'
+        run: sleep 90
+
+      - name: Descargar el HTML real de producción
+        run: curl -sL --max-time 20 -o prod.html https://sendaia.es/
+
+      - name: Comprobar que los elementos clave están presentes
+        id: check
+        run: |
+          FALTAN=""
+          for marker in "WhatsAppButton" "Escríbenos por WhatsApp" "Agente de voz" "Aria"; do
+            if ! grep -qF "$marker" prod.html; then
+              FALTAN="$FALTAN\n- Falta: $marker"
+            fi
+          done
+          if [ -n "$FALTAN" ]; then
+            echo "ok=false" >> "$GITHUB_OUTPUT"
+            {
+              echo "detalle<<EOF"
+              echo -e "$FALTAN"
+              echo "EOF"
+            } >> "$GITHUB_OUTPUT"
+          else
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Avisar por Telegram si algo falta
+        if: steps.check.outputs.ok == 'false'
+        run: |
+          curl -s -X POST "https://api.telegram.org/bot${{ secrets.OPS_TELEGRAM_BOT_TOKEN }}/sendMessage" \
+            -d chat_id="${{ secrets.OPS_TELEGRAM_CHAT_ID }}" \
+            -d parse_mode="HTML" \
+            --data-urlencode text="⚠️ <b>sendaia.es no coincide con main</b>
+${{ steps.check.outputs.detalle }}
+
+Puede ser un deploy viejo pisando al bueno (ya pasó el 11-ago). Revisar:
+https://vercel.com/jose-marias-projects-b8e16ade/sendaia-web"
+
+      - name: Fallar el job si algo faltaba (queda visible en GitHub)
+        if: steps.check.outputs.ok == 'false'
+        run: exit 1
