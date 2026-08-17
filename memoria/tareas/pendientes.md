@@ -1,15 +1,27 @@
 # Tareas pendientes — sendaia.es
 
-> Última actualización: 2026-08-03
+> Última actualización: 2026-08-17
+
+## 🔴 Bloqueante / a confirmar
+- [ ] Decidir si se aplica el cambio guardado en `git stash` (enlace a
+      Facebook en footer + schema SEO) — `git stash list` para verlo,
+      `git stash pop` para aplicarlo si Pachi lo confirma
 
 ## 🟡 Importante
 - [ ] Que Pachi abra sendaia.es en su móvil y confirme el menú lateral y el botón "Ver cómo funciona" · avisar a Ana de que está arreglado
 - [ ] Decidir si `/api/chat` (endpoint viejo de Aria, gpt-4o-mini) se borra. Ya no lo usa Aria; comprobar antes si lo llama algo más · `app/api/chat/route.ts`
+- [ ] Fusionar o limpiar las ramas viejas sueltas que podrían repetir el incidente del 11-ago si se despliegan por error: `feat/gsap-premium`, `feat/hero-3d`, `feat/logo-3d`, `feat/tracking-web`, `codex/sendaia-web-story-ads`
 
 ## 🟢 Menor
 - [ ] Revisar el resto de la web en móvil con el mismo método (medir si los CTA caen dentro de pantalla), no solo el hero
+- [ ] Registrar las horas de la sesión del 17-ago en `/horas` (no cronometradas en vivo)
 
-## ✅ Hecho hoy (2026-08-03)
+## ✅ Hecho hoy (2026-08-17)
+- [x] ~~sendaia.es servía una versión de mayo, sin WhatsApp/Aria/voz~~ **ARREGLADO** — `main` (desactualizada 3 meses) pisaba en silencio el deploy bueno del 3-ago; fusionada `fix/auditoria-a` → `main`, verificado en navegador real con capturas
+- [x] ~~Sin guardarraíl si vuelve a divergir~~ **MONTADO Y VERIFICADO** — GitHub Action diario + en cada push que compara producción contra main y avisa por Telegram si falta algo. Run `32029351689` en verde (success), 17-ago 12:20
+- [x] ~~Regla de "no dejar ramas sueltas sin fusionar"~~ **DOCUMENTADA** — `CLAUDE.md` nuevo en la raíz del repo
+
+## ✅ Hecho 2026-08-03
 - [x] ~~Menú de secciones en móvil~~ **HECHA** — panel lateral, verificado pulsando "Casos" en iPhone real
 - [x] ~~"Ver cómo funciona" no respondía~~ **ARREGLADA** — caía 66px fuera de pantalla; hero compactado en móvil
 - [x] ~~"Activar sonido" tapaba el CTA~~ **ARREGLADA** — movido a la esquina superior en móvil
