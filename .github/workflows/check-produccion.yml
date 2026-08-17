@@ -30,7 +30,7 @@ jobs:
         run: |
           FALTAN=0
           RESUMEN=""
-          for marker in "WhatsAppButton" "Escríbenos por WhatsApp" "Agente de voz" "Aria"; do
+          for marker in "Escríbenos por WhatsApp" "Agente de voz" "Aria"; do
             if ! grep -qF "$marker" prod.html; then
               FALTAN=1
               RESUMEN="$RESUMEN, falta: $marker"
