@@ -11,7 +11,6 @@ on:
   push:
     branches: [main]
   schedule:
-    # 08:13 UTC (~10:13 en verano CEST) — hora floja, no en punto a propósito
     - cron: '13 8 * * *'
   workflow_dispatch: {}
 
@@ -29,35 +28,29 @@ jobs:
       - name: Comprobar que los elementos clave están presentes
         id: check
         run: |
-          FALTAN=""
+          FALTAN=0
+          RESUMEN=""
           for marker in "WhatsAppButton" "Escríbenos por WhatsApp" "Agente de voz" "Aria"; do
             if ! grep -qF "$marker" prod.html; then
-              FALTAN="$FALTAN\n- Falta: $marker"
+              FALTAN=1
+              RESUMEN="$RESUMEN, falta: $marker"
             fi
           done
-          if [ -n "$FALTAN" ]; then
-            echo "ok=false" >> "$GITHUB_OUTPUT"
-            {
-              echo "detalle<<EOF"
-              echo -e "$FALTAN"
-              echo "EOF"
-            } >> "$GITHUB_OUTPUT"
-          else
-            echo "ok=true" >> "$GITHUB_OUTPUT"
-          fi
+          echo "faltan=$FALTAN" >> "$GITHUB_OUTPUT"
+          echo "resumen=$RESUMEN" >> "$GITHUB_OUTPUT"
 
       - name: Avisar por Telegram si algo falta
-        if: steps.check.outputs.ok == 'false'
+        if: steps.check.outputs.faltan == '1'
+        env:
+          BOT_TOKEN: ${{ secrets.OPS_TELEGRAM_BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.OPS_TELEGRAM_CHAT_ID }}
+          RESUMEN: ${{ steps.check.outputs.resumen }}
         run: |
-          curl -s -X POST "https://api.telegram.org/bot${{ secrets.OPS_TELEGRAM_BOT_TOKEN }}/sendMessage" \
-            -d chat_id="${{ secrets.OPS_TELEGRAM_CHAT_ID }}" \
-            -d parse_mode="HTML" \
-            --data-urlencode text="⚠️ <b>sendaia.es no coincide con main</b>
-${{ steps.check.outputs.detalle }}
-
-Puede ser un deploy viejo pisando al bueno (ya pasó el 11-ago). Revisar:
-https://vercel.com/jose-marias-projects-b8e16ade/sendaia-web"
+          MSG="ALERTA: sendaia.es no coincide con main (${RESUMEN}). Puede ser un deploy viejo pisando al bueno, como paso el 11-ago. Revisar en Vercel."
+          curl -s -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage" \
+            --data-urlencode "chat_id=${CHAT_ID}" \
+            --data-urlencode "text=${MSG}"
 
       - name: Fallar el job si algo faltaba (queda visible en GitHub)
-        if: steps.check.outputs.ok == 'false'
+        if: steps.check.outputs.faltan == '1'
         run: exit 1
