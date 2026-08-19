@@ -8,6 +8,7 @@ import { track } from '@/lib/website-events'
 
 const SECCIONES = [
   { href: '#servicios', label: 'Servicios' },
+  { href: '#calculadora', label: 'Calculadora' },
   { href: '#sectores', label: 'Sectores' },
   { href: '#casos', label: 'Casos' },
   { href: '#proceso', label: 'Proceso' },

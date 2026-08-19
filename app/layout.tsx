@@ -128,6 +128,44 @@ export default function RootLayout({
         inLanguage: 'es-ES',
         publisher: { '@id': `${SITE_URL}/#organization` },
       },
+      {
+        '@type': 'FAQPage',
+        '@id': `${SITE_URL}/#faq`,
+        mainEntity: [
+          {
+            '@type': 'Question',
+            name: '¿Cómo funciona la automatización con IA para empresas de SendaIA?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Diseñamos e implementamos agentes de IA y flujos automáticos adaptados a los procesos reales de tu negocio (atención telefónica 24/7, WhatsApp, extracción de facturas y gestión de correos), integrándolos con tus herramientas actuales sin fricción técnica.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: '¿Cuánto tiempo se tarda en poner en marcha un agente o automatización?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Tras un diagnóstico inicial de 30 minutos, la configuración e integración se realiza habitualmente en un plazo de 7 a 10 días laborables, dejando el sistema listo y probado en producción.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: '¿Es necesario que mi equipo tenga conocimientos técnicos o cambiar de software?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'No. Las soluciones de SendaIA se conectan directamente con tus herramientas habituales (WhatsApp, email, hojas de cálculo, CRM o software contable) sin requerir que tu equipo aprenda a programar ni cambie su operativa diaria.',
+            },
+          },
+          {
+            '@type': 'Question',
+            name: '¿Qué procesos se pueden automatizar?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Recepción y filtrado de llamadas 24/7 con agente de voz, atención y cualificación de clientes por WhatsApp, lectura y extracción automática de facturas y albaranes en PDF, clasificación y respuesta de correos electrónicos, y reactivación de clientes dormidos.',
+            },
+          },
+        ],
+      },
     ],
   }
 

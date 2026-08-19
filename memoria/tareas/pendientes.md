@@ -13,6 +13,7 @@
 - [x] ~~Borrar endpoint obsoleto `/api/chat`~~ **ELIMINADO** — Ya no se usaba (Aria usa whatsapp-sendaia)
 - [x] ~~Limpieza total de ramas viejas locales y remotas~~ **HECHA** — Eliminadas `feat/gsap-premium`, `feat/hero-3d`, `feat/logo-3d`, `feat/tracking-web`, `codex/sendaia-web-story-ads`, `fix/auditoria-a`. Solo queda `main`.
 - [x] ~~Auditoría y optimización de móvil~~ **COMPLETADA** — Añadido `scroll-padding-top` en CSS para que los anclajes del menú móvil no queden tapados por el navbar fijo; ajustado tamaño de fuente en inputs de formulario y chat (`text-base sm:text-sm`) para evitar el auto-zoom molesto de iOS Safari; ajustado ancho y márgenes simétricos del modal de Aria en pantallas estrechas.
+- [x] ~~4 disparadores de conversión y captación (CRO & SEO)~~ **IMPLEMENTADO Y VERIFICADO EN NAVEGADOR** — (1) CalculadoraROI interactiva en vivo con sliders dinámicos; (2) Micro-bocadillo gancho de Aria flotante tras 4s; (3) Canal dual de WhatsApp directo en formulario y en páginas de sector con prefill; (4) Schema SEO `FAQPage` enriquecido para Google y motores de IA.
 
 ## ✅ Hecho 2026-08-17
 - [x] ~~sendaia.es servía una versión de mayo, sin WhatsApp/Aria/voz~~ **ARREGLADO** — `main` (desactualizada 3 meses) pisaba en silencio el deploy bueno del 3-ago; fusionada `fix/auditoria-a` → `main`, verificado en navegador real con capturas

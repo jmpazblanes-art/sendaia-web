@@ -866,6 +866,167 @@ function MetricasStrip() {
   )
 }
 
+function CalculadoraROI() {
+  const [horas, setHoras] = useState(15)
+  const [costeHora, setCosteHora] = useState(20)
+  const [personas, setPersonas] = useState(2)
+
+  // Cálculos dinámicos
+  const horasTotalesMes = Math.round(horas * personas * 4.3)
+  const horasAhorradasMes = Math.round(horasTotalesMes * 0.75)
+  const ahorroEurosMes = Math.round(horasAhorradasMes * costeHora)
+  const ahorroEurosAnual = ahorroEurosMes * 12
+
+  return (
+    <section id="calculadora" className="py-20 sm:py-28 relative">
+      <div className="mx-auto max-w-5xl px-6">
+        <FadeIn className="mb-12 text-center">
+          <span
+            className="mb-4 inline-block rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-widest"
+            style={{ background: 'rgba(212,175,55,0.15)', color: 'var(--accent-light)', border: '1px solid rgba(212,175,55,0.3)' }}
+          >
+            Calculadora de Impacto
+          </span>
+          <h2 className="text-3xl font-black sm:text-5xl">
+            Calcula cuánto tiempo y dinero<br />
+            <span className="gradient-text">estás perdiendo sin automatizar</span>
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-7" style={{ color: 'rgba(245,245,245,0.65)' }}>
+            Mueve los controles según la operativa de tu empresa y descubre cuántas horas podría recuperar tu equipo este mes.
+          </p>
+        </FadeIn>
+
+        <FadeIn delay={0.1}>
+          <div
+            className="rounded-3xl p-7 sm:p-12"
+            style={{
+              background: 'var(--card)',
+              border: '1px solid rgba(212,175,55,0.35)',
+              boxShadow: '0 0 60px rgba(212,175,55,0.12)',
+            }}
+          >
+            <div className="grid gap-10 lg:grid-cols-2 items-center">
+              {/* Sliders */}
+              <div className="space-y-6">
+                <div>
+                  <div className="flex justify-between items-center mb-2">
+                    <label className="text-sm font-semibold" style={{ color: 'rgba(245,245,245,0.9)' }}>
+                      Horas/semana en tareas repetitivas
+                    </label>
+                    <span className="rounded-full px-3 py-1 text-xs font-bold font-mono" style={{ background: 'rgba(212,175,55,0.18)', color: 'var(--accent-light)' }}>
+                      {horas} h / semana
+                    </span>
+                  </div>
+                  <input
+                    type="range"
+                    min="5"
+                    max="40"
+                    step="1"
+                    value={horas}
+                    onChange={(e) => setHoras(Number(e.target.value))}
+                    className="w-full h-2 rounded-lg appearance-none cursor-pointer accent-[#D4AF37]"
+                    style={{ background: 'rgba(255,255,255,0.12)' }}
+                  />
+                  <span className="text-[11px]" style={{ color: 'rgba(245,245,245,0.45)' }}>
+                    Facturas, emails, albaranes, llamadas y seguimiento
+                  </span>
+                </div>
+
+                <div>
+                  <div className="flex justify-between items-center mb-2">
+                    <label className="text-sm font-semibold" style={{ color: 'rgba(245,245,245,0.9)' }}>
+                      Personas en el equipo
+                    </label>
+                    <span className="rounded-full px-3 py-1 text-xs font-bold font-mono" style={{ background: 'rgba(212,175,55,0.18)', color: 'var(--accent-light)' }}>
+                      {personas} {personas === 1 ? 'persona' : 'personas'}
+                    </span>
+                  </div>
+                  <input
+                    type="range"
+                    min="1"
+                    max="10"
+                    step="1"
+                    value={personas}
+                    onChange={(e) => setPersonas(Number(e.target.value))}
+                    className="w-full h-2 rounded-lg appearance-none cursor-pointer accent-[#D4AF37]"
+                    style={{ background: 'rgba(255,255,255,0.12)' }}
+                  />
+                  <span className="text-[11px]" style={{ color: 'rgba(245,245,245,0.45)' }}>
+                    Personal que dedica parte de su jornada a gestión
+                  </span>
+                </div>
+
+                <div>
+                  <div className="flex justify-between items-center mb-2">
+                    <label className="text-sm font-semibold" style={{ color: 'rgba(245,245,245,0.9)' }}>
+                      Coste medio por hora
+                    </label>
+                    <span className="rounded-full px-3 py-1 text-xs font-bold font-mono" style={{ background: 'rgba(212,175,55,0.18)', color: 'var(--accent-light)' }}>
+                      {costeHora} € / hora
+                    </span>
+                  </div>
+                  <input
+                    type="range"
+                    min="12"
+                    max="50"
+                    step="1"
+                    value={costeHora}
+                    onChange={(e) => setCosteHora(Number(e.target.value))}
+                    className="w-full h-2 rounded-lg appearance-none cursor-pointer accent-[#D4AF37]"
+                    style={{ background: 'rgba(255,255,255,0.12)' }}
+                  />
+                  <span className="text-[11px]" style={{ color: 'rgba(245,245,245,0.45)' }}>
+                    Coste empresa promedio por hora trabajada
+                  </span>
+                </div>
+              </div>
+
+              {/* Resultados */}
+              <div
+                className="rounded-2xl p-6 sm:p-8 flex flex-col justify-between"
+                style={{ background: 'linear-gradient(135deg, rgba(212,175,55,0.12) 0%, rgba(13,13,26,0.6) 100%)', border: '1px solid rgba(212,175,55,0.25)' }}
+              >
+                <div className="space-y-6">
+                  <div>
+                    <p className="text-xs uppercase tracking-wider font-semibold" style={{ color: 'var(--accent-light)' }}>Tiempo que podrías recuperar</p>
+                    <p className="text-4xl sm:text-5xl font-black gradient-text mt-1">
+                      +{horasAhorradasMes} <span className="text-xl sm:text-2xl font-bold text-white">horas / mes</span>
+                    </p>
+                    <p className="text-xs mt-1" style={{ color: 'rgba(245,245,245,0.55)' }}>
+                      Equivale a liberar ~{Math.round(horasAhorradasMes / 8)} días laborables completos al mes.
+                    </p>
+                  </div>
+
+                  <div className="pt-4 border-t" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
+                    <p className="text-xs uppercase tracking-wider font-semibold" style={{ color: 'var(--accent-light)' }}>Ahorro económico anual estimado</p>
+                    <p className="text-3xl sm:text-4xl font-black gradient-text mt-1">
+                      ~{ahorroEurosAnual.toLocaleString('es-ES')} <span className="text-lg font-bold text-white">€ / año</span>
+                    </p>
+                    <p className="text-xs mt-1" style={{ color: 'rgba(245,245,245,0.55)' }}>
+                      Basado en una reducción del 75% del tiempo en procesos repetitivos.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-8 pt-6 border-t" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
+                  <a
+                    href="#contacto"
+                    onClick={() => track('cta_click', { cta: 'calculadora_roi', horas: horasAhorradasMes })}
+                    className="w-full inline-flex items-center justify-center gap-2 rounded-full py-3.5 px-6 text-sm font-bold text-black transition-all hover:scale-105 hover:shadow-lg"
+                    style={{ background: 'var(--accent)', boxShadow: '0 0 25px rgba(212,175,55,0.35)' }}
+                  >
+                    Recuperar estas {horasAhorradasMes} h/mes →
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </FadeIn>
+      </div>
+    </section>
+  )
+}
+
 // ─────────────── FORMULARIO ───────────────
 
 function ContactForm() {
@@ -977,6 +1138,27 @@ function ContactForm() {
       >
         {status === 'loading' ? 'Enviando...' : 'Quiero el diagnóstico gratuito →'}
       </button>
+
+      <div className="flex items-center gap-3 pt-1">
+        <div className="h-px flex-1" style={{ background: 'rgba(255,255,255,0.08)' }} />
+        <span className="text-[11px] uppercase tracking-wider" style={{ color: 'rgba(245,245,245,0.4)' }}>o consúltanos directo</span>
+        <div className="h-px flex-1" style={{ background: 'rgba(255,255,255,0.08)' }} />
+      </div>
+
+      <a
+        href="https://wa.me/34627256996?text=Hola%2C%20me%20gustar%C3%ADa%20hacer%20una%20consulta%20directa%20sobre%20automatizaci%C3%B3n%20con%20IA."
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => track('cta_click', { cta: 'whatsapp_formulario' })}
+        className="w-full flex items-center justify-center gap-2 rounded-full py-3.5 text-sm font-semibold transition-all hover:bg-white/5 border"
+        style={{ borderColor: 'rgba(37,211,102,0.4)', color: '#25D366' }}
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.71.306 1.263.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg>
+        Escríbenos por WhatsApp
+      </a>
+
       <p className="text-center text-xs" style={{ color: 'rgba(245,245,245,0.45)' }}>
         Te respondemos en menos de 24 h laborables.
       </p>
@@ -1087,6 +1269,8 @@ function AssistantDock() {
     return n
   })
   const [nudge, setNudge] = useState(true)
+  const [tooltipVisible, setTooltipVisible] = useState(false)
+  const [tooltipDismissed, setTooltipDismissed] = useState(false)
   const bottomRef = useRef<HTMLDivElement>(null)
 
   // ── Voz (Retell) ──
@@ -1105,9 +1289,15 @@ function AssistantDock() {
   }, [messages, open])
 
   useEffect(() => {
-    const t = setTimeout(() => setNudge(false), 7000)
-    return () => clearTimeout(t)
-  }, [])
+    const t1 = setTimeout(() => setNudge(false), 7000)
+    const t2 = setTimeout(() => {
+      if (!open && !tooltipDismissed) setTooltipVisible(true)
+    }, 4500)
+    return () => {
+      clearTimeout(t1)
+      clearTimeout(t2)
+    }
+  }, [open, tooltipDismissed])
 
   const send = async () => {
     const text = input.trim()
@@ -1262,6 +1452,50 @@ function AssistantDock() {
         }`}
         style={{ bottom: 'calc(1.5rem + env(safe-area-inset-bottom, 0px))' }}
       >
+
+        {/* Micro-bocadillo gancho de Aria */}
+        <AnimatePresence>
+          {tooltipVisible && !open && !tooltipDismissed && (
+            <motion.div
+              initial={{ opacity: 0, y: 12, scale: 0.92 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 12, scale: 0.92 }}
+              transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+              className="relative mb-1 flex items-start gap-3 rounded-2xl p-3.5 shadow-2xl backdrop-blur-md max-w-[270px] sm:max-w-xs cursor-pointer"
+              style={{
+                background: 'rgba(12,12,18,0.94)',
+                border: '1px solid rgba(212,175,55,0.4)',
+                boxShadow: '0 12px 30px rgba(0,0,0,0.5), 0 0 25px rgba(212,175,55,0.15)',
+              }}
+              onClick={() => {
+                setOpen(true)
+                setTooltipVisible(false)
+                setTooltipDismissed(true)
+              }}
+            >
+              <div className="flex-1">
+                <p className="text-xs leading-relaxed" style={{ color: '#f5f5f0' }}>
+                  👋 <span className="font-semibold text-white">¿Qué proceso te roba más tiempo?</span> Cuéntamelo aquí y te digo cómo automatizarlo.
+                </p>
+                <span className="mt-1.5 inline-block text-[11px] font-semibold" style={{ color: 'var(--accent-light)' }}>
+                  Abrir chat con Aria →
+                </span>
+              </div>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setTooltipVisible(false)
+                  setTooltipDismissed(true)
+                }}
+                className="text-white/40 hover:text-white transition-colors p-0.5 rounded-full"
+                aria-label="Cerrar aviso"
+              >
+                <X size={14} />
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Agente de voz */}
         <motion.button
@@ -1509,8 +1743,9 @@ export default function Home() {
               className="h-8 w-auto object-contain sm:h-10"
             />
           </Link>
-          <div className="hidden items-center gap-8 text-sm md:flex" style={{ color: 'rgba(245,245,245,0.65)' }}>
+          <div className="hidden items-center gap-7 text-sm md:flex" style={{ color: 'rgba(245,245,245,0.65)' }}>
             <NavLink3D href="#servicios">Servicios</NavLink3D>
+            <NavLink3D href="#calculadora">Calculadora</NavLink3D>
             <NavLink3D href="#sectores">Sectores</NavLink3D>
             <NavLink3D href="#casos">Casos</NavLink3D>
             <NavLink3D href="#proceso">Proceso</NavLink3D>
@@ -1804,6 +2039,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ── CALCULADORA ROI ── */}
+      <CalculadoraROI />
 
       {/* ── ¿TE GUSTA ESTA WEB? LA HICIMOS NOSOTROS ── */}
       <section id="web" className="py-20 sm:py-28" style={{ background: 'rgba(13,13,26,0.6)' }}>
