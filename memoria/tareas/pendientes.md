@@ -4,7 +4,6 @@
 
 ## 🟡 Importante
 - [ ] Que Pachi abra sendaia.es en su móvil y confirme el menú lateral y el botón "Ver cómo funciona" · avisar a Ana de que está arreglado
-- [ ] Fusionar o limpiar las ramas viejas sueltas que podrían repetir el incidente del 11-ago si se despliegan por error: `feat/gsap-premium`, `feat/hero-3d`, `feat/logo-3d`, `feat/tracking-web`, `codex/sendaia-web-story-ads`
 
 ## 🟢 Menor
 - [ ] Revisar el resto de la web en móvil con el mismo método (medir si los CTA caen dentro de pantalla), no solo el hero
@@ -13,6 +12,7 @@
 ## ✅ Hecho hoy (2026-08-19)
 - [x] ~~Enlace a Facebook en footer + Schema SEO (`sameAs`)~~ **APLICADO** — Del stash a main, verificado en build
 - [x] ~~Borrar endpoint obsoleto `/api/chat`~~ **ELIMINADO** — Ya no se usaba (Aria usa whatsapp-sendaia)
+- [x] ~~Limpieza total de ramas viejas locales y remotas~~ **HECHA** — Eliminadas `feat/gsap-premium`, `feat/hero-3d`, `feat/logo-3d`, `feat/tracking-web`, `codex/sendaia-web-story-ads`, `fix/auditoria-a`. Solo queda `main`.
 
 ## ✅ Hecho 2026-08-17
 - [x] ~~sendaia.es servía una versión de mayo, sin WhatsApp/Aria/voz~~ **ARREGLADO** — `main` (desactualizada 3 meses) pisaba en silencio el deploy bueno del 3-ago; fusionada `fix/auditoria-a` → `main`, verificado en navegador real con capturas
