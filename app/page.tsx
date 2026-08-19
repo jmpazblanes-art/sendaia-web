@@ -935,7 +935,7 @@ function ContactForm() {
             placeholder={f.placeholder}
             value={form[f.id as keyof typeof form]}
             onChange={e => setForm(p => ({ ...p, [f.id]: e.target.value }))}
-            className="w-full rounded-xl px-4 py-3 text-sm outline-none transition-all"
+            className="w-full rounded-xl px-4 py-3 text-base sm:text-sm outline-none transition-all"
             style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#f5f5f0' }}
           />
         </div>
@@ -947,7 +947,7 @@ function ContactForm() {
           placeholder="Ej: facturas manuales, emails sin leer, llamadas sin atender..."
           value={form.message}
           onChange={e => setForm(p => ({ ...p, message: e.target.value }))}
-          className="w-full rounded-xl px-4 py-3 text-sm outline-none transition-all resize-none"
+          className="w-full rounded-xl px-4 py-3 text-base sm:text-sm outline-none transition-all resize-none"
           style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#f5f5f0' }}
         />
       </div>
@@ -1177,7 +1177,7 @@ function AssistantDock() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 24, scale: 0.96 }}
             transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed bottom-28 right-6 z-50 w-[calc(100vw-3rem)] sm:w-96 rounded-3xl overflow-hidden flex flex-col"
+            className="fixed bottom-28 right-4 sm:right-6 z-50 w-[calc(100vw-2rem)] sm:w-96 rounded-3xl overflow-hidden flex flex-col"
             style={{ background: 'var(--card)', border: '1px solid rgba(212,175,55,0.35)', maxHeight: '70vh', boxShadow: '0 30px 80px rgba(0,0,0,0.55), 0 0 60px rgba(212,175,55,0.12)' }}
           >
             <div className="flex items-center gap-3 px-5 py-4" style={{ background: 'linear-gradient(135deg, rgba(212,175,55,0.18), rgba(212,175,55,0.04))', borderBottom: '1px solid rgba(212,175,55,0.2)' }}>
@@ -1234,7 +1234,7 @@ function AssistantDock() {
                 onChange={e => setInput(e.target.value)}
                 onKeyDown={e => e.key === 'Enter' && send()}
                 placeholder="Escribe a Aria…"
-                className="flex-1 rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-1 transition-all"
+                className="flex-1 rounded-xl px-4 py-2.5 text-base sm:text-sm outline-none focus:ring-1 transition-all"
                 style={{ background: 'rgba(255,255,255,0.07)', color: '#f5f5f0', border: '1px solid rgba(255,255,255,0.1)' }}
               />
               <button
