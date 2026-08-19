@@ -1020,7 +1020,7 @@ Diagnóstico gratuito (30 min) → configuración → integración con tus canal
 "Autoridad tranquila": cercana, clara, sin humo ni tecnicismos. Nada de promesas mágicas ni de "revolucionar tu negocio". Español de España. Respuestas útiles de 3 a 6 frases (usa alguna lista corta si ayuda). Si no sabes un dato exacto, dilo con honestidad y reconduce al diagnóstico, sin inventar.
 
 ## Datos de contacto
-Teléfono / agente de voz: 858 215 026 · Email: info@sendaia.es · Instagram: instagram.com/sendaia.es · LinkedIn: linkedin.com/company/sendaia · Granada, España.`
+Teléfono / agente de voz: 858 215 026 · Email: info@sendaia.es · Instagram: instagram.com/sendaia.es · Facebook: facebook.com/sendaia.es (ahí están los vídeos de ejemplo de lo que hacemos) · LinkedIn: linkedin.com/company/sendaia · Granada, España.`
 
 // Avatar de Aria — orbe dorado vivo, reutilizable en launcher y cabecera
 function AriaAvatar({ size = 44 }: { size?: number }) {
@@ -2220,6 +2220,14 @@ export default function Home() {
                 className="transition-colors hover:text-white"
               >
                 Instagram
+              </a>
+              <a
+                href="https://www.facebook.com/sendaia.es"
+                target="_blank"
+                rel="noreferrer"
+                className="transition-colors hover:text-white"
+              >
+                Facebook
               </a>
               <a
                 href="https://www.linkedin.com/company/sendaia"

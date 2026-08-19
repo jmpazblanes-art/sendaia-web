@@ -96,6 +96,7 @@ export default function RootLayout({
         },
         sameAs: [
           'https://www.instagram.com/sendaia.es',
+          'https://www.facebook.com/sendaia.es',
           'https://www.linkedin.com/company/sendaia',
         ],
       },
