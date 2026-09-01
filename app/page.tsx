@@ -437,10 +437,10 @@ function RobotScrollBackground() {
       <canvas
         ref={canvasRef}
         className="h-full w-full object-cover"
-        style={{ opacity: 0.38, filter: 'contrast(1.08) brightness(0.95)' }}
+        style={{ opacity: 0.65, filter: 'contrast(1.12) brightness(0.95)' }}
       />
-      {/* Degradado para máxima legibilidad de textos dorados y blancos */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#050510]/80 via-[#050510]/60 to-[#050510]/85" />
+      {/* Degradado suave para conservar legibilidad óptima */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#050510]/60 via-[#050510]/40 to-[#050510]/70" />
     </div>
   )
 }
