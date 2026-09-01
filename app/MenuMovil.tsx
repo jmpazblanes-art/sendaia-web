@@ -12,6 +12,7 @@ const SECCIONES = [
   { href: '#sectores', label: 'Sectores' },
   { href: '#casos', label: 'Casos' },
   { href: '#proceso', label: 'Proceso' },
+  { href: '#opiniones', label: 'Opiniones' },
   { href: '#contacto', label: 'Contacto' },
 ]
 

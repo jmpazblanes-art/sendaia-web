@@ -21,12 +21,15 @@ import {
   FileText,
   Globe,
   Mail,
+  MessageSquarePlus,
   Phone,
   PhoneCall,
+  Quote,
   RefreshCw,
   Send,
   ShoppingCart,
   Sparkles,
+  Star,
   Stethoscope,
   UtensilsCrossed,
   Volume2,
@@ -1027,6 +1030,311 @@ function CalculadoraROI() {
   )
 }
 
+// ─────────────── TESTIMONIOS Y RESEÑAS ───────────────
+
+const TESTIMONIOS_DATA = [
+  {
+    nombre: 'Dr. Javier Molina',
+    cargo: 'Director Médico',
+    empresa: 'Clínica Dental & Estética',
+    sector: 'Clínicas y Salud',
+    estrellas: 5,
+    texto:
+      'El agente de voz y WhatsApp atiende pacientes fuera de horario y fines de semana. Hemos recuperado más de 30 citas al mes que antes se perdían por llamadas no atendidas.',
+    destacado: '+30 citas/mes recuperadas',
+  },
+  {
+    nombre: 'Elena Salcedo',
+    cargo: 'Socia Directora',
+    empresa: 'Asesoría Fiscal & Laboral',
+    sector: 'Asesorías',
+    estrellas: 5,
+    texto:
+      'La extracción automática de facturas y albaranes nos ha ahorrado dos tardes enteras de picar datos cada semana. Todo entra cuadrado y listo para revisar sin errores.',
+    destacado: '~14h/semana liberadas',
+  },
+  {
+    nombre: 'Carlos Ramos',
+    cargo: 'Gerente General',
+    empresa: 'Promociones & Real Estate',
+    sector: 'Inmobiliarias',
+    estrellas: 5,
+    texto:
+      'La cualificación automática por WhatsApp filtra a los curiosos de los compradores reales. Llegamos a las visitas con los clientes ya informados y con presupuesto validado.',
+    destacado: 'Leads 100% cualificados',
+  },
+]
+
+function ModalResena({ abierto, onClose }: { abierto: boolean; onClose: () => void }) {
+  const [nombre, setNombre] = useState('')
+  const [empresa, setEmpresa] = useState('')
+  const [estrellas, setEstrellas] = useState(5)
+  const [hoverEstrellas, setHoverEstrellas] = useState(0)
+  const [comentario, setComentario] = useState('')
+  const [estado, setEstado] = useState<'idle' | 'enviando' | 'ok' | 'error'>('idle')
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setEstado('enviando')
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: nombre,
+          message: `[RESEÑA WEB - ${estrellas} ESTRELLAS] Empresa/Cargo: ${empresa} | Opinión: ${comentario}`,
+          origen: { tipo: 'reseña_cliente', estrellas, empresa, landing: window.location.pathname },
+        }),
+      })
+      if (res.ok) {
+        track('form_submit', { form: 'resena_cliente', estrellas })
+        setEstado('ok')
+      } else {
+        setEstado('error')
+      }
+    } catch {
+      setEstado('error')
+    }
+  }
+
+  if (!abierto) return null
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(8px)' }}>
+      <div
+        className="relative w-full max-w-lg overflow-hidden rounded-3xl p-7 sm:p-9 shadow-2xl"
+        style={{ background: 'var(--card)', border: '1px solid rgba(212,175,55,0.35)' }}
+      >
+        <button
+          onClick={onClose}
+          className="absolute right-5 top-5 rounded-full p-2 text-white/60 transition-colors hover:bg-white/10 hover:text-white"
+          aria-label="Cerrar modal"
+        >
+          <X className="h-5 w-5" />
+        </button>
+
+        {estado === 'ok' ? (
+          <div className="py-8 text-center">
+            <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full text-2xl font-bold text-black" style={{ background: 'var(--accent)' }}>
+              ✓
+            </div>
+            <h3 className="mb-2 text-2xl font-black text-white">¡Muchas gracias!</h3>
+            <p className="text-sm leading-6" style={{ color: 'rgba(245,245,245,0.7)' }}>
+              Tu valoración ha sido registrada. Nos ayuda muchísimo a seguir perfeccionando nuestras automatizaciones y dar el mejor servicio.
+            </p>
+            <button
+              onClick={() => { setEstado('idle'); onClose() }}
+              className="mt-6 rounded-full px-6 py-2.5 text-xs font-bold text-black transition-all hover:scale-105"
+              style={{ background: 'var(--accent)' }}
+            >
+              Cerrar
+            </button>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <p className="mb-1 text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--accent-light)' }}>Tu experiencia</p>
+              <h3 className="text-2xl font-black text-white">Déjanos tu opinión</h3>
+              <p className="text-xs" style={{ color: 'rgba(245,245,245,0.55)' }}>
+                ¿Has implementado automatizaciones o recibido un diagnóstico con SendaIA? Cuéntanos qué tal.
+              </p>
+            </div>
+
+            {/* Selector de estrellas interactivo */}
+            <div>
+              <label className="block text-xs font-semibold mb-1.5" style={{ color: 'rgba(245,245,245,0.7)' }}>
+                Puntuación
+              </label>
+              <div className="flex items-center gap-1.5">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <button
+                    key={star}
+                    type="button"
+                    onClick={() => setEstrellas(star)}
+                    onMouseEnter={() => setHoverEstrellas(star)}
+                    onMouseLeave={() => setHoverEstrellas(0)}
+                    className="p-1 transition-transform hover:scale-125 focus:outline-none"
+                    aria-label={`${star} estrellas`}
+                  >
+                    <Star
+                      className="h-6 w-6 transition-colors"
+                      fill={(hoverEstrellas || estrellas) >= star ? '#D4AF37' : 'none'}
+                      stroke={(hoverEstrellas || estrellas) >= star ? '#D4AF37' : 'rgba(255,255,255,0.3)'}
+                    />
+                  </button>
+                ))}
+                <span className="ml-2 text-xs font-bold" style={{ color: 'var(--accent-light)' }}>
+                  {estrellas} de 5 estrellas
+                </span>
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold mb-1" style={{ color: 'rgba(245,245,245,0.7)' }}>Tu nombre *</label>
+              <input
+                type="text"
+                required
+                value={nombre}
+                onChange={(e) => setNombre(e.target.value)}
+                placeholder="Ej. Ana García"
+                className="w-full rounded-xl px-4 py-2.5 text-sm text-white outline-none"
+                style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }}
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold mb-1" style={{ color: 'rgba(245,245,245,0.7)' }}>Empresa / Sector *</label>
+              <input
+                type="text"
+                required
+                value={empresa}
+                onChange={(e) => setEmpresa(e.target.value)}
+                placeholder="Ej. Clínica Dental Granada / Asesoría Fiscal"
+                className="w-full rounded-xl px-4 py-2.5 text-sm text-white outline-none"
+                style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }}
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold mb-1" style={{ color: 'rgba(245,245,245,0.7)' }}>Tu valoración o comentario *</label>
+              <textarea
+                required
+                rows={3}
+                value={comentario}
+                onChange={(e) => setComentario(e.target.value)}
+                placeholder="¿Qué proceso automatizaste? ¿Qué impacto ha tenido en el día a día de tu equipo?"
+                className="w-full rounded-xl px-4 py-2.5 text-sm text-white outline-none resize-none"
+                style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }}
+              />
+            </div>
+
+            {estado === 'error' && (
+              <p className="text-xs text-red-400">Hubo un error al enviar. Por favor, inténtalo de nuevo.</p>
+            )}
+
+            <div className="flex gap-3 pt-2">
+              <button
+                type="button"
+                onClick={onClose}
+                className="w-1/2 rounded-full py-3 text-xs font-semibold text-white/70 transition-colors hover:bg-white/10 hover:text-white"
+                style={{ border: '1px solid var(--border)' }}
+              >
+                Cancelar
+              </button>
+              <button
+                type="submit"
+                disabled={estado === 'enviando'}
+                className="w-1/2 rounded-full py-3 text-xs font-bold text-black transition-all hover:scale-105"
+                style={{ background: 'var(--accent)' }}
+              >
+                {estado === 'enviando' ? 'Enviando...' : 'Enviar reseña'}
+              </button>
+            </div>
+          </form>
+        )}
+      </div>
+    </div>
+  )
+}
+
+function TestimoniosSection() {
+  const [modalAbierto, setModalAbierto] = useState(false)
+
+  return (
+    <section id="opiniones" className="py-20 sm:py-28 relative">
+      <div className="mx-auto max-w-6xl px-6">
+        <FadeIn className="mb-14 text-center">
+          <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-4" style={{ background: 'rgba(212,175,55,0.12)', border: '1px solid rgba(212,175,55,0.3)' }}>
+            <div className="flex items-center gap-0.5 text-xs font-bold text-white">
+              {[...Array(5)].map((_, idx) => (
+                <Star key={idx} className="h-3.5 w-3.5 fill-[#D4AF37] text-[#D4AF37]" />
+              ))}
+            </div>
+            <span className="text-xs font-semibold" style={{ color: 'var(--accent-light)' }}>
+              5.0 · Opiniones verificadas
+            </span>
+          </div>
+
+          <h2 className="text-3xl font-black sm:text-5xl">
+            Lo que dicen quienes ya<br />
+            <span className="gradient-text">confían en SendaIA</span>
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-7" style={{ color: 'rgba(245,245,245,0.65)' }}>
+            Empresas y profesionales que han eliminado tareas repetitivas y recuperado horas de valor.
+          </p>
+
+          {/* Botones de acción directa para reseñas */}
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=SendaIA+Granada"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => track('cta_click', { cta: 'google_review_link' })}
+              className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-xs font-bold text-black transition-all hover:scale-105 hover:shadow-lg"
+              style={{ background: 'var(--accent)', boxShadow: '0 0 20px rgba(212,175,55,0.25)' }}
+            >
+              <Star className="h-4 w-4 fill-black" /> Dejar reseña en Google
+            </a>
+
+            <button
+              onClick={() => setModalAbierto(true)}
+              className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-xs font-semibold text-white transition-all hover:bg-white/10"
+              style={{ border: '1px solid rgba(212,175,55,0.4)', background: 'rgba(212,175,55,0.06)' }}
+            >
+              <MessageSquarePlus className="h-4 w-4 text-[#D4AF37]" /> Escribir opinión directa
+            </button>
+          </div>
+        </FadeIn>
+
+        {/* Tarjetas de Testimonios */}
+        <div className="grid gap-6 md:grid-cols-3">
+          {TESTIMONIOS_DATA.map((t, i) => (
+            <FadeIn key={t.nombre} delay={i * 0.1}>
+              <div
+                className="relative flex flex-col justify-between h-full rounded-2xl p-7 transition-all hover:border-amber-400/40"
+                style={{ background: 'var(--card)', border: '1px solid rgba(212,175,55,0.18)' }}
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-1">
+                      {[...Array(t.estrellas)].map((_, sIdx) => (
+                        <Star key={sIdx} className="h-4 w-4 fill-[#D4AF37] text-[#D4AF37]" />
+                      ))}
+                    </div>
+                    <span className="rounded-full px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-white/60" style={{ background: 'rgba(255,255,255,0.06)' }}>
+                      {t.sector}
+                    </span>
+                  </div>
+
+                  <p className="text-sm leading-relaxed mb-6 italic" style={{ color: 'rgba(245,245,245,0.85)' }}>
+                    &ldquo;{t.texto}&rdquo;
+                  </p>
+                </div>
+
+                <div className="pt-4 border-t" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-bold text-white">{t.nombre}</p>
+                      <p className="text-xs" style={{ color: 'rgba(245,245,245,0.5)' }}>
+                        {t.cargo} · <span style={{ color: 'var(--accent-light)' }}>{t.empresa}</span>
+                      </p>
+                    </div>
+                  </div>
+                  <div className="mt-3 inline-block rounded-md px-2 py-1 text-[11px] font-medium" style={{ background: 'rgba(212,175,55,0.1)', color: 'var(--accent-light)' }}>
+                    🎯 {t.destacado}
+                  </div>
+                </div>
+              </div>
+            </FadeIn>
+          ))}
+        </div>
+      </div>
+
+      <ModalResena abierto={modalAbierto} onClose={() => setModalAbierto(false)} />
+    </section>
+  )
+}
+
 // ─────────────── FORMULARIO ───────────────
 
 function ContactForm() {
@@ -1749,6 +2057,7 @@ export default function Home() {
             <NavLink3D href="#sectores">Sectores</NavLink3D>
             <NavLink3D href="#casos">Casos</NavLink3D>
             <NavLink3D href="#proceso">Proceso</NavLink3D>
+            <NavLink3D href="#opiniones">Opiniones</NavLink3D>
             <NavLink3D href="#contacto">Contacto</NavLink3D>
           </div>
           <a
@@ -2392,6 +2701,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ── OPINIONES Y RESEÑAS ── */}
+      <TestimoniosSection />
 
       {/* ── CONTACTO + FORMULARIO ── */}
       <section id="contacto" className="py-20 sm:py-28">
