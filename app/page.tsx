@@ -1030,40 +1030,7 @@ function CalculadoraROI() {
   )
 }
 
-// ─────────────── TESTIMONIOS Y RESEÑAS ───────────────
-
-const TESTIMONIOS_DATA = [
-  {
-    nombre: 'Dr. Javier Molina',
-    cargo: 'Director Médico',
-    empresa: 'Clínica Dental & Estética',
-    sector: 'Clínicas y Salud',
-    estrellas: 5,
-    texto:
-      'El agente de voz y WhatsApp atiende pacientes fuera de horario y fines de semana. Hemos recuperado más de 30 citas al mes que antes se perdían por llamadas no atendidas.',
-    destacado: '+30 citas/mes recuperadas',
-  },
-  {
-    nombre: 'Elena Salcedo',
-    cargo: 'Socia Directora',
-    empresa: 'Asesoría Fiscal & Laboral',
-    sector: 'Asesorías',
-    estrellas: 5,
-    texto:
-      'La extracción automática de facturas y albaranes nos ha ahorrado dos tardes enteras de picar datos cada semana. Todo entra cuadrado y listo para revisar sin errores.',
-    destacado: '~14h/semana liberadas',
-  },
-  {
-    nombre: 'Carlos Ramos',
-    cargo: 'Gerente General',
-    empresa: 'Promociones & Real Estate',
-    sector: 'Inmobiliarias',
-    estrellas: 5,
-    texto:
-      'La cualificación automática por WhatsApp filtra a los curiosos de los compradores reales. Llegamos a las visitas con los clientes ya informados y con presupuesto validado.',
-    destacado: 'Leads 100% cualificados',
-  },
-]
+// ─────────────── CENTRO DE RESEÑAS Y OPINIONES ───────────────
 
 function ModalResena({ abierto, onClose }: { abierto: boolean; onClose: () => void }) {
   const [nombre, setNombre] = useState('')
@@ -1082,7 +1049,7 @@ function ModalResena({ abierto, onClose }: { abierto: boolean; onClose: () => vo
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: nombre,
-          message: `[RESEÑA WEB - ${estrellas} ESTRELLAS] Empresa/Cargo: ${empresa} | Opinión: ${comentario}`,
+          message: `[RESEÑA CLIENTE - ${estrellas} ESTRELLAS] Empresa/Cargo: ${empresa} | Opinión: ${comentario}`,
           origen: { tipo: 'reseña_cliente', estrellas, empresa, landing: window.location.pathname },
         }),
       })
@@ -1120,7 +1087,7 @@ function ModalResena({ abierto, onClose }: { abierto: boolean; onClose: () => vo
             </div>
             <h3 className="mb-2 text-2xl font-black text-white">¡Muchas gracias!</h3>
             <p className="text-sm leading-6" style={{ color: 'rgba(245,245,245,0.7)' }}>
-              Tu valoración ha sido registrada. Nos ayuda muchísimo a seguir perfeccionando nuestras automatizaciones y dar el mejor servicio.
+              Tu valoración ha sido enviada al equipo. Nos ayuda muchísimo a seguir mejorando nuestras automatizaciones y dar el mejor servicio.
             </p>
             <button
               onClick={() => { setEstado('idle'); onClose() }}
@@ -1136,7 +1103,7 @@ function ModalResena({ abierto, onClose }: { abierto: boolean; onClose: () => vo
               <p className="mb-1 text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--accent-light)' }}>Tu experiencia</p>
               <h3 className="text-2xl font-black text-white">Déjanos tu opinión</h3>
               <p className="text-xs" style={{ color: 'rgba(245,245,245,0.55)' }}>
-                ¿Has implementado automatizaciones o recibido un diagnóstico con SendaIA? Cuéntanos qué tal.
+                ¿Has implementado automatizaciones o recibido un diagnóstico con SendaIA? Cuéntanos tu experiencia real.
               </p>
             </div>
 
@@ -1176,7 +1143,7 @@ function ModalResena({ abierto, onClose }: { abierto: boolean; onClose: () => vo
                 required
                 value={nombre}
                 onChange={(e) => setNombre(e.target.value)}
-                placeholder="Ej. Ana García"
+                placeholder="Tu nombre y apellidos"
                 className="w-full rounded-xl px-4 py-2.5 text-sm text-white outline-none"
                 style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }}
               />
@@ -1189,7 +1156,7 @@ function ModalResena({ abierto, onClose }: { abierto: boolean; onClose: () => vo
                 required
                 value={empresa}
                 onChange={(e) => setEmpresa(e.target.value)}
-                placeholder="Ej. Clínica Dental Granada / Asesoría Fiscal"
+                placeholder="Ej. Clínica Dental / Asesoría / Inmobiliaria"
                 className="w-full rounded-xl px-4 py-2.5 text-sm text-white outline-none"
                 style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }}
               />
@@ -1202,7 +1169,7 @@ function ModalResena({ abierto, onClose }: { abierto: boolean; onClose: () => vo
                 rows={3}
                 value={comentario}
                 onChange={(e) => setComentario(e.target.value)}
-                placeholder="¿Qué proceso automatizaste? ¿Qué impacto ha tenido en el día a día de tu equipo?"
+                placeholder="¿Qué proceso automatizaste? ¿Qué resultado o impacto ha tenido en el día a día?"
                 className="w-full rounded-xl px-4 py-2.5 text-sm text-white outline-none resize-none"
                 style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }}
               />
@@ -1242,92 +1209,82 @@ function TestimoniosSection() {
 
   return (
     <section id="opiniones" className="py-20 sm:py-28 relative">
-      <div className="mx-auto max-w-6xl px-6">
-        <FadeIn className="mb-14 text-center">
+      <div className="mx-auto max-w-5xl px-6">
+        <FadeIn className="text-center">
           <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-4" style={{ background: 'rgba(212,175,55,0.12)', border: '1px solid rgba(212,175,55,0.3)' }}>
-            <div className="flex items-center gap-0.5 text-xs font-bold text-white">
-              {[...Array(5)].map((_, idx) => (
-                <Star key={idx} className="h-3.5 w-3.5 fill-[#D4AF37] text-[#D4AF37]" />
-              ))}
-            </div>
+            <Star className="h-3.5 w-3.5 fill-[#D4AF37] text-[#D4AF37]" />
             <span className="text-xs font-semibold" style={{ color: 'var(--accent-light)' }}>
-              5.0 · Opiniones verificadas
+              Opiniones y Reseñas
             </span>
           </div>
 
-          <h2 className="text-3xl font-black sm:text-5xl">
-            Lo que dicen quienes ya<br />
-            <span className="gradient-text">confían en SendaIA</span>
+          <h2 className="text-3xl font-black sm:text-5xl mb-4">
+            ¿Has trabajado con nosotros?<br />
+            <span className="gradient-text">Déjanos tu valoración</span>
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-sm leading-7" style={{ color: 'rgba(245,245,245,0.65)' }}>
-            Empresas y profesionales que han eliminado tareas repetitivas y recuperado horas de valor.
+          <p className="mx-auto max-w-2xl text-sm leading-7 mb-10" style={{ color: 'rgba(245,245,245,0.65)' }}>
+            Trabajamos con total transparencia: sin testimonios inventados ni promesas mágicas.
+            Si has implementado una automatización en tu negocio o has realizado un diagnóstico con nosotros, tu opinión ayuda a otras empresas a dar el paso.
           </p>
 
-          {/* Botones de acción directa para reseñas */}
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-            <a
-              href="https://www.google.com/maps/search/?api=1&query=SendaIA+Granada"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => track('cta_click', { cta: 'google_review_link' })}
-              className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-xs font-bold text-black transition-all hover:scale-105 hover:shadow-lg"
-              style={{ background: 'var(--accent)', boxShadow: '0 0 20px rgba(212,175,55,0.25)' }}
+          {/* Tarjetas de opciones para valorar */}
+          <div className="grid gap-6 sm:grid-cols-2 max-w-3xl mx-auto text-left">
+            {/* Opción 1: Google Reviews */}
+            <div
+              className="flex flex-col justify-between rounded-3xl p-7 transition-all hover:border-amber-400/40"
+              style={{ background: 'var(--card)', border: '1px solid rgba(212,175,55,0.22)' }}
             >
-              <Star className="h-4 w-4 fill-black" /> Dejar reseña en Google
-            </a>
-
-            <button
-              onClick={() => setModalAbierto(true)}
-              className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-xs font-semibold text-white transition-all hover:bg-white/10"
-              style={{ border: '1px solid rgba(212,175,55,0.4)', background: 'rgba(212,175,55,0.06)' }}
-            >
-              <MessageSquarePlus className="h-4 w-4 text-[#D4AF37]" /> Escribir opinión directa
-            </button>
-          </div>
-        </FadeIn>
-
-        {/* Tarjetas de Testimonios */}
-        <div className="grid gap-6 md:grid-cols-3">
-          {TESTIMONIOS_DATA.map((t, i) => (
-            <FadeIn key={t.nombre} delay={i * 0.1}>
-              <div
-                className="relative flex flex-col justify-between h-full rounded-2xl p-7 transition-all hover:border-amber-400/40"
-                style={{ background: 'var(--card)', border: '1px solid rgba(212,175,55,0.18)' }}
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-1">
-                      {[...Array(t.estrellas)].map((_, sIdx) => (
-                        <Star key={sIdx} className="h-4 w-4 fill-[#D4AF37] text-[#D4AF37]" />
-                      ))}
-                    </div>
-                    <span className="rounded-full px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-white/60" style={{ background: 'rgba(255,255,255,0.06)' }}>
-                      {t.sector}
-                    </span>
-                  </div>
-
-                  <p className="text-sm leading-relaxed mb-6 italic" style={{ color: 'rgba(245,245,245,0.85)' }}>
-                    &ldquo;{t.texto}&rdquo;
-                  </p>
+              <div>
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl mb-4" style={{ background: 'rgba(212,175,55,0.15)', border: '1px solid rgba(212,175,55,0.3)' }}>
+                  <Star className="h-5 w-5 fill-[#D4AF37] text-[#D4AF37]" />
                 </div>
-
-                <div className="pt-4 border-t" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-sm font-bold text-white">{t.nombre}</p>
-                      <p className="text-xs" style={{ color: 'rgba(245,245,245,0.5)' }}>
-                        {t.cargo} · <span style={{ color: 'var(--accent-light)' }}>{t.empresa}</span>
-                      </p>
-                    </div>
-                  </div>
-                  <div className="mt-3 inline-block rounded-md px-2 py-1 text-[11px] font-medium" style={{ background: 'rgba(212,175,55,0.1)', color: 'var(--accent-light)' }}>
-                    🎯 {t.destacado}
-                  </div>
-                </div>
+                <h3 className="text-lg font-bold text-white mb-2">Reseña en Google</h3>
+                <p className="text-xs leading-5 mb-6" style={{ color: 'rgba(245,245,245,0.6)' }}>
+                  Tu valoración pública en Google ayuda a otros profesionales y negocios a conocer cómo trabajamos de forma verificada.
+                </p>
               </div>
-            </FadeIn>
-          ))}
-        </div>
+
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=SendaIA+Granada"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => track('cta_click', { cta: 'google_review_hub' })}
+                className="w-full inline-flex items-center justify-center gap-2 rounded-full py-3 px-5 text-xs font-bold text-black transition-all hover:scale-105 hover:shadow-lg"
+                style={{ background: 'var(--accent)', boxShadow: '0 0 20px rgba(212,175,55,0.25)' }}
+              >
+                <Star className="h-4 w-4 fill-black" /> Valorar en Google →
+              </a>
+            </div>
+
+            {/* Opción 2: Formulario directo */}
+            <div
+              className="flex flex-col justify-between rounded-3xl p-7 transition-all hover:border-white/20"
+              style={{ background: 'var(--card)', border: '1px solid var(--border)' }}
+            >
+              <div>
+                <div className="flex h-11 w-11 items-center justify-center rounded-full mb-4" style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid var(--border)' }}>
+                  <MessageSquarePlus className="h-5 w-5 text-white/80" />
+                </div>
+                <h3 className="text-lg font-bold text-white mb-2">Opinión directa</h3>
+                <p className="text-xs leading-5 mb-6" style={{ color: 'rgba(245,245,245,0.6)' }}>
+                  Envíanos tus comentarios, puntuación y experiencia para ayudarnos a seguir perfeccionando nuestras soluciones.
+                </p>
+              </div>
+
+              <button
+                onClick={() => setModalAbierto(true)}
+                className="w-full inline-flex items-center justify-center gap-2 rounded-full py-3 px-5 text-xs font-semibold text-white transition-all hover:bg-white/10"
+                style={{ border: '1px solid rgba(212,175,55,0.4)', background: 'rgba(212,175,55,0.06)' }}
+              >
+                <MessageSquarePlus className="h-4 w-4 text-[#D4AF37]" /> Escribir opinión →
+              </button>
+            </div>
+          </div>
+
+          <p className="mt-8 text-xs font-medium" style={{ color: 'rgba(245,245,245,0.4)' }}>
+            🔒 Tratamiento confidencial y transparente conforme al RGPD.
+          </p>
+        </FadeIn>
       </div>
 
       <ModalResena abierto={modalAbierto} onClose={() => setModalAbierto(false)} />

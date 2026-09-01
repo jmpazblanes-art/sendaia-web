@@ -119,13 +119,6 @@ export default function RootLayout({
           { '@type': 'City', name: 'Granada' },
           { '@type': 'Country', name: 'España' },
         ],
-        aggregateRating: {
-          '@type': 'AggregateRating',
-          ratingValue: '5.0',
-          reviewCount: '12',
-          bestRating: '5',
-          worstRating: '1',
-        },
       },
       {
         '@type': 'WebSite',
