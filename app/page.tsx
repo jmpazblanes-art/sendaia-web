@@ -343,141 +343,105 @@ function FadeIn({
 
 // ─────────────── PAGE ───────────────
 
-// ─────────────── EFECTOS GLOBALES ───────────────
+// ─────────────── FONDO INTERACTIVO SCROLL ROBOT IA ───────────────
 
-function NeuralField() {
+const TOTAL_ROBOT_FRAMES = 73
+
+function RobotScrollBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const imagesRef = useRef<HTMLImageElement[]>([])
 
   useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
+    const images: HTMLImageElement[] = []
+    let loadedCount = 0
 
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const dpr = Math.min(window.devicePixelRatio || 1, 2)
-    let w = 0, h = 0, raf = 0
-    const mouse = { x: -9999, y: -9999 }
+    const render = (progress: number) => {
+      const canvas = canvasRef.current
+      if (!canvas) return
+      const ctx = canvas.getContext('2d')
+      if (!ctx) return
 
-    type Node = { x: number; y: number; vx: number; vy: number; r: number }
-    let nodes: Node[] = []
+      const frameIndex = Math.min(
+        TOTAL_ROBOT_FRAMES - 1,
+        Math.max(0, Math.floor(progress * TOTAL_ROBOT_FRAMES))
+      )
+      const img = images[frameIndex]
+      if (!img || !img.complete) return
 
-    function build() {
-      w = window.innerWidth
-      h = window.innerHeight
-      canvas!.width = w * dpr
-      canvas!.height = h * dpr
-      canvas!.style.width = w + 'px'
-      canvas!.style.height = h + 'px'
-      ctx!.setTransform(dpr, 0, 0, dpr, 0, 0)
-      const count = Math.min(120, Math.max(46, Math.floor((w * h) / 13000)))
-      nodes = Array.from({ length: count }, () => ({
-        x: Math.random() * w,
-        y: Math.random() * h,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3,
-        r: Math.random() * 1.6 + 0.8,
-      }))
-    }
+      const cw = canvas.width
+      const ch = canvas.height
+      if (cw === 0 || ch === 0) return
 
-    const LINK = 165
-    const MOUSE_LINK = 230
+      ctx.clearRect(0, 0, cw, ch)
 
-    function frame() {
-      ctx!.clearRect(0, 0, w, h)
+      // Dibujar imagen cubriendo toda la pantalla manteniendo proporción (object-cover)
+      const imgRatio = img.naturalWidth / img.naturalHeight
+      const canvasRatio = cw / ch
+      let dw = cw
+      let dh = ch
+      let dx = 0
+      let dy = 0
 
-      for (const n of nodes) {
-        n.x += n.vx
-        n.y += n.vy
-        if (n.x < 0 || n.x > w) n.vx *= -1
-        if (n.y < 0 || n.y > h) n.vy *= -1
-        const dx = mouse.x - n.x
-        const dy = mouse.y - n.y
-        const d = Math.hypot(dx, dy)
-        if (d < 150 && d > 0.1) {
-          n.x += (dx / d) * 0.45
-          n.y += (dy / d) * 0.45
-        }
+      if (canvasRatio > imgRatio) {
+        dh = cw / imgRatio
+        dy = (ch - dh) / 2
+      } else {
+        dw = ch * imgRatio
+        dx = (cw - dw) / 2
       }
 
-      for (let i = 0; i < nodes.length; i++) {
-        const a = nodes[i]
-        for (let j = i + 1; j < nodes.length; j++) {
-          const b = nodes[j]
-          const dist = Math.hypot(a.x - b.x, a.y - b.y)
-          if (dist < LINK) {
-            const o = (1 - dist / LINK) * 0.7
-            ctx!.strokeStyle = `rgba(212,175,55,${o})`
-            ctx!.lineWidth = 0.8
-            ctx!.beginPath()
-            ctx!.moveTo(a.x, a.y)
-            ctx!.lineTo(b.x, b.y)
-            ctx!.stroke()
-          }
-        }
-        const dm = Math.hypot(a.x - mouse.x, a.y - mouse.y)
-        if (dm < MOUSE_LINK) {
-          const o = (1 - dm / MOUSE_LINK) * 0.85
-          ctx!.strokeStyle = `rgba(245,224,138,${o})`
-          ctx!.lineWidth = 1
-          ctx!.beginPath()
-          ctx!.moveTo(a.x, a.y)
-          ctx!.lineTo(mouse.x, mouse.y)
-          ctx!.stroke()
-        }
-      }
-
-      for (const n of nodes) {
-        const near = Math.hypot(n.x - mouse.x, n.y - mouse.y) < MOUSE_LINK
-        ctx!.beginPath()
-        ctx!.arc(n.x, n.y, near ? n.r + 0.8 : n.r, 0, Math.PI * 2)
-        ctx!.fillStyle = near ? 'rgba(245,224,138,1)' : 'rgba(231,200,106,0.85)'
-        if (near) {
-          ctx!.shadowColor = 'rgba(245,224,138,0.9)'
-          ctx!.shadowBlur = 8
-        } else {
-          ctx!.shadowBlur = 0
-        }
-        ctx!.fill()
-      }
-      ctx!.shadowBlur = 0
-
-      raf = requestAnimationFrame(frame)
+      ctx.drawImage(img, dx, dy, dw, dh)
     }
 
-    const onMove = (e: MouseEvent) => { mouse.x = e.clientX; mouse.y = e.clientY }
-    const onLeave = () => { mouse.x = -9999; mouse.y = -9999 }
-    const onResize = () => { build() }
-    const onVisibility = () => {
-      if (document.hidden) cancelAnimationFrame(raf)
-      else if (!reduce) raf = requestAnimationFrame(frame)
+    const resize = () => {
+      const canvas = canvasRef.current
+      if (!canvas) return
+      canvas.width = window.innerWidth
+      canvas.height = window.innerHeight
+      handleScroll()
     }
 
-    build()
-    window.addEventListener('mousemove', onMove)
-    window.addEventListener('mouseleave', onLeave)
-    window.addEventListener('resize', onResize)
-    document.addEventListener('visibilitychange', onVisibility)
+    for (let i = 1; i <= TOTAL_ROBOT_FRAMES; i++) {
+      const img = new window.Image()
+      const frameNum = String(i).padStart(3, '0')
+      img.src = `/frames-robot/frame_${frameNum}.jpg`
+      img.onload = () => {
+        loadedCount++
+        if (loadedCount === 1) {
+          resize()
+        }
+      }
+      images.push(img)
+    }
+    imagesRef.current = images
 
-    if (reduce) frame()
-    else raf = requestAnimationFrame(frame)
+    const handleScroll = () => {
+      const scrollY = window.scrollY
+      const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight)
+      const progress = Math.max(0, Math.min(1, scrollY / maxScroll))
+      render(progress)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('resize', resize)
+    resize()
 
     return () => {
-      cancelAnimationFrame(raf)
-      window.removeEventListener('mousemove', onMove)
-      window.removeEventListener('mouseleave', onLeave)
-      window.removeEventListener('resize', onResize)
-      document.removeEventListener('visibilitychange', onVisibility)
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', resize)
     }
   }, [])
 
   return (
-    <canvas
-      ref={canvasRef}
-      aria-hidden
-      className="pointer-events-none fixed inset-0"
-      style={{ zIndex: -1, opacity: 1 }}
-    />
+    <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: -1 }} aria-hidden="true">
+      <canvas
+        ref={canvasRef}
+        className="h-full w-full object-cover"
+        style={{ opacity: 0.38, filter: 'contrast(1.08) brightness(0.95)' }}
+      />
+      {/* Degradado para máxima legibilidad de textos dorados y blancos */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#050510]/80 via-[#050510]/60 to-[#050510]/85" />
+    </div>
   )
 }
 
@@ -1987,7 +1951,7 @@ export default function Home() {
 
   return (
     <main ref={mainRef} className="min-h-screen" style={{ background: 'transparent', color: 'var(--foreground)' }}>
-      <NeuralField />
+      <RobotScrollBackground />
       <div className="grain" />
       <ScrollProgress />
       <CursorSpotlight />
