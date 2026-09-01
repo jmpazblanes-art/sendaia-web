@@ -47,7 +47,9 @@ Este archivo proporciona contexto persistente, reglas arquitectónicas y un regi
 - **Prevención de auto-zoom en iOS Safari**: Ajustados los inputs a `text-base sm:text-sm`.
 - **Ajuste simétrico del modal de chat**: Optimizado para pantallas móviles compactas.
 
-### C. Limpieza y Optimización del Repositorio
-- Eliminado el endpoint muerto `app/api/chat/route.ts`.
-- Limpieza total de ramas viejas locales y remotas (`feat/gsap-premium`, `feat/hero-3d`, `feat/logo-3d`, `feat/tracking-web`, `codex/sendaia-web-story-ads`, `fix/auditoria-a`).
-- Integrado enlace y schema de Facebook (`sameAs`).
+### D. Scrollytelling Visual y Captación de Reseñas
+- **Fondo Interactivo Scrollytelling de Robot IA**:
+  - Reemplazado el fondo de lienzo clásico por una secuencia cinemática de 73 fotogramas en WebP/JPG sincronizada con el scroll global de la web (`RobotScrollBackground`).
+  - Animación fluida bidireccional al bajar o subir, con degradados de contraste prémium y opacidad optimizada (65%) que mantiene legibilidad de textos.
+- **Centro de Captación de Reseñas 100% Real (`#opiniones`)**:
+  - Rediseñado sin datos ficticios: botón directo a reseñas públicas de Google Maps y modal interactivo para enviar valoraciones directamente a Supabase / CRM.
