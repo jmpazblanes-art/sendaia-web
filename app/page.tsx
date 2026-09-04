@@ -352,6 +352,18 @@ function RobotScrollBackground() {
   const imagesRef = useRef<HTMLImageElement[]>([])
 
   useEffect(() => {
+    // C-11 (04-sep-2026): estos 73 frames son 4,02 MB y se precargaban SIEMPRE.
+    // Medido en producción: un móvil descargaba 4,35 MB en total, así que el 92%
+    // de sus datos era este fondo decorativo. Es puro adorno (el div va con
+    // aria-hidden y zIndex -1), de modo que en móvil, con ahorro de datos o con
+    // reduced-motion no se descarga ni un frame: el canvas se queda vacío y el
+    // degradado de debajo mantiene el fondo. En escritorio no cambia nada.
+    const sinFondoPesado =
+      window.matchMedia('(max-width: 767px)').matches ||
+      window.matchMedia('(prefers-reduced-data: reduce)').matches ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (sinFondoPesado) return
+
     const images: HTMLImageElement[] = []
     let loadedCount = 0
 
@@ -2062,7 +2074,7 @@ export default function Home() {
             className="text-[2.6rem] font-black leading-[1.08] tracking-tight sm:text-6xl lg:text-7xl"
           >
             Recupera{' '}
-            <span className="gradient-text-animated">horas cada semana</span>
+            <span className="gradient-text-animated">horas cada semana</span>{' '}
             <br />con Agentes de IA
           </h1>
 
@@ -2116,10 +2128,12 @@ export default function Home() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.5 }}
-          // En móvil se sube a la esquina superior: abajo se montaba justo encima
-          // de "Ver cómo funciona" y se comía el botón (visto en captura, no en
-          // la medición: el elemento existía y era pulsable, pero quedaba tapado).
-          className="absolute right-4 top-24 z-10 flex items-center gap-2 rounded-full px-3 py-2 transition-all hover:scale-105 sm:bottom-8 sm:right-8 sm:top-auto sm:px-4 sm:py-2.5"
+          // En móvil NO se muestra: el vídeo del hero solo se monta con `isDesktop`,
+          // así que ahí este botón no silencia nada — y encima tapaba el badge
+          // «...PARA PYMES · GRANADA» (medido el 04-sep-2026 en iPhone 13). Antes
+          // se había subido a `top-24` porque abajo se comía "Ver cómo funciona";
+          // ocultarlo resuelve las dos colisiones a la vez.
+          className="absolute right-4 top-24 z-10 hidden items-center gap-2 rounded-full px-3 py-2 transition-all hover:scale-105 sm:bottom-8 sm:right-8 sm:top-auto sm:flex sm:px-4 sm:py-2.5"
           style={{ background: 'rgba(212,175,55,0.15)', border: '1px solid rgba(212,175,55,0.4)', backdropFilter: 'blur(8px)' }}
           aria-label={muted ? 'Activar sonido' : 'Silenciar'}
         >
