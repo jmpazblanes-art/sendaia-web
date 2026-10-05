@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from 'react'
 
 // Esquema del sistema que se dibuja con el scroll (05-oct-2026).
+// La sección se queda FIJA en pantalla durante un tramo de scroll y el dibujo
+// avanza y retrocede con él. Recibe el texto de la sección como children.
 // Sustituye al robot de fondo de la home anterior: aquí lo que se mueve es el
 // propio sistema. Según se baja, la línea avanza desde el cliente, se encienden
 // los canales, llega a SendaIA (la molécula del logo) y de ahí a cada herramienta.
@@ -18,27 +20,39 @@ const SAT = [[296, 48, 23], [473, 63, 21], [243, 167, 28], [494, 184, 23], [348,
 
 const tramo = (p: number, a: number, b: number) => Math.min(1, Math.max(0, (p - a) / (b - a)))
 
-export default function SistemaScroll() {
-  const caja = useRef<HTMLDivElement>(null)
+const PASOS = [
+  { desde: 0, n: '01', texto: 'Un cliente te contacta.' },
+  { desde: 0.2, n: '02', texto: 'Le atiende un agente, por el canal que elija.' },
+  { desde: 0.5, n: '03', texto: 'SendaIA entiende qué necesita y lo ordena.' },
+  { desde: 0.72, n: '04', texto: 'Queda hecho en las herramientas que ya usas.' },
+]
+
+export default function SistemaScroll({ children }: { children: React.ReactNode }) {
+  // `pista` es el tramo alto de scroll; dentro, el contenido se queda fijo en
+  // pantalla mientras `p` va de 0 a 1 (igual que hacía el robot de la home vieja).
+  const pista = useRef<HTMLDivElement>(null)
+  const esquema = useRef<HTMLDivElement>(null)
   const [p, setP] = useState(0)
+  const [quieto, setQuieto] = useState(false)
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setQuieto(true)
       setP(1)
       return
     }
     let pendiente = 0
     const medir = () => {
       pendiente = 0
-      const el = caja.current
+      const el = pista.current
       if (!el) return
       const alto = window.innerHeight
       const r = el.getBoundingClientRect()
-      // Empieza cuando el esquema asoma por abajo y termina antes de que llegue
-      // arriba: en móvil, si no, las últimas piezas se encendían ya casi fuera de vista.
-      const v = tramo(alto * 0.92 - r.top, 0, alto * 0.5 + r.height * 0.12)
-      // Solo avanza: una vez dibujado no se desdibuja al subir.
-      setP((antes) => (v > antes ? v : antes))
+      // En móvil el texto va antes del tramo fijo: el dibujo empieza cuando el
+      // esquema llega arriba, no cuando entra la sección.
+      const previo = window.innerWidth >= 1024 ? 0 : (esquema.current?.offsetTop ?? 0)
+      const recorrido = r.height - alto - previo
+      setP(recorrido > 0 ? tramo(72 - r.top - previo, 0, recorrido * 0.92) : 1)
     }
     const alMover = () => {
       if (!pendiente) pendiente = requestAnimationFrame(medir)
@@ -69,12 +83,38 @@ export default function SistemaScroll() {
   )
   const enSenda = encendido(0.5)
 
+  const paso = [...PASOS].reverse().find((x) => p >= x.desde) ?? PASOS[0]
+
   return (
-    <div
-      ref={caja}
-      role="img"
-      aria-label="Esquema: el cliente contacta por voz, WhatsApp o Aria; SendaIA lo conecta con email, documentos, facturas, CRM, calendario, ERP y otros sistemas."
-    >
+    <div ref={pista} className={quieto ? '' : 'h-[270svh] lg:h-[260vh]'}>
+      <div
+        className={`mx-auto max-w-7xl px-5 sm:px-8 ${
+          quieto
+            ? 'grid gap-14 py-20 lg:grid-cols-2 lg:items-center lg:gap-20'
+            : 'h-full pt-16 lg:sticky lg:top-[4.5rem] lg:grid lg:h-[calc(100vh-4.5rem)] lg:grid-cols-2 lg:items-center lg:gap-20 lg:pt-0'
+        }`}
+      >
+        <div className="pb-10 lg:pb-0">{children}</div>
+
+        <div
+          ref={esquema}
+          className={quieto ? '' : 'sticky top-[4.5rem] flex h-[calc(100svh-4.5rem)] flex-col justify-center lg:static lg:h-auto'}
+        >
+          {/* Qué está pasando en cada momento + cuánto falta */}
+          <div className="mx-auto mb-7 w-full max-w-md">
+            <p className="flex items-baseline gap-3 text-left" aria-live="off">
+              <span className="font-display text-2xl font-semibold text-cobre-claro">{paso.n}</span>
+              <span className="text-base font-semibold text-roto sm:text-lg">{paso.texto}</span>
+            </p>
+            <span className="mt-3 block h-[3px] w-full overflow-hidden rounded-full bg-roto/15" aria-hidden>
+              <span className="block h-full origin-left bg-cobre" style={{ transform: `scaleX(${p})` }} />
+            </span>
+          </div>
+
+          <div
+            role="img"
+            aria-label="Esquema: el cliente contacta por voz, WhatsApp o Aria; SendaIA lo conecta con email, documentos, facturas, CRM, calendario, ERP y otros sistemas."
+          >
       <div className="mx-auto flex max-w-md flex-col items-center text-center" aria-hidden>
         <span
           className="rounded-full border px-6 py-2.5 text-sm font-bold uppercase tracking-[0.14em]"
@@ -147,6 +187,9 @@ export default function SistemaScroll() {
               </span>
             )
           })}
+        </div>
+      </div>
+          </div>
         </div>
       </div>
     </div>

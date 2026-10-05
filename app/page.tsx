@@ -227,25 +227,37 @@ export default function Home() {
               </article>
             ))}
           </div>
+          {/* Demo de facturas: la única que el visitante puede probar con un documento suyo. */}
+          <div className="aparece mt-16 grid items-center gap-8 rounded-[2rem] bg-roto p-8 sm:p-12 lg:grid-cols-[1.4fr_auto]">
+            <div>
+              <p className="eyebrow">Prueba una automatización real</p>
+              <h3 className="mt-4 font-display text-3xl font-semibold leading-tight text-azul sm:text-4xl">
+                Sube una factura.
+              </h3>
+              <p className="mt-4 max-w-2xl text-lg leading-relaxed text-grafito-suave">
+                El sistema la lee y saca los datos en segundos. Lo mismo puede ocurrir automáticamente con cada
+                factura que recibe tu empresa.
+              </p>
+            </div>
+            <a href="/demo/facturas" target="_blank" rel="noopener" data-cta="demo_facturas" className="btn btn-cobre">
+              <FileText className="h-4 w-4" aria-hidden /> Probar la demo de facturas
+            </a>
+          </div>
         </div>
       </section>
 
       {/* ── 4 · EL SISTEMA ── */}
-      <section id="sistema" className="sobre-azul scroll-mt-20 bg-azul py-20 text-roto sm:py-28">
-        <div className="mx-auto grid max-w-7xl gap-14 px-5 sm:px-8 lg:grid-cols-2 lg:items-center lg:gap-20">
-          <div className="aparece">
-            <p className="eyebrow">Automatización</p>
-            <h2 className="mt-4 text-4xl font-semibold leading-[1.08] sm:text-5xl">
-              Los agentes son solo la parte que ves.
-            </h2>
-            <p className="mt-5 text-xl text-roto/80">Detrás construimos el sistema que hace que todo funcione.</p>
-            <p className="mt-8 max-w-md border-l-2 border-cobre pl-5 text-lg leading-relaxed text-roto/75">
-              No conectamos herramientas porque sí. Diseñamos el sistema alrededor de tu negocio.
-            </p>
-          </div>
-
-          <SistemaScroll />
-        </div>
+      <section id="sistema" className="sobre-azul scroll-mt-20 bg-azul text-roto">
+        <SistemaScroll>
+          <p className="eyebrow">Automatización</p>
+          <h2 className="mt-4 text-4xl font-semibold leading-[1.08] sm:text-5xl">
+            Los agentes son solo la parte que ves.
+          </h2>
+          <p className="mt-5 text-xl text-roto/80">Detrás construimos el sistema que hace que todo funcione.</p>
+          <p className="mt-8 max-w-md border-l-2 border-cobre pl-5 text-lg leading-relaxed text-roto/75">
+            No conectamos herramientas porque sí. Diseñamos el sistema alrededor de tu negocio.
+          </p>
+        </SistemaScroll>
       </section>
 
       {/* ── 5 · CASO REAL ── */}
