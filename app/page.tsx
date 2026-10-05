@@ -15,6 +15,7 @@ import SiteFooter from './components/SiteFooter'
 import AssistantDock from './components/AssistantDock'
 import ContactForm from './components/ContactForm'
 import WhatsAppButton from './WhatsAppButton'
+import SistemaScroll from './components/SistemaScroll'
 import { BotonAria, BotonVoz, BotonWhatsApp, DemoVideo, HomeEfectos, IrAAgentes } from './components/HomeClient'
 
 // HOME — escaparate (rediseño 05-oct-2026).
@@ -58,8 +59,6 @@ const PASOS = [
   { n: '03', titulo: 'Conectamos', texto: 'Lo unimos a las herramientas que ya usáis cada día.' },
   { n: '04', titulo: 'Ponemos en producción', texto: 'Empieza a trabajar. Lo vigilamos y lo ajustamos.' },
 ]
-
-const CONECTA = ['Email', 'Documentos', 'Facturas', 'CRM', 'Calendario', 'ERP', 'Otros sistemas']
 
 export default function Home() {
   return (
@@ -245,33 +244,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="aparece" role="img" aria-label="Esquema: el cliente contacta por voz, WhatsApp o Aria; SendaIA lo conecta con email, documentos, facturas, CRM, calendario, ERP y otros sistemas.">
-            <div className="mx-auto flex max-w-md flex-col items-center text-center" aria-hidden>
-              <span className="rounded-full border border-roto/25 px-6 py-2.5 text-sm font-bold uppercase tracking-[0.14em]">
-                Cliente
-              </span>
-              <span className="h-8 w-px bg-roto/25" />
-              <div className="grid w-full grid-cols-3 gap-2.5">
-                {['Voz', 'WhatsApp', 'ARIA'].map((c) => (
-                  <span key={c} className="rounded-2xl bg-roto/[0.07] px-2 py-4 text-sm font-semibold">
-                    {c}
-                  </span>
-                ))}
-              </div>
-              <span className="h-8 w-px bg-roto/25" />
-              <span className="w-full rounded-2xl bg-cobre-boton px-6 py-5 font-display text-2xl font-semibold tracking-wide">
-                SendaIA
-              </span>
-              <span className="h-8 w-px bg-roto/25" />
-              <div className="flex flex-wrap justify-center gap-2">
-                {CONECTA.map((c) => (
-                  <span key={c} className="rounded-full border border-roto/20 px-4 py-2 text-sm text-roto/85">
-                    {c}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
+          <SistemaScroll />
         </div>
       </section>
 
