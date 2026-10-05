@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import Link from 'next/link'
 import { Menu, X, ArrowRight } from 'lucide-react'
 import { track } from '@/lib/website-events'
@@ -52,8 +53,10 @@ export default function MenuMovil({ enlaces }: { enlaces: { href: string; label:
         <Menu className="h-5 w-5" />
       </button>
 
-      {abierto && (
-        <div className="fixed inset-0 z-[60] md:hidden">
+      {/* Se pinta en <body> y no dentro de la cabecera: ahí quedaba por debajo del
+          dock de asistentes y del botón de WhatsApp, que se montaban encima del menú. */}
+      {abierto && createPortal(
+        <div className="fixed inset-0 z-[70] md:hidden">
           <div
             onClick={() => setAbierto(false)}
             className="absolute inset-0"
@@ -101,7 +104,8 @@ export default function MenuMovil({ enlaces }: { enlaces: { href: string; label:
               </Link>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body,
       )}
     </>
   )

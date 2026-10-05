@@ -209,7 +209,7 @@ export default function Home() {
               Un agente. Distintos negocios.
             </h2>
             <p className="mt-5 text-xl text-grafito-suave">
-              El mismo agente, adaptado a cómo trabaja cada uno. Son grabaciones reales, sin guion.
+              El mismo agente, adaptado a cómo trabaja cada uno. Son grabaciones del agente funcionando.
             </p>
           </div>
           <div className="mt-14 grid gap-10 md:grid-cols-3 md:gap-7">
@@ -354,7 +354,7 @@ export default function Home() {
             <ul className="mt-9 space-y-4 text-roto/80">
               <li className="flex items-start gap-3">
                 <CalendarCheck className="mt-0.5 h-5 w-5 shrink-0 text-cobre-claro" aria-hidden />
-                <span>Una conversación de 30 minutos, sin coste y sin compromiso.</span>
+                <span>Un diagnóstico de 30 minutos, sin coste.</span>
               </li>
               <li className="flex items-start gap-3">
                 <Phone className="mt-0.5 h-5 w-5 shrink-0 text-cobre-claro" aria-hidden />

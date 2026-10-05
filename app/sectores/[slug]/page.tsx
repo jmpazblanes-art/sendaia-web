@@ -37,7 +37,7 @@ export default async function SectorPage({ params }: { params: Promise<{ slug: s
   if (!s) notFound()
 
   return (
-    <main style={{ background: '#060608', color: '#f5f5f5', minHeight: '100vh' }}>
+    <main style={{ background: 'var(--azul-hondo)', color: '#f5f5f5', minHeight: '100vh' }}>
       <TrackView slug={s.slug} />
       {/* Datos estructurados por sector: le dicen a Google (y a ChatGPT/Perplexity)
           QUÉ servicio es, para quién y la ruta jerárquica (BreadcrumbList). El Organization/LocalBusiness global vive en app/layout.tsx. */}

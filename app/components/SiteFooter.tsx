@@ -39,7 +39,8 @@ export default function SiteFooter() {
                 </li>
               ))}
               <li>
-                <Link href="/demo/facturas" data-cta="pie_demo_facturas" className="text-roto/75 hover:text-roto">Demo de facturas</Link>
+                {/* <a> y no <Link>: es una redirección externa que solo existe en producción. */}
+                <a href="/demo/facturas" data-cta="pie_demo_facturas" className="text-roto/75 hover:text-roto">Demo de facturas</a>
               </li>
             </ul>
           </nav>
