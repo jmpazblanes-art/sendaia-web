@@ -22,8 +22,10 @@ function azarCon(semilla: number) {
   }
 }
 
-function generar(): Grieta[] {
-  const azar = azarCon(20261005)
+type Origen = [x: number, y: number, ang: number, largo: number, ancho: number]
+
+function generar(semilla: number, origenes: Origen[]): Grieta[] {
+  const azar = azarCon(semilla)
   const salida: Grieta[] = []
   let orden = 0
   const abrir = (x: number, y: number, ang: number, largo: number, ancho: number, prof: number) => {
@@ -46,17 +48,84 @@ function generar(): Grieta[] {
     salida.push({ d, ancho, prof, orden: mio })
     for (const [rx, ry, ra] of ramas) abrir(rx, ry, ra, largo * (0.3 + azar() * 0.25), ancho * 0.58, prof + 1)
   }
-  // Lienzo de 1440×900. Tres grietas que entran desde los bordes.
-  abrir(1440, 60, 2.62, 820, 3.4, 0)
-  abrir(0, 850, -0.55, 470, 2.8, 0)
-  abrir(1440, 690, 3.45, 330, 2.4, 0)
+  for (const o of origenes) abrir(o[0], o[1], o[2], o[3], o[4], 0)
   return salida
 }
 
-const GRIETAS = generar()
+// Las grietas entran desde los bordes y pasan por los HUECOS, no por el texto.
+// Escritorio (1440×900): esquina superior derecha, el pasillo entre las dos
+// columnas y el borde derecho por debajo del panel.
+const ESCRITORIO = generar(20261005, [
+  [1440, 60, 2.62, 760, 3.4],
+  [770, 900, -1.5, 300, 2.8],
+  [1440, 720, 3.5, 300, 2.4],
+])
+// Móvil (400×800): esquina inferior derecha (queda tras los botones), el borde
+// izquierdo a media altura y un arranque corto arriba a la derecha.
+const MOVIL = generar(7, [
+  [400, 800, -2.5, 260, 2.6],
+  [0, 470, 0.25, 170, 2],
+  [400, 96, 2.9, 120, 1.8],
+])
+
+function Pared({ id, ancho, alto, grietas, clase, tenue }: { id: string; ancho: number; alto: number; grietas: Grieta[]; clase: string; tenue?: boolean }) {
+  return (
+    <svg className={`absolute inset-0 h-full w-full ${clase}`} viewBox={`0 0 ${ancho} ${alto}`} preserveAspectRatio="xMidYMid slice">
+      <defs>
+        {/* Yeso: manchas grandes (desigual) + grano fino */}
+        <filter id={`${id}-manchas`} x="0" y="0" width="100%" height="100%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.006 0.009" numOctaves={3} seed={7} />
+          <feColorMatrix values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0.9 0 0 0 -0.32" />
+        </filter>
+        <filter id={`${id}-grano`} x="0" y="0" width="100%" height="100%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves={3} seed={3} stitchTiles="stitch" />
+          <feColorMatrix values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.5 -0.12" />
+        </filter>
+        <radialGradient id={`${id}-luz`} cx="78%" cy="20%" r="75%">
+          <stop offset="0" stopColor="#2A6278" stopOpacity="0.85" />
+          <stop offset="1" stopColor="#173A4A" stopOpacity="0" />
+        </radialGradient>
+        <linearGradient id={`${id}-pie`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0.55" stopColor="#102B37" stopOpacity="0" />
+          <stop offset="1" stopColor="#102B37" stopOpacity="0.75" />
+        </linearGradient>
+      </defs>
+
+      <rect width={ancho} height={alto} fill={`url(#${id}-luz)`} />
+      <rect width={ancho} height={alto} filter={`url(#${id}-manchas)`} opacity="0.1" />
+      <rect width={ancho} height={alto} filter={`url(#${id}-grano)`} opacity="0.5" />
+
+      {/* Cada grieta: la sombra del hueco, y encima el cobre que la rellena */}
+      <g fill="none" strokeLinecap="round" strokeLinejoin="round" opacity={tenue ? 0.7 : 1}>
+        {grietas.map((g, i) => {
+          const fina = g.prof >= 2
+          const comun = {
+            d: g.d,
+            pathLength: 1,
+            strokeDasharray: 1,
+            strokeDashoffset: 1,
+            ...(fina
+              ? { 'data-fina': '' }
+              : { className: 'grieta-abre', style: { animationDelay: `${0.25 + g.orden * 0.07 + g.prof * 0.5}s` } }),
+          }
+          return (
+            <g key={i}>
+              <path {...comun} stroke="#0B2029" strokeWidth={g.ancho + 2.2} opacity={0.75} transform="translate(1.2 1.6)" />
+              <path {...comun} stroke="#B8734A" strokeWidth={g.ancho} />
+              <path {...comun} stroke="#EBC4A6" strokeWidth={Math.max(0.5, g.ancho * 0.28)} opacity={0.75} />
+            </g>
+          )
+        })}
+      </g>
+
+      <rect width={ancho} height={alto} fill={`url(#${id}-pie)`} />
+    </svg>
+  )
+}
+
 
 export default function HeroFondo() {
-  const lienzo = useRef<SVGSVGElement>(null)
+  const lienzo = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const finas = lienzo.current?.querySelectorAll<SVGPathElement>('[data-fina]')
@@ -84,62 +153,9 @@ export default function HeroFondo() {
   }, [])
 
   return (
-    <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-      <svg
-        ref={lienzo}
-        className="absolute inset-0 h-full w-full"
-        viewBox="0 0 1440 900"
-        preserveAspectRatio="xMidYMid slice"
-      >
-        <defs>
-          {/* Yeso: manchas grandes (desigual) + grano fino */}
-          <filter id="pared-manchas" x="0" y="0" width="100%" height="100%">
-            <feTurbulence type="fractalNoise" baseFrequency="0.006 0.009" numOctaves={3} seed={7} />
-            <feColorMatrix values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0.9 0 0 0 -0.32" />
-          </filter>
-          <filter id="pared-grano" x="0" y="0" width="100%" height="100%">
-            <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves={3} seed={3} stitchTiles="stitch" />
-            <feColorMatrix values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.5 -0.12" />
-          </filter>
-          <radialGradient id="pared-luz" cx="78%" cy="20%" r="75%">
-            <stop offset="0" stopColor="#2A6278" stopOpacity="0.85" />
-            <stop offset="1" stopColor="#173A4A" stopOpacity="0" />
-          </radialGradient>
-          <linearGradient id="pared-pie" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0.55" stopColor="#102B37" stopOpacity="0" />
-            <stop offset="1" stopColor="#102B37" stopOpacity="0.75" />
-          </linearGradient>
-        </defs>
-
-        <rect width="1440" height="900" fill="url(#pared-luz)" />
-        <rect width="1440" height="900" filter="url(#pared-manchas)" opacity="0.1" />
-        <rect width="1440" height="900" filter="url(#pared-grano)" opacity="0.5" />
-
-        {/* Cada grieta: la sombra del hueco, y encima el cobre que la rellena */}
-        <g fill="none" strokeLinecap="round" strokeLinejoin="round">
-          {GRIETAS.map((g, i) => {
-            const fina = g.prof >= 2
-            const comun = {
-              d: g.d,
-              pathLength: 1,
-              strokeDasharray: 1,
-              strokeDashoffset: 1,
-              ...(fina
-                ? { 'data-fina': '' }
-                : { className: 'grieta-abre', style: { animationDelay: `${0.25 + g.orden * 0.07 + g.prof * 0.5}s` } }),
-            }
-            return (
-              <g key={i}>
-                <path {...comun} stroke="#0B2029" strokeWidth={g.ancho + 2.2} opacity={0.75} transform="translate(1.2 1.6)" />
-                <path {...comun} stroke="#B8734A" strokeWidth={g.ancho} />
-                <path {...comun} stroke="#EBC4A6" strokeWidth={Math.max(0.5, g.ancho * 0.28)} opacity={0.75} />
-              </g>
-            )
-          })}
-        </g>
-
-        <rect width="1440" height="900" fill="url(#pared-pie)" />
-      </svg>
+    <div ref={lienzo} aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+      <Pared id="pared-e" ancho={1440} alto={900} grietas={ESCRITORIO} clase="hidden lg:block" />
+      <Pared id="pared-m" ancho={400} alto={800} grietas={MOVIL} clase="lg:hidden" tenue />
     </div>
   )
 }
