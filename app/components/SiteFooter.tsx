@@ -14,7 +14,7 @@ const SECTORES = [
 
 export default function SiteFooter() {
   return (
-    <footer className="bg-azul-hondo text-roto">
+    <footer className="pared-azul bg-azul-hondo text-roto">
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
         <div className="grid gap-12 md:grid-cols-[1.3fr_1fr_1fr_1fr]">
           <div>

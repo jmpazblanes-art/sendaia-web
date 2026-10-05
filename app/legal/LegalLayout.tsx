@@ -7,7 +7,7 @@ import { ULTIMA_ACTUALIZACION } from './datos'
 // del sitio, sin animaciones: aquí lo que se busca es leer y encontrar rápido.
 export function LegalLayout({ titulo, children }: { titulo: string; children: React.ReactNode }) {
   return (
-    <main style={{ background: '#102B37', color: '#f5f5f5', minHeight: '100vh' }}>
+    <main className="pared-azul" style={{ backgroundColor: '#102B37', color: '#f5f5f5', minHeight: '100vh' }}>
       <nav
         className="fixed top-0 left-0 right-0 z-50 border-b"
         style={{ borderColor: 'rgba(184,115,74,0.2)', background: 'rgba(16,43,55,0.85)', backdropFilter: 'blur(16px)' }}
