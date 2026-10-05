@@ -42,14 +42,14 @@ type Plano = {
 // del esquema no se quede diminuto al encoger.
 const APAISADO: Plano = {
   ancho: 1000,
-  alto: 760,
+  alto: 800,
   cliente: { x: 500, y: 52 },
   canales: [{ x: 230, y: 205 }, { x: 500, y: 205 }, { x: 770, y: 205 }],
-  centro: { x: 500, y: 415 },
+  centro: { x: 500, y: 400 },
   escala: 0.92,
   salidas: [
-    { x: 95, y: 640 }, { x: 250, y: 705 }, { x: 395, y: 640 }, { x: 500, y: 712 },
-    { x: 605, y: 640 }, { x: 750, y: 705 }, { x: 890, y: 640 },
+    { x: 95, y: 690 }, { x: 250, y: 752 }, { x: 395, y: 690 }, { x: 500, y: 760 },
+    { x: 605, y: 690 }, { x: 750, y: 752 }, { x: 890, y: 690 },
   ],
   cajaCanal: [210, 70],
   cajaSalida: 46,
@@ -57,14 +57,14 @@ const APAISADO: Plano = {
 }
 const VERTICAL: Plano = {
   ancho: 600,
-  alto: 900,
+  alto: 950,
   cliente: { x: 300, y: 48 },
   canales: [{ x: 105, y: 190 }, { x: 300, y: 190 }, { x: 495, y: 190 }],
-  centro: { x: 300, y: 420 },
+  centro: { x: 300, y: 410 },
   escala: 0.86,
   salidas: [
-    { x: 105, y: 660 }, { x: 300, y: 660 }, { x: 495, y: 660 },
-    { x: 105, y: 750 }, { x: 300, y: 750 }, { x: 495, y: 750 }, { x: 300, y: 840 },
+    { x: 105, y: 710 }, { x: 300, y: 710 }, { x: 495, y: 710 },
+    { x: 105, y: 800 }, { x: 300, y: 800 }, { x: 495, y: 800 }, { x: 300, y: 890 },
   ],
   cajaCanal: [176, 76],
   cajaSalida: 60,
@@ -80,7 +80,7 @@ const curva = (a: Punto, b: Punto) => {
 
 export default function SistemaScroll({ children }: { children: React.ReactNode }) {
   const pista = useRef<HTMLDivElement>(null)
-  const escena = useRef<HTMLDivElement>(null)
+  const intro = useRef<HTMLDivElement>(null)
   const [p, setP] = useState(0)
   const [quieto, setQuieto] = useState(false)
   const [vertical, setVertical] = useState(false)
@@ -105,7 +105,7 @@ export default function SistemaScroll({ children }: { children: React.ReactNode 
       const r = el.getBoundingClientRect()
       // En móvil el texto va antes del tramo fijo: el dibujo empieza cuando la
       // escena llega arriba, no cuando entra la sección.
-      const previo = mq.matches ? (escena.current?.offsetTop ?? 0) : 0
+      const previo = mq.matches ? (intro.current?.offsetHeight ?? 0) + 64 : 0
       const recorrido = r.height - alto - previo
       setP(recorrido > 0 ? tramo(72 - r.top - previo, 0, recorrido * 0.9) : 1)
     }
@@ -138,7 +138,8 @@ export default function SistemaScroll({ children }: { children: React.ReactNode 
 
   const bajoCliente = { x: P.cliente.x, y: P.cliente.y + 26 }
   const sobreCentro = { x: P.centro.x, y: P.centro.y - 48 * P.escala - 10 }
-  const bajoCentro = { x: P.centro.x, y: P.centro.y + 128 * P.escala + 34 }
+  const yRotulo = P.centro.y + 156 * P.escala + P.letra * 1.5
+  const bajoCentro = { x: P.centro.x, y: yRotulo + 16 }
   const lineas = [
     ...P.canales.map((c, i) => ({ id: `a${i}`, d: curva(bajoCliente, { x: c.x, y: c.y - P.cajaCanal[1] / 2 }), t: tAlCanal(i) })),
     ...P.canales.map((c, i) => ({ id: `b${i}`, d: curva({ x: c.x, y: c.y + P.cajaCanal[1] / 2 }, sobreCentro), t: tAlCentro(i) })),
@@ -161,7 +162,7 @@ export default function SistemaScroll({ children }: { children: React.ReactNode 
             : 'h-full pt-16 lg:sticky lg:top-[4.5rem] lg:grid lg:h-[calc(100vh-4.5rem)] lg:grid-cols-[0.8fr_1.2fr] lg:items-center lg:gap-10 lg:pt-0'
         }`}
       >
-        <div className="pb-10 lg:pb-0">
+        <div ref={intro} className="pb-10 lg:pb-0">
           {children}
 
           {/* Qué está pasando ahora mismo y cuánto falta (solo escritorio; en móvil va sobre la escena) */}
@@ -177,7 +178,6 @@ export default function SistemaScroll({ children }: { children: React.ReactNode 
         </div>
 
         <div
-          ref={escena}
           className={quieto ? '' : 'sticky top-[4.5rem] flex h-[calc(100svh-4.5rem)] flex-col justify-center lg:static lg:h-auto'}
         >
           <div className="mb-4 lg:hidden">
@@ -269,7 +269,7 @@ export default function SistemaScroll({ children }: { children: React.ReactNode 
             </g>
             <text
               x={P.centro.x}
-              y={P.centro.y + 128 * P.escala + 22}
+              y={yRotulo}
               textAnchor="middle"
               fontSize={P.letra * 1.25}
               fontWeight={600}
