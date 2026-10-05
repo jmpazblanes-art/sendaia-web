@@ -16,6 +16,7 @@ import AssistantDock from './components/AssistantDock'
 import ContactForm from './components/ContactForm'
 import WhatsAppButton from './WhatsAppButton'
 import SistemaScroll from './components/SistemaScroll'
+import HeroFondo from './components/HeroFondo'
 import { BotonAria, BotonVoz, BotonWhatsApp, DemoVideo, HomeEfectos, IrAAgentes } from './components/HomeClient'
 
 // HOME — escaparate (rediseño 05-oct-2026).
@@ -67,8 +68,9 @@ export default function Home() {
       <SiteHeader />
 
       {/* ── 1 · HERO ── */}
-      <section className="sobre-azul bg-azul text-roto">
-        <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 pb-20 pt-32 sm:px-8 sm:pt-40 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16 lg:pb-28">
+      <section className="sobre-azul relative overflow-hidden bg-azul text-roto">
+        <HeroFondo />
+        <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 pb-20 pt-32 sm:px-8 sm:pt-40 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16 lg:pb-28">
           <div>
             <p className="eyebrow">SendaIA · Sistemas con IA para empresas</p>
             <h1 className="mt-6 text-[2.5rem] font-semibold leading-[1.04] sm:text-6xl lg:text-[4.1rem]">
@@ -90,7 +92,7 @@ export default function Home() {
 
           {/* Representación sobria del sistema trabajando: qué entra y qué deja hecho. */}
           <div aria-hidden className="hidden lg:block">
-            <div className="rounded-3xl border border-roto/12 bg-azul-hondo/70 p-7">
+            <div className="rounded-3xl border border-roto/15 bg-azul-hondo/80 p-7 shadow-[0_30px_80px_rgba(8,24,32,0.45)] backdrop-blur-sm">
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-roto/50">El sistema, trabajando</p>
               <ul className="mt-6 space-y-4">
                 {[
