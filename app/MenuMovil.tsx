@@ -1,34 +1,22 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import Link from 'next/link'
-import { gsap } from 'gsap'
 import { Menu, X, ArrowRight } from 'lucide-react'
 import { track } from '@/lib/website-events'
 
-const SECCIONES = [
-  { href: '#servicios', label: 'Servicios' },
-  { href: '#calculadora', label: 'Calculadora' },
-  { href: '#sectores', label: 'Sectores' },
-  { href: '#casos', label: 'Casos' },
-  { href: '#proceso', label: 'Proceso' },
-  { href: '#opiniones', label: 'Opiniones' },
-  { href: '#contacto', label: 'Contacto' },
-]
-
 /**
- * Menú de secciones para móvil (petición de Ana, 03-ago-2026): en el Mac las
- * secciones se ven en la barra de arriba, pero en móvil esa barra se oculta
- * (`hidden md:flex`) y no había forma de saltar de sección — sólo bajar
- * scrolleando toda la página.
+ * Menú para móvil (petición de Ana, 03-ago-2026): en escritorio la navegación se
+ * ve en la barra de arriba, pero en móvil esa barra se oculta y no había forma
+ * de saltar de sección. Panel lateral desde la izquierda.
  *
- * Panel lateral desde la izquierda, como pidió. Sólo se monta en móvil: en
- * pantallas grandes sigue mandando el menú de siempre.
+ * 05-oct-2026 (rediseño): recibe los enlaces de la cabecera en vez de llevar su
+ * propia lista, y navega con enlaces normales (antes hacía scroll a mano, que
+ * solo valía dentro de la home).
  */
-export default function MenuMovil() {
+export default function MenuMovil({ enlaces }: { enlaces: { href: string; label: string }[] }) {
   const [abierto, setAbierto] = useState(false)
-  const panel = useRef<HTMLDivElement>(null)
-  const fondo = useRef<HTMLDivElement>(null)
 
   // Con el panel abierto no se scrollea la página de detrás.
   useEffect(() => {
@@ -48,115 +36,76 @@ export default function MenuMovil() {
     return () => window.removeEventListener('keydown', alPulsar)
   }, [abierto])
 
-  // Entrada animada con GSAP, como el resto de la web.
-  useEffect(() => {
-    if (!abierto || !panel.current || !fondo.current) return
-    const ctx = gsap.context(() => {
-      gsap.fromTo(fondo.current, { opacity: 0 }, { opacity: 1, duration: 0.25, ease: 'power2.out' })
-      gsap.fromTo(
-        panel.current,
-        { xPercent: -100 },
-        { xPercent: 0, duration: 0.38, ease: 'power3.out' },
-      )
-      gsap.fromTo(
-        '[data-menu-item]',
-        { x: -24, opacity: 0 },
-        { x: 0, opacity: 1, duration: 0.32, stagger: 0.05, delay: 0.12, ease: 'power2.out' },
-      )
-    })
-    return () => ctx.revert()
-  }, [abierto])
-
-  const irA = (href: string, label: string) => {
+  const alIr = (label: string) => {
     track('cta_click', { cta: `menu_movil_${label.toLowerCase()}` })
     setAbierto(false)
-    // Se espera al cierre para que el scroll no compita con la animación.
-    setTimeout(() => {
-      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }, 220)
   }
 
   return (
     <>
       <button
         onClick={() => setAbierto(true)}
-        aria-label="Abrir el menú de secciones"
+        aria-label="Abrir el menú"
         aria-expanded={abierto}
         className="flex h-11 w-11 items-center justify-center rounded-full border md:hidden"
-        style={{ borderColor: 'rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.04)' }}
+        style={{ borderColor: 'rgba(250,248,245,0.25)', color: '#FAF8F5' }}
       >
-        <Menu className="h-5 w-5" style={{ color: 'var(--accent-light)' }} />
+        <Menu className="h-5 w-5" />
       </button>
 
-      {abierto && (
-        <div className="fixed inset-0 z-[60] md:hidden">
+      {/* Se pinta en <body> y no dentro de la cabecera: ahí quedaba por debajo del
+          dock de asistentes y del botón de WhatsApp, que se montaban encima del menú. */}
+      {abierto && createPortal(
+        <div className="fixed inset-0 z-[70] md:hidden">
           <div
-            ref={fondo}
             onClick={() => setAbierto(false)}
             className="absolute inset-0"
-            style={{ background: 'rgba(5,5,16,0.75)', backdropFilter: 'blur(4px)' }}
+            style={{ background: 'rgba(16,43,55,0.7)' }}
           />
 
           <div
-            ref={panel}
             role="dialog"
-            aria-label="Secciones"
-            className="absolute inset-y-0 left-0 flex w-[82%] max-w-xs flex-col border-r"
+            aria-label="Menú"
+            className="absolute inset-y-0 left-0 flex w-[84%] max-w-xs flex-col"
             // La altura va aquí y no con h-full: el contenedor es `fixed inset-0`
             // pero `h-full` sobre él dejaba el panel en 78px (solo la cabecera) y
             // los enlaces caían fuera, encima del hero e ilegibles.
-            style={{
-              background: '#0b0b16',
-              borderColor: 'rgba(212,175,55,0.25)',
-              height: '100dvh',
-            }}
+            style={{ background: '#FAF8F5', color: '#2A2A2A', height: '100dvh' }}
           >
-            <div
-              className="flex items-center justify-between border-b px-5 py-4"
-              style={{ borderColor: 'rgba(255,255,255,0.08)' }}
-            >
-              <span
-                className="text-xs font-semibold uppercase tracking-widest"
-                style={{ color: 'var(--accent-light)' }}
-              >
-                Secciones
-              </span>
+            <div className="flex items-center justify-between border-b px-5 py-4" style={{ borderColor: 'rgba(23,58,74,0.12)' }}>
+              <span className="eyebrow">Menú</span>
               <button
                 onClick={() => setAbierto(false)}
                 aria-label="Cerrar el menú"
-                className="flex h-9 w-9 items-center justify-center rounded-full"
-                style={{ background: 'rgba(255,255,255,0.06)' }}
+                className="flex h-11 w-11 items-center justify-center rounded-full"
+                style={{ background: 'rgba(23,58,74,0.07)', color: '#173A4A' }}
               >
-                <X className="h-4 w-4" style={{ color: 'rgba(245,245,245,0.8)' }} />
+                <X className="h-5 w-5" />
               </button>
             </div>
 
-            <nav className="flex flex-1 flex-col gap-1 px-3 py-4">
-              {SECCIONES.map((s) => (
-                <button
+            <nav className="flex flex-1 flex-col px-3 py-4">
+              {enlaces.map((s) => (
+                <Link
                   key={s.href}
-                  data-menu-item
-                  onClick={() => irA(s.href, s.label)}
-                  className="rounded-xl px-4 py-3.5 text-left text-lg font-semibold transition-colors active:bg-white/10"
-                  style={{ color: 'rgba(245,245,245,0.9)' }}
+                  href={s.href}
+                  onClick={() => alIr(s.label)}
+                  className="rounded-xl px-4 py-4 text-xl font-semibold active:bg-black/5"
+                  style={{ color: '#173A4A', fontFamily: 'var(--font-display)' }}
                 >
                   {s.label}
-                </button>
+                </Link>
               ))}
             </nav>
 
-            <div className="border-t px-5 py-5" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
-              <Link
-                href="#contacto"
-                onClick={() => irA('#contacto', 'diagnostico')}
-                className="flex items-center justify-center gap-2 rounded-full px-5 py-3.5 text-sm font-bold text-white"
-                style={{ background: 'var(--accent)' }}
-              >
-                Diagnóstico gratuito <ArrowRight className="h-4 w-4" />
+            <div className="border-t px-5 py-5" style={{ borderColor: 'rgba(23,58,74,0.12)' }}>
+              <Link href="/#contacto" onClick={() => alIr('diagnostico')} className="btn btn-cobre w-full">
+                Solicitar diagnóstico <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body,
       )}
     </>
   )

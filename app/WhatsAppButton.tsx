@@ -8,8 +8,8 @@ import { track } from '@/lib/website-events'
 // Hermes desde el 03-ago-2026). Contesta 24/7, cruza al que escribe con su
 // ficha del CRM y avisa a Pachi por Telegram si detecta un lead caliente.
 // Antes iba al móvil personal de Pachi (34630310451).
-const WHATSAPP_NUMBER = '34627256996' // Número del agente SendaIA
-const PREFILL = 'Hola, me gustaría saber más sobre la automatización con IA de SendaIA.'
+export const WHATSAPP_NUMBER = '34627256996' // Número del agente SendaIA
+export const PREFILL = 'Hola, me gustaría saber más sobre la automatización con IA de SendaIA.'
 
 export default function WhatsAppButton() {
   // El mensaje lleva de qué sección venía el visitante, para que el agente
@@ -45,7 +45,12 @@ export default function WhatsAppButton() {
       const alto = window.innerHeight
       const doc = document.documentElement.scrollHeight
       const enHero = y < alto * 0.5
-      const enContacto = y + alto > doc - alto * 1.15
+      // 05-oct (rediseño): el contacto ya no es lo último de la página, así que se
+      // mide la sección en sí; si no existe, vale la regla de siempre.
+      const caja = document.getElementById('contacto')?.getBoundingClientRect()
+      const enContacto = caja
+        ? caja.top < alto * 0.8 && caja.bottom > alto * 0.2
+        : y + alto > doc - alto * 1.15
       setOculto(enHero || enContacto)
     }
     calcular()
@@ -63,6 +68,7 @@ export default function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Escríbenos por WhatsApp"
+      data-flotante
       onClick={() => track('cta_click', { cta: 'whatsapp' })}
       style={{
         position: 'fixed',
