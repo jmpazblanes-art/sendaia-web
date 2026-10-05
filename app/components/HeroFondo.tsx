@@ -24,7 +24,7 @@ function azarCon(semilla: number) {
 
 type Origen = [x: number, y: number, ang: number, largo: number, ancho: number]
 
-function generar(semilla: number, origenes: Origen[]): Grieta[] {
+function generar(semilla: number, origenes: Origen[], grano = 1): Grieta[] {
   const azar = azarCon(semilla)
   const salida: Grieta[] = []
   let orden = 0
@@ -34,7 +34,7 @@ function generar(semilla: number, origenes: Origen[]): Grieta[] {
     const mio = orden++
     const ramas: [number, number, number][] = []
     while (hecho < largo) {
-      const paso = 14 + azar() * 30
+      const paso = (14 + azar() * 30) * grano
       // Una grieta avanza a tirones: casi recta y, de vez en cuando, un quiebro.
       ang += (azar() - 0.5) * (azar() < 0.22 ? 1.5 : 0.5)
       x += Math.cos(ang) * paso
@@ -60,13 +60,14 @@ const ESCRITORIO = generar(20261005, [
   [770, 900, -1.5, 300, 2.8],
   [1440, 720, 3.5, 300, 2.4],
 ])
-// Móvil (400×800): esquina inferior derecha (queda tras los botones), el borde
-// izquierdo a media altura y un arranque corto arriba a la derecha.
-const MOVIL = generar(7, [
-  [400, 800, -2.5, 260, 2.6],
-  [0, 470, 0.25, 170, 2],
-  [400, 96, 2.9, 120, 1.8],
-])
+// Móvil (400×800): solo por los bordes — arriba a la derecha, entre la cabecera y
+// el titular, y las dos esquinas de abajo, que quedan tras los botones. Con el
+// paso más corto para que, al verse más grandes, sigan pareciendo grietas.
+const MOVIL = generar(11, [
+  [400, 112, 3.2, 120, 1.7],
+  [400, 800, -2.4, 150, 2.2],
+  [0, 800, -0.8, 110, 1.9],
+], 0.32)
 
 function Pared({ id, ancho, alto, grietas, clase, tenue }: { id: string; ancho: number; alto: number; grietas: Grieta[]; clase: string; tenue?: boolean }) {
   return (
