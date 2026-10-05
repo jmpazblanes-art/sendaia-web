@@ -1,17 +1,50 @@
 @import "tailwindcss";
 
 :root {
-  color-scheme: dark;
-  --background: #060608;
-  --foreground: #f5f5f0;
-  --accent: #D4AF37;
-  --accent-light: #E7C86A;
-  --accent-glow: rgba(212, 175, 55, 0.25);
-  --card: #101012;
-  --border: rgba(255, 255, 255, 0.08);
+  /* ── Identidad SendaIA (rediseño 05-oct-2026) ──
+     60 % fondos claros (piedra / blanco roto) · 30 % azul profundo · 10 % cobre. */
+  --azul: #173A4A;
+  --azul-hondo: #102B37;
+  --azul-suave: #1F4A5D;
+  --piedra: #E8E1D8;
+  --roto: #FAF8F5;
+  --cobre: #B8734A;
+  /* Cobre un punto más oscuro para BOTONES: con texto claro encima, el cobre de
+     marca se queda en 3,6:1 de contraste; este llega a 4,6:1. */
+  --cobre-boton: #A8633C;
+  --cobre-claro: #DDA883;
+  --grafito: #2A2A2A;
+  --grafito-suave: #5B5853;
+  --linea: rgba(23, 58, 74, 0.14);
+
+  /* Variables heredadas: las siguen usando las páginas de sector y legales, el
+     dock de asistentes y el formulario. Apuntan a la paleta nueva. */
+  color-scheme: light;
+  --background: var(--azul-hondo);
+  --foreground: var(--roto);
+  --accent: var(--cobre-boton);
+  --accent-light: var(--cobre-claro);
+  --accent-glow: rgba(184, 115, 74, 0.25);
+  --card: var(--azul);
+  --border: rgba(255, 255, 255, 0.1);
   --font-display: 'Fraunces', Georgia, serif;
   --font-sans: 'Manrope', system-ui, -apple-system, sans-serif;
   --font-script: 'Caveat', 'Segoe Script', cursive;
+}
+
+@theme inline {
+  --color-azul: var(--azul);
+  --color-azul-hondo: var(--azul-hondo);
+  --color-azul-suave: var(--azul-suave);
+  --color-piedra: var(--piedra);
+  --color-roto: var(--roto);
+  --color-cobre: var(--cobre);
+  --color-cobre-boton: var(--cobre-boton);
+  --color-cobre-claro: var(--cobre-claro);
+  --color-grafito: var(--grafito);
+  --color-grafito-suave: var(--grafito-suave);
+  --font-display: var(--font-display);
+  --font-sans: var(--font-sans);
 }
 
 /* Eslogan manuscrito «Tú disfrutas.» — a juego con el logo */
@@ -28,7 +61,6 @@ html {
 
 body {
   margin: 0;
-  /* fondo transparente: deja ver el canvas de la red neuronal (html aporta el negro base) */
   background: transparent;
   color: var(--foreground);
   font-family: var(--font-sans);
@@ -57,7 +89,7 @@ h1, h2 {
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #D4AF37 0%, #E7C86A 50%, #F5E08A 100%);
+  background: linear-gradient(135deg, #B8734A 0%, #DDA883 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -70,7 +102,7 @@ h1, h2 {
 }
 
 ::selection {
-  background: rgba(212, 175, 55, 0.3);
+  background: rgba(184, 115, 74, 0.3);
   color: #fff;
 }
 
@@ -80,7 +112,7 @@ h1, h2 {
 }
 
 .gradient-text-animated {
-  background: linear-gradient(135deg, #D4AF37 0%, #E7C86A 25%, #F5E08A 50%, #D4AF37 75%, #E7C86A 100%);
+  background: linear-gradient(135deg, #B8734A 0%, #DDA883 50%, #B8734A 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -162,4 +194,61 @@ h1, h2 {
   .gradient-text-animated { animation: none; }
   .ticker-track { animation: none; }
   html { scroll-behavior: auto; }
+}
+
+/* ─────────────── Rediseño: piezas de la web nueva ─────────────── */
+
+/* Lienzo claro de las páginas nuevas (el html sigue en azul para las heredadas). */
+.lienzo {
+  background: var(--roto);
+  color: var(--grafito);
+}
+.lienzo h1, .lienzo h2, .lienzo h3 { text-wrap: balance; }
+.lienzo p { text-wrap: pretty; }
+
+.eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cobre);
+}
+.sobre-azul .eyebrow { color: var(--cobre-claro); }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 3rem;
+  padding: 0.8rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  line-height: 1.1;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+.btn:active { transform: translateY(1px); }
+.btn:focus-visible { outline: 2px solid var(--cobre-claro); outline-offset: 3px; }
+.btn:disabled { opacity: 0.65; cursor: progress; }
+.btn-cobre { background: var(--cobre-boton); color: var(--roto); }
+.btn-cobre:hover { background: #955632; }
+.btn-linea { border: 1.5px solid var(--linea); color: var(--azul); }
+.btn-linea:hover { border-color: var(--azul); background: rgba(23, 58, 74, 0.05); }
+.sobre-azul .btn-linea { border-color: rgba(250, 248, 245, 0.35); color: var(--roto); }
+.sobre-azul .btn-linea:hover { border-color: var(--roto); background: rgba(250, 248, 245, 0.08); }
+
+/* Aparición suave al entrar en pantalla. Sin JS o con movimiento reducido, se ve. */
+.aparece {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.aparece.visto { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .aparece { opacity: 1; transform: none; transition: none; }
+}
+@media (scripting: none) {
+  .aparece { opacity: 1; transform: none; }
 }

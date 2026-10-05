@@ -8,8 +8,8 @@ import { track } from '@/lib/website-events'
 // Hermes desde el 03-ago-2026). Contesta 24/7, cruza al que escribe con su
 // ficha del CRM y avisa a Pachi por Telegram si detecta un lead caliente.
 // Antes iba al móvil personal de Pachi (34630310451).
-const WHATSAPP_NUMBER = '34627256996' // Número del agente SendaIA
-const PREFILL = 'Hola, me gustaría saber más sobre la automatización con IA de SendaIA.'
+export const WHATSAPP_NUMBER = '34627256996' // Número del agente SendaIA
+export const PREFILL = 'Hola, me gustaría saber más sobre la automatización con IA de SendaIA.'
 
 export default function WhatsAppButton() {
   // El mensaje lleva de qué sección venía el visitante, para que el agente

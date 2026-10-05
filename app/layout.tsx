@@ -23,9 +23,9 @@ const script = Caveat({
 })
 
 const SITE_URL = 'https://sendaia.es'
-const TITLE = 'SendaIA — Automatización con IA para empresas'
+const TITLE = 'SendaIA — Sistemas con IA para empresas'
 const DESCRIPTION =
-  'Automatiza tu gestión administrativa con Agentes de IA: facturas, emails, llamadas y seguimiento. Sin requisitos técnicos.'
+  'Agentes de voz, WhatsApp y automatizaciones conectados a tu negocio para eliminar trabajo manual y recuperar tiempo. Pruébalos en la propia web.'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -170,7 +170,7 @@ export default function RootLayout({
   }
 
   return (
-    <html lang="es" className={`dark ${display.variable} ${sans.variable} ${script.variable}`}>
+    <html lang="es" className={`${display.variable} ${sans.variable} ${script.variable}`}>
       <body className="antialiased">
         <script
           type="application/ld+json"
