@@ -271,3 +271,11 @@ h1, h2 {
 @media (prefers-reduced-motion: reduce) {
   .paso-entra, .latido { animation: none; }
 }
+
+/* En móvil, mientras el escenario del sistema está fijo, los botones flotantes se apartan. */
+@media (max-width: 1023px) {
+  html[data-escena-fija] [data-flotante] {
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+}

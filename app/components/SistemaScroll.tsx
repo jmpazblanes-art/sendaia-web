@@ -108,6 +108,10 @@ export default function SistemaScroll({ children }: { children: React.ReactNode 
       const previo = mq.matches ? (intro.current?.offsetHeight ?? 0) + 64 : 0
       const recorrido = r.height - alto - previo
       setP(recorrido > 0 ? tramo(72 - r.top - previo, 0, recorrido * 0.9) : 1)
+      // Mientras la escena está fija, en móvil se apartan los flotantes (dock y
+      // WhatsApp): si no, tapan media red. Lo aplica globals.css con este atributo.
+      const fija = r.top + previo <= 80 && r.bottom >= alto - 4
+      document.documentElement.toggleAttribute('data-escena-fija', fija)
     }
     const alMover = () => {
       if (!pendiente) pendiente = requestAnimationFrame(medir)
@@ -116,6 +120,7 @@ export default function SistemaScroll({ children }: { children: React.ReactNode 
     window.addEventListener('scroll', alMover, { passive: true })
     window.addEventListener('resize', alMover)
     return () => {
+      document.documentElement.removeAttribute('data-escena-fija')
       mq.removeEventListener('change', alCambiar)
       window.removeEventListener('scroll', alMover)
       window.removeEventListener('resize', alMover)

@@ -68,6 +68,7 @@ export default function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Escríbenos por WhatsApp"
+      data-flotante
       onClick={() => track('cta_click', { cta: 'whatsapp' })}
       style={{
         position: 'fixed',

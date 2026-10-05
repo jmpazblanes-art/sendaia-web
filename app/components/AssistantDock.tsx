@@ -306,6 +306,7 @@ function AssistantDock() {
           pantalla se apartan: ahí el visitante ya está convirtiendo, no hace falta
           ofrecerle otras tres puertas. */}
       <div
+        data-flotante
         className={`fixed right-4 sm:right-6 z-50 flex flex-col items-end gap-3 transition-all duration-300 ${
           contactoVisible ? 'pointer-events-none opacity-0 translate-y-4' : 'opacity-100'
         }`}
