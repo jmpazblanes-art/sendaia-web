@@ -45,7 +45,12 @@ export default function WhatsAppButton() {
       const alto = window.innerHeight
       const doc = document.documentElement.scrollHeight
       const enHero = y < alto * 0.5
-      const enContacto = y + alto > doc - alto * 1.15
+      // 05-oct (rediseño): el contacto ya no es lo último de la página, así que se
+      // mide la sección en sí; si no existe, vale la regla de siempre.
+      const caja = document.getElementById('contacto')?.getBoundingClientRect()
+      const enContacto = caja
+        ? caja.top < alto * 0.8 && caja.bottom > alto * 0.2
+        : y + alto > doc - alto * 1.15
       setOculto(enHero || enContacto)
     }
     calcular()
