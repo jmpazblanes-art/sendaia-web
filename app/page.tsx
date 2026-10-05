@@ -1474,15 +1474,26 @@ function AssistantDock() {
   // Por scroll y no con IntersectionObserver: el dock se monta antes que el hero,
   // así que al correr el efecto los nodos aún no existen y el observer se quedaba
   // sin observar nada (dejaba el dock oculto en toda la página).
-  const [contactoVisible, setContactoVisible] = useState(true)
+  const [contactoVisible, setContactoVisible] = useState(false)
+  const [esDispositivoMovil, setEsDispositivoMovil] = useState(false)
+
+  useEffect(() => {
+    const comprobar = () => {
+      const movil = typeof window !== "undefined" && (/iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768)
+      setEsDispositivoMovil(movil)
+    }
+    comprobar()
+    window.addEventListener("resize", comprobar)
+    return () => window.removeEventListener("resize", comprobar)
+  }, [])
+
   useEffect(() => {
     const calcular = () => {
       const y = window.scrollY
       const alto = window.innerHeight
       const doc = document.documentElement.scrollHeight
-      const enHero = y < alto * 0.5
-      const enContacto = y + alto > doc - alto * 1.15
-      setContactoVisible(enHero || enContacto)
+      const enContacto = y + alto > doc - alto * 0.6
+      setContactoVisible(enContacto)
     }
     calcular()
     window.addEventListener('scroll', calcular, { passive: true })
@@ -1592,6 +1603,21 @@ function AssistantDock() {
     retellClientRef.current?.stopCall()
     setVStatus('idle')
     retellClientRef.current = null
+  }
+
+  const handleVoiceCall = () => {
+    if (typeof window !== "undefined") {
+      const esMovil = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768
+      if (esMovil) {
+        window.location.href = "tel:+34858215026"
+        return
+      }
+    }
+    if (vActive) {
+      endCall()
+    } else {
+      startCall()
+    }
   }
 
   const vActive = vStatus === 'active'
@@ -1740,14 +1766,14 @@ function AssistantDock() {
 
         {/* Agente de voz */}
         <motion.button
-          onClick={vActive ? endCall : startCall}
-          disabled={vStatus === 'connecting'}
+          onClick={handleVoiceCall}
+          disabled={!esDispositivoMovil && vStatus === 'connecting'}
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
           whileHover={{ scale: 1.04 }}
           whileTap={{ scale: 0.97 }}
-          className="group flex items-center gap-3 rounded-full py-2 pl-5 pr-2 backdrop-blur-md disabled:opacity-70"
+          className="group flex items-center gap-2.5 sm:gap-3 rounded-full py-2 pl-4 sm:pl-5 pr-2 backdrop-blur-md disabled:opacity-70 cursor-pointer"
           style={{
             background: vActive ? 'rgba(239,68,68,0.15)' : 'rgba(16,16,18,0.75)',
             border: `1px solid ${vActive ? 'rgba(239,68,68,0.5)' : 'rgba(212,175,55,0.35)'}`,
@@ -1755,19 +1781,19 @@ function AssistantDock() {
           }}
           title="Llamar al agente de voz IA"
         >
-          <span className="hidden sm:flex flex-col text-right leading-tight">
-            <span className="text-[13px] font-bold" style={{ color: vActive ? '#fca5a5' : '#f5f5f0' }}>
+          <span className="flex flex-col text-right leading-tight">
+            <span className="text-[12px] sm:text-[13px] font-bold" style={{ color: vActive ? '#fca5a5' : '#f5f5f0' }}>
               {vActive ? 'En llamada' : 'Agente de voz'}
             </span>
-            <span className="text-[11px]" style={{ color: vActive ? 'rgba(252,165,165,0.8)' : 'var(--accent-light)' }}>
+            <span className="text-[10px] sm:text-[11px]" style={{ color: vActive ? 'rgba(252,165,165,0.8)' : 'var(--accent-light)' }}>
               {vStatus === 'connecting' ? 'Conectando…' : vActive ? 'Pulsa para colgar' : 'Llámanos · IA 24/7'}
             </span>
           </span>
           <span
-            className="relative flex h-11 w-11 items-center justify-center rounded-full"
+            className="relative flex h-11 w-11 items-center justify-center rounded-full shrink-0"
             style={{ background: vActive ? '#ef4444' : 'linear-gradient(135deg, #D4AF37, #E7C86A)', color: vActive ? '#fff' : '#1a1405' }}
           >
-            {vBusy && (
+            {vBusy && !esDispositivoMovil && (
               <motion.span
                 className="absolute inset-0 rounded-full"
                 animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
