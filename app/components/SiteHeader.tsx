@@ -17,7 +17,7 @@ export default function SiteHeader() {
   return (
     <header
       className="sobre-azul fixed inset-x-0 top-0 z-50 border-b"
-      style={{ background: 'rgba(23,58,74,0.97)', borderColor: 'rgba(250,248,245,0.1)' }}
+      style={{ background: '#173A4A', borderColor: 'rgba(250,248,245,0.1)' }}
     >
       <div className="mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between gap-3 px-5 sm:px-8">
         <div className="flex items-center gap-3">

@@ -57,8 +57,16 @@ function AssistantDock() {
       const y = window.scrollY
       const alto = window.innerHeight
       const doc = document.documentElement.scrollHeight
-      const enContacto = y + alto > doc - alto * 0.6
-      setContactoVisible(enContacto)
+      // Rediseño (05-oct): el contacto ya no es lo último de la página (debajo va el
+      // pie), así que se mide la sección en sí. Sin ella, vale la regla anterior.
+      const contacto = document.getElementById('contacto')
+      const caja = contacto?.getBoundingClientRect()
+      const enContacto = caja
+        ? caja.top < alto * 0.8 && caja.bottom > alto * 0.2
+        : y + alto > doc - alto * 0.6
+      // En móvil, arriba del todo el dock caía encima del botón principal del hero.
+      const sobreHeroMovil = window.innerWidth < 768 && y < alto * 0.45
+      setContactoVisible(enContacto || sobreHeroMovil)
     }
     calcular()
     window.addEventListener('scroll', calcular, { passive: true })
@@ -218,8 +226,8 @@ function AssistantDock() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 24, scale: 0.96 }}
             transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed bottom-28 right-4 sm:right-6 z-50 w-[calc(100vw-2rem)] sm:w-96 rounded-3xl overflow-hidden flex flex-col"
-            style={{ background: '#173A4A', color: '#FAF8F5', border: '1px solid rgba(184,115,74,0.35)', maxHeight: '70vh', boxShadow: '0 30px 80px rgba(0,0,0,0.55), 0 0 60px rgba(184,115,74,0.12)' }}
+            className="fixed bottom-44 right-4 sm:right-6 z-50 w-[calc(100vw-2rem)] sm:w-96 rounded-3xl overflow-hidden flex flex-col"
+            style={{ background: '#173A4A', color: '#FAF8F5', border: '1px solid rgba(184,115,74,0.35)', maxHeight: 'min(70vh, calc(100dvh - 12.5rem))', boxShadow: '0 30px 80px rgba(0,0,0,0.55), 0 0 60px rgba(184,115,74,0.12)' }}
           >
             <div className="flex items-center gap-3 px-5 py-4" style={{ background: 'linear-gradient(135deg, rgba(184,115,74,0.18), rgba(184,115,74,0.04))', borderBottom: '1px solid rgba(184,115,74,0.2)' }}>
               <AriaAvatar size={40} />
@@ -359,7 +367,7 @@ function AssistantDock() {
           whileTap={{ scale: 0.97 }}
           className="group flex items-center gap-2.5 sm:gap-3 rounded-full py-2 pl-4 sm:pl-5 pr-2 backdrop-blur-md disabled:opacity-70 cursor-pointer"
           style={{
-            background: vActive ? 'rgba(239,68,68,0.15)' : 'rgba(23,58,74,0.96)',
+            background: vActive ? '#4A1F1F' : 'rgba(23,58,74,0.96)',
             border: `1px solid ${vActive ? 'rgba(239,68,68,0.5)' : 'rgba(184,115,74,0.35)'}`,
             boxShadow: '0 10px 30px rgba(0,0,0,0.4)',
           }}
