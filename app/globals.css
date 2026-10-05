@@ -279,10 +279,4 @@ h1, h2 {
     pointer-events: none !important;
   }
 }
-
-/* Grietas de la pared del hero: se abren (se dibujan) al cargar. */
-@keyframes grieta-abre { to { stroke-dashoffset: 0; } }
-.grieta-abre { animation: grieta-abre 1.9s cubic-bezier(0.3, 0.7, 0.2, 1) forwards; }
-@media (prefers-reduced-motion: reduce) {
-  .grieta-abre { animation: none; stroke-dashoffset: 0; }
 }
