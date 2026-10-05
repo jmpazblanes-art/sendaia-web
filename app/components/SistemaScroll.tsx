@@ -34,8 +34,9 @@ export default function SistemaScroll() {
       if (!el) return
       const alto = window.innerHeight
       const r = el.getBoundingClientRect()
-      // Empieza cuando el esquema asoma por abajo y termina con él ya centrado.
-      const v = tramo(alto * 0.92 - r.top, 0, alto * 0.62 + r.height * 0.35)
+      // Empieza cuando el esquema asoma por abajo y termina antes de que llegue
+      // arriba: en móvil, si no, las últimas piezas se encendían ya casi fuera de vista.
+      const v = tramo(alto * 0.92 - r.top, 0, alto * 0.5 + r.height * 0.12)
       // Solo avanza: una vez dibujado no se desdibuja al subir.
       setP((antes) => (v > antes ? v : antes))
     }
