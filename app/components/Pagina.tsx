@@ -44,7 +44,7 @@ export function Titular({ eyebrow, titulo, lead }: { eyebrow: string; titulo: st
   return (
     <div className="aparece max-w-3xl">
       <p className="eyebrow">{eyebrow}</p>
-      <h2 className="mt-4 text-4xl font-semibold leading-[1.08] sm:text-5xl">{titulo}</h2>
+      <h2 className="mt-4 text-4xl font-semibold leading-[1.08] text-azul sm:text-5xl">{titulo}</h2>
       {lead && <p className="mt-5 text-xl opacity-80">{lead}</p>}
     </div>
   )
@@ -57,7 +57,7 @@ export function CtaDiagnostico({ titulo = '¿Qué tarea sigue haciendo una perso
       <div className="mx-auto grid max-w-7xl gap-14 px-5 sm:px-8 lg:grid-cols-2 lg:gap-20">
         <div>
           <p className="eyebrow">Diagnóstico</p>
-          <h2 className="mt-4 text-4xl font-semibold leading-[1.08] sm:text-5xl">{titulo}</h2>
+          <h2 className="mt-4 text-4xl font-semibold leading-[1.08] text-azul sm:text-5xl">{titulo}</h2>
           <p className="mt-6 max-w-lg text-xl leading-relaxed text-roto/80">{texto}</p>
           <p className="mt-9 text-roto/80">
             O llámanos:{' '}
