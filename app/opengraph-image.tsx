@@ -42,13 +42,12 @@ export default function OpenGraphImage() {
           </svg>
         </div>
 
-        <div style={{ display: 'flex', fontSize: 22, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#DDA883', marginTop: 120 }}>
+        <div style={{ display: 'flex', fontSize: 22, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#DDA883', marginTop: 150 }}>
           SendaIA · Sistemas con IA para empresas
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', fontSize: 72, fontWeight: 800, color: '#FAF8F5', lineHeight: 1.1, letterSpacing: '-0.02em', marginTop: 28, maxWidth: 940 }}>
-          <span>Tu empresa no necesita</span>
-          <span>más herramientas.</span>
+        <div style={{ display: 'flex', flexDirection: 'column', fontSize: 54, fontWeight: 800, color: '#FAF8F5', lineHeight: 1.12, letterSpacing: '-0.01em', marginTop: 26, maxWidth: 1000 }}>
+          <span>Tu empresa no necesita más herramientas.</span>
           <span style={{ color: '#DDA883' }}>Necesita sistemas que trabajen.</span>
         </div>
 
