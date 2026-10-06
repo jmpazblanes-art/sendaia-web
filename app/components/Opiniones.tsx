@@ -221,7 +221,7 @@ export default function Opiniones() {
               </div>
 
               <a
-                href="https://www.google.com/maps/search/?api=1&query=SendaIA+Granada"
+                href="https://g.page/r/CQs5z82aMfGgEBM/review"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => track('cta_click', { cta: 'google_review_hub' })}

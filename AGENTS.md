@@ -90,6 +90,9 @@ Textura mineral tipo estuco / microcemento fino, **muy sutil: «más que se sien
 ## Si la voz da 500 (causa real del 05/10/2026)
 `/api/voice` solo llama a Retell. El 05/10 dio 56 errores entre las 20:02 y las 20:24 (hora de Madrid) porque **Retell devolvió «Credit balance exhausted, please top up to continue»** (saldo agotado); se recuperó al recargar. El teléfono 858 215 026 va por el mismo agente, así que tampoco sonaba. Cómo comprobarlo en un minuto: `get_runtime_errors` de Vercel (projectId `prj_qyJJXOj1aeOsONdagvhItvz1ESjO`, team `team_UwEjgMLUqfQecOLCpBZXj5wX`) devuelve el mensaje de Retell tal cual. **Primero mirar el saldo de Retell; no tocar el código.**
 
+## Reseñas de Google
+El botón «Valorar en Google» (`app/components/Opiniones.tsx`, visible en `/sendaia`) apunta a `https://g.page/r/CQs5z82aMfGgEBM/review`, el enlace de reseña REAL de la ficha «SendaIA · Granada» (verificada; lo sacó Pachi de «Pedir una reseña» en su Perfil de Empresa el 06/10/2026). **No volver a una búsqueda de Maps**: la ficha es de zona de servicio y Google la «corrige» a «ZendaYA Granada» (tablaos de flamenco). La ficha se gestiona en `business.google.com/locations` desde el perfil de Chrome «sendaia.es».
+
 ## Sin promesas de plazo (decisión de Pachi, 06/10/2026: «quita plazos claramente»)
 La web NO promete cuánto se tarda en poner nada en marcha: ni «en días», ni «primera semana», ni «7 a 10 días laborables», ni «listo en X». Esto incluye los **datos estructurados de `layout.tsx` (FAQPage), que leen Google y los asistentes de IA**. El agente de WhatsApp/Aria ya lo cumple (`lib/prompt.ts`: «No prometes plazos de entrega concretos»). Se mantienen, a propósito, el compromiso de respuesta del formulario («en menos de 24 h laborables»), la duración del diagnóstico (30 min) y la velocidad del agente («en menos de 60 segundos»): son compromisos de atención y de producto, no plazos de entrega.
 
