@@ -291,10 +291,12 @@ h1, h2 {
   background-size: 900px, 640px;
   background-blend-mode: multiply, overlay;
 }
+/* Sobre claro la luz es más alta (relieve suave) y se funde multiplicando, para
+   que piedra y blanco roto conserven su tono cálido y el texto se lea bien. */
 .lienzo,
 .lienzo section:not(.sobre-azul),
 .pared-clara {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='900'%3E%3Cfilter id='m' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.004 .006' numOctaves='3' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0.3 0 0 0 -.38'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='640'%3E%3Cfilter id='r' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.04 .055' numOctaves='4' seed='4' stitchTiles='stitch'/%3E%3CfeDiffuseLighting surfaceScale='1.6' diffuseConstant='1.05' lighting-color='%23ffffff'%3E%3CfeDistantLight azimuth='225' elevation='30'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23r)'/%3E%3C/svg%3E");
-  background-size: 900px, 640px;
-  background-blend-mode: multiply, soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='640'%3E%3Cfilter id='r' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.04 .055' numOctaves='4' seed='4' stitchTiles='stitch'/%3E%3CfeDiffuseLighting surfaceScale='1.8' diffuseConstant='1.05' lighting-color='%23fff'%3E%3CfeDistantLight azimuth='225' elevation='58'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23r)'/%3E%3C/svg%3E");
+  background-size: 640px;
+  background-blend-mode: multiply;
 }
