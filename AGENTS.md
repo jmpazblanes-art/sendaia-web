@@ -81,7 +81,8 @@ Textura mineral tipo estuco / microcemento fino, **muy sutil: «más que se sien
 - **Migas de pan**: `PaginaInterior` acepta `migas` y emite `BreadcrumbList`. El JSON-LD se escapa con `ldJson()` (`<` → `\u003c`).
 - **Borrado**: la home antigua (`app/_legacy`) y `public/frames-robot` (73 fotogramas, 4,1 MB). Quedan ~25 MB de imágenes y vídeos de `public/` sin uso (ver `git log`), conservados por si algo externo los enlaza.
 - **Rendimiento (móvil, Lighthouse + medición propia con CPU x4 y 4G lenta)**: el LCP real de la home es ~1,2 s con y sin la textura; los 3,9 s que da Lighthouse son su simulación. La textura NO cuesta rendimiento medible.
-- **Pendiente de revisar con Pachi**: las páginas de sector llevan cifras de mercado sin fuente («convierte hasta un 25 %», «entre un 12 % y un 19 % de no-show»…) de antes del rediseño. Conviene citar fuente o quitarlas (regla: no inventar métricas).
+- **Cifras de los sectores («hasta un 25 %», «12–19 % de no-show», «60 valoraciones»…)**: NO son inventadas. Las investigaron 3 agentes el 08/07/2026 («cifras reales del sector España 2026 con fuente») y se decidió presentarlas como «estimaciones honestas, marcadas como ejemplo», nunca como casos de clientes. Lo que falta es que **las fuentes no quedaron guardadas ni se ven en la web**. Si Pachi lo pide, buscarlas de nuevo y ponerlas en pie de página; mientras tanto no tocarlas ni darlas por «sin fuente» (error mío del 06/10, medido después).
+- **Search Console YA está dado de alta y verificado** (Pachi, 08/07/2026) y hay ficha de Google Business. El sitemap está declarado en `robots.txt`. No pedirle a Pachi que lo haga otra vez (ver nota del cerebro `reference_sendaia_web_seo_indexacion`).
 
 ## Fotos (06/10/2026, generadas por ChatGPT; las encarga Pachi)
 8 fotos en `public/images/fotos/*.webp` (≈760 px de ancho, 15–51 KB cada una; los originales en `~/Downloads/sendaia-web-fotos-separadas/`). Mapa y textos alternativos en `FOTOS` / `FOTO_SECTOR` de `app/components/datos.ts`. **Se usan a media columna en la cabecera interior (`Hero foto={…}`), NUNCA a ancho completo: a 1440 px saldrían borrosas.** Para el hero grande harían falta fotos de 1536×1024 sueltas, no láminas. Son imágenes generadas (personas inexistentes): no presentarlas como clientes ni como equipo; llevan «Imagen ilustrativa, generada con IA» debajo. Van con `unoptimized` (ya están en WebP): no gastan transformaciones de imagen de Vercel. La home NO lleva fotos (Pachi aprobó su hero tal cual).
@@ -92,5 +93,5 @@ La web NO promete cuánto se tarda en poner nada en marcha: ni «en días», ni 
 **Pendiente**
 - Rediseñar a fondo el contenido (no solo la maqueta) de los sectores cuando haya fotos reales (las encarga Pachi a ChatGPT).
 - Aircontec: caso en anónimo y sin capturas hasta autorización expresa.
-- Este repo NO tiene `vercel.json` con `ignoreCommand`: un commit solo de docs dispara build de producción.
+- `vercel.json` lleva un `ignoreCommand` (06/10/2026) que compara contra `VERCEL_GIT_PREVIOUS_SHA` (el último deploy real) y NO contra `HEAD^`, que cancelaba deploys buenos con dos commits seguidos (nota `bug_vercel_ignorecommand_head_caret_cancelaba_deploys_15sep`). Ignora solo `*.md`, `memoria/`, `docs/`, `.claude/`, `*.sql`, `scripts/`, `tests/` y `.github/`. Tras cada push a `main`: `npx vercel ls`, un commit de solo docs sale como «Canceled» A PROPÓSITO.
 
