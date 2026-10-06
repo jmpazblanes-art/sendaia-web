@@ -1,6 +1,6 @@
 
 import type { Metadata } from 'next'
-import { Fraunces, Manrope, Caveat } from 'next/font/google'
+import { Fraunces, Manrope } from 'next/font/google'
 import './globals.css'
 
 const display = Fraunces({
@@ -12,13 +12,6 @@ const display = Fraunces({
 const sans = Manrope({
   subsets: ['latin'],
   variable: '--font-sans',
-  display: 'swap',
-})
-
-// Fuente manuscrita para el eslogan «Tú disfrutas.» (a juego con el logo)
-const script = Caveat({
-  subsets: ['latin'],
-  variable: '--font-script',
   display: 'swap',
 })
 
@@ -170,7 +163,7 @@ export default function RootLayout({
   }
 
   return (
-    <html lang="es" className={`${display.variable} ${sans.variable} ${script.variable}`}>
+    <html lang="es" className={`${display.variable} ${sans.variable}`}>
       <body className="antialiased">
         <script
           type="application/ld+json"

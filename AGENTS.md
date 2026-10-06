@@ -83,6 +83,9 @@ Textura mineral tipo estuco / microcemento fino, **muy sutil: «más que se sien
 - **Rendimiento (móvil, Lighthouse + medición propia con CPU x4 y 4G lenta)**: el LCP real de la home es ~1,2 s con y sin la textura; los 3,9 s que da Lighthouse son su simulación. La textura NO cuesta rendimiento medible.
 - **Pendiente de revisar con Pachi**: las páginas de sector llevan cifras de mercado sin fuente («convierte hasta un 25 %», «entre un 12 % y un 19 % de no-show»…) de antes del rediseño. Conviene citar fuente o quitarlas (regla: no inventar métricas).
 
+## Fotos (06/10/2026, generadas por ChatGPT; las encarga Pachi)
+8 fotos en `public/images/fotos/*.webp` (≈760 px de ancho, 15–51 KB cada una; los originales en `~/Downloads/sendaia-web-fotos-separadas/`). Mapa y textos alternativos en `FOTOS` / `FOTO_SECTOR` de `app/components/datos.ts`. **Se usan a media columna en la cabecera interior (`Hero foto={…}`), NUNCA a ancho completo: a 1440 px saldrían borrosas.** Para el hero grande harían falta fotos de 1536×1024 sueltas, no láminas. Son imágenes generadas (personas inexistentes): no presentarlas como clientes ni como equipo; llevan «Imagen ilustrativa, generada con IA» debajo. Van con `unoptimized` (ya están en WebP): no gastan transformaciones de imagen de Vercel. La home NO lleva fotos (Pachi aprobó su hero tal cual).
+
 **Pendiente**
 - Rediseñar a fondo el contenido (no solo la maqueta) de los sectores cuando haya fotos reales (las encarga Pachi a ChatGPT).
 - Aircontec: caso en anónimo y sin capturas hasta autorización expresa.

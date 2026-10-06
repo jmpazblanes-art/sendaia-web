@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { ArrowRight, Check, MessageCircle, PhoneCall, Sparkles } from 'lucide-react'
 import { PaginaInterior, Hero, Titular, CtaDiagnostico } from '../components/Pagina'
 import { BotonAria, BotonVoz, BotonWhatsApp, DemoVideo, VideoBajoDemanda } from '../components/HomeClient'
-import { DEMOS_NEGOCIO, VIDEOS_DEMO, meta } from '../components/datos'
+import { DEMOS_NEGOCIO, FOTOS, VIDEOS_DEMO, meta } from '../components/datos'
 
 export const metadata = meta(
   '/agentes',
@@ -103,6 +103,7 @@ export default function Agentes() {
   return (
     <PaginaInterior seccion="agentes" migas={[{ nombre: 'Agentes', ruta: '/agentes' }]}>
       <Hero
+        foto={FOTOS.voz}
         eyebrow="Agentes de IA"
         titulo="Tres agentes que ya trabajan."
         acento="Pruébalos."

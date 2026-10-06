@@ -32,7 +32,6 @@
   --border: rgba(255, 255, 255, 0.1);
   --font-display: 'Fraunces', Georgia, serif;
   --font-sans: 'Manrope', system-ui, -apple-system, sans-serif;
-  --font-script: 'Caveat', 'Segoe Script', cursive;
 }
 
 @theme inline {
@@ -49,11 +48,6 @@
   --color-grafito-suave: var(--grafito-suave);
   --font-display: var(--font-display);
   --font-sans: var(--font-sans);
-}
-
-/* Eslogan manuscrito «Tú disfrutas.» — a juego con el logo */
-.font-script {
-  font-family: var(--font-script);
 }
 
 html {

@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { PaginaInterior, Hero, Titular, CtaDiagnostico } from '../components/Pagina'
 import { VideoBajoDemanda } from '../components/HomeClient'
-import { VIDEOS_DEMO, meta } from '../components/datos'
+import { FOTOS, VIDEOS_DEMO, meta } from '../components/datos'
 
 export const metadata = meta(
   '/automatizaciones',
@@ -105,6 +105,7 @@ export default function Automatizaciones() {
   return (
     <PaginaInterior seccion="automatizaciones" migas={[{ nombre: 'Automatizaciones', ruta: '/automatizaciones' }]}>
       <Hero
+        foto={FOTOS.facturas}
         eyebrow="Automatizaciones"
         titulo="Los agentes son solo la parte que ves."
         acento="Detrás está el sistema."
