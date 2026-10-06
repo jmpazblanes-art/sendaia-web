@@ -1,13 +1,17 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import Image from 'next/image'
-import SiteHeader from '../../components/SiteHeader'
-import SiteFooter from '../../components/SiteFooter'
 import { notFound } from 'next/navigation'
 import { ArrowRight, Check } from 'lucide-react'
+import { PaginaInterior, Hero, Titular, CtaDiagnostico } from '../../components/Pagina'
+import { DemoVideo } from '../../components/HomeClient'
 import { SECTORES_PAGINAS, getSector } from '../contenido'
-import { YouTubeEmbed } from '../youtube-embed'
-import { TrackView } from '../track-view'
+
+// Páginas de sector (rediseño 06-oct-2026). Misma información que antes, con la
+// maquetación del resto de la web. Cada una sirve para SEO, campañas y enlaces
+// comerciales: por eso conservan sus URLs, sus datos estructurados y su contenido.
+
+// JSON-LD: se escapa `<` para que ningún texto pueda cerrar la etiqueta <script>.
+const ldJson = (o: unknown) => JSON.stringify(o).replace(/</g, '\\u003c')
 
 // genera las 6 rutas estáticas en build
 export function generateStaticParams() {
@@ -17,18 +21,16 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
   const s = getSector(slug)
-  if (!s) return { title: 'Sector no encontrado — SendaIA' }
+  if (!s) return { title: 'Sector no encontrado' }
+  // Sin «— SendaIA» en el título: la plantilla del sitio ya añade «· SendaIA»
+  // (antes salía duplicado: «… — SendaIA · SendaIA»).
+  const titulo = `${s.nombre}: automatización con IA`
   return {
-    title: `${s.nombre} · Automatización con IA — SendaIA`,
+    title: titulo,
     description: s.intro,
     alternates: { canonical: `https://sendaia.es/sectores/${slug}` },
-    openGraph: {
-      title: `${s.nombre} · Automatización con IA — SendaIA`,
-      description: s.intro,
-      url: `https://sendaia.es/sectores/${slug}`,
-      // Sin `images`: hereda la tarjeta 1200×630 generada en app/opengraph-image.tsx.
-      // Antes apuntaba a logo-sendaia.png, que es 1536×1024 y sale recortado.
-    },
+    openGraph: { type: 'website', locale: 'es_ES', siteName: 'SendaIA', title: titulo, description: s.intro, url: `https://sendaia.es/sectores/${slug}` },
+    twitter: { card: 'summary_large_image', title: titulo, description: s.intro },
   }
 }
 
@@ -36,215 +38,164 @@ export default async function SectorPage({ params }: { params: Promise<{ slug: s
   const { slug } = await params
   const s = getSector(slug)
   if (!s) notFound()
+  const otros = SECTORES_PAGINAS.filter((o) => o.slug !== s.slug)
+  const wa = (texto: string) => `https://wa.me/34627256996?text=${encodeURIComponent(texto)}`
 
   return (
-    <main className="pared-azul" style={{ backgroundColor: 'var(--azul-hondo)', color: '#f5f5f5', minHeight: '100vh' }}>
-      <TrackView slug={s.slug} />
-      {/* Datos estructurados por sector: le dicen a Google (y a ChatGPT/Perplexity)
-          QUÉ servicio es, para quién y la ruta jerárquica (BreadcrumbList). El Organization/LocalBusiness global vive en app/layout.tsx. */}
+    <PaginaInterior
+      seccion="sector"
+      extra={{ seccion: 'sector', sector: s.slug }}
+      migas={[{ nombre: 'Demos', ruta: '/demos' }, { nombre: s.nombre, ruta: `/sectores/${s.slug}` }]}
+    >
+      {/* Datos estructurados por sector: le dicen a Google (y a ChatGPT/Perplexity) QUÉ servicio es,
+          para quién y dónde. El Organization/LocalBusiness global vive en app/layout.tsx. */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+          __html: ldJson({
             '@context': 'https://schema.org',
-            '@graph': [
-              {
-                '@type': 'Service',
-                name: `Automatización con IA para ${s.nombre.toLowerCase()}`,
-                description: s.intro,
-                serviceType: 'Automatización de procesos con inteligencia artificial',
-                url: `https://sendaia.es/sectores/${s.slug}`,
-                provider: { '@id': 'https://sendaia.es/#organization' },
-                areaServed: [
-                  { '@type': 'City', name: 'Granada' },
-                  { '@type': 'Country', name: 'España' },
-                ],
-                audience: { '@type': 'BusinessAudience', name: s.nombre },
-              },
-              {
-                '@type': 'BreadcrumbList',
-                itemListElement: [
-                  {
-                    '@type': 'ListItem',
-                    position: 1,
-                    name: 'Inicio',
-                    item: 'https://sendaia.es',
-                  },
-                  {
-                    '@type': 'ListItem',
-                    position: 2,
-                    name: 'Sectores',
-                    item: 'https://sendaia.es/demos#sectores',
-                  },
-                  {
-                    '@type': 'ListItem',
-                    position: 3,
-                    name: s.nombre,
-                    item: `https://sendaia.es/sectores/${s.slug}`,
-                  },
-                ],
-              },
+            '@type': 'Service',
+            name: `Automatización con IA para ${s.nombre.toLowerCase()}`,
+            description: s.intro,
+            serviceType: 'Automatización de procesos con inteligencia artificial',
+            url: `https://sendaia.es/sectores/${s.slug}`,
+            provider: { '@id': 'https://sendaia.es/#organization' },
+            areaServed: [
+              { '@type': 'City', name: 'Granada' },
+              { '@type': 'Country', name: 'España' },
             ],
+            audience: { '@type': 'BusinessAudience', name: s.nombre },
           }),
         }}
       />
-      <SiteHeader />
 
-      {/* HERO */}
-      <section className="relative overflow-hidden px-6 pt-36 pb-16 sm:pt-44 sm:pb-20">
-        <div className="mx-auto max-w-4xl text-center">
-          <Link href="/demos#sectores" className="inline-block mb-6 text-sm transition-colors hover:text-white" style={{ color: 'var(--accent-light)' }}>
-            ← Todos los sectores
-          </Link>
-          <p className="mb-4 text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--accent)' }}>{s.eyebrow}</p>
-          <h1 className="text-3xl font-black leading-tight sm:text-5xl">
-            {s.h1}<br />
-            <span className="gradient-text">{s.h1Accent}</span>
-          </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-base leading-7 sm:text-lg" style={{ color: 'rgba(245,245,245,0.65)' }}>
-            {s.intro}
-          </p>
-          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
-            <Link href="/#contacto" className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-bold text-white transition-all hover:opacity-90" style={{ background: 'var(--accent)' }}>
-              Pide tu diagnóstico gratuito <ArrowRight className="h-4 w-4" />
-            </Link>
-            <a
-              href={`https://wa.me/34627256996?text=${encodeURIComponent(`Hola, me interesa conocer soluciones de automatización con IA para ${s.nombre.toLowerCase()}.`)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border px-6 py-3.5 text-sm font-semibold transition-all hover:bg-white/10"
-              style={{ borderColor: 'rgba(184,115,74,0.35)', color: '#25D366' }}
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.71.306 1.263.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-              </svg>
-              Escribir por WhatsApp
-            </a>
-          </div>
-        </div>
-      </section>
+      <Hero eyebrow={s.eyebrow} titulo={s.h1} acento={s.h1Accent} lead={s.intro}>
+        <a href="#contacto" data-cta={`sector_${s.slug}_diagnostico`} className="btn btn-cobre">
+          Pide tu diagnóstico gratuito <ArrowRight className="h-4 w-4" aria-hidden />
+        </a>
+        <a
+          href={wa(`Hola, me interesa conocer soluciones de automatización con IA para ${s.nombre.toLowerCase()}.`)}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-cta={`sector_${s.slug}_whatsapp`}
+          className="btn btn-linea"
+        >
+          Escribir por WhatsApp
+        </a>
+      </Hero>
 
-      {/* DOLORES */}
-      <section className="px-6 py-16" style={{ background: 'rgba(23,58,74,0.6)' }}>
-        <div className="mx-auto max-w-5xl">
-          <h2 className="mb-10 text-center text-2xl font-black sm:text-3xl">Lo que te está costando ahora</h2>
-          <div className="grid gap-6 sm:grid-cols-3">
+      {/* Lo que te cuesta hoy */}
+      <section className="pared py-20 text-grafito sm:py-28">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+          <Titular eyebrow="El problema" titulo="Lo que te está costando ahora" />
+          <div className="mt-12 grid gap-10 border-t border-azul/15 pt-10 md:grid-cols-3 md:gap-12">
             {s.dolores.map((d) => (
-              <div key={d.titulo} className="rounded-2xl p-6 h-full" style={{ background: 'var(--card)', border: '1px solid rgba(184,115,74,0.15)' }}>
-                <h3 className="mb-3 font-bold text-lg" style={{ color: '#C0563B' }}>{d.titulo}</h3>
-                <p className="text-sm leading-6" style={{ color: 'rgba(245,245,245,0.6)' }}>{d.texto}</p>
+              <div key={d.titulo} className="aparece">
+                <h3 className="font-display text-2xl font-semibold text-azul">{d.titulo}</h3>
+                <p className="mt-3 text-lg leading-relaxed text-grafito-suave">{d.texto}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* GANCHOS — cada dolor con su propio pitch (problema → solución → cifra) */}
+      {/* Cada dolor, con su propio pitch: problema → solución → cifra */}
       {s.ganchos && s.ganchos.length > 0 && (
-        <section className="px-6 py-16 sm:py-20">
-          <div className="mx-auto max-w-5xl">
-            <p className="mb-3 text-center text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--accent-light)' }}>Cómo lo resolvemos</p>
-            <h2 className="mb-12 text-center text-2xl font-black sm:text-4xl">Tres formas de darte la vuelta al problema</h2>
-            <div className="space-y-6">
+        <section className="pared bg-piedra py-20 text-grafito sm:py-28">
+          <div className="mx-auto max-w-7xl px-5 sm:px-8">
+            <Titular eyebrow="Cómo lo resolvemos" titulo="Tres formas de darle la vuelta al problema" />
+            <ol className="mt-12">
               {s.ganchos.map((g, i) => (
-                <div key={g.gancho} className="rounded-3xl p-8 sm:p-10" style={{ background: 'var(--card)', border: '1px solid rgba(184,115,74,0.2)' }}>
-                  <div className="flex items-start gap-4">
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-sm font-black" style={{ background: 'rgba(184,115,74,0.15)', color: 'var(--accent)' }}>{i + 1}</span>
-                    <div>
-                      <h3 className="mb-4 text-xl font-black sm:text-2xl gradient-text">{g.gancho}</h3>
-                      <p className="mb-3 text-sm leading-6" style={{ color: 'rgba(245,245,245,0.55)' }}><span className="font-semibold" style={{ color: '#C0563B' }}>El problema:</span> {g.problema}</p>
-                      <p className="mb-4 text-sm leading-6" style={{ color: 'rgba(245,245,245,0.75)' }}><span className="font-semibold" style={{ color: 'var(--accent-light)' }}>La solución:</span> {g.solucion}</p>
-                      <p className="inline-block rounded-full px-4 py-1.5 text-sm font-semibold" style={{ background: 'rgba(184,115,74,0.12)', color: 'var(--accent)' }}>{g.cifra}</p>
-                    </div>
+                <li key={g.gancho} className="aparece grid gap-6 border-t border-azul/20 py-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-14">
+                  <div className="flex items-start gap-5">
+                    <span className="font-display text-4xl font-semibold leading-none text-cobre-texto">{String(i + 1).padStart(2, '0')}</span>
+                    <h3 className="font-display text-2xl font-semibold leading-snug text-azul sm:text-3xl">{g.gancho}</h3>
                   </div>
-                </div>
+                  <div className="space-y-4 text-lg leading-relaxed">
+                    <p><span className="font-bold text-azul">El problema. </span>{g.problema}</p>
+                    <p><span className="font-bold text-azul">La solución. </span>{g.solucion}</p>
+                    <p className="inline-block rounded-full border border-azul/25 px-4 py-1.5 text-base font-semibold text-azul">{g.cifra}</p>
+                  </div>
+                </li>
               ))}
-            </div>
+            </ol>
           </div>
         </section>
       )}
 
-      {/* SOLUCIÓN */}
-      <section className="px-6 py-16 sm:py-20">
-        <div className="mx-auto max-w-4xl text-center">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--accent-light)' }}>La solución SendaIA</p>
-          <h2 className="mb-5 text-2xl font-black sm:text-4xl">
-            <span className="gradient-text">{s.solucionTitulo}</span>
-          </h2>
-          <p className="mx-auto max-w-2xl text-base leading-7" style={{ color: 'rgba(245,245,245,0.7)' }}>{s.solucion}</p>
+      {/* La solución */}
+      <section className="sobre-azul bg-azul py-20 text-roto sm:py-28">
+        <div className="mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 lg:grid-cols-[1fr_1fr] lg:gap-20">
+          <div className="aparece">
+            <p className="eyebrow">La solución SendaIA</p>
+            <h2 className="mt-4 text-4xl font-semibold leading-[1.08] sm:text-5xl">{s.solucionTitulo}</h2>
+            <p className="mt-6 text-lg leading-relaxed text-roto/85">{s.solucion}</p>
+          </div>
+          <ul className="aparece space-y-6 lg:pt-3">
+            {s.agentes.map((a) => (
+              <li key={a.nombre} className="flex items-start gap-4 border-t border-roto/15 pt-6">
+                <Check className="mt-1 h-5 w-5 shrink-0 text-cobre-claro" aria-hidden />
+                <div>
+                  <h3 className="font-display text-2xl font-semibold">{a.nombre}</h3>
+                  <p className="mt-1 leading-relaxed text-roto/80">{a.desc}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
+      </section>
 
-        {/* AGENTES */}
-        <div className="mx-auto mt-12 grid max-w-5xl gap-6 sm:grid-cols-3">
-          {s.agentes.map((a) => (
-            <div key={a.nombre} className="rounded-2xl p-6 h-full" style={{ background: 'var(--card)', border: '1px solid rgba(184,115,74,0.2)' }}>
-              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl" style={{ background: 'rgba(184,115,74,0.12)' }}>
-                <Check className="h-5 w-5" style={{ color: 'var(--accent)' }} />
+      {/* Qué ganas + la objeción de siempre, ya contestada */}
+      {(s.retorno || s.objecion) && (
+        <section className="pared py-20 text-grafito sm:py-28">
+          <div className="mx-auto grid max-w-7xl gap-14 px-5 sm:px-8 lg:grid-cols-2 lg:gap-20">
+            {s.retorno && (
+              <div className="aparece">
+                <p className="eyebrow">Qué ganas tú</p>
+                <h2 className="mt-4 font-display text-3xl font-semibold leading-snug text-azul sm:text-4xl">{s.retorno.titulo}</h2>
+                <p className="mt-5 text-lg leading-relaxed">{s.retorno.texto}</p>
               </div>
-              <h3 className="mb-2 font-bold gradient-text">{a.nombre}</h3>
-              <p className="text-sm leading-6" style={{ color: 'rgba(245,245,245,0.6)' }}>{a.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* RETORNO — cálculo honesto de lo que gana el cliente */}
-      {s.retorno && (
-        <section className="px-6 pb-4 pt-2">
-          <div className="mx-auto max-w-3xl rounded-3xl p-8 sm:p-10" style={{ background: 'linear-gradient(135deg, rgba(184,115,74,0.10) 0%, rgba(23,58,74,0.4) 60%)', border: '1px solid rgba(184,115,74,0.3)' }}>
-            <p className="mb-2 text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--accent-light)' }}>Qué ganas tú</p>
-            <h3 className="mb-3 text-xl font-black sm:text-2xl gradient-text">{s.retorno.titulo}</h3>
-            <p className="text-base leading-7" style={{ color: 'rgba(245,245,245,0.75)' }}>{s.retorno.texto}</p>
+            )}
+            {s.objecion && (
+              <div className="aparece">
+                <p className="eyebrow">La duda de siempre</p>
+                <h2 className="mt-4 font-display text-3xl font-semibold leading-snug text-azul sm:text-4xl">{s.objecion.pregunta}</h2>
+                <p className="mt-5 text-lg leading-relaxed">{s.objecion.respuesta}</p>
+              </div>
+            )}
           </div>
         </section>
       )}
 
-      {/* OBJECIÓN — la duda típica del sector, ya resuelta */}
-      {s.objecion && (
-        <section className="px-6 pb-8 pt-6">
-          <div className="mx-auto max-w-3xl rounded-2xl p-8" style={{ background: 'var(--card)', border: '1px solid var(--border)' }}>
-            <p className="mb-3 text-lg font-bold" style={{ color: 'rgba(245,245,245,0.9)' }}>{s.objecion.pregunta}</p>
-            <p className="text-base leading-7" style={{ color: 'rgba(245,245,245,0.65)' }}>{s.objecion.respuesta}</p>
-          </div>
-        </section>
-      )}
-
-      {/* DEMO EN VÍDEO (si el sector tiene una demo real) */}
+      {/* Demo real del sector, si la hay */}
       {s.videoYoutube && (
-        <section className="px-6 pb-8 pt-4">
-          <div className="mx-auto max-w-4xl">
-            <p className="mb-4 text-center text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--accent-light)' }}>Demo real</p>
-            <h2 className="mb-8 text-center text-2xl font-black sm:text-3xl">Míralo funcionando</h2>
-            <YouTubeEmbed id={s.videoYoutube} title={`Demo — ${s.nombre} — SendaIA`} />
+        <section className="bg-piedra py-20 text-grafito sm:py-28">
+          <div className="mx-auto max-w-4xl px-5 sm:px-8">
+            <Titular eyebrow="Demo real" titulo="Míralo funcionando" />
+            <div className="aparece mt-10">
+              <DemoVideo id={s.videoYoutube} titulo={`Demo de ${s.nombre} — SendaIA`} clave={`sector_${s.slug}`} />
+            </div>
           </div>
         </section>
       )}
 
-      {/* CIERRE + CTA */}
-      <section className="px-6 pb-24 pt-4">
-        <div className="mx-auto max-w-3xl rounded-3xl p-10 text-center sm:p-14" style={{ background: 'var(--card)', border: '1px solid rgba(184,115,74,0.35)', boxShadow: '0 0 60px rgba(184,115,74,0.1)' }}>
-          <p className="mb-6 text-xl font-bold leading-8 sm:text-2xl">{s.cierre}</p>
-          <div className="flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
-            <Link href="/#contacto" className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-bold text-white transition-all hover:opacity-90" style={{ background: 'var(--accent)' }}>
-              Agenda tu diagnóstico gratuito <ArrowRight className="h-4 w-4" />
-            </Link>
-            <a
-              href={`https://wa.me/34627256996?text=${encodeURIComponent(`Hola, me gustaría agendar una consulta o ver una demo para ${s.nombre.toLowerCase()}.`)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border px-6 py-3.5 text-sm font-semibold transition-all hover:bg-white/10"
-              style={{ borderColor: 'rgba(184,115,74,0.35)', color: '#25D366' }}
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.71.306 1.263.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-              </svg>
-              Consultar por WhatsApp
-            </a>
-          </div>
+      {/* Otros sectores: enlazado interno */}
+      <section className="py-16 text-grafito sm:py-20">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+          <p className="eyebrow">Otros sectores</p>
+          <ul className="mt-5 flex flex-wrap gap-3">
+            {otros.map((o) => (
+              <li key={o.slug}>
+                <Link href={`/sectores/${o.slug}`} data-cta={`sector_${s.slug}_a_${o.slug}`} className="inline-block rounded-full border border-azul/20 px-5 py-2 text-azul transition-colors hover:border-azul hover:bg-azul/5">
+                  {o.nombre}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
-      <SiteFooter />
-    </main>
+      <CtaDiagnostico titulo="Pide tu diagnóstico gratuito" texto={s.cierre} />
+    </PaginaInterior>
   )
 }

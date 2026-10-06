@@ -128,14 +128,14 @@ export default function PrivacidadPage() {
         Puedes ejercer los derechos de <strong>acceso, rectificación, supresión, oposición,
         limitación del tratamiento y portabilidad</strong>, así como retirar tu consentimiento en
         cualquier momento, escribiendo a{' '}
-        <a href={`mailto:${TITULAR.email}`} style={{ color: 'var(--accent-light)' }}>{TITULAR.email}</a>{' '}
+        <a href={`mailto:${TITULAR.email}`} style={{ color: 'var(--cobre-texto)' }}>{TITULAR.email}</a>{' '}
         e indicando el derecho que deseas ejercer. La retirada del consentimiento no afecta a la
         licitud del tratamiento previo.
       </p>
       <p>
         Si consideras que el tratamiento no se ajusta a la normativa, puedes presentar una reclamación
         ante la <strong>Agencia Española de Protección de Datos</strong> (
-        <a href="https://www.aepd.es" target="_blank" rel="noreferrer" style={{ color: 'var(--accent-light)' }}>www.aepd.es</a>).
+        <a href="https://www.aepd.es" target="_blank" rel="noreferrer" style={{ color: 'var(--cobre-texto)' }}>www.aepd.es</a>).
       </p>
 
       <H2>Seguridad</H2>
@@ -148,7 +148,7 @@ export default function PrivacidadPage() {
       <H2>Cookies</H2>
       <p>
         El uso de cookies y tecnologías similares se detalla en la{' '}
-        <Link href="/cookies" style={{ color: 'var(--accent-light)' }}>política de cookies</Link>.
+        <Link href="/cookies" style={{ color: 'var(--cobre-texto)' }}>política de cookies</Link>.
       </p>
     </LegalLayout>
   )

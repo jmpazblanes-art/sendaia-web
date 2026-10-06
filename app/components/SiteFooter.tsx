@@ -19,7 +19,7 @@ export default function SiteFooter() {
         <div className="grid gap-12 md:grid-cols-[1.3fr_1fr_1fr_1fr]">
           <div>
             <Logo className="h-16 w-auto" />
-            <p className="mt-5 max-w-xs text-sm leading-relaxed text-roto/60">
+            <p className="mt-5 max-w-xs text-sm leading-relaxed text-roto/70">
               Sistemas con IA para empresas reales. Granada, España.
             </p>
             <a href="tel:+34858215026" data-cta="pie_telefono" className="mt-5 inline-flex items-center gap-2 text-sm font-semibold">
@@ -31,7 +31,7 @@ export default function SiteFooter() {
           </div>
 
           <nav aria-label="Web">
-            <p className="text-xs font-bold uppercase tracking-[0.16em] text-roto/45">Web</p>
+            <p className="text-xs font-bold uppercase tracking-[0.16em] text-roto/65">Web</p>
             <ul className="mt-4 space-y-2.5 text-sm">
               {NAVEGACION.map((n) => (
                 <li key={n.href}>
@@ -45,7 +45,7 @@ export default function SiteFooter() {
           </nav>
 
           <nav aria-label="Sectores">
-            <p className="text-xs font-bold uppercase tracking-[0.16em] text-roto/45">Sectores</p>
+            <p className="text-xs font-bold uppercase tracking-[0.16em] text-roto/65">Sectores</p>
             <ul className="mt-4 space-y-2.5 text-sm">
               {SECTORES.map((s) => (
                 <li key={s.href}>
@@ -56,7 +56,7 @@ export default function SiteFooter() {
           </nav>
 
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.16em] text-roto/45">Síguenos</p>
+            <p className="text-xs font-bold uppercase tracking-[0.16em] text-roto/65">Síguenos</p>
             <ul className="mt-4 space-y-2.5 text-sm">
               <li><a href="https://www.instagram.com/sendaia.es" target="_blank" rel="noreferrer" className="text-roto/75 hover:text-roto">Instagram</a></li>
               <li><a href="https://www.facebook.com/sendaia.es" target="_blank" rel="noreferrer" className="text-roto/75 hover:text-roto">Facebook</a></li>
@@ -67,12 +67,12 @@ export default function SiteFooter() {
 
         {/* Enlaces legales exigibles (LSSI-CE / RGPD) + razón social y NIF: además de
             obligatorio, es señal de solvencia para quien va a dejar sus datos. */}
-        <div className="mt-14 flex flex-wrap gap-x-6 gap-y-2 border-t border-roto/10 pt-6 text-xs text-roto/60">
+        <div className="mt-14 flex flex-wrap gap-x-6 gap-y-2 border-t border-roto/10 pt-6 text-xs text-roto/70">
           <Link href="/aviso-legal" className="hover:text-roto">Aviso legal</Link>
           <Link href="/privacidad" className="hover:text-roto">Política de privacidad</Link>
           <Link href="/cookies" className="hover:text-roto">Política de cookies</Link>
         </div>
-        <p className="mt-4 text-xs text-roto/40">
+        <p className="mt-4 text-xs text-roto/65">
           © 2026 SendaIA · Ana Isabel Quesada Martínez · NIF 44267995X · Todos los derechos reservados
         </p>
       </div>

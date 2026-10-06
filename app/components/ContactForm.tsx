@@ -67,7 +67,7 @@ function ContactForm() {
         { id: 'phone', label: 'Teléfono', type: 'tel', placeholder: '600 000 000', required: false },
       ].map(f => (
         <div key={f.id}>
-          <label className="block text-xs font-semibold mb-2" style={{ color: 'rgba(245,245,245,0.55)' }}>{f.label}</label>
+          <label className="block text-xs font-semibold mb-2" style={{ color: 'rgba(245,245,245,0.75)' }}>{f.label}</label>
           <input
             type={f.type}
             required={f.required}
@@ -80,7 +80,7 @@ function ContactForm() {
         </div>
       ))}
       <div>
-        <label className="block text-xs font-semibold mb-2" style={{ color: 'rgba(245,245,245,0.55)' }}>¿Qué procesos quieres automatizar?</label>
+        <label className="block text-xs font-semibold mb-2" style={{ color: 'rgba(245,245,245,0.75)' }}>¿Qué procesos quieres automatizar?</label>
         <textarea
           rows={3}
           placeholder="Ej: facturas manuales, emails sin leer, llamadas sin atender..."
@@ -119,7 +119,7 @@ function ContactForm() {
 
       <div className="flex items-center gap-3 pt-1">
         <div className="h-px flex-1" style={{ background: 'rgba(255,255,255,0.08)' }} />
-        <span className="text-[11px] uppercase tracking-wider" style={{ color: 'rgba(245,245,245,0.4)' }}>o consúltanos directo</span>
+        <span className="text-[11px] uppercase tracking-wider" style={{ color: 'rgba(245,245,245,0.7)' }}>o consúltanos directo</span>
         <div className="h-px flex-1" style={{ background: 'rgba(255,255,255,0.08)' }} />
       </div>
 
@@ -137,7 +137,7 @@ function ContactForm() {
         Escríbenos por WhatsApp
       </a>
 
-      <p className="text-center text-xs" style={{ color: 'rgba(245,245,245,0.45)' }}>
+      <p className="text-center text-xs" style={{ color: 'rgba(245,245,245,0.7)' }}>
         Te respondemos en menos de 24 h laborables.
       </p>
       {status === 'error' && (

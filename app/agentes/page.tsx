@@ -67,7 +67,7 @@ function Lista({ items, marca }: { items: string[]; marca?: boolean }) {
           {marca ? (
             <Check className="mt-1 h-4 w-4 shrink-0 text-cobre" aria-hidden />
           ) : (
-            <span className="mt-0.5 font-display text-lg font-semibold text-cobre">{String(i + 1).padStart(2, '0')}</span>
+            <span className="mt-0.5 font-display text-lg font-semibold text-cobre-texto">{String(i + 1).padStart(2, '0')}</span>
           )}
           <span>{t}</span>
         </li>
@@ -101,7 +101,7 @@ function Detalle({ a }: { a: Agente }) {
 
 export default function Agentes() {
   return (
-    <PaginaInterior seccion="agentes">
+    <PaginaInterior seccion="agentes" migas={[{ nombre: 'Agentes', ruta: '/agentes' }]}>
       <Hero
         eyebrow="Agentes de IA"
         titulo="Tres agentes que ya trabajan."

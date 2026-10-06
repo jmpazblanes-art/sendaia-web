@@ -10,9 +10,11 @@ import { WHATSAPP_NUMBER, PREFILL } from '../WhatsAppButton'
 // WhatsApp usa el mismo número y el mismo texto que el botón flotante.
 
 /** page_view de la home + aparición suave de los bloques marcados con `.aparece`. */
-export function HomeEfectos({ seccion = 'home' }: { seccion?: string }) {
+export function HomeEfectos({ seccion = 'home', extra }: { seccion?: string; extra?: Record<string, unknown> }) {
+  // El slug u otros datos van en `extra`; se serializa para que el efecto solo se repita si cambian.
+  const extraTxt = JSON.stringify(extra ?? {})
   useEffect(() => {
-    track('page_view', { seccion })
+    track('page_view', { seccion, ...JSON.parse(extraTxt) })
     const nodos = document.querySelectorAll<HTMLElement>('.aparece')
     if (!('IntersectionObserver' in window)) {
       nodos.forEach((n) => n.classList.add('visto'))
@@ -31,7 +33,7 @@ export function HomeEfectos({ seccion = 'home' }: { seccion?: string }) {
     )
     nodos.forEach((n) => io.observe(n))
     return () => io.disconnect()
-  }, [seccion])
+  }, [seccion, extraTxt])
 
   // Clics en cualquier CTA marcado con data-cta (enlaces del servidor incluidos).
   useEffect(() => {
