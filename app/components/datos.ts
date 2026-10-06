@@ -142,3 +142,28 @@ export const PILARES = [
   { titulo: 'Sistemas a medida', texto: 'No revendemos software. Diseñamos el sistema que encaja con tu operativa real.' },
   { titulo: 'Resultados medibles', texto: 'Menos tareas manuales, más control. Lo ves desde el primer día.' },
 ]
+
+// Fotos de ChatGPT (06-oct-2026), guardadas en WebP a su tamaño real (≈760 px de ancho):
+// por eso se usan a media columna y NUNCA a ancho completo, donde saldrían borrosas.
+// Son imágenes generadas: las personas no existen, así que no se presentan como clientes
+// ni como equipo y llevan «Imagen ilustrativa» debajo (ver Hero en Pagina.tsx).
+export type Foto = { src: string; ancho: number; alto: number; alt: string }
+const foto = (n: string, ancho: number, alto: number, alt: string): Foto => ({ src: `/images/fotos/${n}.webp`, ancho, alto, alt })
+export const FOTOS = {
+  oficina: foto('oficina-granada', 855, 299, 'Una persona trabaja con el panel de SendaIA en el portátil, en un despacho con vistas a Granada'),
+  voz: foto('atencion-telefonica', 674, 299, 'Una persona atiende una llamada con auriculares en una oficina luminosa'),
+  facturas: foto('gestion-facturas', 768, 241, 'Una persona revisa una factura en papel con el portátil abierto al fondo'),
+  clinica: foto('recepcion-clinica', 761, 241, 'Recepción de una clínica: la recepcionista atiende sonriendo a una paciente'),
+  inmobiliaria: foto('reunion-inmobiliaria', 768, 237, 'Una agente inmobiliaria enseña fotografías de viviendas a una pareja'),
+  restaurante: foto('restaurante-pedidos', 761, 237, 'Un camarero toma nota en una tableta en el comedor de un restaurante'),
+  whatsapp: foto('whatsapp-sendaia', 768, 226, 'Un teléfono móvil con una conversación de WhatsApp con SendaIA'),
+  analitica: foto('analitica-negocio', 761, 226, 'Un portátil con un panel de gráficos de actividad del negocio'),
+}
+export const FOTO_SECTOR: Record<string, Foto> = {
+  clinicas: FOTOS.clinica,
+  asesorias: FOTOS.facturas,
+  inmobiliarias: FOTOS.inmobiliaria,
+  restaurantes: FOTOS.restaurante,
+  ecommerce: FOTOS.whatsapp,
+  pymes: FOTOS.analitica,
+}

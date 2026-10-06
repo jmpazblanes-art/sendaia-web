@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { ArrowRight, Check } from 'lucide-react'
 import { PaginaInterior, Hero, Titular, CtaDiagnostico } from '../../components/Pagina'
 import { DemoVideo } from '../../components/HomeClient'
+import { FOTO_SECTOR } from '../../components/datos'
 import { SECTORES_PAGINAS, getSector } from '../contenido'
 
 // Páginas de sector (rediseño 06-oct-2026). Misma información que antes, con la
@@ -69,7 +70,7 @@ export default async function SectorPage({ params }: { params: Promise<{ slug: s
         }}
       />
 
-      <Hero eyebrow={s.eyebrow} titulo={s.h1} acento={s.h1Accent} lead={s.intro}>
+      <Hero foto={FOTO_SECTOR[s.slug]} eyebrow={s.eyebrow} titulo={s.h1} acento={s.h1Accent} lead={s.intro}>
         <a href="#contacto" data-cta={`sector_${s.slug}_diagnostico`} className="btn btn-cobre">
           Pide tu diagnóstico gratuito <ArrowRight className="h-4 w-4" aria-hidden />
         </a>

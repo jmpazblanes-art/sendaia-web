@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import SiteHeader from './SiteHeader'
 import SiteFooter from './SiteFooter'
 import AssistantDock from './AssistantDock'
@@ -5,6 +6,7 @@ import ContactForm from './ContactForm'
 import HeroFondo from './HeroFondo'
 import WhatsAppButton from '../WhatsAppButton'
 import { HomeEfectos } from './HomeClient'
+import type { Foto } from './datos'
 
 // Armazón común de las páginas interiores (06-oct-2026): cabecera, voz y Aria,
 // WhatsApp flotante y pie. Cada página pone solo su contenido.
@@ -44,19 +46,37 @@ export function PaginaInterior({ seccion, extra, migas, children }: { seccion: s
   )
 }
 
-/** Cabecera azul de página interior. */
-export function Hero({ eyebrow, titulo, acento, lead, children }: { eyebrow: string; titulo: string; acento?: string; lead: string; children?: React.ReactNode }) {
+/** Cabecera azul de página interior. Con `foto`, la mitad derecha (vacía hasta ahora) lleva una imagen. */
+export function Hero({ eyebrow, titulo, acento, lead, foto, children }: { eyebrow: string; titulo: string; acento?: string; lead: string; foto?: Foto; children?: React.ReactNode }) {
   return (
     <section className="sobre-azul pared-azul relative overflow-hidden bg-azul text-roto">
       <HeroFondo />
-      <div className="relative mx-auto max-w-7xl px-5 pb-16 pt-32 sm:px-8 sm:pb-20 sm:pt-40">
-        <p className="eyebrow">{eyebrow}</p>
-        <h1 className="mt-5 max-w-4xl text-[2.3rem] font-semibold leading-[1.06] sm:text-6xl">
-          {titulo}
-          {acento && <> <span className="text-cobre-claro">{acento}</span></>}
-        </h1>
-        <p className="mt-6 max-w-2xl text-lg leading-relaxed text-roto/80 sm:text-xl">{lead}</p>
-        {children && <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">{children}</div>}
+      <div
+        className={`relative mx-auto max-w-7xl px-5 pb-16 pt-32 sm:px-8 sm:pb-20 sm:pt-40 ${
+          foto ? 'lg:grid lg:grid-cols-[1.12fr_0.88fr] lg:items-center lg:gap-14' : ''
+        }`}
+      >
+        <div>
+          <p className="eyebrow">{eyebrow}</p>
+          <h1 className={`mt-5 max-w-4xl text-[2.3rem] font-semibold leading-[1.06] ${foto ? 'sm:text-5xl xl:text-[3.4rem]' : 'sm:text-6xl'}`}>
+            {titulo}
+            {acento && <> <span className="text-cobre-claro">{acento}</span></>}
+          </h1>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-roto/80 sm:text-xl">{lead}</p>
+          {children && <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">{children}</div>}
+        </div>
+
+        {foto && (
+          <figure className="mt-12 lg:mt-0">
+            <div className="relative overflow-hidden rounded-2xl border border-roto/15 shadow-[0_30px_80px_rgba(8,24,32,0.45)]">
+              {/* `unoptimized`: ya están en WebP a su tamaño; así no gastan transformaciones de Vercel. */}
+              <Image src={foto.src} alt={foto.alt} width={foto.ancho} height={foto.alto} unoptimized priority sizes="(min-width:1024px) 540px, 100vw" className="block h-auto w-full" />
+              {/* Velo azul: funde la foto con la cabecera. */}
+              <span aria-hidden className="pointer-events-none absolute inset-0 bg-azul/20 mix-blend-multiply" />
+            </div>
+            <figcaption className="mt-2 text-xs text-roto/65">Imagen ilustrativa, generada con IA.</figcaption>
+          </figure>
+        )}
       </div>
     </section>
   )

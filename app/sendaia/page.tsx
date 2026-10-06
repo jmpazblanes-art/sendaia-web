@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { PaginaInterior, Hero, Titular, CtaDiagnostico } from '../components/Pagina'
 import Opiniones from '../components/Opiniones'
-import { PASOS, PILARES, meta } from '../components/datos'
+import { FOTOS, PASOS, PILARES, meta } from '../components/datos'
 
 export const metadata = meta(
   '/sendaia',
@@ -20,6 +20,7 @@ export default function SobreSendaia() {
   return (
     <PaginaInterior seccion="sendaia" migas={[{ nombre: 'SendaIA', ruta: '/sendaia' }]}>
       <Hero
+        foto={FOTOS.oficina}
         eyebrow="SendaIA"
         titulo="Sistemas con IA"
         acento="para negocios reales."
