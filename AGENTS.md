@@ -86,6 +86,9 @@ Textura mineral tipo estuco / microcemento fino, **muy sutil: «más que se sien
 ## Fotos (06/10/2026, generadas por ChatGPT; las encarga Pachi)
 8 fotos en `public/images/fotos/*.webp` (≈760 px de ancho, 15–51 KB cada una; los originales en `~/Downloads/sendaia-web-fotos-separadas/`). Mapa y textos alternativos en `FOTOS` / `FOTO_SECTOR` de `app/components/datos.ts`. **Se usan a media columna en la cabecera interior (`Hero foto={…}`), NUNCA a ancho completo: a 1440 px saldrían borrosas.** Para el hero grande harían falta fotos de 1536×1024 sueltas, no láminas. Son imágenes generadas (personas inexistentes): no presentarlas como clientes ni como equipo; llevan «Imagen ilustrativa, generada con IA» debajo. Van con `unoptimized` (ya están en WebP): no gastan transformaciones de imagen de Vercel. La home NO lleva fotos (Pachi aprobó su hero tal cual).
 
+## Sin promesas de plazo (decisión de Pachi, 06/10/2026: «quita plazos claramente»)
+La web NO promete cuánto se tarda en poner nada en marcha: ni «en días», ni «primera semana», ni «7 a 10 días laborables», ni «listo en X». Esto incluye los **datos estructurados de `layout.tsx` (FAQPage), que leen Google y los asistentes de IA**. El agente de WhatsApp/Aria ya lo cumple (`lib/prompt.ts`: «No prometes plazos de entrega concretos»). Se mantienen, a propósito, el compromiso de respuesta del formulario («en menos de 24 h laborables»), la duración del diagnóstico (30 min) y la velocidad del agente («en menos de 60 segundos»): son compromisos de atención y de producto, no plazos de entrega.
+
 **Pendiente**
 - Rediseñar a fondo el contenido (no solo la maqueta) de los sectores cuando haya fotos reales (las encarga Pachi a ChatGPT).
 - Aircontec: caso en anónimo y sin capturas hasta autorización expresa.

@@ -137,7 +137,7 @@ export const CASOS = [
 ]
 
 export const PILARES = [
-  { titulo: 'Implementación en días', texto: 'No meses. No pilotos eternos. En producción desde la primera semana.' },
+  { titulo: 'Sistemas en producción', texto: 'No nos quedamos en una prueba: lo diseñamos, lo conectamos y lo ponemos a trabajar en tu negocio.' },
   { titulo: 'Sin equipo técnico', texto: 'Tu equipo no necesita saber nada de tecnología. Nosotros lo montamos todo.' },
   { titulo: 'Sistemas a medida', texto: 'No revendemos software. Diseñamos el sistema que encaja con tu operativa real.' },
   { titulo: 'Resultados medibles', texto: 'Menos tareas manuales, más control. Lo ves desde el primer día.' },
