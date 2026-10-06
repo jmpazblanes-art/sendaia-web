@@ -16,6 +16,7 @@ import AssistantDock from './components/AssistantDock'
 import ContactForm from './components/ContactForm'
 import WhatsAppButton from './WhatsAppButton'
 import SistemaScroll from './components/SistemaScroll'
+import { DEMOS_NEGOCIO, PASOS } from './components/datos'
 import HeroFondo from './components/HeroFondo'
 import { BotonAria, BotonVoz, BotonWhatsApp, DemoVideo, HomeEfectos, IrAAgentes } from './components/HomeClient'
 
@@ -26,41 +27,6 @@ import { BotonAria, BotonVoz, BotonWhatsApp, DemoVideo, HomeEfectos, IrAAgentes 
 // (calculadora, servicios, opiniones, desarrollo web…) NO se ha borrado: está en
 // `app/_legacy/HomeLegacy.tsx` a la espera de su página propia.
 
-// Vídeos reales ya publicados en el canal de SendaIA (los mismos de las páginas de sector).
-const DEMOS_NEGOCIO = [
-  {
-    clave: 'clinica',
-    id: 'FwcY5vLDPmw',
-    negocio: 'Clínica',
-    titulo: 'Agente de voz atendiendo y gestionando citas en una clínica',
-    texto: 'Atiende la llamada, entiende lo que necesita el paciente y deja la cita registrada.',
-    sector: '/sectores/clinicas',
-  },
-  {
-    clave: 'inmobiliaria',
-    id: 'w2PAe8R_3IY',
-    negocio: 'Inmobiliaria',
-    titulo: 'Agente de voz captando un contacto y agendando una visita',
-    texto: 'Del primer contacto a la visita: conversación, información del inmueble y cita.',
-    sector: '/sectores/inmobiliarias',
-  },
-  {
-    clave: 'restaurante',
-    id: 'iPZKD1bkFvE',
-    negocio: 'Restaurante / Bar',
-    titulo: 'Agente de voz atendiendo una reserva de principio a fin',
-    texto: 'Consulta, reserva y confirmación sin que nadie tenga que soltar lo que está haciendo.',
-    sector: '/sectores/restaurantes',
-  },
-]
-
-const PASOS = [
-  { n: '01', titulo: 'Analizamos', texto: 'Miramos cómo trabajáis hoy y dónde se va el tiempo.' },
-  { n: '02', titulo: 'Diseñamos', texto: 'Definimos el sistema alrededor de tu negocio, no al revés.' },
-  { n: '03', titulo: 'Conectamos', texto: 'Lo unimos a las herramientas que ya usáis cada día.' },
-  { n: '04', titulo: 'Ponemos en producción', texto: 'Empieza a trabajar. Lo vigilamos y lo ajustamos.' },
-]
-
 export default function Home() {
   return (
     <main className="lienzo">
@@ -68,7 +34,7 @@ export default function Home() {
       <SiteHeader />
 
       {/* ── 1 · HERO ── */}
-      <section className="sobre-azul relative overflow-hidden bg-azul text-roto">
+      <section className="sobre-azul pared-azul relative overflow-hidden bg-azul text-roto">
         <HeroFondo />
         <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 pb-20 pt-32 sm:px-8 sm:pt-40 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16 lg:pb-28">
           <div>
@@ -198,6 +164,11 @@ export default function Home() {
               </div>
             </div>
           </div>
+          <div className="aparece mt-8">
+            <Link href="/agentes" data-cta="home_agentes_detalle" className="inline-flex items-center gap-2 font-bold text-cobre-boton hover:underline">
+              Ver los tres agentes en detalle <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -229,6 +200,11 @@ export default function Home() {
               </article>
             ))}
           </div>
+          <div className="aparece mt-10">
+            <Link href="/demos" data-cta="home_todas_demos" className="inline-flex items-center gap-2 font-bold text-cobre-boton hover:underline">
+              Ver todas las demos <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+          </div>
           {/* Demo de facturas: la única que el visitante puede probar con un documento suyo. */}
           <div className="aparece mt-16 grid items-center gap-8 rounded-[2rem] bg-roto p-8 sm:p-12 lg:grid-cols-[1.4fr_auto]">
             <div>
@@ -241,9 +217,9 @@ export default function Home() {
                 factura que recibe tu empresa.
               </p>
             </div>
-            <a href="/demo/facturas" target="_blank" rel="noopener" data-cta="demo_facturas" className="btn btn-cobre">
+            <Link href="/demos/facturas" data-cta="demo_facturas" className="btn btn-cobre">
               <FileText className="h-4 w-4" aria-hidden /> Probar la demo de facturas
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -259,11 +235,14 @@ export default function Home() {
           <p className="mt-8 max-w-md border-l-2 border-cobre pl-5 text-lg leading-relaxed text-roto/75">
             No conectamos herramientas porque sí. Diseñamos el sistema alrededor de tu negocio.
           </p>
+          <Link href="/automatizaciones" data-cta="home_automatizaciones" className="btn btn-cobre mt-8">
+            Descubrir automatizaciones <ArrowRight className="h-4 w-4" aria-hidden />
+          </Link>
         </SistemaScroll>
       </section>
 
       {/* ── 5 · CASO REAL ── */}
-      <section id="caso" className="scroll-mt-20 py-20 sm:py-28">
+      <section id="caso" className="pared scroll-mt-20 py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="aparece max-w-3xl">
             <p className="eyebrow">Caso real</p>
@@ -302,11 +281,22 @@ export default function Home() {
               </p>
             </div>
           </div>
+          <div className="aparece mt-12 flex flex-col gap-4 sm:flex-row sm:items-center">
+            <Link href="/casos-reales#climatizacion" data-cta="home_caso_completo" className="btn btn-cobre">
+              Ver caso completo <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+            <p className="text-grafito-suave">
+              Otros casos:{' '}
+              <Link href="/casos-reales#peritacion" data-cta="home_caso_peritacion" className="font-semibold text-azul underline underline-offset-4">informes de peritación</Link>
+              {' · '}
+              <Link href="/casos-reales#clinica" data-cta="home_caso_clinica" className="font-semibold text-azul underline underline-offset-4">agente de voz en una clínica</Link>
+            </p>
+          </div>
         </div>
       </section>
 
       {/* ── 6 · CÓMO TRABAJAMOS ── */}
-      <section id="proceso" className="scroll-mt-20 bg-piedra py-20 sm:py-28">
+      <section id="proceso" className="pared scroll-mt-20 bg-piedra py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="aparece max-w-3xl">
             <p className="eyebrow">Cómo trabajamos</p>
@@ -324,6 +314,9 @@ export default function Home() {
           <p className="aparece mt-14 max-w-3xl font-display text-2xl leading-snug text-azul sm:text-3xl">
             No tienes que saber de IA. Tienes que conocer tu negocio. Del sistema nos encargamos nosotros.
           </p>
+          <Link href="/sendaia" data-cta="home_sendaia" className="aparece mt-8 inline-flex items-center gap-2 font-bold text-cobre-boton hover:underline">
+            Conoce SendaIA <ArrowRight className="h-4 w-4" aria-hidden />
+          </Link>
         </div>
       </section>
 

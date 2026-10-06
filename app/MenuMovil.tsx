@@ -15,7 +15,7 @@ import { track } from '@/lib/website-events'
  * propia lista, y navega con enlaces normales (antes hacía scroll a mano, que
  * solo valía dentro de la home).
  */
-export default function MenuMovil({ enlaces }: { enlaces: { href: string; label: string }[] }) {
+export default function MenuMovil({ enlaces, contacto = '/#contacto' }: { enlaces: { href: string; label: string }[]; contacto?: string }) {
   const [abierto, setAbierto] = useState(false)
 
   // Con el panel abierto no se scrollea la página de detrás.
@@ -99,7 +99,7 @@ export default function MenuMovil({ enlaces }: { enlaces: { href: string; label:
             </nav>
 
             <div className="border-t px-5 py-5" style={{ borderColor: 'rgba(23,58,74,0.12)' }}>
-              <Link href="/#contacto" onClick={() => alIr('diagnostico')} className="btn btn-cobre w-full">
+              <Link href={contacto} onClick={() => alIr('diagnostico')} className="btn btn-cobre w-full">
                 Solicitar diagnóstico <ArrowRight className="h-4 w-4" />
               </Link>
             </div>

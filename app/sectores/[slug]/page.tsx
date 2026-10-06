@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import Logo from '../../components/Logo'
+import SiteHeader from '../../components/SiteHeader'
+import SiteFooter from '../../components/SiteFooter'
 import { notFound } from 'next/navigation'
 import { ArrowRight, Check } from 'lucide-react'
 import { SECTORES_PAGINAS, getSector } from '../contenido'
@@ -73,7 +74,7 @@ export default async function SectorPage({ params }: { params: Promise<{ slug: s
                     '@type': 'ListItem',
                     position: 2,
                     name: 'Sectores',
-                    item: 'https://sendaia.es/#sectores',
+                    item: 'https://sendaia.es/demos#sectores',
                   },
                   {
                     '@type': 'ListItem',
@@ -87,22 +88,12 @@ export default async function SectorPage({ params }: { params: Promise<{ slug: s
           }),
         }}
       />
-      {/* NAVBAR simple */}
-      <nav className="fixed top-0 left-0 right-0 z-50 border-b" style={{ borderColor: 'var(--border)', background: 'rgba(16,43,55,0.85)', backdropFilter: 'blur(16px)' }}>
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <Link href="/" className="flex items-center">
-            <Logo className="h-12 w-auto" />
-          </Link>
-          <Link href="/#contacto" className="rounded-full px-5 py-2.5 text-sm font-semibold text-white transition-all hover:opacity-90" style={{ background: 'var(--accent)' }}>
-            Diagnóstico gratuito
-          </Link>
-        </div>
-      </nav>
+      <SiteHeader />
 
       {/* HERO */}
       <section className="relative overflow-hidden px-6 pt-36 pb-16 sm:pt-44 sm:pb-20">
         <div className="mx-auto max-w-4xl text-center">
-          <Link href="/#sectores" className="inline-block mb-6 text-sm transition-colors hover:text-white" style={{ color: 'var(--accent-light)' }}>
+          <Link href="/demos#sectores" className="inline-block mb-6 text-sm transition-colors hover:text-white" style={{ color: 'var(--accent-light)' }}>
             ← Todos los sectores
           </Link>
           <p className="mb-4 text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--accent)' }}>{s.eyebrow}</p>
@@ -253,13 +244,7 @@ export default async function SectorPage({ params }: { params: Promise<{ slug: s
         </div>
       </section>
 
-      {/* FOOTER mínimo */}
-      <footer className="border-t px-6 py-10" style={{ borderColor: 'var(--border)' }}>
-        <div className="mx-auto flex max-w-7xl flex-col items-center gap-3 text-center sm:flex-row sm:justify-between">
-          <Link href="/"><Logo className="h-11 w-auto" /></Link>
-          <p className="text-sm" style={{ color: 'rgba(245,245,245,0.5)' }}>Automatización con IA para PYMEs · <a href="tel:+34858215026" className="hover:text-white">858 215 026</a></p>
-        </div>
-      </footer>
+      <SiteFooter />
     </main>
   )
 }
