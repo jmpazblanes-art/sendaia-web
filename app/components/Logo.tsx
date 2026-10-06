@@ -1,5 +1,5 @@
 // Logo de SendaIA en vectorial (05-oct-2026).
-// Trazado sobre el PNG original (public/images/logo.png) y comprobado superpuesto:
+// Trazado sobre el PNG original del logo (carpeta BRANDING de Trabajo/SENDAIA) y comprobado superpuesto:
 // misma molécula (centro + 5 satélites, mismas posiciones y radios) y mismo texto
 // (Helvetica Bold convertida a contornos, así no depende de la fuente instalada).
 // Solo cambia el color: «Senda» en claro u oscuro según el fondo, «IA» en cobre.
