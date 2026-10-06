@@ -10,6 +10,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 1,
     },
+    // Páginas interiores (rediseño 06-oct-2026).
+    ...[
+      ['/agentes', 0.9],
+      ['/automatizaciones', 0.9],
+      ['/demos', 0.9],
+      ['/demos/facturas', 0.7],
+      ['/casos-reales', 0.8],
+      ['/sendaia', 0.7],
+      ['/calculadora', 0.6],
+      ['/soluciones', 0.5],
+    ].map(([ruta, prioridad]) => ({
+      url: `${SITE_URL}${ruta}`,
+      changeFrequency: 'monthly' as const,
+      priority: prioridad as number,
+    })),
     // Las 6 páginas de sector: cada una es una puerta de entrada indexable.
     ...SECTORES_PAGINAS.map((s) => ({
       url: `${SITE_URL}/sectores/${s.slug}`,

@@ -10,9 +10,9 @@ import { WHATSAPP_NUMBER, PREFILL } from '../WhatsAppButton'
 // WhatsApp usa el mismo número y el mismo texto que el botón flotante.
 
 /** page_view de la home + aparición suave de los bloques marcados con `.aparece`. */
-export function HomeEfectos() {
+export function HomeEfectos({ seccion = 'home' }: { seccion?: string }) {
   useEffect(() => {
-    track('page_view', { seccion: 'home' })
+    track('page_view', { seccion })
     const nodos = document.querySelectorAll<HTMLElement>('.aparece')
     if (!('IntersectionObserver' in window)) {
       nodos.forEach((n) => n.classList.add('visto'))
@@ -31,7 +31,7 @@ export function HomeEfectos() {
     )
     nodos.forEach((n) => io.observe(n))
     return () => io.disconnect()
-  }, [])
+  }, [seccion])
 
   // Clics en cualquier CTA marcado con data-cta (enlaces del servidor incluidos).
   useEffect(() => {
@@ -167,6 +167,39 @@ export function DemoVideo({ id, titulo, clave }: { id: string; titulo: string; c
               <Play className="h-5 w-5 translate-x-[1px]" fill="currentColor" aria-hidden />
             </span>
             <span className="text-sm font-bold" style={{ color: 'var(--roto)' }}>Ver demo</span>
+          </span>
+        </button>
+      )}
+    </div>
+  )
+}
+
+/** Vídeo grabado (mp4) bajo demanda: solo el póster hasta que se pulsa; no descarga nada antes. */
+export function VideoBajoDemanda({ src, poster, titulo, clave }: { src: string; poster: string; titulo: string; clave: string }) {
+  const [reproduce, setReproduce] = useState(false)
+  return (
+    <div className="relative w-full overflow-hidden rounded-2xl" style={{ aspectRatio: '16 / 9', background: '#102B37' }}>
+      {reproduce ? (
+        // eslint-disable-next-line jsx-a11y/media-has-caption
+        <video className="absolute inset-0 h-full w-full" src={src} poster={poster} controls autoPlay playsInline preload="auto" />
+      ) : (
+        <button
+          type="button"
+          onClick={() => {
+            track('cta_click', { cta: 'demo_video', demo: clave })
+            setReproduce(true)
+          }}
+          className="group absolute inset-0 h-full w-full cursor-pointer"
+          aria-label={`Ver vídeo: ${titulo}`}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={poster} alt="" loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
+          <span className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(16,43,55,0.78), rgba(16,43,55,0.12) 60%)' }} />
+          <span className="absolute bottom-4 left-4 flex items-center gap-3 text-left">
+            <span className="flex h-12 w-12 items-center justify-center rounded-full transition-transform duration-300 group-hover:scale-105" style={{ background: 'var(--cobre-boton)', color: 'var(--roto)' }}>
+              <Play className="h-5 w-5 translate-x-[1px]" fill="currentColor" aria-hidden />
+            </span>
+            <span className="text-sm font-bold" style={{ color: 'var(--roto)' }}>Ver vídeo</span>
           </span>
         </button>
       )}
