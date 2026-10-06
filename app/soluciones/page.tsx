@@ -5,10 +5,10 @@ import { meta } from '../components/datos'
 export const metadata = meta(
   '/soluciones',
   'Diseño y desarrollo web con IA integrada',
-  'Webs rápidas, cuidadas y con chat y voz con IA integrados, a medida y listas en días. Una solución complementaria a los sistemas de SendaIA.',
+  'Webs rápidas, cuidadas y con chat y voz con IA integrados, a medida. Una solución complementaria a los sistemas de SendaIA.',
 )
 
-const PUNTOS = ['Diseño a medida', 'Chat y voz con IA', 'Animaciones cuidadas', 'Lista en días']
+const PUNTOS = ['Diseño a medida', 'Chat y voz con IA', 'Animaciones cuidadas', 'Integrada con tus agentes']
 
 export default function Soluciones() {
   return (

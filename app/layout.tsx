@@ -135,10 +135,10 @@ export default function RootLayout({
           },
           {
             '@type': 'Question',
-            name: '¿Cuánto tiempo se tarda en poner en marcha un agente o automatización?',
+            name: '¿Cómo se empieza a trabajar con SendaIA?',
             acceptedAnswer: {
               '@type': 'Answer',
-              text: 'Tras un diagnóstico inicial de 30 minutos, la configuración e integración se realiza habitualmente en un plazo de 7 a 10 días laborables, dejando el sistema listo y probado en producción.',
+              text: 'Se empieza con un diagnóstico inicial de 30 minutos, sin coste, en el que analizamos tu proceso y te decimos qué tiene sentido automatizar y qué no. A partir de ahí diseñamos el sistema alrededor de tu negocio, lo conectamos con tus herramientas y lo ponemos en producción.',
             },
           },
           {
