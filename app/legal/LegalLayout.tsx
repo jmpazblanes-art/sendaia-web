@@ -1,44 +1,29 @@
-import Link from 'next/link'
-import Image from 'next/image'
-import Logo from '../components/Logo'
+import SiteHeader from '../components/SiteHeader'
+import SiteFooter from '../components/SiteFooter'
 import { ULTIMA_ACTUALIZACION } from './datos'
 
-// Marco común de las páginas legales. Mismo negro carbón + dorado que el resto
-// del sitio, sin animaciones: aquí lo que se busca es leer y encontrar rápido.
+// Marco común de las páginas legales (rediseño 06-oct-2026). Cabecera azul corta
+// y el texto sobre blanco roto, sin adornos: aquí lo que se busca es leer y
+// encontrar rápido. Usa la misma cabecera y el mismo pie que el resto de la web.
 export function LegalLayout({ titulo, children }: { titulo: string; children: React.ReactNode }) {
   return (
-    <main className="pared-azul" style={{ backgroundColor: '#102B37', color: '#f5f5f5', minHeight: '100vh' }}>
-      <nav
-        className="fixed top-0 left-0 right-0 z-50 border-b"
-        style={{ borderColor: 'rgba(184,115,74,0.2)', background: 'rgba(16,43,55,0.85)', backdropFilter: 'blur(16px)' }}
-      >
-        <div className="mx-auto flex max-w-4xl items-center justify-between px-6 py-4">
-          <Link href="/" className="flex items-center">
-            <Logo className="h-12 w-auto" />
-          </Link>
-          <Link href="/#contacto" className="text-sm font-semibold" style={{ color: 'var(--accent-light)' }}>
-            Volver a la web
-          </Link>
+    <main className="lienzo">
+      <SiteHeader />
+      <section className="sobre-azul pared-azul relative bg-azul text-roto">
+        <div className="mx-auto max-w-4xl px-5 pb-12 pt-32 sm:px-8 sm:pt-40">
+          <p className="eyebrow">Información legal</p>
+          <h1 className="mt-4 text-4xl font-semibold leading-[1.08] sm:text-5xl">{titulo}</h1>
+          <p className="mt-4 text-sm text-roto/70">Última actualización: {ULTIMA_ACTUALIZACION}</p>
         </div>
-      </nav>
-
-      <article className="mx-auto max-w-4xl px-6 pb-24 pt-32">
-        <h1 className="text-3xl font-black sm:text-4xl">{titulo}</h1>
-        <p className="mt-3 text-sm" style={{ color: 'rgba(245,245,245,0.5)' }}>
-          Última actualización: {ULTIMA_ACTUALIZACION}
-        </p>
-        <div className="legal-body mt-10 space-y-6 text-sm leading-7" style={{ color: 'rgba(245,245,245,0.8)' }}>
-          {children}
-        </div>
+      </section>
+      <article className="mx-auto max-w-4xl px-5 pb-24 pt-12 text-grafito sm:px-8">
+        <div className="legal-body space-y-6 text-[0.95rem] leading-7">{children}</div>
       </article>
+      <SiteFooter />
     </main>
   )
 }
 
 export function H2({ children }: { children: React.ReactNode }) {
-  return (
-    <h2 className="pt-4 text-lg font-bold" style={{ color: '#f5f5f5' }}>
-      {children}
-    </h2>
-  )
+  return <h2 className="pt-4 font-display text-2xl font-semibold text-azul">{children}</h2>
 }

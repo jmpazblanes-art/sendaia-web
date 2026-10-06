@@ -12,7 +12,7 @@ const PUNTOS = ['Diseño a medida', 'Chat y voz con IA', 'Animaciones cuidadas',
 
 export default function Soluciones() {
   return (
-    <PaginaInterior seccion="soluciones">
+    <PaginaInterior seccion="soluciones" migas={[{ nombre: 'Soluciones', ruta: '/soluciones' }]}>
       <Hero
         eyebrow="Soluciones complementarias"
         titulo="¿Te gusta esta web?"

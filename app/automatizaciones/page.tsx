@@ -103,7 +103,7 @@ const BLOQUES: Bloque[] = [
 
 export default function Automatizaciones() {
   return (
-    <PaginaInterior seccion="automatizaciones">
+    <PaginaInterior seccion="automatizaciones" migas={[{ nombre: 'Automatizaciones', ruta: '/automatizaciones' }]}>
       <Hero
         eyebrow="Automatizaciones"
         titulo="Los agentes son solo la parte que ves."

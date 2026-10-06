@@ -10,7 +10,7 @@ export const metadata = meta(
 
 export default function PaginaCalculadora() {
   return (
-    <PaginaInterior seccion="calculadora">
+    <PaginaInterior seccion="calculadora" migas={[{ nombre: 'Calculadora', ruta: '/calculadora' }]}>
       <Hero
         eyebrow="Calculadora de automatización"
         titulo="Calcula cuánto trabajo manual"

@@ -8,10 +8,33 @@ import { HomeEfectos } from './HomeClient'
 
 // Armazón común de las páginas interiores (06-oct-2026): cabecera, voz y Aria,
 // WhatsApp flotante y pie. Cada página pone solo su contenido.
-export function PaginaInterior({ seccion, children }: { seccion: string; children: React.ReactNode }) {
+// JSON-LD: se escapa `<` para que ningún texto pueda cerrar la etiqueta <script>.
+const ldJson = (o: unknown) => JSON.stringify(o).replace(/</g, '\\u003c')
+
+export type Miga = { nombre: string; ruta: string }
+
+export function PaginaInterior({ seccion, extra, migas, children }: { seccion: string; extra?: Record<string, unknown>; migas?: Miga[]; children: React.ReactNode }) {
   return (
     <main className="lienzo">
-      <HomeEfectos seccion={seccion} />
+      <HomeEfectos seccion={seccion} extra={extra} />
+      {migas && migas.length > 0 && (
+        // Ruta de navegación para buscadores: Inicio › … › esta página.
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: ldJson({
+              '@context': 'https://schema.org',
+              '@type': 'BreadcrumbList',
+              itemListElement: [{ nombre: 'Inicio', ruta: '' }, ...migas].map((m, i) => ({
+                '@type': 'ListItem',
+                position: i + 1,
+                name: m.nombre,
+                item: `https://sendaia.es${m.ruta}`,
+              })),
+            }),
+          }}
+        />
+      )}
       <SiteHeader contacto="#contacto" />
       {children}
       <AssistantDock />

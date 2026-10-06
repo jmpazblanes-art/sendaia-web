@@ -12,7 +12,7 @@ export const metadata = meta(
 
 export default function Demos() {
   return (
-    <PaginaInterior seccion="demos">
+    <PaginaInterior seccion="demos" migas={[{ nombre: 'Demos', ruta: '/demos' }]}>
       <Hero
         eyebrow="Demos"
         titulo="No imagines lo que podemos hacer."
@@ -78,7 +78,7 @@ export default function Demos() {
                 <DemoVideo id={d.id} titulo={d.titulo} clave={`demos_${d.clave}`} />
                 <h3 className="mt-5 font-display text-2xl font-semibold text-azul">{d.negocio}</h3>
                 <p className="mt-2 leading-relaxed text-grafito-suave">{d.texto}</p>
-                <Link href={d.sector} data-cta={`demos_sector_${d.clave}`} className="mt-3 inline-flex items-center gap-1.5 text-sm font-bold text-cobre-boton hover:underline">
+                <Link href={d.sector} data-cta={`demos_sector_${d.clave}`} className="mt-3 inline-flex items-center gap-1.5 text-sm font-bold text-cobre-texto hover:underline">
                   Cómo lo aplicamos <ArrowRight className="h-3.5 w-3.5" aria-hidden />
                 </Link>
               </article>

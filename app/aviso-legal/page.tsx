@@ -3,7 +3,7 @@ import { LegalLayout, H2 } from '../legal/LegalLayout'
 import { TITULAR } from '../legal/datos'
 
 export const metadata: Metadata = {
-  title: 'Aviso legal — SendaIA',
+  title: 'Aviso legal',
   description: 'Información legal del titular del sitio web sendaia.es conforme a la LSSI-CE.',
   robots: { index: true, follow: true },
 }

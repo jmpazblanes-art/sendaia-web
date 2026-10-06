@@ -16,7 +16,7 @@ const DEMO = 'https://demo-pedidos-legumbre-espino.vercel.app/'
 
 export default function DemoFacturas() {
   return (
-    <PaginaInterior seccion="demo-facturas">
+    <PaginaInterior seccion="demo-facturas" migas={[{ nombre: 'Demos', ruta: '/demos' }, { nombre: 'Demo de facturas', ruta: '/demos/facturas' }]}>
       <Hero
         eyebrow="Demo · Facturación"
         titulo="Prueba una automatización real."

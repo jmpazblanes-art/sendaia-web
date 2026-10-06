@@ -4,7 +4,7 @@ import { LegalLayout, H2 } from '../legal/LegalLayout'
 import { TITULAR } from '../legal/datos'
 
 export const metadata: Metadata = {
-  title: 'Política de cookies — SendaIA',
+  title: 'Política de cookies',
   description: 'Uso de cookies y almacenamiento local en sendaia.es.',
   robots: { index: true, follow: true },
 }
@@ -58,9 +58,9 @@ export default function CookiesPage() {
       </p>
       <p>
         Para cualquier duda sobre el tratamiento de tus datos, consulta la{' '}
-        <Link href="/privacidad" style={{ color: 'var(--accent-light)' }}>política de privacidad</Link>{' '}
+        <Link href="/privacidad" style={{ color: 'var(--cobre-texto)' }}>política de privacidad</Link>{' '}
         o escríbenos a{' '}
-        <a href={`mailto:${TITULAR.email}`} style={{ color: 'var(--accent-light)' }}>{TITULAR.email}</a>.
+        <a href={`mailto:${TITULAR.email}`} style={{ color: 'var(--cobre-texto)' }}>{TITULAR.email}</a>.
       </p>
     </LegalLayout>
   )

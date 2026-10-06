@@ -73,9 +73,18 @@ Rutas nuevas, todas estáticas y en el sitemap: `/agentes`, `/automatizaciones`,
 ### Efecto pared (decisión de Pachi, 06/10)
 Textura mineral tipo estuco / microcemento fino, **muy sutil: «más que se sienta que se vea»**, sin patrón repetido, con variaciones mínimas de tono y profundidad; aire de consultora premium con dirección de arte arquitectónica. Es **opt-in**: clases `.pared` (sobre piedra / blanco roto) y `.pared-azul` (sobre azul) en `globals.css`, pensadas para cabeceras, zonas editoriales y pie. **Las zonas con agentes, demos, formularios, calculadora y el escenario del sistema van limpias.** No volver a la versión marcada del 05/10 (estuco con relieve) ni a las grietas de cobre.
 
+## Bloque 3 — contraste, tarjetas por página, sector y legales (06/10/2026)
+
+- **Contraste AA (medido con Lighthouse)**. Tokens: `--cobre-texto` `#905330` para TEXTO pequeño sobre claro (el cobre de marca `#B8734A` solo daba 2,9 sobre piedra y 3,5 sobre blanco roto: queda para formas e iconos) y `--cobre-boton` `#A25F39` para botones con texto claro (4,68). `.eyebrow` ya usa `--cobre-texto`; sobre azul va `--cobre-claro`. Regla: sobre azul, texto `roto` nunca por debajo de `/65`.
+- **Tarjeta social por página**: `app/components/og.tsx` (`tarjeta()`), y un `opengraph-image.tsx` mínimo en cada ruta; el de `sectores/[slug]` lee `getSector(slug)`. Al añadir una página nueva, copiar uno de esos ficheros.
+- **Sectores y legales** usan ya `PaginaInterior` / `SiteHeader` / `SiteFooter`. Los títulos de sector no llevan «— SendaIA» (la plantilla del sitio ya añade « · SendaIA»; antes salía duplicado).
+- **Migas de pan**: `PaginaInterior` acepta `migas` y emite `BreadcrumbList`. El JSON-LD se escapa con `ldJson()` (`<` → `\u003c`).
+- **Borrado**: la home antigua (`app/_legacy`) y `public/frames-robot` (73 fotogramas, 4,1 MB). Quedan ~25 MB de imágenes y vídeos de `public/` sin uso (ver `git log`), conservados por si algo externo los enlaza.
+- **Rendimiento (móvil, Lighthouse + medición propia con CPU x4 y 4G lenta)**: el LCP real de la home es ~1,2 s con y sin la textura; los 3,9 s que da Lighthouse son su simulación. La textura NO cuesta rendimiento medible.
+- **Pendiente de revisar con Pachi**: las páginas de sector llevan cifras de mercado sin fuente («convierte hasta un 25 %», «entre un 12 % y un 19 % de no-show»…) de antes del rediseño. Conviene citar fuente o quitarlas (regla: no inventar métricas).
+
 **Pendiente**
-- Imagen propia por página al compartir (hoy todas heredan la del sitio).
-- Rediseño de fondo de las páginas de sector y legales (llevan cabecera, pie, paleta y logo nuevos).
+- Rediseñar a fondo el contenido (no solo la maqueta) de los sectores cuando haya fotos reales (las encarga Pachi a ChatGPT).
 - Aircontec: caso en anónimo y sin capturas hasta autorización expresa.
 - Este repo NO tiene `vercel.json` con `ignoreCommand`: un commit solo de docs dispara build de producción.
 

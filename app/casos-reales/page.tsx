@@ -12,7 +12,7 @@ export const metadata = meta(
 
 export default function CasosReales() {
   return (
-    <PaginaInterior seccion="casos-reales">
+    <PaginaInterior seccion="casos-reales" migas={[{ nombre: 'Casos reales', ruta: '/casos-reales' }]}>
       <Hero
         eyebrow="Casos reales"
         titulo="Proyectos que ya están en marcha."
@@ -54,7 +54,7 @@ export default function CasosReales() {
               <ol className="mt-6 grid gap-x-10 gap-y-5 sm:grid-cols-2 lg:grid-cols-3">
                 {c.pasos.map((p, k) => (
                   <li key={p} className="flex items-start gap-4">
-                    <span className="font-display text-3xl font-semibold leading-none text-cobre">{String(k + 1).padStart(2, '0')}</span>
+                    <span className="font-display text-3xl font-semibold leading-none text-cobre-texto">{String(k + 1).padStart(2, '0')}</span>
                     <span className="leading-relaxed">{p}</span>
                   </li>
                 ))}

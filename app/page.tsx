@@ -24,8 +24,7 @@ import { BotonAria, BotonVoz, BotonWhatsApp, DemoVideo, HomeEfectos, IrAAgentes 
 // Enseñar antes que explicar: primero los tres agentes que ya funcionan (voz,
 // WhatsApp y Aria), después las demos por negocio, el sistema que hay detrás, un
 // caso real y el diagnóstico. El resto del contenido de la home anterior
-// (calculadora, servicios, opiniones, desarrollo web…) NO se ha borrado: está en
-// `app/_legacy/HomeLegacy.tsx` a la espera de su página propia.
+// (calculadora, servicios, opiniones, desarrollo web) vive ya en sus páginas.
 
 export default function Home() {
   return (
@@ -53,13 +52,13 @@ export default function Home() {
                 Ver casos reales
               </a>
             </div>
-            <p className="mt-10 text-sm text-roto/60">Nosotros ponemos los sistemas. Tú disfrutas.</p>
+            <p className="mt-10 text-sm text-roto/70">Nosotros ponemos los sistemas. Tú disfrutas.</p>
           </div>
 
           {/* Representación sobria del sistema trabajando: qué entra y qué deja hecho. */}
           <div aria-hidden className="hidden lg:block">
             <div className="rounded-3xl border border-roto/15 bg-azul-hondo/80 p-7 shadow-[0_30px_80px_rgba(8,24,32,0.45)] backdrop-blur-sm">
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-roto/50">El sistema, trabajando</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-roto/65">El sistema, trabajando</p>
               <ul className="mt-6 space-y-4">
                 {[
                   { I: PhoneCall, entra: 'Entra una llamada', hace: 'Atendida · cita registrada' },
@@ -73,13 +72,13 @@ export default function Home() {
                     </span>
                     <span className="min-w-0 flex-1">
                       <span className="block text-[0.95rem] font-semibold">{entra}</span>
-                      <span className="block text-sm text-roto/60">{hace}</span>
+                      <span className="block text-sm text-roto/70">{hace}</span>
                     </span>
                     <Check className="h-4 w-4 shrink-0 text-cobre-claro" />
                   </li>
                 ))}
               </ul>
-              <p className="mt-6 text-sm leading-relaxed text-roto/55">
+              <p className="mt-6 text-sm leading-relaxed text-roto/65">
                 Sin que nadie de tu equipo tenga que acordarse de hacerlo.
               </p>
             </div>
@@ -115,7 +114,7 @@ export default function Home() {
                   <Phone className="h-4 w-4" aria-hidden /> 858 215 026
                 </a>
               </div>
-              <p className="mt-5 text-sm text-roto/55">
+              <p className="mt-5 text-sm text-roto/65">
                 Desde el ordenador hablas por el micrófono. Desde el móvil, te llama al agente por teléfono.
               </p>
             </div>
@@ -165,7 +164,7 @@ export default function Home() {
             </div>
           </div>
           <div className="aparece mt-8">
-            <Link href="/agentes" data-cta="home_agentes_detalle" className="inline-flex items-center gap-2 font-bold text-cobre-boton hover:underline">
+            <Link href="/agentes" data-cta="home_agentes_detalle" className="inline-flex items-center gap-2 font-bold text-cobre-texto hover:underline">
               Ver los tres agentes en detalle <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
           </div>
@@ -193,7 +192,7 @@ export default function Home() {
                 <Link
                   href={d.sector}
                   data-cta={`demo_sector_${d.clave}`}
-                  className="mt-3 inline-flex items-center gap-1.5 text-sm font-bold text-cobre-boton hover:underline"
+                  className="mt-3 inline-flex items-center gap-1.5 text-sm font-bold text-cobre-texto hover:underline"
                 >
                   Cómo lo aplicamos <ArrowRight className="h-3.5 w-3.5" aria-hidden />
                 </Link>
@@ -201,7 +200,7 @@ export default function Home() {
             ))}
           </div>
           <div className="aparece mt-10">
-            <Link href="/demos" data-cta="home_todas_demos" className="inline-flex items-center gap-2 font-bold text-cobre-boton hover:underline">
+            <Link href="/demos" data-cta="home_todas_demos" className="inline-flex items-center gap-2 font-bold text-cobre-texto hover:underline">
               Ver todas las demos <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
           </div>
@@ -305,7 +304,7 @@ export default function Home() {
           <ol className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
             {PASOS.map((p) => (
               <li key={p.n} className="aparece border-t-2 border-azul pt-6">
-                <span className="font-display text-5xl font-semibold text-cobre">{p.n}</span>
+                <span className="font-display text-5xl font-semibold text-cobre-texto">{p.n}</span>
                 <h3 className="mt-4 text-xl font-bold uppercase tracking-[0.06em] text-azul">{p.titulo}</h3>
                 <p className="mt-3 leading-relaxed text-grafito-suave">{p.texto}</p>
               </li>
@@ -314,7 +313,7 @@ export default function Home() {
           <p className="aparece mt-14 max-w-3xl font-display text-2xl leading-snug text-azul sm:text-3xl">
             No tienes que saber de IA. Tienes que conocer tu negocio. Del sistema nos encargamos nosotros.
           </p>
-          <Link href="/sendaia" data-cta="home_sendaia" className="aparece mt-8 inline-flex items-center gap-2 font-bold text-cobre-boton hover:underline">
+          <Link href="/sendaia" data-cta="home_sendaia" className="aparece mt-8 inline-flex items-center gap-2 font-bold text-cobre-texto hover:underline">
             Conoce SendaIA <ArrowRight className="h-4 w-4" aria-hidden />
           </Link>
         </div>

@@ -18,7 +18,7 @@ const IDEAS = [
 
 export default function SobreSendaia() {
   return (
-    <PaginaInterior seccion="sendaia">
+    <PaginaInterior seccion="sendaia" migas={[{ nombre: 'SendaIA', ruta: '/sendaia' }]}>
       <Hero
         eyebrow="SendaIA"
         titulo="Sistemas con IA"
@@ -40,7 +40,7 @@ export default function SobreSendaia() {
           <div className="mt-14 grid gap-10 border-t border-azul/15 pt-10 md:grid-cols-3 md:gap-12">
             {IDEAS.map((i) => (
               <div key={i.titulo} className="aparece">
-                <h3 className="font-display text-3xl font-semibold text-cobre">{i.titulo}</h3>
+                <h3 className="font-display text-3xl font-semibold text-cobre-texto">{i.titulo}</h3>
                 <p className="mt-3 text-lg leading-relaxed">{i.texto}</p>
               </div>
             ))}
@@ -54,7 +54,7 @@ export default function SobreSendaia() {
           <ol className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
             {PASOS.map((p) => (
               <li key={p.n} className="aparece border-t-2 border-azul pt-6">
-                <span className="font-display text-5xl font-semibold text-cobre">{p.n}</span>
+                <span className="font-display text-5xl font-semibold text-cobre-texto">{p.n}</span>
                 <h3 className="mt-4 text-xl font-bold uppercase tracking-[0.06em] text-azul">{p.titulo}</h3>
                 <p className="mt-3 leading-relaxed text-grafito-suave">{p.texto}</p>
               </li>
