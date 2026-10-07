@@ -970,37 +970,71 @@
     </div>
   </section>
 
-  <!-- CASOS REALES ANTES Y DESPUÉS (INTERACTIVE SLIDER) -->
+  <!-- CASOS REALES ANTES Y DESPUÉS DADENT -->
   <section class="cases-section" id="antes-despues">
     <div class="container">
       <div class="section-head">
-        <span class="sub">Excelencia Clínica</span>
-        <h2>Resultados Reales en Granada</h2>
-        <p>Desliza el comparador interactivo para ver la precisión del escáner 3D y la ortodoncia digital en casos reales de nuestros pacientes.</p>
+        <span class="sub">Excelencia Clínica Comprobada</span>
+        <h2>Casos Clínicos Reales en DADENT</h2>
+        <p>Resultados reales de pacientes tratados en nuestra clínica de Camino de Ronda con cirugía guiada 3D y estética dental avanzada.</p>
       </div>
 
-      <div class="ba-container">
-        <div class="ba-tabs">
-          <button class="ba-tab active" onclick="switchCase('invisalign', this)">Invisalign (Alineación)</button>
-          <button class="ba-tab" onclick="switchCase('implantes', this)">Implante Dental 3D</button>
-          <button class="ba-tab" onclick="switchCase('carillas', this)">Carillas Estéticas</button>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px;">
+        <!-- CASO 1: JOSE -->
+        <div style="background: #FFFFFF; border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); transition: transform 0.2s, box-shadow 0.2s;">
+          <div style="position: relative; background: #0F172A; height: 320px; overflow: hidden;">
+            <img src="https://clinicadentaldadent.com/wp-content/uploads/2026/09/caso-realizado-10.webp" alt="Caso Clínico Implantes Jose" style="width: 100%; height: 100%; object-fit: cover; object-position: center; display: block;">
+            <div style="position: absolute; top: 12px; left: 12px; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); color: #FFF; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 999px;">Arriba: ANTES · Abajo: DESPUÉS</div>
+          </div>
+          <div style="padding: 24px;">
+            <div style="font-size: 12px; font-weight: 700; color: var(--cyan); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Rehabilitación Oral Completa</div>
+            <h3 style="font-size: 18px; font-weight: 800; color: var(--navy); margin-bottom: 10px;">Caso Jose: Recuperación Funcional y Estética</h3>
+            <p style="font-size: 13.5px; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px;">
+              6 implantes superiores con cirugía guiada por ordenador y coronas de zirconio sobre dientes. Recuperación de 7 piezas perdidas.
+            </p>
+            <blockquote style="font-size: 13px; font-style: italic; color: var(--text-main); border-left: 3px solid var(--cyan); padding-left: 12px; margin-bottom: 18px;">
+              "Yo no pensaba arreglarme también abajo... pero al ver cómo quedó arriba, dije: ¡abajo también! Vuelvo a sonreír con seguridad."
+            </blockquote>
+            <a href="#cita" class="btn-primary" style="width: 100%; justify-content: center; font-size: 13.5px; padding: 10px;">Consultar Caso Similar →</a>
+          </div>
         </div>
 
-        <div class="ba-slider-wrap" id="ba-wrap">
-          <div class="ba-label ba-label-before">Antes</div>
-          <div class="ba-label ba-label-after">Después DADENT</div>
-          
-          <img src="https://clinicadentaldadent.com/wp-content/uploads/2023/01/ortodoncia-invisible-invisalign-granada-3.webp" alt="Caso Clínico Después" class="ba-after" id="img-after">
-          
-          <div class="ba-before" id="ba-before-wrap">
-            <img src="https://clinicadentaldadent.com/wp-content/uploads/2023/01/Clinica-dadent-home.webp" alt="Caso Clínico Antes" id="img-before" style="filter: grayscale(80%) contrast(1.1);">
+        <!-- CASO 2: OLGA -->
+        <div style="background: #FFFFFF; border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); transition: transform 0.2s, box-shadow 0.2s;">
+          <div style="position: relative; background: #0F172A; height: 320px; overflow: hidden;">
+            <img src="https://clinicadentaldadent.com/wp-content/uploads/2026/09/caso-realizado-11.webp" alt="Caso Clínico Carillas Olga" style="width: 100%; height: 100%; object-fit: cover; object-position: center; display: block;">
+            <div style="position: absolute; top: 12px; left: 12px; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); color: #FFF; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 999px;">Arriba: ANTES · Abajo: DESPUÉS</div>
           </div>
-
-          <div class="ba-handle" id="ba-handle">
-            <div class="ba-handle-circle">↔</div>
+          <div style="padding: 24px;">
+            <div style="font-size: 12px; font-weight: 700; color: var(--cyan); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Estética Dental y Sonrisa</div>
+            <h3 style="font-size: 18px; font-weight: 800; color: var(--navy); margin-bottom: 10px;">Caso Olga: Sonrisa Luminosa y Armónica</h3>
+            <p style="font-size: 13.5px; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px;">
+              Perfeccionamiento de sonrisa mediante 5 microcarillas superiores y 5 inferiores en solo tres citas, con corrección de forma y color.
+            </p>
+            <blockquote style="font-size: 13px; font-style: italic; color: var(--text-main); border-left: 3px solid var(--cyan); padding-left: 12px; margin-bottom: 18px;">
+              "Estoy contentísima. Sigo siendo yo, pero con una sonrisa mucho más bonita y con ganas de lucirla todo el día."
+            </blockquote>
+            <a href="#cita" class="btn-primary" style="width: 100%; justify-content: center; font-size: 13.5px; padding: 10px;">Consultar Caso Similar →</a>
           </div>
+        </div>
 
-          <input type="range" min="0" max="100" value="50" class="ba-slider-range" id="ba-slider" oninput="updateBA(this.value)">
+        <!-- CASO 3: LOLA -->
+        <div style="background: #FFFFFF; border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); transition: transform 0.2s, box-shadow 0.2s;">
+          <div style="position: relative; background: #0F172A; height: 320px; overflow: hidden;">
+            <img src="https://clinicadentaldadent.com/wp-content/uploads/2026/09/caso-realizado-12.webp" alt="Caso Clínico Implantes Lola" style="width: 100%; height: 100%; object-fit: cover; object-position: center; display: block;">
+            <div style="position: absolute; top: 12px; left: 12px; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); color: #FFF; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 999px;">Arriba: ANTES · Abajo: DESPUÉS</div>
+          </div>
+          <div style="padding: 24px;">
+            <div style="font-size: 12px; font-weight: 700; color: var(--cyan); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Implantología y Soporte Labial</div>
+            <h3 style="font-size: 18px; font-weight: 800; color: var(--navy); margin-bottom: 10px;">Caso Lola: Rejuvenecimiento y Naturalidad</h3>
+            <p style="font-size: 13.5px; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px;">
+              6 implantes superiores y prótesis fija de alta precisión. Recuperación de la mordida y del volumen del labio superior.
+            </p>
+            <blockquote style="font-size: 13px; font-style: italic; color: var(--text-main); border-left: 3px solid var(--cyan); padding-left: 12px; margin-bottom: 18px;">
+              "Me ha quedado natural, que era lo que yo buscaba. Cuando me miro al espejo me veo yo misma con total armonía."
+            </blockquote>
+            <a href="#cita" class="btn-primary" style="width: 100%; justify-content: center; font-size: 13.5px; padding: 10px;">Consultar Caso Similar →</a>
+          </div>
         </div>
       </div>
     </div>
