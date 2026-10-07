@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link from "next/link"
 import {
   ArrowRight,
   CalendarCheck,
@@ -9,22 +9,23 @@ import {
   Phone,
   PhoneCall,
   Sparkles,
-} from 'lucide-react'
-import SiteHeader from './components/SiteHeader'
-import SiteFooter from './components/SiteFooter'
-import AssistantDock from './components/AssistantDock'
-import ContactForm from './components/ContactForm'
-import WhatsAppButton from './WhatsAppButton'
-import SistemaScroll from './components/SistemaScroll'
-import { DEMOS_NEGOCIO, PASOS } from './components/datos'
-import HeroFondo from './components/HeroFondo'
-import { BotonAria, BotonVoz, BotonWhatsApp, DemoVideo, HomeEfectos, IrAAgentes } from './components/HomeClient'
+  Stethoscope,
+  Wrench,
+  Receipt,
+} from "lucide-react"
+import SiteHeader from "./components/SiteHeader"
+import SiteFooter from "./components/SiteFooter"
+import AssistantDock from "./components/AssistantDock"
+import ContactForm from "./components/ContactForm"
+import WhatsAppButton from "./WhatsAppButton"
+import SistemaScroll from "./components/SistemaScroll"
+import { PASOS } from "./components/datos"
+import HeroFondo from "./components/HeroFondo"
+import { BotonAria, BotonVoz, BotonWhatsApp, HomeEfectos, IrAAgentes } from "./components/HomeClient"
 
-// HOME — escaparate (rediseño 05-oct-2026).
-// Enseñar antes que explicar: primero los tres agentes que ya funcionan (voz,
-// WhatsApp y Aria), después las demos por negocio, el sistema que hay detrás, un
-// caso real y el diagnóstico. El resto del contenido de la home anterior
-// (calculadora, servicios, opiniones, desarrollo web) vive ya en sus páginas.
+// PREVIEW: Home estilizada, rapida y directa.
+// Mantiene intactos: Hero, los 3 Agentes Vivos y el SistemaScroll (animacion con scroll).
+// Convierte Demos y Casos en escaparates compactos que enlazan a sus paginas dedicadas.
 
 export default function Home() {
   return (
@@ -39,7 +40,7 @@ export default function Home() {
           <div>
             <p className="eyebrow">SendaIA · Sistemas con IA para empresas</p>
             <h1 className="mt-6 text-[2.5rem] font-semibold leading-[1.04] sm:text-6xl lg:text-[4.1rem]">
-              Tu empresa no necesita más herramientas.{' '}
+              Tu empresa no necesita más herramientas.{" "}
               <span className="text-cobre-claro">Necesita sistemas que trabajen.</span>
             </h1>
             <p className="mt-7 max-w-xl text-lg leading-relaxed text-roto/80 sm:text-xl">
@@ -55,16 +56,16 @@ export default function Home() {
             <p className="mt-10 text-sm text-roto/70">Nosotros ponemos los sistemas. Tú disfrutas.</p>
           </div>
 
-          {/* Representación sobria del sistema trabajando: qué entra y qué deja hecho. */}
+          {/* Representacion del sistema trabajando */}
           <div aria-hidden className="hidden lg:block">
             <div className="rounded-3xl border border-roto/15 bg-azul-hondo/80 p-7 shadow-[0_30px_80px_rgba(8,24,32,0.45)] backdrop-blur-sm">
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-roto/65">El sistema, trabajando</p>
               <ul className="mt-6 space-y-4">
                 {[
-                  { I: PhoneCall, entra: 'Entra una llamada', hace: 'Atendida · cita registrada' },
-                  { I: MessageCircle, entra: 'Llega un WhatsApp', hace: 'Respondido · datos recogidos' },
-                  { I: FileText, entra: 'Llega una factura', hace: 'Leída · asignada a su sitio' },
-                  { I: Mail, entra: 'Entra un correo', hace: 'Clasificado · borrador listo' },
+                  { I: PhoneCall, entra: "Entra una llamada", hace: "Atendida · cita registrada" },
+                  { I: MessageCircle, entra: "Llega un WhatsApp", hace: "Respondido · datos recogidos" },
+                  { I: FileText, entra: "Llega una factura", hace: "Leída · asignada a su sitio" },
+                  { I: Mail, entra: "Entra un correo", hace: "Clasificado · borrador listo" },
                 ].map(({ I, entra, hace }) => (
                   <li key={entra} className="flex items-center gap-4 rounded-2xl bg-roto/[0.05] px-4 py-3.5">
                     <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-roto/10 text-cobre-claro">
@@ -86,7 +87,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 2 · AGENTES (protagonistas) ── */}
+      {/* ── 2 · AGENTES VIVOS (Los protagonistas) ── */}
       <section id="agentes" className="scroll-mt-20 py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="aparece max-w-3xl">
@@ -97,7 +98,7 @@ export default function Home() {
             <p className="mt-5 text-xl text-grafito-suave">No te contamos lo que pueden hacer. Te dejamos verlo.</p>
           </div>
 
-          {/* Voz: el protagonista, a todo el ancho */}
+          {/* Voz: protagonista */}
           <div className="aparece sobre-azul mt-14 grid overflow-hidden rounded-[2rem] bg-azul text-roto lg:grid-cols-[1.1fr_0.9fr]">
             <div className="p-8 sm:p-12 lg:p-14">
               <p className="eyebrow">Agente de voz</p>
@@ -124,7 +125,7 @@ export default function Home() {
                   <span
                     key={i}
                     className="block w-[7px] rounded-full"
-                    style={{ height: `${h}%`, background: i % 4 === 2 ? 'var(--cobre)' : 'rgba(250,248,245,0.28)' }}
+                    style={{ height: `${h}%`, background: i % 4 === 2 ? "var(--cobre)" : "rgba(250,248,245,0.28)" }}
                   />
                 ))}
               </div>
@@ -139,8 +140,7 @@ export default function Home() {
                 Escríbele como lo haría un cliente.
               </h3>
               <p className="mt-5 text-lg leading-relaxed text-grafito-suave">
-                Responde consultas, recoge información, realiza seguimientos y puede conectarse con los sistemas del
-                negocio.
+                Responde consultas, recoge información, realiza seguimientos y se conecta directamente con tu sistema.
               </p>
               <div className="mt-auto pt-8">
                 <BotonWhatsApp origen="home_agentes" />
@@ -163,67 +163,93 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="aparece mt-8">
-            <Link href="/agentes" data-cta="home_agentes_detalle" className="inline-flex items-center gap-2 font-bold text-cobre-texto hover:underline">
-              Ver los tres agentes en detalle <ArrowRight className="h-4 w-4" aria-hidden />
-            </Link>
-          </div>
         </div>
       </section>
 
-      {/* ── 3 · DEMOS POR NEGOCIO ── */}
-      <section id="demos" className="scroll-mt-20 bg-piedra py-20 sm:py-28">
+      {/* ── 3 · ESCAPARATE DE DEMOS (Compacto: 3 tarjetas de impacto sin saturar) ── */}
+      <section id="demos" className="scroll-mt-20 bg-piedra py-16 sm:py-24">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="aparece max-w-3xl">
-            <p className="eyebrow">Demos</p>
-            <h2 className="mt-4 text-4xl font-semibold leading-[1.08] text-azul sm:text-5xl">
-              Un agente. Distintos negocios.
-            </h2>
-            <p className="mt-5 text-xl text-grafito-suave">
-              El mismo agente, adaptado a cómo trabaja cada uno. Son grabaciones del agente funcionando.
-            </p>
-          </div>
-          <div className="mt-14 grid gap-10 md:grid-cols-3 md:gap-7">
-            {DEMOS_NEGOCIO.map((d) => (
-              <article key={d.clave} className="aparece">
-                <DemoVideo id={d.id} titulo={d.titulo} clave={d.clave} />
-                <h3 className="mt-5 font-display text-2xl font-semibold text-azul">{d.negocio}</h3>
-                <p className="mt-2 leading-relaxed text-grafito-suave">{d.texto}</p>
-                <Link
-                  href={d.sector}
-                  data-cta={`demo_sector_${d.clave}`}
-                  className="mt-3 inline-flex items-center gap-1.5 text-sm font-bold text-cobre-texto hover:underline"
-                >
-                  Cómo lo aplicamos <ArrowRight className="h-3.5 w-3.5" aria-hidden />
-                </Link>
-              </article>
-            ))}
-          </div>
-          <div className="aparece mt-10">
-            <Link href="/demos" data-cta="home_todas_demos" className="inline-flex items-center gap-2 font-bold text-cobre-texto hover:underline">
-              Ver todas las demos <ArrowRight className="h-4 w-4" aria-hidden />
-            </Link>
-          </div>
-          {/* Demo de facturas: la única que el visitante puede probar con un documento suyo. */}
-          <div className="aparece mt-16 grid items-center gap-8 rounded-[2rem] bg-roto p-8 sm:p-12 lg:grid-cols-[1.4fr_auto]">
-            <div>
-              <p className="eyebrow">Prueba una automatización real</p>
-              <h3 className="mt-4 font-display text-3xl font-semibold leading-tight text-azul sm:text-4xl">
-                Sube una factura.
-              </h3>
-              <p className="mt-4 max-w-2xl text-lg leading-relaxed text-grafito-suave">
-                El sistema la lee y saca los datos en segundos. Lo mismo puede ocurrir automáticamente con cada
-                factura que recibe tu empresa.
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+            <div className="aparece max-w-2xl">
+              <p className="eyebrow">Laboratorio SendaIA</p>
+              <h2 className="mt-4 text-3xl font-semibold leading-[1.1] text-azul sm:text-4xl">
+                Pruébalo en un entorno real.
+              </h2>
+              <p className="mt-3 text-lg text-grafito-suave">
+                Demostraciones en vivo de cómo los sistemas procesan documentos y captan clientes.
               </p>
             </div>
-            <Link href="/demos/facturas" data-cta="demo_facturas" className="btn btn-cobre">
-              <FileText className="h-4 w-4" aria-hidden /> Probar la demo de facturas
+            <Link
+              href="/demos"
+              data-cta="home_ver_todas_demos"
+              className="inline-flex items-center gap-2 font-bold text-cobre-texto hover:underline shrink-0"
+            >
+              Ver todas las demos y sectores <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+          </div>
+
+          <div className="mt-10 grid gap-6 sm:grid-cols-3">
+            {/* Demo 1: Facturas */}
+            <Link
+              href="/demos/facturas"
+              className="group flex flex-col rounded-2xl border border-azul/10 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md"
+            >
+              <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-azul text-cobre-claro">
+                <Receipt className="h-6 w-6" />
+              </span>
+              <h3 className="mt-4 font-bold text-xl text-azul group-hover:text-cobre-texto transition-colors">
+                Extracción de Facturas
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-grafito-suave">
+                Sube un PDF o foto real. La IA lee proveedor, importes, líneas de gasto y lo estructura en segundos.
+              </p>
+              <span className="mt-auto pt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-cobre-texto">
+                Probar con tu factura <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </span>
+            </Link>
+
+            {/* Demo 2: Clínicas y Salud */}
+            <Link
+              href="/demo/dadent.html"
+              className="group flex flex-col rounded-2xl border border-azul/10 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md"
+            >
+              <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-azul text-cobre-claro">
+                <Stethoscope className="h-6 w-6" />
+              </span>
+              <h3 className="mt-4 font-bold text-xl text-azul group-hover:text-cobre-texto transition-colors">
+                Citas y Captación Clínica
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-grafito-suave">
+                Reserva médica en 3 toques, calculadora interactiva de cuotas y confirmación instantánea por WhatsApp.
+              </p>
+              <span className="mt-auto pt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-cobre-texto">
+                Probar en móvil <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </span>
+            </Link>
+
+            {/* Demo 3: Climatización e Instaladores */}
+            <Link
+              href="/casos-reales#climatizacion"
+              className="group flex flex-col rounded-2xl border border-azul/10 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md"
+            >
+              <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-azul text-cobre-claro">
+                <Wrench className="h-6 w-6" />
+              </span>
+              <h3 className="mt-4 font-bold text-xl text-azul group-hover:text-cobre-texto transition-colors">
+                Partes y Control de Obras
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-grafito-suave">
+                Cómo una empresa de 83 trabajadores cuadra 932 facturas con horas y costes de obra en tiempo real.
+              </p>
+              <span className="mt-auto pt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-cobre-texto">
+                Ver caso operativo <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </span>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ── 4 · EL SISTEMA ── */}
+      {/* ── 4 · EL SISTEMA (INTACTO CON TODA SU ANIMACIÓN DE SCROLL) ── */}
       <section id="sistema" className="sobre-azul scroll-mt-20 bg-azul text-roto">
         <SistemaScroll>
           <p className="eyebrow">Automatización</p>
@@ -240,86 +266,51 @@ export default function Home() {
         </SistemaScroll>
       </section>
 
-      {/* ── 5 · CASO REAL ── */}
+      {/* ── 5 · CASO REAL Y PROCESO (Compacto: métrica ganadora + 4 pasos) ── */}
       <section id="caso" className="pared scroll-mt-20 py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="aparece max-w-3xl">
-            <p className="eyebrow">Caso real</p>
-            <h2 className="mt-4 text-4xl font-semibold leading-[1.08] text-azul sm:text-5xl">
-              De hojas de Excel sueltas a un sistema que cuadra solo
-            </h2>
-            <p className="mt-5 text-lg text-grafito-suave">
-              Instaladora de climatización · 83 trabajadores · Granada · en marcha desde mayo de 2026
-            </p>
-          </div>
+          <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:items-center">
+            <div className="aparece">
+              <p className="eyebrow">Caso real · Granada</p>
+              <h2 className="mt-4 text-3xl font-semibold leading-[1.08] text-azul sm:text-5xl">
+                932 facturas procesadas solas.
+              </h2>
+              <p className="mt-5 text-lg text-grafito-suave">
+                Instaladora de climatización · 83 trabajadores · en marcha desde mayo de 2026.
+              </p>
+              <p className="mt-4 text-base leading-relaxed text-grafito">
+                Las facturas de proveedor entran por correo, la IA extrae cada línea de gasto y la asigna a su obra con
+                el margen visible al instante.
+              </p>
+              <div className="mt-8 flex items-center gap-4">
+                <Link href="/casos-reales#climatizacion" className="btn btn-cobre">
+                  Ver caso completo <ArrowRight className="h-4 w-4" aria-hidden />
+                </Link>
+                <Link href="/casos-reales" className="font-semibold text-azul underline underline-offset-4 text-sm">
+                  Otros sectores
+                </Link>
+              </div>
+            </div>
 
-          <div className="mt-14 grid gap-10 border-t border-azul/15 pt-10 lg:grid-cols-3 lg:gap-12">
-            <div className="aparece">
-              <p className="eyebrow">Problema</p>
-              <p className="mt-4 text-lg leading-relaxed text-grafito">
-                Llevaban obras, horas y facturas de proveedor en Excels dispersos. Cada factura se imputaba a mano a su
-                obra; los descuadres aparecían meses después y nadie sabía el margen real de cada proyecto hasta que
-                era tarde.
-              </p>
+            {/* 4 pasos rápidos */}
+            <div className="aparece rounded-3xl bg-piedra p-8 sm:p-10 border border-azul/10">
+              <p className="eyebrow">Metodología</p>
+              <h3 className="mt-2 text-2xl font-bold text-azul">Cuatro pasos. Sin sorpresas.</h3>
+              <div className="mt-6 grid gap-6 sm:grid-cols-2">
+                {PASOS.map((p) => (
+                  <div key={p.n} className="border-t border-azul/20 pt-4">
+                    <span className="font-display text-2xl font-bold text-cobre-texto">{p.n}</span>
+                    <h4 className="mt-1 font-bold text-sm text-azul uppercase tracking-wide">{p.titulo}</h4>
+                    <p className="mt-1.5 text-xs text-grafito-suave leading-relaxed">{p.texto}</p>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="aparece">
-              <p className="eyebrow">Sistema SendaIA</p>
-              <p className="mt-4 text-lg leading-relaxed text-grafito">
-                Un sistema de gestión a medida: las facturas de proveedor entran por correo, la IA extrae cada línea y
-                la liga a su obra automáticamente. Horas sincronizadas desde el sistema de campo. Panel por obra con
-                coste real frente al estimado.
-              </p>
-            </div>
-            <div className="aparece">
-              <p className="eyebrow">Resultado</p>
-              <p className="mt-4 font-display text-5xl font-semibold text-azul">932 facturas</p>
-              <p className="mt-4 text-lg leading-relaxed text-grafito">
-                En sus primeros tres meses el sistema procesó 932 facturas de proveedor (1.848 líneas de gasto)
-                repartidas entre 388 obras, con el margen de cada una visible al instante y avisos cuando algo no
-                cuadra.
-              </p>
-            </div>
-          </div>
-          <div className="aparece mt-12 flex flex-col gap-4 sm:flex-row sm:items-center">
-            <Link href="/casos-reales#climatizacion" data-cta="home_caso_completo" className="btn btn-cobre">
-              Ver caso completo <ArrowRight className="h-4 w-4" aria-hidden />
-            </Link>
-            <p className="text-grafito-suave">
-              Otros casos:{' '}
-              <Link href="/casos-reales#peritacion" data-cta="home_caso_peritacion" className="font-semibold text-azul underline underline-offset-4">informes de peritación</Link>
-              {' · '}
-              <Link href="/casos-reales#clinica" data-cta="home_caso_clinica" className="font-semibold text-azul underline underline-offset-4">agente de voz en una clínica</Link>
-            </p>
           </div>
         </div>
       </section>
 
-      {/* ── 6 · CÓMO TRABAJAMOS ── */}
-      <section id="proceso" className="pared scroll-mt-20 bg-piedra py-20 sm:py-28">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="aparece max-w-3xl">
-            <p className="eyebrow">Cómo trabajamos</p>
-            <h2 className="mt-4 text-4xl font-semibold leading-[1.08] text-azul sm:text-5xl">Cuatro pasos. Sin sorpresas.</h2>
-          </div>
-          <ol className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
-            {PASOS.map((p) => (
-              <li key={p.n} className="aparece border-t-2 border-azul pt-6">
-                <span className="font-display text-5xl font-semibold text-cobre-texto">{p.n}</span>
-                <h3 className="mt-4 text-xl font-bold uppercase tracking-[0.06em] text-azul">{p.titulo}</h3>
-                <p className="mt-3 leading-relaxed text-grafito-suave">{p.texto}</p>
-              </li>
-            ))}
-          </ol>
-          <p className="aparece mt-14 max-w-3xl font-display text-2xl leading-snug text-azul sm:text-3xl">
-            No tienes que saber de IA. Tienes que conocer tu negocio. Del sistema nos encargamos nosotros.
-          </p>
-          <Link href="/sendaia" data-cta="home_sendaia" className="aparece mt-8 inline-flex items-center gap-2 font-bold text-cobre-texto hover:underline">
-            Conoce SendaIA <ArrowRight className="h-4 w-4" aria-hidden />
-          </Link>
-        </div>
-      </section>
-
-      {/* ── 7 · CTA FINAL ── */}
+      {/* ── 6 · CTA FINAL (Diagnóstico) ── */}
       <section id="contacto" className="sobre-azul scroll-mt-20 bg-azul py-20 text-roto sm:py-28">
         <div className="mx-auto grid max-w-7xl gap-14 px-5 sm:px-8 lg:grid-cols-2 lg:gap-20">
           <div>
@@ -338,7 +329,7 @@ export default function Home() {
               <li className="flex items-start gap-3">
                 <Phone className="mt-0.5 h-5 w-5 shrink-0 text-cobre-claro" aria-hidden />
                 <span>
-                  O llámanos:{' '}
+                  O llámanos:{" "}
                   <a href="tel:+34858215026" data-cta="contacto_telefono" className="font-bold underline underline-offset-4">
                     858 215 026
                   </a>

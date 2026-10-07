@@ -60,6 +60,8 @@ export default function SiteFooter() {
             <ul className="mt-4 space-y-2.5 text-sm">
               <li><a href="https://www.instagram.com/sendaia.es" target="_blank" rel="noreferrer" className="text-roto/75 hover:text-roto">Instagram</a></li>
               <li><a href="https://www.facebook.com/sendaia.es" target="_blank" rel="noreferrer" className="text-roto/75 hover:text-roto">Facebook</a></li>
+              <li><a href="https://www.youtube.com/@sendaia" target="_blank" rel="noreferrer" className="text-roto/75 hover:text-roto">YouTube</a></li>
+              <li><a href="https://www.pinterest.es/sendaia" target="_blank" rel="noreferrer" className="text-roto/75 hover:text-roto">Pinterest</a></li>
               <li><a href="https://www.linkedin.com/company/sendaia" target="_blank" rel="noreferrer" className="text-roto/75 hover:text-roto">LinkedIn</a></li>
             </ul>
           </div>
