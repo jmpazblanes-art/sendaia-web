@@ -1173,6 +1173,7 @@
       <div class="chat-msg bot">
         ¡Hola! Soy el asistente digital de la <strong>familia Sánchez</strong> en DADENT. ¿En qué puedo ayudarte hoy?
         <div class="chat-quick-actions">
+          <button class="quick-chip" style="background: var(--navy); color: #fff; border-color: var(--navy);" onclick="startChatBooking()">📅 Pedir cita por aquí</button>
           <button class="quick-chip" onclick="askQuick('¿Duele ponerse un implante?')">¿Duele un implante?</button>
           <button class="quick-chip" onclick="askQuick('¿Cuánto cuesta la ortodoncia invisible?')">Precio Invisalign</button>
           <button class="quick-chip" onclick="askQuick('Tengo dolor urgente, ¿tenéis hueco?')">Dolor urgente hoy</button>
@@ -1235,13 +1236,13 @@
         const dow = dias[d.getDay()];
         const day = d.getDate();
         const mon = meses[d.getMonth()];
-        const label = `${dow} ${day} ${mon}`;
+        const label = dow + ' ' + day + ' ' + mon;
         const isSelected = count === 0;
         if (isSelected) selectedDate = label;
 
         const pill = document.createElement('div');
-        pill.className = `date-pill ${isSelected ? 'selected' : ''}`;
-        pill.innerHTML = `<div class="dow">${dow}</div><div class="day">${day}</div><div class="month">${mon}</div>`;
+        pill.className = 'date-pill ' + (isSelected ? 'selected' : '');
+        pill.innerHTML = '<div class="dow">' + dow + '</div><div class="day">' + day + '</div><div class="month">' + mon + '</div>';
         pill.onclick = () => {
           document.querySelectorAll('.date-pill').forEach(p => p.classList.remove('selected'));
           pill.classList.add('selected');
@@ -1259,7 +1260,7 @@
       hours.forEach((h, i) => {
         const pill = document.createElement('div');
         const isSelected = h === selectedHour;
-        pill.className = `hour-pill ${isSelected ? 'selected' : ''} ${i === 2 ? 'disabled' : ''}`;
+        pill.className = 'hour-pill ' + (isSelected ? 'selected' : '') + (i === 2 ? ' disabled' : '');
         pill.textContent = h;
         if (i !== 2) {
           pill.onclick = () => {
@@ -1277,8 +1278,8 @@
       const title = document.getElementById('summary-title');
       const dt = document.getElementById('summary-datetime');
       if (title && dt) {
-        title.textContent = `${selectedTreat} (${selectedPrice})`;
-        dt.textContent = `${selectedDate || 'Mañana'} a las ${selectedHour} h · Clínica Camino de Ronda 111`;
+        title.textContent = selectedTreat + ' (' + selectedPrice + ')';
+        dt.textContent = (selectedDate || 'Mañana') + ' a las ' + selectedHour + ' h · Clínica Camino de Ronda 111';
       }
     }
 
@@ -1333,10 +1334,53 @@
       }
     }
 
-    // AI CHAT COPILOT
+    // AI CHAT COPILOT WITH CONVERSATIONAL BOOKING
+    let chatBookingState = 0;
+    let chatBookData = { trat: '', hueco: '', contacto: '' };
+
     function toggleChat() {
       const modal = document.getElementById('chat-modal');
-      modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+      const isVisible = window.getComputedStyle(modal).display === 'flex';
+      modal.style.display = isVisible ? 'none' : 'flex';
+    }
+
+    function startChatBooking() {
+      chatBookingState = 1;
+      appendMsg('user', 'Quiero pedir cita por el chat');
+      setTimeout(() => {
+        let reply = '¡Estupendo! Te agendo cita directamente en un minuto. ¿Qué tratamiento deseas revisar?<div class="chat-quick-actions" style="margin-top:8px;">';
+        reply += '<button class="quick-chip" onclick="chooseChatTrat(\'Implantes Dentales\')">🦷 Implantes</button>';
+        reply += '<button class="quick-chip" onclick="chooseChatTrat(\'Ortodoncia Invisible\')">✨ Invisalign</button>';
+        reply += '<button class="quick-chip" onclick="chooseChatTrat(\'Carillas Estéticas\')">💎 Carillas</button>';
+        reply += '<button class="quick-chip" onclick="chooseChatTrat(\'Urgencia por Dolor\')">🚨 Dolor Urgente</button>';
+        reply += '</div>';
+        appendMsg('bot', reply);
+      }, 400);
+    }
+
+    function chooseChatTrat(trat) {
+      chatBookData.trat = trat;
+      chatBookingState = 2;
+      appendMsg('user', 'Tratamiento: ' + trat);
+      setTimeout(() => {
+        let reply = 'Genial. Tenemos estos huecos preferentes libres esta semana en Camino de Ronda 111. ¿Cuál te viene mejor?<div class="chat-quick-actions" style="margin-top:8px;">';
+        reply += '<button class="quick-chip" onclick="chooseChatSlot(\'Mañana a las 11:15 h\')">Mañana 11:15 h</button>';
+        reply += '<button class="quick-chip" onclick="chooseChatSlot(\'Mañana a las 17:30 h\')">Mañana 17:30 h</button>';
+        reply += '<button class="quick-chip" onclick="chooseChatSlot(\'Jueves a las 10:30 h\')">Jueves 10:30 h</button>';
+        reply += '<button class="quick-chip" onclick="chooseChatSlot(\'Viernes a las 12:00 h\')">Viernes 12:00 h</button>';
+        reply += '</div>';
+        appendMsg('bot', reply);
+      }, 400);
+    }
+
+    function chooseChatSlot(slot) {
+      chatBookData.hueco = slot;
+      chatBookingState = 3;
+      appendMsg('user', 'Prefiero: ' + slot);
+      setTimeout(() => {
+        const reply = 'Perfecto, hueco pre-bloqueado. Por favor, <strong>escribe aquí abajo tu nombre y teléfono móvil</strong> (ej: <em>Carlos 612345678</em>) para confirmártela en la agenda del Dr. Enrique y enviarte el recordatorio a tu WhatsApp.';
+        appendMsg('bot', reply);
+      }, 400);
     }
 
     function askQuick(text) {
@@ -1356,16 +1400,37 @@
     function appendMsg(sender, text) {
       const body = document.getElementById('chat-body');
       const msg = document.createElement('div');
-      msg.className = `chat-msg ${sender}`;
+      msg.className = 'chat-msg ' + sender;
       msg.innerHTML = text;
       body.appendChild(msg);
       body.scrollTop = body.scrollHeight;
     }
 
     function respondBot(query) {
+      if (chatBookingState === 3) {
+        chatBookData.contacto = query;
+        chatBookingState = 0;
+        setTimeout(() => {
+          let reply = '✅ <strong>¡Cita agendada con éxito!</strong><br><br>';
+          reply += '📍 <strong>Lugar:</strong> Clínica Dental DADENT (Camino de Ronda 111, Granada)<br>';
+          reply += '🦷 <strong>Tratamiento:</strong> ' + chatBookData.trat + '<br>';
+          reply += '⏰ <strong>Horario:</strong> ' + chatBookData.hueco + '<br>';
+          reply += '👤 <strong>Paciente:</strong> ' + query + '<br><br>';
+          reply += 'Te hemos enviado la confirmación y el recordatorio a tu WhatsApp. ¡Te esperamos en la clínica!<br><br>';
+          reply += '<a href="https://wa.me/34674293751?text=Hola,%20he%20agendado%20cita%20por%20la%20recepción%20digital" target="_blank" class="btn-primary" style="padding:8px 14px;font-size:12px;margin-top:6px;display:inline-block;text-decoration:none;">💬 Ver confirmación en WhatsApp</a>';
+          appendMsg('bot', reply);
+        }, 500);
+        return;
+      }
+
+      const q = query.toLowerCase();
+      if (q.includes('cita') || q.includes('agendar') || q.includes('reservar') || q.includes('hora')) {
+        startChatBooking();
+        return;
+      }
+
       setTimeout(() => {
         let reply = "";
-        const q = query.toLowerCase();
         if (q.includes('duele') || q.includes('implante')) {
           reply = "En absoluto. Los implantes en DADENT se planifican con <strong>cirugía 3D guiada por ordenador</strong> de la Dra. María Sánchez. Es mínimamente invasivo, con anestesia local y sin molestias postoperatorias.";
         } else if (q.includes('invisalign') || q.includes('precio') || q.includes('cuanto') || q.includes('cost')) {
@@ -1375,7 +1440,7 @@
         } else if (q.includes('financiaci') || q.includes('pagar')) {
           reply = "Financiamos hasta el 100% del tratamiento en hasta 48 meses. La aprobación se realiza en 24h directamente en la clínica de Camino de Ronda 111.";
         } else {
-          reply = "Perfecto. Si lo deseas, puedes dejarnos tu teléfono y el Dr. Enrique o nuestro equipo te llamará en cuanto abramos, o reservar directamente tu consulta gratuita arriba.";
+          reply = "Perfecto. Si lo deseas, puedes dejar tu consulta o pulsar 'Pedir cita por aquí' para agendarte en menos de un minuto.";
         }
         appendMsg('bot', reply);
       }, 500);
