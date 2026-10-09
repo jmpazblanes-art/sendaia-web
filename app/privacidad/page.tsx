@@ -36,7 +36,9 @@ export default function PrivacidadPage() {
       </p>
       <p>
         Si utilizas el asistente de chat o el agente de voz, se trata el contenido de la conversación
-        y, en el caso del agente de voz, el audio necesario para mantenerla.
+        y, en el caso del agente de voz, el audio necesario para mantenerla. Conforme a las obligaciones
+        de transparencia del artículo 50 del Reglamento (UE) 2024/1689 (AI Act), ambos canales informan
+        expresamente al usuario de su condición automatizada desde el inicio de la interacción.
       </p>
       <p>
         Además, registramos de forma agregada la navegación por el sitio (página visitada, página de

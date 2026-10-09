@@ -31,8 +31,41 @@ export default function AvisoLegalPage() {
       <H2>Objeto</H2>
       <p>
         Este sitio web tiene por objeto informar sobre los servicios de automatización de procesos
-        administrativos y agentes de inteligencia artificial que presta {TITULAR.marca}, así como
-        permitir el contacto con personas interesadas en dichos servicios.
+        administrativos y soluciones de agentes de inteligencia artificial que presta {TITULAR.marca},
+        así como permitir el contacto y solicitud de diagnóstico por parte de personas interesadas en
+        dichos servicios.
+      </p>
+
+      <H2>Transparencia en sistemas de inteligencia artificial (Reglamento UE 2024/1689)</H2>
+      <p>
+        En cumplimiento de los principios y obligaciones de transparencia previstos en el artículo 50
+        del Reglamento (UE) 2024/1689 del Parlamento Europeo y del Consejo (Ley de Inteligencia
+        Artificial o <em>AI Act</em>), {TITULAR.marca} delimita de forma pública y contractual las
+        características y alcance de sus soluciones tecnológicas:
+      </p>
+      <ul className="space-y-2">
+        <li>
+          <strong>1. Agentes interactivos con personas físicas:</strong> Los sistemas de inteligencia
+          artificial diseñados para interactuar directamente con usuarios (como el asistente
+          conversacional de chat web Aria o los agentes telefónicos de voz) informan de forma previa,
+          explícita e inequívoca de su condición automatizada desde el inicio de cada interacción. Su
+          propósito es la atención inicial, orientación operativa y canalización de solicitudes,
+          disponiendo en todo momento de mecanismos de derivación a profesionales del equipo humano.
+          Ningún agente interactivo adopta de manera autónoma decisiones que produzcan efectos
+          jurídicos sobre las personas físicas (art. 22 RGPD).
+        </li>
+        <li>
+          <strong>2. Automatización de procesos administrativos internos:</strong> Los flujos de
+          procesamiento y extracción documental (facturas, albaranes, pedidos) y la sincronización de
+          datos entre herramientas empresariales (ERP, CRM, contabilidad) operan como procesos técnicos
+          desatendidos de gestión interna, bajo estricto control y supervisión del cliente responsable,
+          sin mantener interacción directa con terceros.
+        </li>
+      </ul>
+      <p>
+        Todos los despliegues de {TITULAR.marca} se diseñan bajo el principio de supervisión humana
+        efectiva (<em>Human-in-the-Loop</em>) y gobernanza técnica responsable, garantizando la
+        diferenciación operativa y la plena transparencia de cada sistema.
       </p>
 
       <H2>Condiciones de uso</H2>
