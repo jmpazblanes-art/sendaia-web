@@ -1,3 +1,4 @@
+import Image from "next/image"
 import Link from "next/link"
 import {
   ArrowRight,
@@ -19,7 +20,7 @@ import AssistantDock from "./components/AssistantDock"
 import ContactForm from "./components/ContactForm"
 import WhatsAppButton from "./WhatsAppButton"
 import SistemaScroll from "./components/SistemaScroll"
-import { PASOS } from "./components/datos"
+import { FOTOS, PASOS } from "./components/datos"
 import HeroFondo from "./components/HeroFondo"
 import { BotonAria, BotonVoz, BotonWhatsApp, HomeEfectos, IrAAgentes } from "./components/HomeClient"
 
@@ -119,16 +120,20 @@ export default function Home() {
                 Desde el ordenador hablas por el micrófono. Desde el móvil, te llama al agente por teléfono.
               </p>
             </div>
-            <div aria-hidden className="relative hidden items-center justify-center bg-azul-hondo/60 p-12 lg:flex">
-              <div className="flex h-36 items-center gap-[7px]">
-                {[28, 54, 82, 46, 100, 68, 36, 88, 58, 30, 72, 96, 44, 64, 26].map((h, i) => (
-                  <span
-                    key={i}
-                    className="block w-[7px] rounded-full"
-                    style={{ height: `${h}%`, background: i % 4 === 2 ? "var(--cobre)" : "rgba(250,248,245,0.28)" }}
-                  />
-                ))}
-              </div>
+            <div className="relative hidden items-center justify-center overflow-hidden bg-azul-hondo/60 p-6 lg:flex">
+              <figure className="relative w-full overflow-hidden rounded-2xl border border-roto/15 shadow-xl">
+                <Image
+                  src={FOTOS.voz.src}
+                  alt={FOTOS.voz.alt}
+                  width={FOTOS.voz.ancho}
+                  height={FOTOS.voz.alto}
+                  unoptimized
+                  className="block h-full w-full object-cover"
+                />
+                <figcaption className="absolute bottom-2 right-3 rounded bg-azul/85 px-2 py-0.5 text-[11px] text-roto/75 backdrop-blur-sm">
+                  Imagen ilustrativa, generada con IA
+                </figcaption>
+              </figure>
             </div>
           </div>
 
@@ -147,18 +152,27 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="aparece flex flex-col rounded-[2rem] border border-azul/15 bg-white p-8 sm:p-12">
-              <div className="flex items-center gap-3">
-                <span className="flex h-11 w-11 items-center justify-center rounded-full bg-azul text-cobre-claro">
+            <div className="aparece relative flex flex-col overflow-hidden rounded-[2rem] border border-azul/20 bg-azul p-8 text-roto shadow-sm sm:p-12">
+              <Image
+                src={FOTOS.oficina.src}
+                alt={FOTOS.oficina.alt}
+                width={FOTOS.oficina.ancho}
+                height={FOTOS.oficina.alto}
+                unoptimized
+                className="absolute inset-0 h-full w-full object-cover opacity-25 mix-blend-luminosity"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-azul via-azul/90 to-azul/60" />
+              <div className="relative z-10 flex items-center gap-3">
+                <span className="flex h-11 w-11 items-center justify-center rounded-full bg-roto/10 text-cobre-claro backdrop-blur-sm">
                   <Sparkles className="h-5 w-5" aria-hidden />
                 </span>
-                <p className="eyebrow">Tu guía dentro de SendaIA</p>
+                <p className="eyebrow !text-cobre-claro">Tu guía dentro de SendaIA</p>
               </div>
-              <h3 className="mt-5 font-display text-4xl font-semibold tracking-[0.04em] text-azul sm:text-5xl">ARIA</h3>
-              <p className="mt-5 text-lg leading-relaxed text-grafito-suave">
+              <h3 className="relative z-10 mt-5 font-display text-4xl font-semibold tracking-[0.04em] text-roto sm:text-5xl">ARIA</h3>
+              <p className="relative z-10 mt-5 text-lg leading-relaxed text-roto/80">
                 Cuéntale qué tarea te está quitando tiempo y descubre cómo podría convertirse en un sistema.
               </p>
-              <div className="mt-auto pt-8">
+              <div className="relative z-10 mt-auto pt-8">
                 <BotonAria origen="home_agentes" />
               </div>
             </div>
@@ -192,58 +206,94 @@ export default function Home() {
             {/* Demo 1: Facturas */}
             <Link
               href="/demos/facturas"
-              className="group flex flex-col rounded-2xl border border-azul/10 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md"
+              className="group flex flex-col overflow-hidden rounded-2xl border border-azul/10 bg-white shadow-sm transition-all hover:-translate-y-1 hover:shadow-md"
             >
-              <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-azul text-cobre-claro">
-                <Receipt className="h-6 w-6" />
-              </span>
-              <h3 className="mt-4 font-bold text-xl text-azul group-hover:text-cobre-texto transition-colors">
-                Extracción de Facturas
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-grafito-suave">
-                Sube un PDF o foto real. La IA lee proveedor, importes, líneas de gasto y lo estructura en segundos.
-              </p>
-              <span className="mt-auto pt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-cobre-texto">
-                Probar con tu factura <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </span>
+              <div className="relative aspect-[16/9] w-full overflow-hidden bg-azul/5">
+                <Image
+                  src={FOTOS.facturas.src}
+                  alt={FOTOS.facturas.alt}
+                  width={FOTOS.facturas.ancho}
+                  height={FOTOS.facturas.alto}
+                  unoptimized
+                  className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <span className="absolute bottom-3 left-3 flex h-10 w-10 items-center justify-center rounded-xl bg-azul/90 text-cobre-claro shadow backdrop-blur-sm">
+                  <Receipt className="h-5 w-5" />
+                </span>
+              </div>
+              <div className="flex flex-1 flex-col p-6">
+                <h3 className="font-bold text-xl text-azul transition-colors group-hover:text-cobre-texto">
+                  Extracción de Facturas
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-grafito-suave">
+                  Sube un PDF o foto real. La IA lee proveedor, importes, líneas de gasto y lo estructura en segundos.
+                </p>
+                <span className="mt-auto pt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-cobre-texto">
+                  Probar con tu factura <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </span>
+              </div>
             </Link>
 
             {/* Demo 2: Clínicas y Salud */}
             <Link
               href="/demo/dadent.html"
-              className="group flex flex-col rounded-2xl border border-azul/10 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md"
+              className="group flex flex-col overflow-hidden rounded-2xl border border-azul/10 bg-white shadow-sm transition-all hover:-translate-y-1 hover:shadow-md"
             >
-              <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-azul text-cobre-claro">
-                <Stethoscope className="h-6 w-6" />
-              </span>
-              <h3 className="mt-4 font-bold text-xl text-azul group-hover:text-cobre-texto transition-colors">
-                Citas y Captación Clínica
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-grafito-suave">
-                Reserva médica en 3 toques, calculadora interactiva de cuotas y confirmación instantánea por WhatsApp.
-              </p>
-              <span className="mt-auto pt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-cobre-texto">
-                Probar en móvil <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </span>
+              <div className="relative aspect-[16/9] w-full overflow-hidden bg-azul/5">
+                <Image
+                  src={FOTOS.clinica.src}
+                  alt={FOTOS.clinica.alt}
+                  width={FOTOS.clinica.ancho}
+                  height={FOTOS.clinica.alto}
+                  unoptimized
+                  className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <span className="absolute bottom-3 left-3 flex h-10 w-10 items-center justify-center rounded-xl bg-azul/90 text-cobre-claro shadow backdrop-blur-sm">
+                  <Stethoscope className="h-5 w-5" />
+                </span>
+              </div>
+              <div className="flex flex-1 flex-col p-6">
+                <h3 className="font-bold text-xl text-azul transition-colors group-hover:text-cobre-texto">
+                  Citas y Captación Clínica
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-grafito-suave">
+                  Reserva médica en 3 toques, calculadora interactiva de cuotas y confirmación instantánea por WhatsApp.
+                </p>
+                <span className="mt-auto pt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-cobre-texto">
+                  Probar en móvil <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </span>
+              </div>
             </Link>
 
             {/* Demo 3: Climatización e Instaladores */}
             <Link
               href="/casos-reales#climatizacion"
-              className="group flex flex-col rounded-2xl border border-azul/10 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md"
+              className="group flex flex-col overflow-hidden rounded-2xl border border-azul/10 bg-white shadow-sm transition-all hover:-translate-y-1 hover:shadow-md"
             >
-              <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-azul text-cobre-claro">
-                <Wrench className="h-6 w-6" />
-              </span>
-              <h3 className="mt-4 font-bold text-xl text-azul group-hover:text-cobre-texto transition-colors">
-                Partes y Control de Obras
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-grafito-suave">
-                Cómo una empresa de 83 trabajadores cuadra 932 facturas con horas y costes de obra en tiempo real.
-              </p>
-              <span className="mt-auto pt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-cobre-texto">
-                Ver caso operativo <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </span>
+              <div className="relative aspect-[16/9] w-full overflow-hidden bg-azul/5">
+                <Image
+                  src={FOTOS.analitica.src}
+                  alt={FOTOS.analitica.alt}
+                  width={FOTOS.analitica.ancho}
+                  height={FOTOS.analitica.alto}
+                  unoptimized
+                  className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <span className="absolute bottom-3 left-3 flex h-10 w-10 items-center justify-center rounded-xl bg-azul/90 text-cobre-claro shadow backdrop-blur-sm">
+                  <Wrench className="h-5 w-5" />
+                </span>
+              </div>
+              <div className="flex flex-1 flex-col p-6">
+                <h3 className="font-bold text-xl text-azul transition-colors group-hover:text-cobre-texto">
+                  Partes y Control de Obras
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-grafito-suave">
+                  Cómo una empresa de 83 trabajadores cuadra 932 facturas con horas y costes de obra en tiempo real.
+                </p>
+                <span className="mt-auto pt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-cobre-texto">
+                  Ver caso operativo <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </span>
+              </div>
             </Link>
           </div>
         </div>
