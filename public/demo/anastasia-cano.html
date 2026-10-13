@@ -4,35 +4,34 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Clínica Dra. Anastasia Cano | Medicina Estética Avanzada en Granada</title>
-  <meta name="description" content="Centro médico de medicina estética homologado NICA 44613 en Edificio Fórum, Granada. Aparatología de referencia: CoolSculpting Elite, Ultherapy Prime, Nordlys y Frax 1550.">
+  <meta name="description" content="Centro médico de medicina estética homologado NICA 44613 en Edificio Fórum, Granada. Dra. Anastasia Cano. CoolSculpting Elite, Ultherapy Prime, Nordlys y Frax 1550.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            travertine: '#F7F5F0',
-            cream: '#FAF8F5',
+            alabaster: '#FAF9F6',
+            sand: '#F5F2EB',
+            warmgray: '#EFECE6',
             stone: {
-              50: '#FAF9F6',
-              100: '#F2EFE9',
-              200: '#E5DFD5',
-              300: '#D4C9BC',
-              400: '#B8A896',
-              600: '#7A6B5B',
-              800: '#3D352E',
-              900: '#231E1A',
+              50: '#FBFBFA',
+              100: '#F4F2EE',
+              200: '#E7E3DC',
+              300: '#D5CFC5',
+              400: '#B5ACA0',
+              600: '#6E665D',
+              800: '#342F2A',
+              900: '#1C1917',
             },
-            champagne: '#E5D5C5',
             bronze: {
-              light: '#C8A27A',
-              DEFAULT: '#A67C52',
-              dark: '#855E38',
-            },
-            medical: '#1A3636',
+              light: '#BFA07E',
+              DEFAULT: '#98754F',
+              dark: '#765532',
+            }
           },
           fontFamily: {
             serif: ['"Cormorant Garamond"', 'serif'],
@@ -43,406 +42,342 @@
     }
   </script>
   <style>
-    /* Custom styling for luxury aesthetics */
-    .glass-nav {
-      background: rgba(250, 248, 245, 0.92);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+    /* Clean luxury medical styling */
+    .glass-header {
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
-    .gradient-hero-overlay {
-      background: linear-gradient(180deg, rgba(35, 30, 26, 0.2) 0%, rgba(35, 30, 26, 0.75) 100%);
+    .card-hover-lift {
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .gold-shimmer {
-      background: linear-gradient(135deg, #A67C52 0%, #D4AF37 50%, #855E38 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    .card-hover-lift:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 32px -8px rgba(152, 117, 79, 0.12);
     }
-    .treatment-card-hover {
-      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .treatment-card-hover:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 35px -10px rgba(133, 94, 56, 0.12);
-    }
-    /* Hide scrollbars for clean aesthetic */
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    
-    /* Subtle pulse animation for online status */
-    @keyframes subtlePulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(1.15); }
-    }
-    .pulse-dot {
-      animation: subtlePulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-    }
   </style>
 </head>
-<body class="bg-stone-50 text-stone-900 font-sans antialiased selection:bg-bronze-light selection:text-white">
+<body class="bg-[#FCFBF9] text-stone-900 font-sans antialiased selection:bg-bronze-light selection:text-white">
 
   <!-- ========================================================
-       BARRA DE PROPUESTA COMERCIAL SENDAIA (Auditoría en vivo)
+       BARRA SUTIL DE PROPOSICIÓN COMERCIAL SENDAIA (Discreta, no invasiva)
        ======================================================== -->
-  <aside class="bg-stone-900 text-stone-300 py-2.5 px-4 text-xs border-b border-stone-800 z-50 sticky top-0">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-2">
-      <div class="flex items-center gap-3">
-        <span class="inline-flex items-center gap-1.5 bg-bronze/20 text-bronze-light px-2.5 py-0.5 rounded-full font-medium tracking-wide">
-          <span class="w-1.5 h-1.5 rounded-full bg-bronze-light pulse-dot"></span>
-          DEMO SENDAIA · PROPUESTA DE REDISEÑO CLÍNICO
-        </span>
-        <span class="hidden sm:inline text-stone-400">|</span>
-        <span class="text-stone-300 font-medium">Clínica Dra. Anastasia Cano (Edificio Fórum, Granada)</span>
+  <aside class="bg-stone-900 text-stone-300 py-2 px-4 text-xs z-50">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+        <span class="font-medium text-stone-200">Propuesta de Rediseño SendaIA</span>
+        <span class="text-stone-500 hidden sm:inline">|</span>
+        <span class="text-stone-400 hidden sm:inline">Clínica Dra. Anastasia Cano (Edificio Fórum, Granada)</span>
       </div>
-      <div class="flex items-center gap-3">
-        <button onclick="toggleAuditModal()" class="text-stone-300 hover:text-white underline underline-offset-4 transition">
-          Ver Auditoría: Por qué su web actual pierde pacientes
+      <div class="flex items-center gap-4">
+        <button onclick="toggleAuditModal()" class="text-stone-300 hover:text-white underline underline-offset-4 transition text-[11px]">
+          Ver auditoría comercial ↗
         </button>
-        <a href="https://anastasiacano.es" target="_blank" rel="noopener" class="bg-stone-800 hover:bg-stone-700 text-stone-200 px-3 py-1 rounded text-[11px] transition">
-          Abrir web antigua ↗
+        <a href="https://anastasiacano.es" target="_blank" rel="noopener" class="text-stone-400 hover:text-stone-200 text-[11px] transition">
+          Web actual ↗
         </a>
       </div>
     </div>
   </aside>
 
   <!-- ========================================================
-       TOP HEADER CLÍNICO (Acreditación Sanitaria y Contacto Directo)
+       CABECERA NAVEGACIÓN LIMPIA Y BLANCA (1 sola barra luminosa)
        ======================================================== -->
-  <div class="bg-stone-100/80 border-b border-stone-200/60 py-2 px-4 text-xs text-stone-600 hidden md:block">
-    <div class="max-w-7xl mx-auto flex justify-between items-center">
-      <div class="flex items-center gap-5">
-        <span class="flex items-center gap-1.5 font-medium text-stone-700">
-          <svg class="w-3.5 h-3.5 text-bronze" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-          Centro Médico Homologado NICA 44613
-        </span>
-        <span class="text-stone-300">•</span>
-        <span>Colegiada Nº 1810931 · Ilustre Colegio de Médicos de Granada</span>
-        <span class="text-stone-300">•</span>
-        <span>C/ José Luis Pérez Pujadas 35, Local 1 (Edificio Fórum)</span>
-      </div>
-      <div class="flex items-center gap-4">
-        <a href="tel:858996637" class="hover:text-bronze font-medium transition flex items-center gap-1">
-          <svg class="w-3 h-3 text-bronze" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-          858 996 637 / 640 741 719
-        </a>
-        <span class="text-stone-300">•</span>
-        <span class="inline-flex items-center gap-1 text-emerald-800 font-medium">
-          <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-          Citas activas este mes
-        </span>
-      </div>
-    </div>
-  </div>
-
-  <!-- ========================================================
-       NAVEGACIÓN PRINCIPAL
-       ======================================================== -->
-  <header class="glass-nav sticky top-8 z-40 border-b border-stone-200/80 transition-all">
+  <header class="glass-header sticky top-0 z-40 border-b border-stone-200/70 transition-all">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
       
-      <!-- Logo y Branding -->
+      <!-- Logotipo Limpio -->
       <a href="#inicio" class="flex flex-col group">
-        <span class="font-serif text-2xl sm:text-3xl tracking-tight text-stone-900 group-hover:text-bronze transition">
+        <span class="font-serif text-2xl sm:text-3xl font-normal tracking-tight text-stone-900 group-hover:text-bronze transition">
           Dra. Anastasia Cano
         </span>
-        <span class="text-[10px] sm:text-[11px] tracking-[0.22em] uppercase font-semibold text-bronze">
-          Medicina Estética Avanzada
+        <span class="text-[10px] tracking-[0.25em] uppercase font-semibold text-bronze -mt-0.5">
+          Medicina Estética · NICA 44613
         </span>
       </a>
 
-      <!-- Menú Desktop -->
-      <nav class="hidden lg:flex items-center gap-7 text-sm font-medium text-stone-700">
-        <a href="#aparatologia" class="hover:text-bronze transition">Aparatología de Marca</a>
-        <a href="#faciales" class="hover:text-bronze transition">Tratamientos Faciales</a>
-        <a href="#corporales" class="hover:text-bronze transition">Tratamientos Corporales</a>
-        <a href="#diagnostico" class="hover:text-bronze transition">Tecnología Diagnóstica</a>
-        <a href="#doctora" class="hover:text-bronze transition">La Doctora</a>
-        <a href="#opiniones" class="hover:text-bronze transition">Opiniones 5.0★</a>
+      <!-- Menú Desktop con Aire -->
+      <nav class="hidden lg:flex items-center gap-8 text-sm font-normal text-stone-600">
+        <a href="#aparatologia" class="hover:text-stone-900 transition">Aparatología de Marca</a>
+        <a href="#faciales" class="hover:text-stone-900 transition">Facial</a>
+        <a href="#corporales" class="hover:text-stone-900 transition">Corporal</a>
+        <a href="#diagnostico" class="hover:text-stone-900 transition">Diagnóstico</a>
+        <a href="#doctora" class="hover:text-stone-900 transition">La Doctora</a>
+        <a href="#opiniones" class="hover:text-stone-900 transition">Opiniones (5.0★)</a>
       </nav>
 
-      <!-- Botones de Acción -->
-      <div class="flex items-center gap-3">
-        <button onclick="openChat('cita')" class="hidden sm:inline-flex items-center gap-2 bg-stone-900 hover:bg-bronze-dark text-white px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase transition shadow-sm hover:shadow-md">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+      <!-- Botón de Cita & Contacto Rápido -->
+      <div class="flex items-center gap-4">
+        <a href="tel:858996637" class="hidden xl:flex items-center gap-1.5 text-xs text-stone-600 hover:text-bronze transition font-medium">
+          <svg class="w-3.5 h-3.5 text-bronze" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+          858 996 637
+        </a>
+        <button onclick="openChat('cita')" class="bg-stone-900 hover:bg-bronze text-white px-5 py-2.5 rounded-full text-xs font-medium tracking-wider uppercase transition shadow-sm">
           Pedir Cita Online
         </button>
-        <button onclick="toggleMobileMenu()" class="lg:hidden p-2 text-stone-700 hover:text-stone-900">
+        <button onclick="toggleMobileMenu()" class="lg:hidden p-2 text-stone-700">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
       </div>
 
     </div>
 
-    <!-- Menú Móvil Desplegable -->
-    <div id="mobile-menu" class="hidden lg:hidden border-t border-stone-200 bg-stone-50 px-5 py-4 space-y-3 text-sm font-medium">
-      <a href="#aparatologia" onclick="toggleMobileMenu()" class="block py-1 hover:text-bronze">Aparatología de Marca (Ultherapy, Coolsculpting, Nordlys)</a>
-      <a href="#faciales" onclick="toggleMobileMenu()" class="block py-1 hover:text-bronze">Tratamientos Faciales</a>
-      <a href="#corporales" onclick="toggleMobileMenu()" class="block py-1 hover:text-bronze">Tratamientos Corporales</a>
-      <a href="#diagnostico" onclick="toggleMobileMenu()" class="block py-1 hover:text-bronze">Tecnología Diagnóstica & NICA</a>
-      <a href="#doctora" onclick="toggleMobileMenu()" class="block py-1 hover:text-bronze">Dra. Anastasia Cano</a>
-      <a href="#opiniones" onclick="toggleMobileMenu()" class="block py-1 hover:text-bronze">Opiniones Verificadas</a>
-      <div class="pt-2 border-t border-stone-200">
-        <button onclick="openChat('cita'); toggleMobileMenu()" class="w-full bg-stone-900 text-white py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider text-center">
-          Agendar Cita con Asistente IA
+    <!-- Menú Móvil -->
+    <div id="mobile-menu" class="hidden lg:hidden border-t border-stone-200 bg-white px-5 py-4 space-y-3 text-sm">
+      <a href="#aparatologia" onclick="toggleMobileMenu()" class="block py-1 text-stone-700">Aparatología de Marca</a>
+      <a href="#faciales" onclick="toggleMobileMenu()" class="block py-1 text-stone-700">Tratamientos Faciales</a>
+      <a href="#corporales" onclick="toggleMobileMenu()" class="block py-1 text-stone-700">Tratamientos Corporales</a>
+      <a href="#diagnostico" onclick="toggleMobileMenu()" class="block py-1 text-stone-700">Tecnología Diagnóstica</a>
+      <a href="#doctora" onclick="toggleMobileMenu()" class="block py-1 text-stone-700">Dra. Anastasia Cano</a>
+      <a href="#opiniones" onclick="toggleMobileMenu()" class="block py-1 text-stone-700">Opiniones (5.0★)</a>
+      <div class="pt-2">
+        <button onclick="openChat('cita'); toggleMobileMenu()" class="w-full bg-stone-900 text-white py-2.5 rounded-full text-xs uppercase tracking-wider font-semibold">
+          Pedir Cita con Asistente IA
         </button>
       </div>
     </div>
   </header>
 
   <!-- ========================================================
-       HERO PRINCIPAL DE MÁXIMO IMPACTO
+       HERO NUEVO: BLANCO, LUMINOSO, CON AIRE Y ELEGANCIA EDITORIAL
        ======================================================== -->
-  <section id="inicio" class="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
-    <!-- Imagen de Fondo Editorial -->
-    <div class="absolute inset-0 z-0">
-      <img src="/images/demo-anastasia-hero.jpg" alt="Consulta médica Dra. Anastasia Cano Granada" class="w-full h-full object-cover object-center transform scale-105 transition duration-1000">
-      <div class="absolute inset-0 bg-gradient-to-r from-stone-950/85 via-stone-950/60 to-stone-900/30"></div>
-    </div>
-
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 text-white w-full">
-      <div class="max-w-2xl">
+  <section id="inicio" class="relative bg-white border-b border-stone-200/60 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
         
-        <!-- Badge Sanitario -->
-        <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-3.5 py-1.5 rounded-full text-xs font-medium text-stone-200 mb-6">
-          <span class="w-2 h-2 rounded-full bg-bronze-light"></span>
-          Centro Médico Homologado NICA 44613 · Edificio Fórum
+        <!-- Columna Izquierda: Mensaje Claro con Aire -->
+        <div class="lg:col-span-7">
+          
+          <!-- Badge Sanitario Delgado y Elegante -->
+          <div class="inline-flex items-center gap-2 bg-stone-100 border border-stone-200/80 px-3.5 py-1.5 rounded-full text-xs text-stone-700 mb-8">
+            <span class="w-1.5 h-1.5 rounded-full bg-bronze"></span>
+            <span>Centro Médico Homologado <strong>NICA 44613</strong> · Edificio Fórum</span>
+          </div>
+
+          <!-- Titular Editorial en Serif Ligero -->
+          <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-light text-stone-900 leading-[1.12] tracking-tight mb-6">
+            La belleza natural no se inventa. <br>
+            <span class="italic font-normal text-bronze">Se perfecciona con medicina.</span>
+          </h1>
+
+          <!-- Párrafo Descriptivo Luminoso -->
+          <p class="text-stone-600 text-base sm:text-lg font-light leading-relaxed mb-8 max-w-xl">
+            «Sentirse bien es lo natural y le ayudamos a conseguirlo». Tratamientos médico-estéticos personalizados en Granada con la aparatología más avanzada del mundo: <strong class="text-stone-800 font-medium">CoolSculpting® Elite, Ultherapy Prime® y Nordlys Candela</strong>.
+          </p>
+
+          <!-- CTAs Refinados -->
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-12">
+            <button onclick="openChat('cita')" class="bg-stone-900 hover:bg-bronze text-white px-8 py-4 rounded-full text-xs font-semibold uppercase tracking-widest transition-all shadow-sm hover:shadow-md text-center flex items-center justify-center gap-2">
+              <span>Reservar Valoración Médica</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </button>
+            <a href="#aparatologia" class="bg-stone-100 hover:bg-stone-200 text-stone-800 border border-stone-200 px-7 py-4 rounded-full text-xs font-semibold uppercase tracking-widest transition text-center">
+              Explorar Tecnología Médica
+            </a>
+          </div>
+
+          <!-- Métricas Médicas Claras y Aireadas -->
+          <div class="grid grid-cols-3 gap-6 pt-8 border-t border-stone-200/70 max-w-lg">
+            <div>
+              <div class="font-serif text-2xl sm:text-3xl text-stone-900 font-light">5.0 ★</div>
+              <div class="text-[11px] text-stone-500 uppercase tracking-wider mt-0.5">Google Reviews</div>
+            </div>
+            <div>
+              <div class="font-serif text-2xl sm:text-3xl text-stone-900 font-light">+10</div>
+              <div class="text-[11px] text-stone-500 uppercase tracking-wider mt-0.5">Años de Ejercicio</div>
+            </div>
+            <div>
+              <div class="font-serif text-2xl sm:text-3xl text-stone-900 font-light">Nº 1810931</div>
+              <div class="text-[11px] text-stone-500 uppercase tracking-wider mt-0.5">Médico Colegiada</div>
+            </div>
+          </div>
+
         </div>
 
-        <!-- Titular Principal -->
-        <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-light leading-[1.12] mb-6 tracking-tight">
-          Medicina estética de <span class="italic font-normal text-champagne">máxima precisión</span> y naturalidad en Granada.
-        </h1>
+        <!-- Columna Derecha: Imagen Médica Luminosa y Limpia -->
+        <div class="lg:col-span-5">
+          <div class="relative">
+            
+            <!-- Marco de Fotografía Editorial Luminosa -->
+            <div class="aspect-[4/5] rounded-3xl overflow-hidden shadow-xl border border-stone-200/80 bg-stone-100 relative">
+              <img src="/images/demo-anastasia-doctora.jpg" alt="Dra. Anastasia Cano Granada" class="w-full h-full object-cover object-top">
+              <div class="absolute inset-0 bg-gradient-to-t from-stone-900/60 via-transparent to-transparent"></div>
+              
+              <!-- Texto dentro de la foto al pie -->
+              <div class="absolute bottom-6 left-6 right-6 text-white">
+                <span class="text-[10px] uppercase tracking-widest font-semibold text-champagne block">Dirección Médica</span>
+                <span class="font-serif text-2xl block mt-0.5">Dra. Anastasia Cano</span>
+                <span class="text-xs text-stone-200 font-light">Licenciada en Medicina UGR · Máster Medicina Estética UCO</span>
+              </div>
+            </div>
 
-        <!-- Párrafo descriptivo -->
-        <p class="text-stone-200 text-base sm:text-lg font-light leading-relaxed mb-8 max-w-xl">
-          «Sentirse bien es lo natural». Combinamos diagnóstico médico avanzado, aparatología de referencia internacional (<span class="text-white font-medium">CoolSculpting® Elite, Ultherapy Prime® y Nordlys®</span>) y más de 10 años de dedicación médica personalizada.
-        </p>
+            <!-- Tarjeta Flotante: Aparatología en Consulta -->
+            <div class="absolute -bottom-5 -left-6 bg-white p-4 rounded-2xl shadow-lg border border-stone-200 max-w-[240px] hidden sm:block">
+              <div class="flex items-center gap-2 mb-1">
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                <span class="text-[11px] font-bold text-stone-900 uppercase tracking-wider">Aparatología Top</span>
+              </div>
+              <p class="text-[11px] text-stone-600 leading-tight">
+                CoolSculpting Elite · Ultherapy Prime · Nordlys Candela
+              </p>
+            </div>
 
-        <!-- Botones de Acción -->
-        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-10">
-          <button onclick="openChat('cita')" class="bg-bronze hover:bg-bronze-dark text-white px-8 py-4 rounded-full text-xs font-semibold tracking-widest uppercase transition-all shadow-lg hover:shadow-xl text-center flex items-center justify-center gap-2 group">
-            <span>Pedir Cita de Valoración</span>
-            <svg class="w-4 h-4 transform group-hover:translate-x-0.5 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-          </button>
-          <a href="#aparatologia" class="bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 text-white px-7 py-4 rounded-full text-xs font-semibold tracking-widest uppercase transition text-center">
-            Ver Aparatología Médica
-          </a>
-        </div>
-
-        <!-- Métricas de Confianza en el Hero -->
-        <div class="grid grid-cols-3 gap-4 pt-6 border-t border-white/15 max-w-lg">
-          <div>
-            <div class="font-serif text-2xl sm:text-3xl text-champagne font-light">5.0 ★</div>
-            <div class="text-[11px] text-stone-300 uppercase tracking-wider mt-0.5">Google Reviews</div>
-          </div>
-          <div>
-            <div class="font-serif text-2xl sm:text-3xl text-champagne font-light">+10</div>
-            <div class="text-[11px] text-stone-300 uppercase tracking-wider mt-0.5">Años de Ejercicio</div>
-          </div>
-          <div>
-            <div class="font-serif text-2xl sm:text-3xl text-champagne font-light">100%</div>
-            <div class="text-[11px] text-stone-300 uppercase tracking-wider mt-0.5">Personalizado</div>
           </div>
         </div>
 
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================
+       BARRA DE MARCAS MÉDICAS Y PROTOCOLOS
+       ======================================================== -->
+  <section class="bg-[#FAF9F6] border-b border-stone-200/70 py-6 px-4">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-6 text-xs text-stone-500">
+      <span class="font-semibold uppercase tracking-widest text-stone-400">Tecnologías en consulta:</span>
+      <div class="flex flex-wrap items-center gap-6 sm:gap-10 font-serif text-base text-stone-700">
+        <span>CoolSculpting® ELITE</span>
+        <span class="text-stone-300">•</span>
+        <span>Ultherapy Prime®</span>
+        <span class="text-stone-300">•</span>
+        <span>Nordlys® SWT Candela</span>
+        <span class="text-stone-300">•</span>
+        <span>Frax 1550™</span>
+        <span class="text-stone-300">•</span>
+        <span>Neauvia Zaffiro</span>
+        <span class="text-stone-300">•</span>
+        <span>Tanita BC-418 MA Clase III</span>
       </div>
     </div>
   </section>
 
   <!-- ========================================================
-       BARRA DE MARCAS Y CERTIFICACIONES OFICIALES
+       SECCIÓN 1: APARATOLOGÍA DE ÉLITE (Puesta en valor)
        ======================================================== -->
-  <section class="bg-stone-100 border-y border-stone-200/80 py-8 px-4">
-    <div class="max-w-7xl mx-auto">
-      <p class="text-center text-xs uppercase tracking-[0.25em] text-stone-600 font-semibold mb-6">
-        Tecnología Médica de Vanguardia Mundial en Consulta
+  <section id="aparatologia" class="py-20 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-2xl mb-14">
+      <span class="text-xs uppercase tracking-[0.25em] font-semibold text-bronze">Parque Tecnológico en Consulta</span>
+      <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-stone-900 mt-2">
+        Aparatología médica de referencia internacional.
+      </h2>
+      <p class="text-stone-600 mt-3 text-sm sm:text-base leading-relaxed">
+        Cada equipo cuenta con homologación sanitaria estricta y evidencia científica contrastada para ofrecer resultados visibles sin cirugía invasiva.
       </p>
-      <div class="flex flex-wrap justify-center items-center gap-8 md:gap-14 text-stone-600 font-serif text-lg tracking-wide">
-        <span class="hover:text-stone-900 transition flex items-center gap-2">
-          <span class="w-1.5 h-1.5 rounded-full bg-bronze"></span>
-          CoolSculpting® ELITE
-        </span>
-        <span class="hover:text-stone-900 transition flex items-center gap-2">
-          <span class="w-1.5 h-1.5 rounded-full bg-bronze"></span>
-          Ultherapy Prime®
-        </span>
-        <span class="hover:text-stone-900 transition flex items-center gap-2">
-          <span class="w-1.5 h-1.5 rounded-full bg-bronze"></span>
-          Nordlys® by Ellipse
-        </span>
-        <span class="hover:text-stone-900 transition flex items-center gap-2">
-          <span class="w-1.5 h-1.5 rounded-full bg-bronze"></span>
-          Frax 1550™
-        </span>
-        <span class="hover:text-stone-900 transition flex items-center gap-2">
-          <span class="w-1.5 h-1.5 rounded-full bg-bronze"></span>
-          Neauvia Zaffiro
-        </span>
-        <span class="hover:text-stone-900 transition flex items-center gap-2">
-          <span class="w-1.5 h-1.5 rounded-full bg-bronze"></span>
-          Tanita BC-418 MA
-        </span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========================================================
-       SECCIÓN 1: APARATOLOGÍA MÉDICA DE ÉLITE (El verdadero valor)
-       ======================================================== -->
-  <section id="aparatologia" class="py-20 lg:py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-      <div class="max-w-2xl">
-        <span class="text-xs uppercase tracking-[0.25em] font-semibold text-bronze">Parque Tecnológico de la Clínica</span>
-        <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-stone-900 mt-2">
-          Aparatología médica de referencia internacional.
-        </h2>
-        <p class="text-stone-600 mt-4 leading-relaxed text-sm sm:text-base">
-          En la clínica invertimos exclusivamente en tecnología con sólida evidencia científica, homologación sanitaria estricta y resultados predecibles sin recurrir a cirugía invasiva.
-        </p>
-      </div>
-      <div class="flex items-center gap-3">
-        <span class="text-xs text-stone-600">Disponibles en Edificio Fórum</span>
-        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-      </div>
     </div>
 
-    <!-- Grid de Aparatología Principal -->
+    <!-- Grid de Máquinas -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
-      <!-- TARJETA 1: CoolSculpting ELITE -->
-      <div class="bg-white rounded-2xl border border-stone-200/80 overflow-hidden shadow-sm treatment-card-hover flex flex-col justify-between">
+      <!-- CoolSculpting Elite -->
+      <div class="bg-white rounded-3xl border border-stone-200/80 p-8 shadow-sm card-hover-lift flex flex-col justify-between">
         <div>
-          <div class="h-56 bg-stone-900 relative overflow-hidden">
-            <img src="/images/demo-anastasia-aparatologia.jpg" alt="CoolSculpting Elite Granada" class="w-full h-full object-cover opacity-80 hover:opacity-100 transition duration-500">
-            <div class="absolute top-4 left-4 bg-stone-900/80 backdrop-blur-md text-white text-[11px] uppercase tracking-wider font-semibold px-3 py-1 rounded-full">
-              Criolipólisis Médica Dual
-            </div>
+          <div class="w-12 h-12 rounded-2xl bg-stone-100 flex items-center justify-center text-bronze mb-6">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
           </div>
-          <div class="p-7">
-            <div class="flex items-center justify-between text-xs text-bronze font-semibold mb-2">
-              <span>Corporal · Grasa Localizada</span>
-              <span>Sin Cirugía</span>
-            </div>
-            <h3 class="font-serif text-2xl text-stone-900 mb-3">CoolSculpting® ELITE</h3>
-            <p class="text-stone-600 text-sm leading-relaxed mb-5">
-              El avance más potente en eliminación no invasiva de grasa subcutánea por frío controlado. Su sistema DualSculpting permite tratar dos zonas en simultáneo con aplicadores ergonómicos en C.
-            </p>
-            <ul class="space-y-2 text-xs text-stone-600 border-t border-stone-100 pt-4 mb-6">
-              <li class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-bronze shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                Reducción de hasta un 25% de grasa por sesión
-              </li>
-              <li class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-bronze shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                Sin agujas, sin anestesia y sin baja laboral
-              </li>
-              <li class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-bronze shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                Abdomen, flancos, papada, brazos y cartucheras
-              </li>
-            </ul>
-          </div>
+          <span class="text-[11px] font-semibold uppercase tracking-wider text-bronze">Criolipólisis Médica Dual</span>
+          <h3 class="font-serif text-2xl text-stone-900 mt-1 mb-3">CoolSculpting® ELITE</h3>
+          <p class="text-stone-600 text-xs sm:text-sm leading-relaxed mb-6">
+            Eliminación definitiva de grasa subcutánea localizada por enfriamiento controlado (-11°C). El sistema DualSculpting permite tratar dos zonas al mismo tiempo con aplicadores ergonómicos en C.
+          </p>
+          <ul class="space-y-2.5 text-xs text-stone-600 border-t border-stone-100 pt-5 mb-8">
+            <li class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-bronze"></span>
+              Reducción de hasta un 25% de grasa por ciclo
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-bronze"></span>
+              Sin agujas, sin anestesia y sin baja laboral
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-bronze"></span>
+              Abdomen, flancos, brazos, cartucheras y papada
+            </li>
+          </ul>
         </div>
-        <div class="px-7 pb-7 pt-0">
-          <button onclick="openMachineModal('coolsculpting')" class="w-full bg-stone-100 hover:bg-bronze hover:text-white text-stone-800 text-xs font-semibold py-3 rounded-xl transition uppercase tracking-wider text-center">
-            Ver Ficha Clínica y Protocolo ↗
-          </button>
-        </div>
+        <button onclick="openMachineModal('coolsculpting')" class="w-full bg-stone-100 hover:bg-stone-900 hover:text-white text-stone-800 text-xs font-semibold py-3 rounded-full transition uppercase tracking-wider text-center">
+          Ver Ficha Técnica y Protocolo ↗
+        </button>
       </div>
 
-      <!-- TARJETA 2: Ultherapy Prime® -->
-      <div class="bg-white rounded-2xl border border-bronze/30 overflow-hidden shadow-md treatment-card-hover flex flex-col justify-between relative ring-1 ring-bronze/20">
-        <div class="absolute top-4 right-4 z-10 bg-bronze text-white text-[10px] uppercase tracking-widest font-bold px-3 py-1 rounded-full shadow">
+      <!-- Ultherapy Prime -->
+      <div class="bg-white rounded-3xl border border-bronze/40 p-8 shadow-md card-hover-lift flex flex-col justify-between ring-1 ring-bronze/20 relative">
+        <div class="absolute top-6 right-6 bg-bronze text-white text-[10px] uppercase tracking-widest font-bold px-3 py-1 rounded-full">
           Tratamiento Estrella
         </div>
         <div>
-          <div class="h-56 bg-stone-900 relative overflow-hidden">
-            <img src="/images/demo-anastasia-tratamiento.jpg" alt="Ultherapy Prime Lifting Granada" class="w-full h-full object-cover opacity-85 hover:opacity-100 transition duration-500">
-            <div class="absolute top-4 left-4 bg-stone-900/80 backdrop-blur-md text-white text-[11px] uppercase tracking-wider font-semibold px-3 py-1 rounded-full">
-              Lifting Facial Sin Cirugía
-            </div>
+          <div class="w-12 h-12 rounded-2xl bg-bronze/10 flex items-center justify-center text-bronze mb-6">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
           </div>
-          <div class="p-7">
-            <div class="flex items-center justify-between text-xs text-bronze font-semibold mb-2">
-              <span>Facial & Cuello · Flacidez</span>
-              <span>1 Sola Sesión</span>
-            </div>
-            <h3 class="font-serif text-2xl text-stone-900 mb-3">Ultherapy Prime®</h3>
-            <p class="text-stone-600 text-sm leading-relaxed mb-5">
-              Nueva generación con procesador 10 veces más rápido y ecografía de alta definición a tiempo real. Tensa las capas profundas de la piel estimulando colágeno y elastina de forma totalmente natural.
-            </p>
-            <ul class="space-y-2 text-xs text-stone-600 border-t border-stone-100 pt-4 mb-6">
-              <li class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-bronze shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                Visualización ecográfica de las capas dérmicas
-              </li>
-              <li class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-bronze shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                Menor molestia y tiempo de sesión optimizado
-              </li>
-              <li class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-bronze shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                Óvalo facial, cuello, escote y cejas definidas
-              </li>
-            </ul>
-          </div>
+          <span class="text-[11px] font-semibold uppercase tracking-wider text-bronze">Lifting Facial Sin Cirugía</span>
+          <h3 class="font-serif text-2xl text-stone-900 mt-1 mb-3">Ultherapy Prime®</h3>
+          <p class="text-stone-600 text-xs sm:text-sm leading-relaxed mb-6">
+            Lifting no invasivo con ultrasonidos microfocalizados guiados por ecografía en tiempo real. Actúa en la capa SMAS (la que tensan los cirujanos) para estimular nuevo colágeno natural.
+          </p>
+          <ul class="space-y-2.5 text-xs text-stone-600 border-t border-stone-100 pt-5 mb-8">
+            <li class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-bronze"></span>
+              1 sola sesión anual con resultados progresivos
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-bronze"></span>
+              Ecografía de alta definición a tiempo real
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-bronze"></span>
+              Definición mandibular, cuello, escote y cejas
+            </li>
+          </ul>
         </div>
-        <div class="px-7 pb-7 pt-0">
-          <button onclick="openMachineModal('ultherapy')" class="w-full bg-stone-900 hover:bg-bronze text-white text-xs font-semibold py-3 rounded-xl transition uppercase tracking-wider text-center">
-            Ver Ficha Clínica y Protocolo ↗
-          </button>
-        </div>
+        <button onclick="openMachineModal('ultherapy')" class="w-full bg-stone-900 hover:bg-bronze text-white text-xs font-semibold py-3 rounded-full transition uppercase tracking-wider text-center">
+          Ver Ficha Técnica y Protocolo ↗
+        </button>
       </div>
 
-      <!-- TARJETA 3: Nordlys® by Ellipse & Frax 1550 -->
-      <div class="bg-white rounded-2xl border border-stone-200/80 overflow-hidden shadow-sm treatment-card-hover flex flex-col justify-between">
+      <!-- Nordlys Candela -->
+      <div class="bg-white rounded-3xl border border-stone-200/80 p-8 shadow-sm card-hover-lift flex flex-col justify-between">
         <div>
-          <div class="h-56 bg-stone-900 relative overflow-hidden">
-            <img src="/images/demo-anastasia-doctora.jpg" alt="Nordlys Ellipse Candela Granada" class="w-full h-full object-cover opacity-80 hover:opacity-100 transition duration-500">
-            <div class="absolute top-4 left-4 bg-stone-900/80 backdrop-blur-md text-white text-[11px] uppercase tracking-wider font-semibold px-3 py-1 rounded-full">
-              Luz Pulsada SWT & Láser Frax
-            </div>
+          <div class="w-12 h-12 rounded-2xl bg-stone-100 flex items-center justify-center text-bronze mb-6">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
           </div>
-          <div class="p-7">
-            <div class="flex items-center justify-between text-xs text-bronze font-semibold mb-2">
-              <span>Manchas · Rosácea · Resurfacing</span>
-              <span>Candela Medical</span>
-            </div>
-            <h3 class="font-serif text-2xl text-stone-900 mb-3">Nordlys® & Frax 1550™</h3>
-            <p class="text-stone-600 text-sm leading-relaxed mb-5">
-              Plataforma lumínica de pulsos en sub-milisegundos (0,5 ms) con tecnología SWT® y láser fraccionado no ablativo. La solución médica definitiva para lesiones vasculares, manchas solares y cicatrices.
-            </p>
-            <ul class="space-y-2 text-xs text-stone-600 border-t border-stone-100 pt-4 mb-6">
-              <li class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-bronze shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                Eliminación de manchas solares y lentigos seniles
-              </li>
-              <li class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-bronze shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                Tratamiento eficaz de cuperosis, rojeces y rosácea
-              </li>
-              <li class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-bronze shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                Regeneración de estrías y cicatrices con Frax 1550
-              </li>
-            </ul>
-          </div>
+          <span class="text-[11px] font-semibold uppercase tracking-wider text-bronze">Plataforma SWT & Frax 1550</span>
+          <h3 class="font-serif text-2xl text-stone-900 mt-1 mb-3">Nordlys® & Frax 1550™</h3>
+          <p class="text-stone-600 text-xs sm:text-sm leading-relaxed mb-6">
+            La plataforma lumínica de referencia médica de Candela. Combina tecnología SWT en sub-milisegundos para manchas y capilares con láser fraccionado no ablativo Frax 1550 para cicatrices y textura.
+          </p>
+          <ul class="space-y-2.5 text-xs text-stone-600 border-t border-stone-100 pt-5 mb-8">
+            <li class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-bronze"></span>
+              Manchas solares, léntigos y melasma superficial
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-bronze"></span>
+              Cuperosis, rojeces faciales y rosácea
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-bronze"></span>
+              Cicatrices de acné y estrías sin tiempo de baja
+            </li>
+          </ul>
         </div>
-        <div class="px-7 pb-7 pt-0">
-          <button onclick="openMachineModal('nordlys')" class="w-full bg-stone-100 hover:bg-bronze hover:text-white text-stone-800 text-xs font-semibold py-3 rounded-xl transition uppercase tracking-wider text-center">
-            Ver Ficha Clínica y Protocolo ↗
-          </button>
-        </div>
+        <button onclick="openMachineModal('nordlys')" class="w-full bg-stone-100 hover:bg-stone-900 hover:text-white text-stone-800 text-xs font-semibold py-3 rounded-full transition uppercase tracking-wider text-center">
+          Ver Ficha Técnica y Protocolo ↗
+        </button>
       </div>
 
     </div>
 
-    <!-- Banner complementario: Neauvia Zaffiro -->
-    <div class="mt-8 bg-stone-100/90 rounded-2xl border border-stone-200 p-8 flex flex-col md:flex-row items-center justify-between gap-6">
-      <div class="max-w-3xl">
-        <span class="text-xs font-semibold uppercase tracking-widest text-bronze">Innovación en Termolifting & Hidroexfoliación</span>
-        <h4 class="font-serif text-2xl text-stone-900 mt-1">Neauvia Zaffiro: Luz Infrarroja y Exfoliación con Agua</h4>
-        <p class="text-stone-600 text-sm mt-2">
-          Dispositivo médico único que combina termo-lifting por infrarrojos para la contracción de colágeno e hidroexfoliación precisa a presión con infusión de principios activos patentados. Piel inmediatamente jugosa, tersa y luminosa.
+    <!-- Tarjeta Complementaria: Neauvia Zaffiro -->
+    <div class="mt-8 bg-stone-100 rounded-3xl p-8 flex flex-col md:flex-row items-center justify-between gap-6 border border-stone-200">
+      <div>
+        <span class="text-[11px] font-semibold uppercase tracking-wider text-bronze">Termolifting & Hidroexfoliación de Agua</span>
+        <h4 class="font-serif text-2xl text-stone-900 mt-0.5">Neauvia Zaffiro: La sinergia de luz infrarroja y principios activos</h4>
+        <p class="text-stone-600 text-xs sm:text-sm mt-1 max-w-3xl leading-relaxed">
+          Dispositivo médico único que tensa las fibras colágenas mediante infrarrojos mientras limpia en profundidad e infunde nutrición celular. Piel visiblemente luminosa, jugosa y tersa desde la primera sesión.
         </p>
       </div>
       <button onclick="openMachineModal('zaffiro')" class="bg-white hover:bg-stone-900 hover:text-white text-stone-800 border border-stone-300 px-6 py-3 rounded-full text-xs font-semibold uppercase tracking-wider transition whitespace-nowrap">
@@ -453,338 +388,208 @@
   </section>
 
   <!-- ========================================================
-       SECCIÓN 2: CATÁLOGO CLÍNICO COMPLETO (Faciales y Corporales)
+       SECCIÓN 2: CATÁLOGO COMPLETO DE TRATAMIENTOS
        ======================================================== -->
-  <section class="bg-stone-100/60 py-20 lg:py-28 border-y border-stone-200/80">
+  <section class="bg-white py-20 lg:py-24 border-y border-stone-200/70">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <div class="text-center max-w-2xl mx-auto mb-14">
-        <span class="text-xs uppercase tracking-[0.25em] font-semibold text-bronze">Catálogo Médico Completo</span>
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-xs uppercase tracking-[0.25em] font-semibold text-bronze">Catálogo Clínico</span>
         <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-stone-900 mt-2">
-          Tratamientos adaptados a su fisiología.
+          Tratamientos adaptados a cada paciente.
         </h2>
-        <p class="text-stone-600 mt-3 text-sm sm:text-base">
-          Cada paciente recibe un protocolo personalizado tras un exhaustivo diagnóstico médico.
+        <p class="text-stone-600 mt-3 text-sm">
+          Evaluamos cada caso con honestidad médica para aconsejar únicamente lo que de verdad aportará armonía y naturalidad.
         </p>
 
-        <!-- Selector de Pestañas -->
-        <div class="inline-flex bg-white p-1.5 rounded-full border border-stone-200 shadow-sm mt-8">
+        <!-- Selector de Pestañas Limpio -->
+        <div class="inline-flex bg-stone-100 p-1.5 rounded-full border border-stone-200/80 mt-8">
           <button id="tab-btn-faciales" onclick="switchCatalog('faciales')" class="px-6 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-stone-900 text-white transition">
-            Tratamientos Faciales
+            Facial
           </button>
           <button id="tab-btn-corporales" onclick="switchCatalog('corporales')" class="px-6 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider text-stone-600 hover:text-stone-900 transition">
-            Tratamientos Corporales
+            Corporal
           </button>
           <button id="tab-btn-diagnostico" onclick="switchCatalog('diagnostico')" class="px-6 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider text-stone-600 hover:text-stone-900 transition">
-            Diagnóstico Clínico
+            Diagnóstico
           </button>
         </div>
       </div>
 
-      <!-- PANEL 1: FACIALES (Por defecto activo) -->
+      <!-- PANEL FACIALES -->
       <div id="panel-faciales" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-        <!-- Facial 1 -->
-        <div class="bg-white p-7 rounded-2xl border border-stone-200/80 shadow-sm hover:border-bronze/40 transition">
-          <div class="w-10 h-10 rounded-full bg-stone-100 flex items-center justify-center text-bronze mb-5">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-          </div>
-          <span class="text-[11px] font-semibold uppercase tracking-wider text-bronze">Lifting & Flacidez</span>
+        
+        <div class="bg-[#FCFBF9] p-7 rounded-2xl border border-stone-200/80">
+          <span class="text-[11px] font-semibold uppercase tracking-wider text-bronze">Flacidez & Óvalo</span>
           <h3 class="font-serif text-xl text-stone-900 mt-1 mb-2">Ultherapy Prime® Facial</h3>
           <p class="text-stone-600 text-xs leading-relaxed mb-4">
-            Tensado profundo del óvalo facial, cuello y cejas mediante ultrasonidos microfocalizados guiados por ecografía en tiempo real. 1 sesión anual.
+            Tensado profundo no quirúrgico del óvalo mandibular, cuello y cejas con ultrasonidos microfocalizados guiados por ecografía.
           </p>
-          <button onclick="openChat('Ultherapy Prime')" class="text-xs font-semibold text-stone-900 hover:text-bronze flex items-center gap-1">
-            Consultar con Asistente IA →
-          </button>
+          <button onclick="openChat('Ultherapy Prime')" class="text-xs font-semibold text-stone-900 hover:text-bronze">Consultar con Valeria IA →</button>
         </div>
 
-        <!-- Facial 2 -->
-        <div class="bg-white p-7 rounded-2xl border border-stone-200/80 shadow-sm hover:border-bronze/40 transition">
-          <div class="w-10 h-10 rounded-full bg-stone-100 flex items-center justify-center text-bronze mb-5">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-          </div>
-          <span class="text-[11px] font-semibold uppercase tracking-wider text-bronze">Manchas & Tono</span>
+        <div class="bg-[#FCFBF9] p-7 rounded-2xl border border-stone-200/80">
+          <span class="text-[11px] font-semibold uppercase tracking-wider text-bronze">Manchas & Luminosidad</span>
           <h3 class="font-serif text-xl text-stone-900 mt-1 mb-2">Eliminación de Manchas Nordlys</h3>
           <p class="text-stone-600 text-xs leading-relaxed mb-4">
-            Tecnología SWT de banda estrecha para lentigos solares, manchas de edad, melasma superficial y unificación del tono con total seguridad dérmica.
+            Luz pulsada de banda estrecha SWT para eliminar léntigos solares, manchas de edad y unificar el tono facial con máxima seguridad.
           </p>
-          <button onclick="openChat('Eliminación de Manchas')" class="text-xs font-semibold text-stone-900 hover:text-bronze flex items-center gap-1">
-            Consultar con Asistente IA →
-          </button>
+          <button onclick="openChat('Eliminación de Manchas')" class="text-xs font-semibold text-stone-900 hover:text-bronze">Consultar con Valeria IA →</button>
         </div>
 
-        <!-- Facial 3 -->
-        <div class="bg-white p-7 rounded-2xl border border-stone-200/80 shadow-sm hover:border-bronze/40 transition">
-          <div class="w-10 h-10 rounded-full bg-stone-100 flex items-center justify-center text-bronze mb-5">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
-          </div>
-          <span class="text-[11px] font-semibold uppercase tracking-wider text-bronze">Naturalidad Médica</span>
-          <h3 class="font-serif text-xl text-stone-900 mt-1 mb-2">Neuromoduladores & Bótox</h3>
+        <div class="bg-[#FCFBF9] p-7 rounded-2xl border border-stone-200/80">
+          <span class="text-[11px] font-semibold uppercase tracking-wider text-bronze">Líneas de Expresión</span>
+          <h3 class="font-serif text-xl text-stone-900 mt-1 mb-2">Neuromoduladores (Bótox)</h3>
           <p class="text-stone-600 text-xs leading-relaxed mb-4">
-            Relajación precisa de líneas de expresión (frente, entrecejo y patas de gallo). El sello de la Dra. Anastasia: preservar siempre la expresividad natural.
+            Suavizado de arrugas en frente, entrecejo y patas de gallo respetando la movilidad y la expresividad natural de cada rostro.
           </p>
-          <button onclick="openChat('Neuromoduladores')" class="text-xs font-semibold text-stone-900 hover:text-bronze flex items-center gap-1">
-            Consultar con Asistente IA →
-          </button>
+          <button onclick="openChat('Neuromoduladores')" class="text-xs font-semibold text-stone-900 hover:text-bronze">Consultar con Valeria IA →</button>
         </div>
 
-        <!-- Facial 4 -->
-        <div class="bg-white p-7 rounded-2xl border border-stone-200/80 shadow-sm hover:border-bronze/40 transition">
-          <div class="w-10 h-10 rounded-full bg-stone-100 flex items-center justify-center text-bronze mb-5">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
-          </div>
-          <span class="text-[11px] font-semibold uppercase tracking-wider text-bronze">Armonización</span>
-          <h3 class="font-serif text-xl text-stone-900 mt-1 mb-2">Ácido Hialurónico & Labios</h3>
+        <div class="bg-[#FCFBF9] p-7 rounded-2xl border border-stone-200/80">
+          <span class="text-[11px] font-semibold uppercase tracking-wider text-bronze">Labios & Ojeras</span>
+          <h3 class="font-serif text-xl text-stone-900 mt-1 mb-2">Ácido Hialurónico de Precisión</h3>
           <p class="text-stone-600 text-xs leading-relaxed mb-4">
-            Hidratación profunda, perfilado o volumen sutil de labios, corrección de ojeras y reposición de volúmenes malares sin aspecto artificial.
+            Perfilado, hidratación o volumen labial sutil, corrección de ojeras cansadas y reposición de volúmenes con máxima naturalidad.
           </p>
-          <button onclick="openChat('Ácido Hialurónico')" class="text-xs font-semibold text-stone-900 hover:text-bronze flex items-center gap-1">
-            Consultar con Asistente IA →
-          </button>
+          <button onclick="openChat('Ácido Hialurónico')" class="text-xs font-semibold text-stone-900 hover:text-bronze">Consultar con Valeria IA →</button>
         </div>
 
-        <!-- Facial 5 -->
-        <div class="bg-white p-7 rounded-2xl border border-stone-200/80 shadow-sm hover:border-bronze/40 transition">
-          <div class="w-10 h-10 rounded-full bg-stone-100 flex items-center justify-center text-bronze mb-5">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
-          </div>
+        <div class="bg-[#FCFBF9] p-7 rounded-2xl border border-stone-200/80">
           <span class="text-[11px] font-semibold uppercase tracking-wider text-bronze">Textura & Poros</span>
           <h3 class="font-serif text-xl text-stone-900 mt-1 mb-2">Frax 1550™ Resurfacing</h3>
           <p class="text-stone-600 text-xs leading-relaxed mb-4">
-            Láser fraccionado no ablativo para afinar la textura de la piel, cerrar poros dilatados y tratar cicatrices de acné sin dejar costras ni descamación agresiva.
+            Láser fraccionado no ablativo para afinar la piel, cerrar poros dilatados y atenuar cicatrices de acné sin dejar costras visibles.
           </p>
-          <button onclick="openChat('Frax 1550')" class="text-xs font-semibold text-stone-900 hover:text-bronze flex items-center gap-1">
-            Consultar con Asistente IA →
-          </button>
+          <button onclick="openChat('Frax 1550')" class="text-xs font-semibold text-stone-900 hover:text-bronze">Consultar con Valeria IA →</button>
         </div>
 
-        <!-- Facial 6 -->
-        <div class="bg-white p-7 rounded-2xl border border-stone-200/80 shadow-sm hover:border-bronze/40 transition">
-          <div class="w-10 h-10 rounded-full bg-stone-100 flex items-center justify-center text-bronze mb-5">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-          </div>
-          <span class="text-[11px] font-semibold uppercase tracking-wider text-bronze">Luminosidad Inmediata</span>
+        <div class="bg-[#FCFBF9] p-7 rounded-2xl border border-stone-200/80">
+          <span class="text-[11px] font-semibold uppercase tracking-wider text-bronze">Efecto Glow</span>
           <h3 class="font-serif text-xl text-stone-900 mt-1 mb-2">Neauvia Zaffiro Glow</h3>
           <p class="text-stone-600 text-xs leading-relaxed mb-4">
-            Combinación sinérgica de hidro-peeling de agua con infusión nutritiva y termolifting infrarrojo para un efecto tensor e iluminador de alfombra roja.
+            Tratamiento de hidro-peeling con agua e infrarrojos para un rostro radiante, firme e hidratado antes de cualquier evento.
           </p>
-          <button onclick="openChat('Neauvia Zaffiro')" class="text-xs font-semibold text-stone-900 hover:text-bronze flex items-center gap-1">
-            Consultar con Asistente IA →
-          </button>
+          <button onclick="openChat('Neauvia Zaffiro')" class="text-xs font-semibold text-stone-900 hover:text-bronze">Consultar con Valeria IA →</button>
         </div>
 
       </div>
 
-      <!-- PANEL 2: CORPORALES (Oculto por JS) -->
+      <!-- PANEL CORPORALES -->
       <div id="panel-corporales" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-        <!-- Corporal 1 -->
-        <div class="bg-white p-7 rounded-2xl border border-stone-200/80 shadow-sm">
+        
+        <div class="bg-[#FCFBF9] p-7 rounded-2xl border border-stone-200/80">
           <span class="text-[11px] font-semibold uppercase tracking-wider text-bronze">Reducción de Grasa</span>
           <h3 class="font-serif text-xl text-stone-900 mt-1 mb-2">CoolSculpting® ELITE</h3>
           <p class="text-stone-600 text-xs leading-relaxed mb-4">
-            Criolipólisis médica de última generación. Destrucción permanente y por apoptosis de adipocitos en abdomen, flancos, espalda, cara interna de muslos y brazos.
+            Criolipólisis médica para eliminar de forma definitiva la grasa localizada en abdomen, flancos, brazos, espalda y muslos.
           </p>
-          <button onclick="openChat('Coolsculpting Corporal')" class="text-xs font-semibold text-stone-900 hover:text-bronze flex items-center gap-1">
-            Consultar con Asistente IA →
-          </button>
+          <button onclick="openChat('CoolSculpting')" class="text-xs font-semibold text-stone-900 hover:text-bronze">Consultar con Valeria IA →</button>
         </div>
 
-        <!-- Corporal 2 -->
-        <div class="bg-white p-7 rounded-2xl border border-stone-200/80 shadow-sm">
-          <span class="text-[11px] font-semibold uppercase tracking-wider text-bronze">Textura & Firmeza</span>
+        <div class="bg-[#FCFBF9] p-7 rounded-2xl border border-stone-200/80">
+          <span class="text-[11px] font-semibold uppercase tracking-wider text-bronze">Piel de Naranja</span>
           <h3 class="font-serif text-xl text-stone-900 mt-1 mb-2">Celulitis y Grasa Localizada</h3>
           <p class="text-stone-600 text-xs leading-relaxed mb-4">
-            Abordaje médico multidisciplinar para celulitis edematosa, fibrótica y esclerosada. Alisa la piel de naranja y activa la microcirculación tisular.
+            Protocolos médicos combinados para alisar el relieve de la piel, mejorar el drenaje linfático y reducir adiposidades rebeldes.
           </p>
-          <button onclick="openChat('Celulitis')" class="text-xs font-semibold text-stone-900 hover:text-bronze flex items-center gap-1">
-            Consultar con Asistente IA →
-          </button>
+          <button onclick="openChat('Celulitis')" class="text-xs font-semibold text-stone-900 hover:text-bronze">Consultar con Valeria IA →</button>
         </div>
 
-        <!-- Corporal 3 -->
-        <div class="bg-white p-7 rounded-2xl border border-stone-200/80 shadow-sm">
+        <div class="bg-[#FCFBF9] p-7 rounded-2xl border border-stone-200/80">
           <span class="text-[11px] font-semibold uppercase tracking-wider text-bronze">Salud Vascular</span>
           <h3 class="font-serif text-xl text-stone-900 mt-1 mb-2">Piernas Cansadas & Flebología</h3>
           <p class="text-stone-600 text-xs leading-relaxed mb-4">
-            Tratamiento de pesadez, retención linfática y varículas con apoyo diagnóstico mediante transiluminador venoso Veinlite LEDX de 32 diodos.
+            Alivio de la pesadez y tratamiento de varículas con diagnóstico vascular mediante transiluminador Veinlite LEDX.
           </p>
-          <button onclick="openChat('Piernas Cansadas')" class="text-xs font-semibold text-stone-900 hover:text-bronze flex items-center gap-1">
-            Consultar con Asistente IA →
-          </button>
+          <button onclick="openChat('Piernas Cansadas')" class="text-xs font-semibold text-stone-900 hover:text-bronze">Consultar con Valeria IA →</button>
         </div>
 
-        <!-- Corporal 4 -->
-        <div class="bg-white p-7 rounded-2xl border border-stone-200/80 shadow-sm">
-          <span class="text-[11px] font-semibold uppercase tracking-wider text-bronze">Regeneración Tisular</span>
+        <div class="bg-[#FCFBF9] p-7 rounded-2xl border border-stone-200/80">
+          <span class="text-[11px] font-semibold uppercase tracking-wider text-bronze">Regeneración</span>
           <h3 class="font-serif text-xl text-stone-900 mt-1 mb-2">Estrías y Cicatrices Frax 1550</h3>
           <p class="text-stone-600 text-xs leading-relaxed mb-4">
-            Remodelación de colágeno mediante micro-columnas térmicas no ablativas. Reduce profundidad y coloración de estrías y marcas quirúrgicas.
+            Láser fraccionado no ablativo para restaurar las fibras de colágeno en estrías y cicatrices corporales.
           </p>
-          <button onclick="openChat('Estrías')" class="text-xs font-semibold text-stone-900 hover:text-bronze flex items-center gap-1">
-            Consultar con Asistente IA →
-          </button>
+          <button onclick="openChat('Estrías')" class="text-xs font-semibold text-stone-900 hover:text-bronze">Consultar con Valeria IA →</button>
         </div>
 
-        <!-- Corporal 5 -->
-        <div class="bg-white p-7 rounded-2xl border border-stone-200/80 shadow-sm">
-          <span class="text-[11px] font-semibold uppercase tracking-wider text-bronze">Nutrición Clínica</span>
-          <h3 class="font-serif text-xl text-stone-900 mt-1 mb-2">Dietoterapia & Control de Peso</h3>
+        <div class="bg-[#FCFBF9] p-7 rounded-2xl border border-stone-200/80">
+          <span class="text-[11px] font-semibold uppercase tracking-wider text-bronze">Nutrición Médica</span>
+          <h3 class="font-serif text-xl text-stone-900 mt-1 mb-2">Dietoterapia y Control de Peso</h3>
           <p class="text-stone-600 text-xs leading-relaxed mb-4">
-            Planes nutricionales prescritos por médico con seguimiento de composición corporal segmental en báscula médica homologada Tanita BC-418 MA Clase III.
+            Planes nutricionales supervisados por médico con seguimiento de composición corporal en báscula segmental Tanita BC-418 MA.
           </p>
-          <button onclick="openChat('Dietas y Control')" class="text-xs font-semibold text-stone-900 hover:text-bronze flex items-center gap-1">
-            Consultar con Asistente IA →
-          </button>
+          <button onclick="openChat('Dietas')" class="text-xs font-semibold text-stone-900 hover:text-bronze">Consultar con Valeria IA →</button>
         </div>
 
-        <!-- Corporal 6 -->
-        <div class="bg-white p-7 rounded-2xl border border-stone-200/80 shadow-sm">
+        <div class="bg-[#FCFBF9] p-7 rounded-2xl border border-stone-200/80">
           <span class="text-[11px] font-semibold uppercase tracking-wider text-bronze">Eficacia Médica</span>
-          <h3 class="font-serif text-xl text-stone-900 mt-1 mb-2">Fotodepilación Médica Láser</h3>
+          <h3 class="font-serif text-xl text-stone-900 mt-1 mb-2">Depilación Láser Médica</h3>
           <p class="text-stone-600 text-xs leading-relaxed mb-4">
-            Eliminación definitiva del folículo piloso con parámetros médicos supervisados. Eficaz en fototipos claros y oscuros sin riesgo de quemadura.
+            Eliminación médica del vello corporal con parámetros regulados según el fototipo para máxima seguridad y efectividad.
           </p>
-          <button onclick="openChat('Depilación Médica')" class="text-xs font-semibold text-stone-900 hover:text-bronze flex items-center gap-1">
-            Consultar con Asistente IA →
-          </button>
+          <button onclick="openChat('Depilación')" class="text-xs font-semibold text-stone-900 hover:text-bronze">Consultar con Valeria IA →</button>
         </div>
 
       </div>
 
-      <!-- PANEL 3: DIAGNÓSTICO (Oculto por JS) -->
+      <!-- PANEL DIAGNÓSTICO -->
       <div id="panel-diagnostico" class="hidden grid grid-cols-1 md:grid-cols-3 gap-6">
-
-        <!-- Diagnostico 1 -->
-        <div class="bg-white p-7 rounded-2xl border border-stone-200/80 shadow-sm">
+        
+        <div class="bg-[#FCFBF9] p-7 rounded-2xl border border-stone-200/80">
           <span class="text-[11px] font-semibold uppercase tracking-wider text-bronze">Composición Corporal</span>
           <h3 class="font-serif text-xl text-stone-900 mt-1 mb-2">Tanita BC-418 MA Segmental</h3>
           <p class="text-stone-600 text-xs leading-relaxed mb-4">
-            Báscula médica homologada Clase III CE con 8 electrodos de acero inoxidable. Analiza grasa, masa muscular y agua por segmentos (brazos, piernas y tronco).
+            Báscula médica homologada Clase III CE con 8 electrodos para análisis segmental de grasa, masa muscular y agua por miembros.
           </p>
-          <span class="inline-block bg-stone-100 text-stone-700 px-3 py-1 rounded-full text-[10px] font-semibold">Precisión Clínica III</span>
+          <span class="text-[10px] font-semibold text-stone-500 uppercase">Clase III Homologado CE</span>
         </div>
 
-        <!-- Diagnostico 2 -->
-        <div class="bg-white p-7 rounded-2xl border border-stone-200/80 shadow-sm">
-          <span class="text-[11px] font-semibold uppercase tracking-wider text-bronze">Flebología Avanzada</span>
+        <div class="bg-[#FCFBF9] p-7 rounded-2xl border border-stone-200/80">
+          <span class="text-[11px] font-semibold uppercase tracking-wider text-bronze">Flebología Estética</span>
           <h3 class="font-serif text-xl text-stone-900 mt-1 mb-2">Transiluminador Veinlite LEDX</h3>
           <p class="text-stone-600 text-xs leading-relaxed mb-4">
-            Visualizador venoso de alta penetración con 32 LEDs para localizar venas nutricias profundas antes de realizar escleroterapia en piernas cansadas.
+            Visualizador venoso de 32 LEDs de alta penetración para localizar venas nutricias antes de tratamientos de escleroterapia.
           </p>
-          <span class="inline-block bg-stone-100 text-stone-700 px-3 py-1 rounded-full text-[10px] font-semibold">Diagnóstico Vascular</span>
+          <span class="text-[10px] font-semibold text-stone-500 uppercase">Diagnóstico Vascular</span>
         </div>
 
-        <!-- Diagnostico 3 -->
-        <div class="bg-white p-7 rounded-2xl border border-stone-200/80 shadow-sm">
-          <span class="text-[11px] font-semibold uppercase tracking-wider text-bronze">Dermatología Digital</span>
+        <div class="bg-[#FCFBF9] p-7 rounded-2xl border border-stone-200/80">
+          <span class="text-[11px] font-semibold uppercase tracking-wider text-bronze">Salud Cutánea</span>
           <h3 class="font-serif text-xl text-stone-900 mt-1 mb-2">Dermatoscopio Dermlite II PRO HR</h3>
           <p class="text-stone-600 text-xs leading-relaxed mb-4">
-            Sistema de epiluminiscencia con luz polarizada de máxima resolución para el estudio exhaustivo de lesiones pigmentarias, manchas y salud cutánea.
+            Epiluminiscencia con luz polarizada para evaluación precisa de manchas, lunares y alteraciones de la pigmentación dérmica.
           </p>
-          <span class="inline-block bg-stone-100 text-stone-700 px-3 py-1 rounded-full text-[10px] font-semibold">Epiluminiscencia Polarizada</span>
+          <span class="text-[10px] font-semibold text-stone-500 uppercase">Luz Polarizada Digital</span>
         </div>
 
       </div>
 
-    </div>
-  </section>
-
-  <!-- ========================================================
-       PRE-DIAGNÓSTICO INTERACTIVO (Innovación SendaIA)
-       ======================================================== -->
-  <section class="py-20 lg:py-24 max-w-4xl mx-auto px-4 sm:px-6">
-    <div class="bg-gradient-to-br from-stone-900 to-stone-950 text-white rounded-3xl p-8 sm:p-12 shadow-xl border border-stone-800 relative overflow-hidden">
-      
-      <!-- Fondo sutil con brillo dorado -->
-      <div class="absolute -top-24 -right-24 w-72 h-72 bg-bronze/20 rounded-full blur-3xl pointer-events-none"></div>
-
-      <div class="relative z-10">
-        <div class="flex items-center gap-2 text-bronze-light text-xs font-semibold uppercase tracking-widest mb-3">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-          Recomendador Clínico Inteligente
-        </div>
-        <h2 class="font-serif text-3xl sm:text-4xl font-light text-white mb-3">
-          ¿Qué zona o inquietud deseas tratar?
-        </h2>
-        <p class="text-stone-300 text-sm max-w-xl mb-8">
-          Selecciona tu prioridad y nuestro algoritmo médico te indicará qué tecnología de la Dra. Anastasia Cano ofrece la mayor evidencia y efectividad para tu caso.
-        </p>
-
-        <!-- Selector de Zonas -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
-          <button onclick="setDiagnosis('flacidez')" id="diag-btn-flacidez" class="diag-btn bg-white/10 hover:bg-white/20 border border-white/20 p-4 rounded-xl text-left transition active">
-            <div class="text-xs text-stone-400">Facial / Cuello</div>
-            <div class="font-serif text-lg text-white font-medium mt-1">Flacidez y Óvalo</div>
-          </button>
-          <button onclick="setDiagnosis('grasa')" id="diag-btn-grasa" class="diag-btn bg-white/5 hover:bg-white/20 border border-white/10 p-4 rounded-xl text-left transition">
-            <div class="text-xs text-stone-400">Corporal</div>
-            <div class="font-serif text-lg text-white font-medium mt-1">Grasa Rebelde</div>
-          </button>
-          <button onclick="setDiagnosis('manchas')" id="diag-btn-manchas" class="diag-btn bg-white/5 hover:bg-white/20 border border-white/10 p-4 rounded-xl text-left transition">
-            <div class="text-xs text-stone-400">Piel / Rostro</div>
-            <div class="font-serif text-lg text-white font-medium mt-1">Manchas o Rosácea</div>
-          </button>
-          <button onclick="setDiagnosis('labios')" id="diag-btn-labios" class="diag-btn bg-white/5 hover:bg-white/20 border border-white/10 p-4 rounded-xl text-left transition">
-            <div class="text-xs text-stone-400">Expresividad</div>
-            <div class="font-serif text-lg text-white font-medium mt-1">Labios y Ojeras</div>
-          </button>
-        </div>
-
-        <!-- Tarjeta de Resultado Dinámico -->
-        <div id="diagnosis-result" class="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/15">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div>
-              <span class="text-[11px] font-semibold uppercase tracking-wider text-bronze-light">Tratamiento de Primera Elección:</span>
-              <h3 id="diag-title" class="font-serif text-2xl text-white mt-0.5">Ultherapy Prime® (Lifting No Quirúrgico)</h3>
-              <p id="diag-desc" class="text-stone-300 text-xs sm:text-sm mt-1 max-w-lg leading-relaxed">
-                Ultrasonidos microfocalizados con guía ecográfica de alta resolución. Tensa las capas dérmicas profundas y regenera el colágeno en una sola sesión sin baja social.
-              </p>
-            </div>
-            <button onclick="openChatWithPref()" class="bg-bronze hover:bg-bronze-dark text-white px-6 py-3 rounded-full text-xs font-semibold uppercase tracking-wider transition whitespace-nowrap shrink-0">
-              Agendar Valoración ↗
-            </button>
-          </div>
-        </div>
-
-      </div>
     </div>
   </section>
 
   <!-- ========================================================
        SECCIÓN 3: LA DOCTORA & ACREDITACIONES SANITARIAS
        ======================================================== -->
-  <section id="doctora" class="py-20 lg:py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section id="doctora" class="py-20 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
       
-      <!-- Columna Foto Doctora -->
       <div class="lg:col-span-5">
-        <div class="relative">
-          <div class="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border border-stone-200">
-            <img src="/images/demo-anastasia-doctora.jpg" alt="Dra. Anastasia María Cano Castilla" class="w-full h-full object-cover">
-          </div>
-          <div class="absolute -bottom-6 -right-6 bg-white p-5 rounded-2xl shadow-xl border border-stone-200 max-w-xs hidden sm:block">
-            <div class="flex items-center gap-2 text-bronze font-serif text-lg">
-              <span>«Sentirse bien es lo natural»</span>
-            </div>
-            <p class="text-stone-600 text-xs mt-1">
-              Más de una década de ejercicio médico con foco en resultados sutiles y armónicos.
-            </p>
-          </div>
+        <div class="rounded-3xl overflow-hidden shadow-lg border border-stone-200 bg-white">
+          <img src="/images/demo-anastasia-doctora.jpg" alt="Dra. Anastasia María Cano Castilla" class="w-full h-auto object-cover">
         </div>
       </div>
 
-      <!-- Columna Trayectoria y Filosofía -->
       <div class="lg:col-span-7">
-        <span class="text-xs uppercase tracking-[0.25em] font-semibold text-bronze">Dirección Médica</span>
+        <span class="text-xs uppercase tracking-[0.25em] font-semibold text-bronze">Trayectoria Médica</span>
         <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-stone-900 mt-2 mb-6">
           Dra. Anastasia María Cano Castilla
         </h2>
 
         <div class="space-y-4 text-stone-700 text-sm sm:text-base leading-relaxed">
           <p>
-            <strong class="text-stone-900">Licenciada en Medicina y Cirugía por la Universidad de Granada (UGR)</strong> y <strong class="text-stone-900">Máster Universitario en Medicina Estética por la Universidad de Córdoba (UCO)</strong>. Colegiada nº 1810931 del Ilustre Colegio Oficial de Médicos de la Provincia de Granada.
+            <strong class="text-stone-900">Licenciada en Medicina y Cirugía por la Universidad de Granada (UGR)</strong> y <strong class="text-stone-900">Máster Universitario en Medicina Estética por la Universidad de Córdoba (UCO)</strong>. Colegiada nº 1810931 del Ilustre Colegio Oficial de Médicos de Granada.
           </p>
           <p>
             Al frente del centro médico homologado <strong class="text-stone-900">NICA 44613</strong> en el Edificio Fórum, defiende una medicina estética estrictamente personalizada y honesta:
@@ -794,22 +599,21 @@
           </blockquote>
         </div>
 
-        <!-- Credenciales y Puntos Fuertes -->
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-8 pt-6 border-t border-stone-200">
-          <div class="bg-stone-50 p-4 rounded-xl border border-stone-200/60">
+          <div class="bg-stone-50 p-4 rounded-xl border border-stone-200/80">
             <div class="text-bronze text-xs font-semibold uppercase tracking-wider">Acreditación</div>
             <div class="font-serif text-lg text-stone-900 mt-0.5">NICA 44613</div>
-            <div class="text-[11px] text-stone-600">Centro Sanitario Homologado</div>
+            <div class="text-[11px] text-stone-500">Centro Médico Oficial</div>
           </div>
-          <div class="bg-stone-50 p-4 rounded-xl border border-stone-200/60">
+          <div class="bg-stone-50 p-4 rounded-xl border border-stone-200/80">
             <div class="text-bronze text-xs font-semibold uppercase tracking-wider">Colegiatura</div>
             <div class="font-serif text-lg text-stone-900 mt-0.5">Nº 1810931</div>
-            <div class="text-[11px] text-stone-600">Colegio de Médicos de Granada</div>
+            <div class="text-[11px] text-stone-500">Colegio Médicos Granada</div>
           </div>
-          <div class="bg-stone-50 p-4 rounded-xl border border-stone-200/60 col-span-2 sm:col-span-1">
+          <div class="bg-stone-50 p-4 rounded-xl border border-stone-200/80 col-span-2 sm:col-span-1">
             <div class="text-bronze text-xs font-semibold uppercase tracking-wider">Ubicación</div>
             <div class="font-serif text-lg text-stone-900 mt-0.5">Edificio Fórum</div>
-            <div class="text-[11px] text-stone-600">Fácil parking y acceso directo</div>
+            <div class="text-[11px] text-stone-500">Parking cómodo</div>
           </div>
         </div>
 
@@ -821,66 +625,62 @@
   <!-- ========================================================
        SECCIÓN 4: TESTIMONIOS VERIFICADOS GOOGLE 5.0★
        ======================================================== -->
-  <section id="opiniones" class="bg-stone-100/70 py-20 lg:py-28 border-t border-stone-200/80">
+  <section id="opiniones" class="bg-white py-20 lg:py-24 border-t border-stone-200/70">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-4">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
         <div>
-          <span class="text-xs uppercase tracking-[0.25em] font-semibold text-bronze">Opiniones de Pacientes Reales</span>
+          <span class="text-xs uppercase tracking-[0.25em] font-semibold text-bronze">Pacientes Reales</span>
           <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-stone-900 mt-2">
             La confianza de quienes ya han venido.
           </h2>
         </div>
-        <div class="flex items-center gap-3 bg-white px-4 py-2 rounded-full border border-stone-200 shadow-sm">
-          <div class="flex text-amber-500">★★★★★</div>
+        <div class="flex items-center gap-3 bg-stone-50 px-4 py-2 rounded-full border border-stone-200">
+          <div class="flex text-amber-500 text-sm">★★★★★</div>
           <span class="text-xs font-bold text-stone-900">5.0 de 5.0</span>
           <span class="text-stone-300">|</span>
-          <span class="text-xs text-stone-600">Google Reviews & Doctoralia</span>
+          <span class="text-xs text-stone-500">Google Reviews</span>
         </div>
       </div>
 
-      <!-- Grid de Reseñas Reales -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         
-        <!-- Reseña 1 -->
-        <div class="bg-white p-8 rounded-2xl border border-stone-200 shadow-sm flex flex-col justify-between">
+        <div class="bg-[#FCFBF9] p-8 rounded-3xl border border-stone-200/80 flex flex-col justify-between">
           <div>
             <div class="flex text-amber-500 text-sm mb-4">★★★★★</div>
             <p class="text-stone-700 text-sm leading-relaxed mb-6 italic">
-              «Acudí a la doctora animada por las valoraciones que tiene en Google. ¡La realidad es aún mejor! Es perfeccionista, sabe lo que quieres mejor que tú misma, los resultados son espectaculares pero sutiles, completamente naturales, es muy cercana y los precios son inmejorables.»
+              «Acudí animada por las valoraciones de Google y la realidad es aún mejor. Es perfeccionista, sabe lo que quieres mejor que tú misma, los resultados son espectaculares pero sutiles y completamente naturales.»
             </p>
           </div>
-          <div class="pt-4 border-t border-stone-100 flex items-center justify-between">
-            <span class="font-serif text-base text-stone-900">Paciente Verificada</span>
-            <span class="text-[11px] text-stone-600 uppercase tracking-wider">Google Review</span>
+          <div class="pt-4 border-t border-stone-200/60 flex items-center justify-between text-xs text-stone-500">
+            <span class="font-serif text-base text-stone-900 font-medium">Paciente Verificada</span>
+            <span>Google Review</span>
           </div>
         </div>
 
-        <!-- Reseña 2 -->
-        <div class="bg-white p-8 rounded-2xl border border-stone-200 shadow-sm flex flex-col justify-between">
+        <div class="bg-[#FCFBF9] p-8 rounded-3xl border border-stone-200/80 flex flex-col justify-between">
           <div>
             <div class="flex text-amber-500 text-sm mb-4">★★★★★</div>
             <p class="text-stone-700 text-sm leading-relaxed mb-6 italic">
-              «Cuando se juntan la profesionalidad y el trato cercano es un placer y es justamente lo que pasa en la clínica de la Doctora Anastasia Cano. Llevo yendo desde hace años y nunca cambian. Resultados increíbles después de pasar un rato muy agradable con estas grandes profesionales.»
+              «Cuando se juntan la profesionalidad y el trato cercano es un placer. Llevo yendo desde hace años y nunca cambian. Resultados increíbles después de pasar un rato muy agradable con estas grandes profesionales.»
             </p>
           </div>
-          <div class="pt-4 border-t border-stone-100 flex items-center justify-between">
-            <span class="font-serif text-base text-stone-900">Cristina CC</span>
-            <span class="text-[11px] text-stone-600 uppercase tracking-wider">Paciente Frecuente</span>
+          <div class="pt-4 border-t border-stone-200/60 flex items-center justify-between text-xs text-stone-500">
+            <span class="font-serif text-base text-stone-900 font-medium">Cristina CC</span>
+            <span>Paciente Frecuente</span>
           </div>
         </div>
 
-        <!-- Reseña 3 -->
-        <div class="bg-white p-8 rounded-2xl border border-stone-200 shadow-sm flex flex-col justify-between">
+        <div class="bg-[#FCFBF9] p-8 rounded-3xl border border-stone-200/80 flex flex-col justify-between">
           <div>
             <div class="flex text-amber-500 text-sm mb-4">★★★★★</div>
             <p class="text-stone-700 text-sm leading-relaxed mb-6 italic">
-              «Perfección y excelencia. Con estas dos palabras puedo definir a la clínica de la Dra. Anastasia Cano y su equipo. La experiencia en el trato desde el primer contacto, durante el tratamiento y al finalizarlo es sin duda fabulosa y de máxima confianza en los resultados.»
+              «Perfección y excelencia. La experiencia en el trato desde el primer contacto, durante el tratamiento y al finalizarlo es sin duda fabulosa y de máxima confianza en los resultados.»
             </p>
           </div>
-          <div class="pt-4 border-t border-stone-100 flex items-center justify-between">
-            <span class="font-serif text-base text-stone-900">Cristina L.</span>
-            <span class="text-[11px] text-stone-600 uppercase tracking-wider">Google Review</span>
+          <div class="pt-4 border-t border-stone-200/60 flex items-center justify-between text-xs text-stone-500">
+            <span class="font-serif text-base text-stone-900 font-medium">Cristina L.</span>
+            <span>Google Review</span>
           </div>
         </div>
 
@@ -890,400 +690,193 @@
   </section>
 
   <!-- ========================================================
-       SECCIÓN 5: LOCALIZACIÓN & CONTACTO CLÍNICO
+       SECCIÓN 5: UBICACIÓN & CONTACTO CLÍNICO
        ======================================================== -->
   <section class="py-20 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="bg-white rounded-3xl border border-stone-200 p-8 sm:p-14 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+    <div class="bg-white rounded-3xl border border-stone-200 p-8 sm:p-12 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
       
       <div class="lg:col-span-7">
-        <span class="text-xs uppercase tracking-[0.25em] font-semibold text-bronze">Ubicación Privilegiada en Granada</span>
+        <span class="text-xs uppercase tracking-[0.25em] font-semibold text-bronze">Edificio Fórum · Granada</span>
         <h2 class="font-serif text-3xl sm:text-4xl font-light text-stone-900 mt-1 mb-4">
-          Visítanos en el Edificio Fórum
+          Visítanos en nuestra consulta
         </h2>
-        <p class="text-stone-600 text-sm sm:text-base leading-relaxed mb-8">
-          Ubicada en una de las zonas empresariales y médicas más cómodas de Granada, con amplias opciones de estacionamiento público, total discreción y fácil acceso desde la autovía y el centro.
+        <p class="text-stone-600 text-sm leading-relaxed mb-6">
+          Calle José Luis Pérez Pujadas 35, Local 1 (Edificio Fórum), 18006 Granada. Fácil aparcamiento y máxima discreción.
         </p>
-
-        <div class="space-y-4 text-sm text-stone-700">
-          <div class="flex items-start gap-3">
-            <div class="w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center text-bronze shrink-0 mt-0.5">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-            </div>
-            <div>
-              <strong class="text-stone-900 block">Dirección de Consulta:</strong>
-              <span>Calle José Luis Pérez Pujadas 35, Local 1 (Edificio Fórum), 18006 Granada.</span>
-            </div>
-          </div>
-
-          <div class="flex items-start gap-3">
-            <div class="w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center text-bronze shrink-0 mt-0.5">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-            </div>
-            <div>
-              <strong class="text-stone-900 block">Teléfonos de Cita y Urgencias:</strong>
-              <div class="flex gap-4 mt-0.5">
-                <a href="tel:858996637" class="text-bronze hover:underline font-semibold">858 996 637</a>
-                <span>·</span>
-                <a href="tel:640741719" class="text-bronze hover:underline font-semibold">640 741 719</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="flex items-start gap-3">
-            <div class="w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center text-bronze shrink-0 mt-0.5">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-            </div>
-            <div>
-              <strong class="text-stone-900 block">Correo Electrónico:</strong>
-              <a href="mailto:info@anastasiacano.es" class="text-stone-600 hover:text-bronze">info@anastasiacano.es</a>
-            </div>
-          </div>
+        <div class="flex flex-wrap gap-4 text-xs font-semibold text-stone-800">
+          <span>📞 Tel: 858 996 637</span>
+          <span>•</span>
+          <span>📱 WhatsApp: 640 741 719</span>
+          <span>•</span>
+          <span>✉️ info@anastasiacano.es</span>
         </div>
       </div>
 
-      <!-- Columna Acción Directa -->
-      <div class="lg:col-span-5 bg-stone-50 rounded-2xl p-7 border border-stone-200 text-center">
-        <h3 class="font-serif text-2xl text-stone-900 mb-2">Solicita tu Primera Consulta</h3>
-        <p class="text-stone-600 text-xs mb-6 leading-relaxed">
-          Evaluaremos tu anatomía facial o corporal con total honestidad médica antes de proponer cualquier tratamiento.
+      <div class="lg:col-span-5 bg-stone-50 rounded-2xl p-6 border border-stone-200 text-center">
+        <h3 class="font-serif text-xl text-stone-900 mb-2">Primera Valoración Médica</h3>
+        <p class="text-stone-600 text-xs mb-4">
+          Sin compromiso. Evaluaremos tu anatomía y resolveremos todas tus dudas con honestidad médica.
         </p>
-        <button onclick="openChat('cita')" class="w-full bg-stone-900 hover:bg-bronze text-white py-3.5 rounded-full text-xs font-semibold uppercase tracking-wider transition mb-3">
-          Reservar Cita con Asistente IA 24/7
+        <button onclick="openChat('cita')" class="w-full bg-stone-900 hover:bg-bronze text-white py-3 rounded-full text-xs font-semibold uppercase tracking-wider transition">
+          Agendar con Asistente IA 24/7
         </button>
-        <a href="https://wa.me/34640741719?text=Hola%2C%20quisiera%20pedir%20cita%20con%20la%20Dra.%20Anastasia%20Cano" target="_blank" rel="noopener" class="w-full inline-block bg-white hover:bg-emerald-50 text-emerald-800 border border-emerald-300 py-3 rounded-full text-xs font-semibold uppercase tracking-wider transition">
-          Contactar por WhatsApp Directo
-        </a>
       </div>
 
     </div>
   </section>
 
   <!-- ========================================================
-       FOOTER LEGAL Y SANITARIO
+       FOOTER LEGAL
        ======================================================== -->
-  <footer class="bg-stone-900 text-stone-400 py-14 border-t border-stone-800 text-xs">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-        <div class="md:col-span-2 space-y-3">
-          <span class="font-serif text-2xl text-white block">Dra. Anastasia Cano</span>
-          <span class="text-bronze text-[11px] uppercase tracking-widest block">Medicina Estética Avanzada</span>
-          <p class="text-stone-400 text-xs max-w-md leading-relaxed">
-            Centro médico autorizado NICA 44613. Dra. Anastasia María Cano Castilla, Colegiada nº 1810931 del Ilustre Colegio de Médicos de Granada.
-          </p>
-        </div>
-        <div>
-          <h4 class="text-white text-xs font-semibold uppercase tracking-wider mb-3">Aparatología Top</h4>
-          <ul class="space-y-1.5 text-stone-400">
-            <li>CoolSculpting® ELITE</li>
-            <li>Ultherapy Prime®</li>
-            <li>Nordlys® SWT & Frax 1550</li>
-            <li>Neauvia Zaffiro</li>
-            <li>Tanita BC-418 Segmental</li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="text-white text-xs font-semibold uppercase tracking-wider mb-3">Contacto Clínico</h4>
-          <p class="text-stone-400 mb-2">Edificio Fórum, Local 1</p>
-          <p class="text-stone-400 mb-2">858 996 637 / 640 741 719</p>
-          <p class="text-stone-400">info@anastasiacano.es</p>
-        </div>
+  <footer class="bg-stone-900 text-stone-400 py-12 text-xs border-t border-stone-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div>
+        <span class="font-serif text-xl text-white block">Dra. Anastasia Cano</span>
+        <span class="text-stone-400 text-[11px]">Medicina Estética · Centro Homologado NICA 44613 · Colegiada 1810931</span>
       </div>
-      <div class="pt-8 border-t border-stone-800 flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] text-stone-400">
-        <p>© 2026 Clínica Dra. Anastasia Cano. Todos los derechos reservados.</p>
-        <div class="flex gap-4">
-          <a href="#" class="hover:text-stone-200">Aviso Legal</a>
-          <span>·</span>
-          <a href="#" class="hover:text-stone-200">Política de Privacidad RGPD</a>
-          <span>·</span>
-          <a href="#" class="hover:text-stone-200">Consentimiento Médico Informado</a>
-        </div>
-      </div>
+      <p class="text-stone-400 text-[11px]">© 2026 Clínica Dra. Anastasia Cano. Edificio Fórum, Granada.</p>
     </div>
   </footer>
 
   <!-- ========================================================
-       MODAL DE FICHA TÉCNICA CLÍNICA (Aparatología Detallada)
+       MODAL FICHA TÉCNICA
        ======================================================== -->
-  <div id="machine-modal" class="fixed inset-0 z-50 bg-stone-950/80 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="bg-white rounded-3xl max-w-2xl w-full p-8 shadow-2xl border border-stone-200 relative max-h-[90vh] overflow-y-auto">
-      <button onclick="closeMachineModal()" class="absolute top-6 right-6 text-stone-400 hover:text-stone-800 text-xl font-bold p-1">
-        ✕
-      </button>
-      <div id="machine-modal-content">
-        <!-- Rellenado dinámicamente con JS -->
+  <div id="machine-modal" class="fixed inset-0 z-50 bg-stone-950/70 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-xl w-full p-8 shadow-2xl border border-stone-200 relative max-h-[85vh] overflow-y-auto">
+      <button onclick="closeMachineModal()" class="absolute top-6 right-6 text-stone-400 hover:text-stone-800 text-xl font-bold">✕</button>
+      <div id="machine-modal-content"></div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODAL AUDITORÍA SENDAIA
+       ======================================================== -->
+  <div id="audit-modal" class="fixed inset-0 z-50 bg-stone-950/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-stone-900 text-stone-200 rounded-3xl max-w-2xl w-full p-8 shadow-2xl border border-stone-800 relative max-h-[85vh] overflow-y-auto">
+      <button onclick="toggleAuditModal()" class="absolute top-6 right-6 text-stone-400 hover:text-white text-xl font-bold">✕</button>
+      <span class="text-xs uppercase tracking-widest text-bronze-light font-semibold block mb-2">Auditoría SendaIA</span>
+      <h3 class="font-serif text-2xl text-white mb-4">¿Por qué cambiar la web de la clínica?</h3>
+      <div class="space-y-3 text-xs text-stone-300">
+        <p>• <strong>Web actual (anastasiacano.es):</strong> Tema genérico <code class="text-stone-400">vw-dentist-pro</code> de dentistas, fuentes lentas y solo un formulario de contacto estático que no capta pacientes fuera de horario.</p>
+        <p>• <strong>Nueva versión SendaIA:</strong> Diseño limpio, luminoso y editorial que da valor a máquinas de más de 80.000€ (CoolSculpting Elite, Ultherapy Prime, Nordlys) y cuenta con un Asistente IA 24/7 para agendar citas directamente.</p>
+      </div>
+      <div class="mt-6 flex justify-end">
+        <button onclick="toggleAuditModal()" class="bg-stone-800 text-white px-5 py-2 rounded-full text-xs uppercase font-semibold">Cerrar</button>
       </div>
     </div>
   </div>
 
   <!-- ========================================================
-       MODAL DE AUDITORÍA COMPARATIVA SENDAIA
-       ======================================================== -->
-  <div id="audit-modal" class="fixed inset-0 z-50 bg-stone-950/85 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="bg-stone-900 text-stone-200 rounded-3xl max-w-3xl w-full p-8 sm:p-10 shadow-2xl border border-stone-800 relative max-h-[90vh] overflow-y-auto">
-      <button onclick="toggleAuditModal()" class="absolute top-6 right-6 text-stone-400 hover:text-white text-xl font-bold p-1">
-        ✕
-      </button>
-      
-      <div class="flex items-center gap-2 text-bronze-light text-xs font-semibold uppercase tracking-widest mb-2">
-        <span class="w-2 h-2 rounded-full bg-bronze-light"></span>
-        Informe de Auditoría Digital SendaIA para Dra. Anastasia Cano
-      </div>
-      <h3 class="font-serif text-3xl text-white mb-4">
-        Por qué la clínica pierde pacientes con su web actual
-      </h3>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-6 text-xs">
-        
-        <!-- Web Antigua -->
-        <div class="bg-stone-950/70 p-5 rounded-2xl border border-red-500/30">
-          <div class="text-red-400 font-bold uppercase tracking-wider mb-2 flex items-center gap-1.5">
-            <span>✕</span> Web Actual (anastasiacano.es)
-          </div>
-          <ul class="space-y-2 text-stone-400">
-            <li>• Plantilla india de clínicas dentales (tema <code class="text-stone-300">vw-dentist-pro</code>).</li>
-            <li>• Colores morados estridentes (#ad28d6) que devalúan la percepción de lujo.</li>
-            <li>• Más de 50 fuentes cargadas simultáneamente ralentizando la carga móvil.</li>
-            <li>• Solo un formulario de contacto estático de WordPress: cero respuesta inmediata por la noche o fin de semana.</li>
-            <li>• Pierde el 70% de pacientes que descubren la clínica fuera del horario de recepción.</li>
-          </ul>
-        </div>
-
-        <!-- Propuesta SendaIA -->
-        <div class="bg-stone-950/70 p-5 rounded-2xl border border-emerald-500/30">
-          <div class="text-emerald-400 font-bold uppercase tracking-wider mb-2 flex items-center gap-1.5">
-            <span>✓</span> Nueva Web Inteligente SendaIA
-          </div>
-          <ul class="space-y-2 text-stone-300">
-            <li>• Estética editorial de lujo médico (Garamond + Travertino + Bronce).</li>
-            <li>• Pone en valor toda la inversión en máquinas (Ultherapy, CoolSculpting Elite, Nordlys).</li>
-            <li>• Asistente IA 24/7 entrenado con sus protocolos que responde dudas al instante.</li>
-            <li>• Agendamiento guiado y directo a WhatsApp de recepción médica.</li>
-            <li>• Diseñado para duplicar la conversión de pacientes procedentes de Instagram y Google.</li>
-          </ul>
-        </div>
-
-      </div>
-
-      <div class="pt-4 border-t border-stone-800 flex justify-end gap-3">
-        <button onclick="toggleAuditModal()" class="bg-stone-800 hover:bg-stone-700 text-stone-300 px-5 py-2.5 rounded-full text-xs uppercase tracking-wider font-semibold transition">
-          Cerrar
-        </button>
-        <button onclick="toggleAuditModal(); openChat('cita')" class="bg-bronze hover:bg-bronze-dark text-white px-6 py-2.5 rounded-full text-xs uppercase tracking-wider font-semibold transition">
-          Probar Asistente IA ↗
-        </button>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ========================================================
-       BOTÓN FLOTANTE Y WIDGET DEL CHATBOT MÉDICO IA ("Valeria")
+       CHATBOT FLOTANTE VALERIA IA
        ======================================================== -->
   <div class="fixed bottom-6 right-6 z-50">
-    
-    <!-- Botón disparador -->
-    <button id="chatbot-toggle-btn" onclick="toggleChatWindow()" class="bg-stone-900 hover:bg-bronze text-white p-4 rounded-full shadow-2xl border-2 border-stone-100 flex items-center gap-3 transition-all hover:scale-105 group">
+    <button id="chatbot-toggle-btn" onclick="toggleChatWindow()" class="bg-stone-900 hover:bg-bronze text-white p-4 rounded-full shadow-xl flex items-center gap-3 transition hover:scale-105">
       <div class="relative">
         <svg class="w-6 h-6 text-champagne" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
         <span class="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-stone-900"></span>
       </div>
       <div class="text-left hidden sm:block pr-1">
         <div class="text-[11px] uppercase tracking-wider font-bold text-white leading-tight">Valeria · Asistente IA</div>
-        <div class="text-[10px] text-stone-300">Citas y Consultas 24/7</div>
+        <div class="text-[10px] text-stone-300">Citas 24/7 Edificio Fórum</div>
       </div>
     </button>
 
-    <!-- Ventana del Chatbot (Flotante) -->
-    <div id="chat-window" class="hidden absolute bottom-20 right-0 w-[92vw] sm:w-[400px] h-[550px] bg-white rounded-3xl shadow-2xl border border-stone-200 overflow-hidden flex-col flex animate-in slide-in-from-bottom-5">
-      
-      <!-- Cabecera del Chat -->
-      <div class="bg-stone-900 text-white p-4 flex items-center justify-between border-b border-stone-800">
+    <div id="chat-window" class="hidden absolute bottom-20 right-0 w-[90vw] sm:w-[380px] h-[520px] bg-white rounded-3xl shadow-2xl border border-stone-200 overflow-hidden flex-col flex">
+      <div class="bg-stone-900 text-white p-4 flex items-center justify-between">
         <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-full bg-bronze/30 border border-bronze-light flex items-center justify-center text-champagne font-serif text-lg font-bold">
-            V
-          </div>
+          <div class="w-8 h-8 rounded-full bg-bronze/30 text-champagne font-serif text-base font-bold flex items-center justify-center">V</div>
           <div>
-            <div class="text-xs font-semibold tracking-wide flex items-center gap-1.5">
-              <span>Valeria</span>
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-            </div>
-            <div class="text-[10px] text-stone-400">Asistente Clínica Dra. Anastasia Cano</div>
+            <div class="text-xs font-semibold">Valeria · Clínica Dra. Anastasia Cano</div>
+            <div class="text-[10px] text-stone-400">Asistente Médica IA 24/7</div>
           </div>
         </div>
-        <button onclick="toggleChatWindow()" class="text-stone-400 hover:text-white text-lg p-1">
-          ✕
-        </button>
+        <button onclick="toggleChatWindow()" class="text-stone-400 hover:text-white">✕</button>
       </div>
 
-      <!-- Mensajes del Chat -->
-      <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-3.5 bg-stone-50 text-xs">
-        <!-- Mensaje de bienvenida inicial -->
-        <div class="flex gap-2.5 items-start">
-          <div class="w-6 h-6 rounded-full bg-stone-800 text-champagne flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">V</div>
-          <div class="bg-white p-3.5 rounded-2xl rounded-tl-sm border border-stone-200/80 text-stone-800 shadow-sm leading-relaxed max-w-[85%]">
-            Hola, soy <strong>Valeria</strong>, la asistente clínica de la Dra. Anastasia Cano en Edificio Fórum.
-            <br><br>
-            Conozco todos nuestros protocolos médicos (<strong class="text-stone-900">CoolSculpting Elite, Ultherapy Prime, Nordlys</strong> y armonización facial). ¿En qué tratamiento estás interesado/a o prefieres que agendemos tu primera cita de valoración médica?
+      <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-3 bg-stone-50 text-xs">
+        <div class="flex gap-2 items-start">
+          <div class="w-5 h-5 rounded-full bg-stone-800 text-champagne flex items-center justify-center text-[9px] font-bold shrink-0 mt-0.5">V</div>
+          <div class="bg-white p-3 rounded-2xl border border-stone-200 text-stone-800 shadow-sm leading-relaxed max-w-[85%]">
+            Hola, soy <strong>Valeria</strong>. Conozco todos los protocolos de la Dra. Anastasia Cano (CoolSculpting Elite, Ultherapy Prime, Nordlys, neuromodulación). ¿En qué podemos ayudarte o deseas agendar cita de valoración?
           </div>
         </div>
       </div>
 
-      <!-- Botones Rápidos de Conversación -->
-      <div id="quick-replies" class="p-2.5 bg-white border-t border-stone-100 flex gap-2 overflow-x-auto no-scrollbar">
-        <button onclick="sendQuickReply('¿Cómo funciona CoolSculpting Elite?')" class="bg-stone-100 hover:bg-stone-200 text-stone-800 text-[11px] px-3 py-1.5 rounded-full whitespace-nowrap transition">
-          ❄️ CoolSculpting Elite
+      <div id="quick-replies" class="p-2 bg-white border-t border-stone-100 flex gap-2 overflow-x-auto no-scrollbar">
+        <button onclick="sendQuickReply('CoolSculpting Elite')" class="bg-stone-100 hover:bg-stone-200 text-stone-800 text-[10px] px-3 py-1 rounded-full whitespace-nowrap transition">
+          ❄️ CoolSculpting
         </button>
-        <button onclick="sendQuickReply('¿Qué resultados da Ultherapy Prime?')" class="bg-stone-100 hover:bg-stone-200 text-stone-800 text-[11px] px-3 py-1.5 rounded-full whitespace-nowrap transition">
+        <button onclick="sendQuickReply('Ultherapy Prime')" class="bg-stone-100 hover:bg-stone-200 text-stone-800 text-[10px] px-3 py-1 rounded-full whitespace-nowrap transition">
           ✨ Ultherapy Prime
         </button>
-        <button onclick="sendQuickReply('Quiero pedir una cita de valoración')" class="bg-bronze hover:bg-bronze-dark text-white text-[11px] px-3 py-1.5 rounded-full whitespace-nowrap transition font-medium">
+        <button onclick="sendQuickReply('Pedir Cita')" class="bg-bronze text-white text-[10px] px-3 py-1 rounded-full whitespace-nowrap transition">
           📅 Pedir Cita
         </button>
       </div>
 
-      <!-- Input de Texto -->
-      <div class="p-3 bg-white border-t border-stone-200 flex gap-2 items-center">
-        <input type="text" id="chat-input" placeholder="Escribe tu consulta o duda médica..." onkeydown="if(event.key === 'Enter') handleUserMessage()" class="flex-1 bg-stone-100 border border-stone-200 rounded-full px-4 py-2.5 text-xs text-stone-900 focus:outline-none focus:border-bronze">
-        <button onclick="handleUserMessage()" class="bg-stone-900 hover:bg-bronze text-white p-2.5 rounded-full transition shrink-0">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+      <div class="p-2.5 bg-white border-t border-stone-200 flex gap-2 items-center">
+        <input type="text" id="chat-input" placeholder="Escribe tu consulta..." onkeydown="if(event.key === 'Enter') handleUserMessage()" class="flex-1 bg-stone-100 rounded-full px-3.5 py-2 text-xs focus:outline-none">
+        <button onclick="handleUserMessage()" class="bg-stone-900 text-white p-2 rounded-full">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
         </button>
       </div>
-
     </div>
-
   </div>
 
-  <!-- ========================================================
-       JAVASCRIPT: INTERACTIVIDAD COMPLETA Y MOTOR DEL CHATBOT
-       ======================================================== -->
   <script>
-    // 1. Selector de Pestañas del Catálogo
-    function switchCatalog(category) {
-      const panels = ['faciales', 'corporales', 'diagnostico'];
-      panels.forEach(p => {
-        const panelEl = document.getElementById('panel-' + p);
-        const btnEl = document.getElementById('tab-btn-' + p);
-        if (p === category) {
-          panelEl.classList.remove('hidden');
-          btnEl.classList.remove('text-stone-600');
-          btnEl.classList.add('bg-stone-900', 'text-white');
+    function switchCatalog(cat) {
+      ['faciales', 'corporales', 'diagnostico'].forEach(c => {
+        document.getElementById('panel-' + c).classList.toggle('hidden', c !== cat);
+        const btn = document.getElementById('tab-btn-' + c);
+        if (c === cat) {
+          btn.className = "px-6 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-stone-900 text-white transition";
         } else {
-          panelEl.classList.add('hidden');
-          btnEl.classList.remove('bg-stone-900', 'text-white');
-          btnEl.classList.add('text-stone-600');
+          btn.className = "px-6 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider text-stone-600 hover:text-stone-900 transition";
         }
       });
     }
 
-    // 2. Recomendador Clínico Inteligente
-    const diagnosisData = {
-      flacidez: {
-        title: "Ultherapy Prime® (Lifting No Quirúrgico)",
-        desc: "Ultrasonidos microfocalizados con guía ecográfica de alta resolución en tiempo real. Tensa las capas dérmicas profundas y regenera el colágeno en una sola sesión anual sin baja social."
-      },
-      grasa: {
-        title: "CoolSculpting® ELITE (Criolipólisis Médica Dual)",
-        desc: "Eliminación no invasiva de grasa subcutánea por congelación controlada (-11°C). Destruye permanentemente hasta un 25% de grasa localizada en abdomen, flancos, brazos y cartucheras."
-      },
-      manchas: {
-        title: "Plataforma Nordlys® Candela (Luz SWT®)",
-        desc: "Tecnología lumínica patentada en sub-milisegundos que elimina selectivamente pigmentos solares, léntigos y capilares de rosácea/cuperosis sin dañar la piel circundante."
-      },
-      labios: {
-        title: "Armonización Facial & Ácido Hialurónico",
-        desc: "El sello de la Dra. Anastasia Cano: hidratación o proyección labial de máxima sutileza, corrección de ojeras cansadas y óvalo facial respetando siempre tu fisonomía natural."
-      }
-    };
-
-    let currentPref = "Ultherapy Prime";
-
-    function setDiagnosis(type) {
-      document.querySelectorAll('.diag-btn').forEach(btn => {
-        btn.classList.remove('bg-white/20', 'border-white/20');
-        btn.classList.add('bg-white/5', 'border-white/10');
-      });
-      const activeBtn = document.getElementById('diag-btn-' + type);
-      if (activeBtn) {
-        activeBtn.classList.remove('bg-white/5', 'border-white/10');
-        activeBtn.classList.add('bg-white/20', 'border-white/20');
-      }
-
-      const item = diagnosisData[type];
-      document.getElementById('diag-title').innerText = item.title;
-      document.getElementById('diag-desc').innerText = item.desc;
-      currentPref = item.title;
-    }
-
-    function openChatWithPref() {
-      openChat(currentPref);
-    }
-
-    // 3. Ficha Técnica / Modal de Máquinas
-    const machinesInfo = {
+    const machineDetails = {
       coolsculpting: {
-        title: "CoolSculpting® ELITE : Criolipólisis Médica",
-        sub: "Eliminación definitiva de grasa localizada por frío sin cirugía",
-        desc: "CoolSculpting Elite es la plataforma médica líder mundial de criolipólisis. Su accesorio de enfriamiento avanzado utiliza copas aplicadoras en forma de C que se adaptan con máxima ergonomía a la curvatura anatómica del paciente.",
-        points: [
-          "<strong>Duración:</strong> 35 a 60 minutos por ciclo.",
-          "<strong>Aplicadores Duales:</strong> Permite tratar dos zonas corporales a la vez reduciendo a la mitad el tiempo en clínica.",
-          "<strong>Zonas habituales:</strong> Abdomen, flancos (flotadores), cara interna y externa de muslos, grasa submentoniana (papada), brazos y espalda.",
-          "<strong>Sin baja laboral:</strong> Puedes reincorporarte a tu vida social inmediatamente tras la sesión."
-        ]
+        title: "CoolSculpting® ELITE",
+        sub: "Criolipólisis Médica Dual",
+        desc: "Eliminación de grasa localizada por frío (-11°C). El equipo utiliza aplicadores anatómicos en C y permite tratar dos zonas a la vez.",
+        points: ["35 a 60 min por ciclo", "Hasta 25% de grasa eliminada de forma permanente", "Sin agujas ni tiempo de baja"]
       },
       ultherapy: {
-        title: "Ultherapy Prime® : Lifting Microfocalizado",
-        sub: "Tratamiento no invasivo de referencia avalado por la FDA",
-        desc: "Ultherapy Prime representa la cúspide del tensado dérmico no quirúrgico. Dispone de un procesador 10 veces más potente y una visualización ecográfica de alta definición que permite a la Dra. Anastasia ver exactamente a qué profundidad deposita la energía de ultrasonidos.",
-        points: [
-          "<strong>Ecografía en tiempo real:</strong> Garantiza que la energía llega a las capas SMAS (el plano que tensan los cirujanos).",
-          "<strong>1 sola sesión:</strong> Los resultados progresan a lo largo de 3 a 6 meses a medida que el cuerpo produce nuevo colágeno joven.",
-          "<strong>Indicado para:</strong> Desdibujamiento de la mandíbula, descolgamiento de cuello, flacidez del escote y elevación de cejas.",
-          "<strong>Sin cicatrices:</strong> Deja la superficie de la piel intacta."
-        ]
+        title: "Ultherapy Prime®",
+        sub: "Lifting Facial Sin Cirugía",
+        desc: "Ultrasonidos microfocalizados con ecografía de alta definición en tiempo real. Estimula colágeno en el plano SMAS.",
+        points: ["1 sola sesión al año", "Efecto tensor gradual y natural", "Sin marcas superficiales en la piel"]
       },
       nordlys: {
-        title: "Nordlys® by Candela : Plataforma SWT y Frax 1550",
-        sub: "Luz pulsada de banda estrecha y láser fraccionado no ablativo",
-        desc: "Nordlys es el equipo más versátil del mercado médico-estético internacional. Inicia la era de los pulsos en sub-milisegundos (0,5 ms) junto con la tecnología SWT (Selective Waveband Technology), eliminando el exceso de calor innecesario.",
-        points: [
-          "<strong>Láser Frax 1550:</strong> Skin resurfacing no ablativo para arrugas finas, textura de porcelana, estrías y cicatrices de acné.",
-          "<strong>Vascular y Manchas:</strong> Tratamiento de alta eficacia en rojeces difusas, cuperosis, rosácea y lentigos solares.",
-          "<strong>Recuperación exprés:</strong> Al dejar la barrera epidérmica íntegra, no requiere vendajes ni costras visibles."
-        ]
+        title: "Nordlys® & Frax 1550™",
+        sub: "Plataforma SWT y Láser Fraccionado",
+        desc: "Luz pulsada de banda estrecha para manchas solares, cuperosis y rosácea, combinada con láser Frax 1550 para cicatrices y estrías.",
+        points: ["Pulsos en sub-milisegundos (0,5 ms)", "Elimina léntigos y rojeces", "Recuperación rápida sin costras agresivas"]
       },
       zaffiro: {
-        title: "Neauvia Zaffiro : Termo-Lifting e Hidroexfoliación",
-        sub: "Sinergia de luz infrarroja y agua a alta velocidad",
-        desc: "Zaffiro combina la exfoliación con agua enriquecida en principios activos patentados y el calor profundo de la luz infrarroja para tensar las fibras elásticas del rostro y el cuerpo.",
-        points: [
-          "<strong>Efecto Flash & Progresivo:</strong> Ideal antes de eventos importantes por su luminosidad inmediata.",
-          "<strong>Hidratación profunda:</strong> Desincrusta impurezas al tiempo que infunde antioxidantes dérmicos.",
-          "<strong>Cero dolor:</strong> Sensación cálida muy agradable y relajante durante todo el protocolo."
-        ]
+        title: "Neauvia Zaffiro",
+        sub: "Termolifting e Hidroexfoliación",
+        desc: "Sinergia de luz infrarroja y agua a presión enriquecida en principios activos para tensar e iluminar el rostro.",
+        points: ["Efecto tensor y glow inmediato", "Hidratación celular profunda", "Tratamiento indoloro y muy agradable"]
       }
     };
 
-    function openMachineModal(key) {
-      const data = machinesInfo[key];
-      if (!data) return;
-      const html = `
-        <span class="text-xs font-semibold uppercase tracking-widest text-bronze">${data.sub}</span>
-        <h3 class="font-serif text-3xl text-stone-900 mt-1 mb-4">${data.title}</h3>
-        <p class="text-stone-600 text-sm leading-relaxed mb-6">${data.desc}</p>
-        <div class="bg-stone-50 p-5 rounded-2xl border border-stone-200 mb-6">
-          <h4 class="text-xs font-bold uppercase tracking-wider text-stone-800 mb-3">Detalles Clínicos del Protocolo:</h4>
-          <ul class="space-y-2 text-xs text-stone-700">
-            ${data.points.map(p => `<li>• ${p}</li>`).join('')}
-          </ul>
-        </div>
-        <div class="flex gap-3">
-          <button onclick="closeMachineModal(); openChat('${data.title}')" class="bg-stone-900 hover:bg-bronze text-white px-6 py-3 rounded-full text-xs font-semibold uppercase tracking-wider transition w-full">
-            Consultar Disponibilidad y Cita con Asistente IA ↗
-          </button>
-        </div>
+    function openMachineModal(k) {
+      const d = machineDetails[k];
+      if (!d) return;
+      document.getElementById('machine-modal-content').innerHTML = `
+        <span class="text-xs font-semibold uppercase tracking-widest text-bronze">${d.sub}</span>
+        <h3 class="font-serif text-2xl text-stone-900 mt-1 mb-3">${d.title}</h3>
+        <p class="text-stone-600 text-xs sm:text-sm leading-relaxed mb-4">${d.desc}</p>
+        <ul class="space-y-1.5 text-xs text-stone-700 bg-stone-50 p-4 rounded-2xl border border-stone-200 mb-6">
+          ${d.points.map(p => `<li>• ${p}</li>`).join('')}
+        </ul>
+        <button onclick="closeMachineModal(); openChat('${d.title}')" class="w-full bg-stone-900 text-white py-3 rounded-full text-xs uppercase font-semibold">
+          Pedir Cita para este Tratamiento ↗
+        </button>
       `;
-      document.getElementById('machine-modal-content').innerHTML = html;
       document.getElementById('machine-modal').classList.remove('hidden');
       document.getElementById('machine-modal').classList.add('flex');
     }
@@ -1293,245 +886,97 @@
       document.getElementById('machine-modal').classList.remove('flex');
     }
 
-    // 4. Modal de Auditoría SendaIA
     function toggleAuditModal() {
-      const el = document.getElementById('audit-modal');
-      el.classList.toggle('hidden');
-      el.classList.toggle('flex');
+      const m = document.getElementById('audit-modal');
+      m.classList.toggle('hidden');
+      m.classList.toggle('flex');
     }
 
-    // 5. Menú Móvil
     function toggleMobileMenu() {
       document.getElementById('mobile-menu').classList.toggle('hidden');
     }
 
-    // 6. MOTOR DEL CHATBOT MÉDICO "VALERIA"
-    let bookingStep = 0;
-    let appointmentData = {
-      treatment: '',
-      datePreference: '',
-      name: '',
-      phone: ''
-    };
-
     function toggleChatWindow() {
-      const chatWin = document.getElementById('chat-window');
-      chatWin.classList.toggle('hidden');
-      if (!chatWin.classList.contains('hidden')) {
-        document.getElementById('chat-input').focus();
-      }
+      document.getElementById('chat-window').classList.toggle('hidden');
     }
 
-    function openChat(treatmentTopic) {
-      const chatWin = document.getElementById('chat-window');
-      chatWin.classList.remove('hidden');
-      if (treatmentTopic === 'cita') {
-        startAppointmentFlow();
+    function openChat(topic) {
+      document.getElementById('chat-window').classList.remove('hidden');
+      appendUserMessage(`Quisiera información sobre ${topic}`);
+      respondToTopic(topic);
+    }
+
+    function sendQuickReply(t) {
+      appendUserMessage(t);
+      if (t.includes('Cita')) {
+        startBooking();
       } else {
-        appendUserMessage(`Quisiera información sobre ${treatmentTopic}`);
-        respondToTopic(treatmentTopic);
+        respondToTopic(t);
       }
     }
 
-    function sendQuickReply(text) {
-      appendUserMessage(text);
-      if (text.includes('CoolSculpting')) {
-        respondToTopic('Coolsculpting');
-      } else if (text.includes('Ultherapy')) {
-        respondToTopic('Ultherapy');
-      } else if (text.includes('cita')) {
-        startAppointmentFlow();
-      } else {
-        respondGeneral(text);
-      }
+    function appendUserMessage(t) {
+      const c = document.getElementById('chat-messages');
+      const div = document.createElement('div');
+      div.className = "flex justify-end";
+      div.innerHTML = `<div class="bg-stone-900 text-white p-3 rounded-2xl text-xs max-w-[85%]">${t}</div>`;
+      c.appendChild(div);
+      c.scrollTop = c.scrollHeight;
     }
 
-    function appendUserMessage(text) {
-      const container = document.getElementById('chat-messages');
-      const msg = document.createElement('div');
-      msg.className = "flex justify-end";
-      msg.innerHTML = `
-        <div class="bg-stone-900 text-white p-3.5 rounded-2xl rounded-tr-sm text-stone-100 max-w-[85%] shadow-sm leading-relaxed">
-          ${text}
-        </div>
-      `;
-      container.appendChild(msg);
-      container.scrollTop = container.scrollHeight;
+    function appendBotMessage(h) {
+      const c = document.getElementById('chat-messages');
+      const div = document.createElement('div');
+      div.className = "flex gap-2 items-start";
+      div.innerHTML = `<div class="w-5 h-5 rounded-full bg-stone-800 text-champagne flex items-center justify-center text-[9px] font-bold shrink-0 mt-0.5">V</div><div class="bg-white p-3 rounded-2xl border border-stone-200 text-stone-800 shadow-sm leading-relaxed max-w-[85%] text-xs">${h}</div>`;
+      c.appendChild(div);
+      c.scrollTop = c.scrollHeight;
     }
 
-    function appendBotMessage(html) {
-      const container = document.getElementById('chat-messages');
-      const msg = document.createElement('div');
-      msg.className = "flex gap-2.5 items-start";
-      msg.innerHTML = `
-        <div class="w-6 h-6 rounded-full bg-stone-800 text-champagne flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">V</div>
-        <div class="bg-white p-3.5 rounded-2xl rounded-tl-sm border border-stone-200/80 text-stone-800 shadow-sm leading-relaxed max-w-[85%]">
-          ${html}
-        </div>
-      `;
-      container.appendChild(msg);
-      container.scrollTop = container.scrollHeight;
+    let bStep = 0;
+    let bData = { tr: '', dt: '', nm: '', ph: '' };
+
+    function startBooking(tr) {
+      bStep = 1;
+      bData.tr = tr || 'Valoración General';
+      appendBotMessage(`Perfecto, coordinemos tu cita de valoración médica en Edificio Fórum.<br><br><strong>Paso 1/3:</strong> ¿Qué días u horarios prefieres? (ej: <em>martes por la tarde</em>)`);
     }
 
     function handleUserMessage() {
       const input = document.getElementById('chat-input');
-      const text = input.value.trim();
-      if (!text) return;
+      const val = input.value.trim();
+      if (!val) return;
       input.value = '';
-      appendUserMessage(text);
+      appendUserMessage(val);
 
-      if (bookingStep > 0) {
-        handleBookingStep(text);
-        return;
-      }
-
-      const lower = text.toLowerCase();
-      if (lower.includes('cita') || lower.includes('reservar') || lower.includes('hora') || lower.includes('consulta')) {
-        startAppointmentFlow();
-      } else if (lower.includes('coolsculpting') || lower.includes('grasa') || lower.includes('criolipolisis')) {
-        respondToTopic('Coolsculpting');
-      } else if (lower.includes('ultherapy') || lower.includes('lifting') || lower.includes('flacidez')) {
-        respondToTopic('Ultherapy');
-      } else if (lower.includes('mancha') || lower.includes('nordlys') || lower.includes('rosacea')) {
-        respondToTopic('Nordlys');
-      } else if (lower.includes('precio') || lower.includes('cuesta') || lower.includes('tarifa')) {
-        appendBotMessage(`
-          Los tratamientos en nuestra clínica son 100% individualizados tras el diagnóstico médico con la Dra. Anastasia Cano.
-          <br><br>
-          En la <strong>primera consulta de valoración médica</strong> evaluamos tu anatomía con ecografía dérmica o análisis segmental y te entregamos un plan terapéutico con presupuesto cerrado sin compromiso.
-          <br><br>
-          ¿Deseas que te agende cita esta semana?
-          <div class="mt-2.5">
-            <button onclick="startAppointmentFlow()" class="bg-bronze hover:bg-bronze-dark text-white px-3 py-1.5 rounded-lg text-[11px] font-semibold transition">
-              Sí, agendar consulta médica
-            </button>
-          </div>
-        `);
+      if (bStep === 1) {
+        bData.dt = val;
+        bStep = 2;
+        appendBotMessage(`Anotado (${val}).<br><br><strong>Paso 2/3:</strong> ¿A qué nombre preparamos la ficha médica?`);
+      } else if (bStep === 2) {
+        bData.nm = val;
+        bStep = 3;
+        appendBotMessage(`Gracias, ${val}.<br><br><strong>Paso 3/3:</strong> Por favor, déjame tu teléfono de contacto para confirmarte la hora.`);
+      } else if (bStep === 3) {
+        bData.ph = val;
+        bStep = 0;
+        const msg = encodeURIComponent(`Hola Dra. Anastasia Cano, solicito cita desde la web:\n- Nombre: ${bData.nm}\n- Tratamiento: ${bData.tr}\n- Horario: ${bData.dt}\n- Tel: ${bData.ph}`);
+        appendBotMessage(`🎉 <strong>¡Solicitud de cita pre-registrada!</strong><br><br>• Paciente: ${bData.nm}<br>• Preferencia: ${bData.dt}<br><br>Recepción te contactará enseguida, o puedes confirmar ya mismo en WhatsApp:<div class="mt-2.5"><a href="https://wa.me/34640741719?text=${msg}" target="_blank" class="inline-block bg-emerald-600 text-white px-3.5 py-1.5 rounded-lg font-semibold text-[11px]">Confirmar en WhatsApp ↗</a></div>`);
       } else {
-        respondGeneral(text);
+        respondToTopic(val);
       }
     }
 
-    function respondToTopic(topic) {
-      const lower = topic.toLowerCase();
-      if (lower.includes('coolsculpting')) {
-        appendBotMessage(`
-          <strong>CoolSculpting® ELITE</strong> es nuestro equipo de criolipólisis médica en Edificio Fórum.
-          <br><br>
-          • <strong>Efectividad:</strong> Elimina hasta un 20-25% de la grasa localizada tratada por congelación (-11°C).
-          <br>• <strong>Sesiones:</strong> Habitualmente entre 1 y 2 sesiones según el volumen a tratar.
-          <br>• <strong>Sin baja médica:</strong> Regreso inmediato a tu rutina.
-          <br><br>
-          ¿Quieres agendar una valoración diagnóstica para valorar tu zona?
-          <div class="mt-2.5">
-            <button onclick="startAppointmentFlow('CoolSculpting Elite')" class="bg-stone-900 text-white px-3 py-1.5 rounded-lg text-[11px] font-semibold">
-              Agendar para CoolSculpting
-            </button>
-          </div>
-        `);
-      } else if (lower.includes('ultherapy')) {
-        appendBotMessage(`
-          <strong>Ultherapy Prime®</strong> es el único lifting facial sin cirugía que utiliza ecografía de alta definición a tiempo real para ver las capas exactas de tu piel.
-          <br><br>
-          • <strong>Sesiones:</strong> Solo 1 sesión al año.
-          <br>• <strong>Resultados:</strong> Tensa óvalo, cejas y cuello de forma gradual durante 3-6 meses mediante síntesis de colágeno propio.
-          <br><br>
-          ¿Deseas que reservemos tu cita diagnóstica con la doctora?
-          <div class="mt-2.5">
-            <button onclick="startAppointmentFlow('Ultherapy Prime')" class="bg-stone-900 text-white px-3 py-1.5 rounded-lg text-[11px] font-semibold">
-              Agendar para Ultherapy Prime
-            </button>
-          </div>
-        `);
-      } else if (lower.includes('nordlys')) {
-        appendBotMessage(`
-          Nuestra plataforma <strong>Nordlys Candela</strong> combina luz pulsada selectiva (SWT) y láser fraccionado <strong>Frax 1550</strong>.
-          <br><br>
-          Elimina manchas solares, capilares faciales, cuperosis y trata cicatrices o estrías sin periodo de convalecencia.
-          <br><br>
-          ¿Te gustaría una valoración dérmica con dermatoscopio?
-          <div class="mt-2.5">
-            <button onclick="startAppointmentFlow('Nordlys / Manchas')" class="bg-stone-900 text-white px-3 py-1.5 rounded-lg text-[11px] font-semibold">
-              Pedir Cita para Manchas
-            </button>
-          </div>
-        `);
+    function respondToTopic(t) {
+      const l = t.toLowerCase();
+      if (l.includes('coolsculpting')) {
+        appendBotMessage(`<strong>CoolSculpting® ELITE</strong> es nuestra criolipólisis médica en Edificio Fórum. Elimina hasta un 25% de grasa localizada por frío sin agujas ni cirugía.<br><br>¿Quieres agendar cita de valoración?<div class="mt-2"><button onclick="startBooking('CoolSculpting Elite')" class="bg-stone-900 text-white px-3 py-1 rounded-lg font-semibold text-[11px]">Pedir Cita</button></div>`);
+      } else if (l.includes('ultherapy')) {
+        appendBotMessage(`<strong>Ultherapy Prime®</strong> es el lifting facial sin cirugía avalado por FDA con ecografía en tiempo real. 1 sola sesión anual.<br><br>¿Agendamos valoración?<div class="mt-2"><button onclick="startBooking('Ultherapy Prime')" class="bg-stone-900 text-white px-3 py-1 rounded-lg font-semibold text-[11px]">Pedir Cita</button></div>`);
       } else {
-        appendBotMessage(`
-          Perfecto. Para <strong>${topic}</strong> la Dra. Anastasia realiza una valoración clínica previa en nuestra consulta del Edificio Fórum (NICA 44613).
-          <br><br>
-          ¿Quieres que iniciemos la reserva de tu cita?
-          <div class="mt-2.5">
-            <button onclick="startAppointmentFlow('${topic}')" class="bg-bronze text-white px-3 py-1.5 rounded-lg text-[11px] font-semibold">
-              Sí, reservar cita
-            </button>
-          </div>
-        `);
-      }
-    }
-
-    function respondGeneral(text) {
-      appendBotMessage(`
-        Entendido. En la clínica cuidamos al máximo cada detalle para que recibas un asesoramiento honesto y adaptado a ti.
-        <br><br>
-        Estamos en <strong>Calle José Luis Pérez Pujadas 35 (Edificio Fórum), Granada</strong>. Teléfono: <strong>858 996 637</strong>.
-        <br><br>
-        ¿Prefieres que te ayude a agendar una cita o tienes alguna pregunta específica sobre nuestros equipos?
-      `);
-    }
-
-    // FLUJO CONVERSACIONAL DE AGENDAMIENTO PASO A PASO
-    function startAppointmentFlow(pref) {
-      bookingStep = 1;
-      appointmentData.treatment = pref || 'Valoración General';
-      appendBotMessage(`
-        Genial, vamos a preparar tu cita de valoración médica. 
-        <br><br>
-        <strong>Paso 1 de 3:</strong> ¿Qué días u horarios te vienen mejor habitualmente? (Por ejemplo: <em>"Martes o jueves por la tarde"</em> o <em>"Cualquier mañana"</em>).
-      `);
-    }
-
-    function handleBookingStep(text) {
-      if (bookingStep === 1) {
-        appointmentData.datePreference = text;
-        bookingStep = 2;
-        appendBotMessage(`
-          Anotado (${text}).
-          <br><br>
-          <strong>Paso 2 de 3:</strong> ¿A nombre de quién registramos la reserva?
-        `);
-      } else if (bookingStep === 2) {
-        appointmentData.name = text;
-        bookingStep = 3;
-        appendBotMessage(`
-          Muchas gracias, ${text}.
-          <br><br>
-          <strong>Paso 3 de 3:</strong> Por favor, indícame un número de teléfono de contacto para enviarte la confirmación por WhatsApp y los detalles de acceso al Edificio Fórum.
-        `);
-      } else if (bookingStep === 3) {
-        appointmentData.phone = text;
-        bookingStep = 0; // Terminado
-        
-        const waText = encodeURIComponent(`Hola Dra. Anastasia Cano, he solicitado una cita desde la web:\n- Nombre: ${appointmentData.name}\n- Tratamiento: ${appointmentData.treatment}\n- Preferencia horaria: ${appointmentData.datePreference}\n- Teléfono: ${appointmentData.phone}`);
-        
-        appendBotMessage(`
-          🎉 <strong>¡Solicitud de cita pre-registrada con éxito!</strong>
-          <br><br>
-          • <strong>Paciente:</strong> ${appointmentData.name}<br>
-          • <strong>Interés:</strong> ${appointmentData.treatment}<br>
-          • <strong>Horario preferente:</strong> ${appointmentData.datePreference}<br>
-          • <strong>Teléfono:</strong> ${appointmentData.phone}
-          <br><br>
-          Nuestro equipo de recepción revisará el hueco y te contactará en breve. Si lo prefieres, puedes confirmar directamente ahora en un clic:
-          <div class="mt-3">
-            <a href="https://wa.me/34640741719?text=${waText}" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-xl text-xs font-semibold transition">
-              Confirmar en WhatsApp Oficial ↗
-            </a>
-          </div>
-        `);
+        appendBotMessage(`En la clínica de la Dra. Anastasia Cano tratamos cada caso de forma honesta y personalizada en el Edificio Fórum (NICA 44613).<br><br>¿Deseas pedir cita de valoración médica?<div class="mt-2"><button onclick="startBooking('${t}')" class="bg-stone-900 text-white px-3 py-1 rounded-lg font-semibold text-[11px]">Sí, reservar</button></div>`);
       }
     }
   </script>
-
 </body>
 </html>
