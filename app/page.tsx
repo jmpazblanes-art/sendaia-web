@@ -44,9 +44,9 @@ export default function Home() {
           unoptimized
           priority
           sizes="100vw"
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-20 mix-blend-luminosity"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-50"
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-azul via-azul/90 to-azul/60" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-azul via-azul/85 to-azul/35" />
         <HeroFondo />
         <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 pb-20 pt-32 sm:px-8 sm:pt-40 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16 lg:pb-28">
           <div>
@@ -170,9 +170,9 @@ export default function Home() {
                 width={FOTOS.oficina.ancho}
                 height={FOTOS.oficina.alto}
                 unoptimized
-                className="absolute inset-0 h-full w-full object-cover opacity-25 mix-blend-luminosity"
+                className="absolute inset-0 h-full w-full object-cover opacity-50"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-azul via-azul/90 to-azul/60" />
+              <div className="absolute inset-0 bg-gradient-to-t from-azul via-azul/80 to-azul/30" />
               <div className="relative z-10 flex items-center gap-3">
                 <span className="flex h-11 w-11 items-center justify-center rounded-full bg-roto/10 text-cobre-claro backdrop-blur-sm">
                   <Sparkles className="h-5 w-5" aria-hidden />
