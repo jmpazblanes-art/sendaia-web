@@ -57,33 +57,22 @@ export default function Home() {
             <p className="mt-10 text-sm text-roto/70">Nosotros ponemos los sistemas. Tú disfrutas.</p>
           </div>
 
-          {/* Representacion del sistema trabajando */}
-          <div aria-hidden className="hidden lg:block">
-            <div className="rounded-3xl border border-roto/15 bg-azul-hondo/80 p-7 shadow-[0_30px_80px_rgba(8,24,32,0.45)] backdrop-blur-sm">
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-roto/65">El sistema, trabajando</p>
-              <ul className="mt-6 space-y-4">
-                {[
-                  { I: PhoneCall, entra: "Entra una llamada", hace: "Atendida · cita registrada" },
-                  { I: MessageCircle, entra: "Llega un WhatsApp", hace: "Respondido · datos recogidos" },
-                  { I: FileText, entra: "Llega una factura", hace: "Leída · asignada a su sitio" },
-                  { I: Mail, entra: "Entra un correo", hace: "Clasificado · borrador listo" },
-                ].map(({ I, entra, hace }) => (
-                  <li key={entra} className="flex items-center gap-4 rounded-2xl bg-roto/[0.05] px-4 py-3.5">
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-roto/10 text-cobre-claro">
-                      <I className="h-[1.1rem] w-[1.1rem]" />
-                    </span>
-                    <span className="min-w-0 flex-1">
-                      <span className="block text-[0.95rem] font-semibold">{entra}</span>
-                      <span className="block text-sm text-roto/70">{hace}</span>
-                    </span>
-                    <Check className="h-4 w-4 shrink-0 text-cobre-claro" />
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-6 text-sm leading-relaxed text-roto/65">
-                Sin que nadie de tu equipo tenga que acordarse de hacerlo.
-              </p>
-            </div>
+          {/* Visual del Hero con foto */}
+          <div className="relative">
+            <figure className="relative overflow-hidden rounded-3xl border border-roto/15 shadow-[0_30px_80px_rgba(8,24,32,0.45)]">
+              <div className="pointer-events-none absolute inset-0 bg-azul/20 mix-blend-multiply" />
+              <Image
+                src={FOTOS.oficina.src}
+                alt={FOTOS.oficina.alt}
+                width={FOTOS.oficina.ancho}
+                height={FOTOS.oficina.alto}
+                unoptimized
+                priority
+                sizes="(min-width:1024px) 540px, 100vw"
+                className="block h-auto w-full object-cover"
+              />
+            </figure>
+            <figcaption className="mt-2 text-xs text-roto/65">Imagen ilustrativa, generada con IA.</figcaption>
           </div>
         </div>
       </section>
