@@ -1,0 +1,1531 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dra. Anastasia Cano | Clínica de Medicina Estética Avanzada en Granada</title>
+  <meta name="description" content="Medicina estética de alta precisión y máxima naturalidad en Granada. Armonización facial, ácido hialurónico, neuromoduladores y tecnología médica en Edificio Fórum. Cita previa 24/7.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FAF8F5;
+      --bg-card: #FFFFFF;
+      --bg-warm: #F4EFEA;
+      --dark: #1E1815;
+      --dark-soft: #382F2A;
+      --bronze: #B88358;
+      --bronze-dark: #8F5E36;
+      --bronze-light: #F6EDE4;
+      --champagne: #D9BBA0;
+      --text: #2B231F;
+      --text-muted: #786C64;
+      --border: #E8E0D7;
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --shadow-sm: 0 4px 12px rgba(30, 24, 21, 0.04);
+      --shadow-md: 0 10px 30px rgba(30, 24, 21, 0.08);
+      --shadow-lg: 0 20px 50px rgba(30, 24, 21, 0.12);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--text); background: var(--bg); }
+    body { overflow-x: hidden; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+
+    h1, h2, h3, h4, .font-serif {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+    }
+
+    /* TOP BAR */
+    .topbar {
+      background: var(--dark);
+      color: #D6CCC2;
+      font-size: 13px;
+      padding: 9px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .topbar-left { display: flex; gap: 20px; align-items: center; }
+    .topbar-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(184, 131, 88, 0.2);
+      color: var(--champagne);
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .topbar a { color: #EDE5DC; text-decoration: none; font-weight: 500; transition: color 0.2s; }
+    .topbar a:hover { color: #FFFFFF; }
+
+    /* AUDIT NOTIFICATION BANNER (PROPOSAL FOR DOCTOR / CLIENT) */
+    .audit-banner {
+      background: linear-gradient(90deg, #1A1512 0%, #2A1F18 100%);
+      color: #F7EFE8;
+      padding: 10px 20px;
+      font-size: 12.5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid rgba(184,131,88,0.3);
+      text-align: center;
+    }
+    .audit-tag {
+      background: var(--bronze);
+      color: #fff;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 10.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250, 248, 245, 0.94);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+    .nav-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: var(--dark);
+    }
+    .logo-main {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--dark);
+      line-height: 1;
+    }
+    .logo-sub {
+      font-size: 10.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--bronze);
+      font-weight: 600;
+      margin-top: 3px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      align-items: center;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 14.5px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--bronze); }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px 22px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      border: none;
+    }
+    .btn-bronze {
+      background: var(--bronze);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(184, 131, 88, 0.35);
+    }
+    .btn-bronze:hover {
+      background: var(--bronze-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(184, 131, 88, 0.45);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--dark);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover {
+      background: #fff;
+      border-color: var(--bronze);
+      color: var(--bronze);
+    }
+    .btn-dark {
+      background: var(--dark);
+      color: #fff;
+    }
+    .btn-dark:hover {
+      background: var(--dark-soft);
+      transform: translateY(-1px);
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      padding: 60px 24px 80px;
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--bronze);
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: var(--bronze);
+    }
+    .hero-title {
+      font-size: 54px;
+      font-weight: 600;
+      line-height: 1.06;
+      color: var(--dark);
+      margin-bottom: 22px;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--bronze);
+      font-weight: 500;
+    }
+    .hero-desc {
+      font-size: 17px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 32px;
+      max-width: 540px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+    .trust-row {
+      display: flex;
+      gap: 28px;
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .trust-val {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--dark);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .trust-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* HERO IMAGE CARD */
+    .hero-visual {
+      position: relative;
+    }
+    .hero-img-wrap {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border);
+      aspect-ratio: 4 / 3;
+      background: var(--bg-warm);
+      position: relative;
+    }
+    .hero-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .hero-img-wrap:hover img {
+      transform: scale(1.02);
+    }
+    .floating-card {
+      position: absolute;
+      bottom: -24px;
+      left: -20px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      padding: 16px 20px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+      max-width: 290px;
+    }
+    .floating-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--bronze);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background: #10B981;
+      border-radius: 50%;
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+    }
+    .floating-text {
+      font-size: 13px;
+      color: var(--dark);
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    /* SECTION BASICS */
+    section { padding: 80px 24px; }
+    .container { max-width: 1240px; margin: 0 auto; }
+    .section-head { text-align: center; max-width: 680px; margin: 0 auto 56px; }
+    .section-eyebrow {
+      color: var(--bronze);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+    .section-title {
+      font-size: 44px;
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--dark);
+      margin-bottom: 16px;
+    }
+    .section-desc {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* TREATMENTS GRID WITH FILTER TABS */
+    .tabs-nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      padding: 10px 20px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tab-btn.active, .tab-btn:hover {
+      background: var(--dark);
+      color: #fff;
+      border-color: var(--dark);
+    }
+    .treatments-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .treatment-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .treatment-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--champagne);
+    }
+    .treatment-badge {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--bronze);
+      margin-bottom: 12px;
+    }
+    .treatment-name {
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+    .treatment-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+    .treatment-meta {
+      border-top: 1px solid #F0EAE2;
+      padding-top: 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      font-size: 12.5px;
+      color: var(--dark-soft);
+      margin-bottom: 20px;
+    }
+    .treatment-meta span { display: flex; align-items: center; gap: 5px; }
+
+    /* PRE-DIAGNOSIS INTERACTIVE TOOL */
+    .diagnostic-box {
+      background: linear-gradient(135deg, #241C18 0%, #16120F 100%);
+      color: #FAF5F0;
+      border-radius: var(--radius-lg);
+      padding: 56px 48px;
+      box-shadow: var(--shadow-lg);
+    }
+    .diag-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .diag-title {
+      font-size: 40px;
+      line-height: 1.1;
+      color: #FAF5F0;
+      margin-bottom: 16px;
+    }
+    .diag-title em { color: var(--champagne); font-style: italic; }
+    .diag-options-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--champagne);
+      margin-bottom: 14px;
+    }
+    .diag-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .diag-chip {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #EDE4DB;
+      padding: 9px 16px;
+      border-radius: 999px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .diag-chip.selected, .diag-chip:hover {
+      background: var(--bronze);
+      color: #fff;
+      border-color: var(--bronze);
+    }
+    .diag-result {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(217, 187, 160, 0.3);
+      padding: 24px;
+      border-radius: var(--radius-md);
+      margin-top: 16px;
+    }
+
+    /* DOCTOR PROFILE */
+    .doctor-section {
+      background: var(--bg-warm);
+    }
+    .doctor-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 56px;
+      align-items: center;
+    }
+    .doctor-img-wrap {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      border: 2px solid #FFFFFF;
+      aspect-ratio: 1 / 1;
+    }
+    .doctor-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .quote-box {
+      border-left: 2px solid var(--bronze);
+      padding-left: 20px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-style: italic;
+      color: var(--dark);
+      margin: 24px 0;
+      line-height: 1.35;
+    }
+    .credentials-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .credentials-list li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13.5px;
+      color: var(--dark-soft);
+      font-weight: 500;
+    }
+    .credentials-list li::before {
+      content: '✓';
+      color: var(--bronze);
+      font-weight: 700;
+    }
+
+    /* REVIEWS SECTION */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .review-card {
+      background: #fff;
+      padding: 28px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+    .review-stars { color: #F59E0B; margin-bottom: 14px; font-size: 15px; }
+    .review-text { font-size: 14px; line-height: 1.6; color: var(--text); margin-bottom: 18px; font-style: italic; }
+    .review-author { display: flex; align-items: center; gap: 12px; }
+    .review-avatar {
+      width: 38px;
+      height: 38px;
+      background: var(--bg-warm);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--bronze);
+      font-size: 13px;
+    }
+    .review-name { font-size: 13.5px; font-weight: 600; color: var(--dark); }
+    .review-badge { font-size: 11.5px; color: var(--text-muted); }
+
+    /* FOOTER */
+    footer {
+      background: var(--dark);
+      color: #D6CCC2;
+      padding: 60px 24px 30px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .footer-grid {
+      max-width: 1240px;
+      margin: 0 auto 40px;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 40px;
+    }
+    .footer-col h4 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--champagne);
+      margin-bottom: 18px;
+      font-weight: 700;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 10px; }
+    .footer-col a { color: #BBB0A4; text-decoration: none; font-size: 13.5px; transition: color 0.2s; }
+    .footer-col a:hover { color: #fff; }
+    .footer-bottom {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: #9E9287;
+    }
+
+    /* ── CHATBOT COPILOT 24/7 (INTERACTIVE APPOINTMENT GENERATOR) ── */
+    .chat-trigger {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 999;
+      background: var(--dark);
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 12px 36px rgba(30, 24, 21, 0.35);
+      border: 1px solid rgba(217, 187, 160, 0.3);
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .chat-trigger:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 16px 42px rgba(30, 24, 21, 0.45);
+    }
+    .chat-trigger-avatar {
+      position: relative;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 1.5px solid var(--champagne);
+    }
+    .chat-trigger-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .chat-trigger-dot {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 9px;
+      height: 9px;
+      background: #10B981;
+      border-radius: 50%;
+      border: 1.5px solid var(--dark);
+    }
+
+    .chat-modal {
+      position: fixed;
+      bottom: 90px;
+      right: 24px;
+      width: 380px;
+      height: 540px;
+      background: #FFFFFF;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 24px 60px rgba(30, 24, 21, 0.25);
+      border: 1px solid var(--border);
+      z-index: 1000;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      animation: modalFadeIn 0.25s ease-out;
+    }
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: translateY(12px) scale(0.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .chat-header {
+      background: var(--dark);
+      color: #fff;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .chat-header-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .chat-close {
+      background: transparent;
+      border: none;
+      color: #BBB;
+      font-size: 20px;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .chat-body {
+      flex: 1;
+      padding: 18px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      background: #FAF8F5;
+    }
+    .chat-msg {
+      max-width: 85%;
+      font-size: 13px;
+      line-height: 1.45;
+      padding: 12px 16px;
+      border-radius: 16px;
+    }
+    .chat-msg.bot {
+      align-self: flex-start;
+      background: #FFFFFF;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-bottom-left-radius: 4px;
+    }
+    .chat-msg.user {
+      align-self: flex-end;
+      background: var(--bronze);
+      color: #FFFFFF;
+      border-bottom-right-radius: 4px;
+    }
+    .chat-actions-row {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .chat-chip {
+      background: #F4EFEA;
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--dark);
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s;
+    }
+    .chat-chip:hover {
+      background: var(--bronze);
+      color: #fff;
+      border-color: var(--bronze);
+    }
+    .chat-footer {
+      padding: 12px 16px;
+      border-top: 1px solid var(--border);
+      background: #FFFFFF;
+      display: flex;
+      gap: 8px;
+    }
+    .chat-input {
+      flex: 1;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 9px 16px;
+      font-size: 13px;
+      outline: none;
+      font-family: inherit;
+    }
+    .chat-send {
+      background: var(--dark);
+      color: #fff;
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 992px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+      .hero-title { font-size: 40px; }
+      .treatments-grid { grid-template-columns: 1fr 1fr; }
+      .diag-grid { grid-template-columns: 1fr; }
+      .doctor-grid { grid-template-columns: 1fr; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .chat-modal { width: calc(100vw - 32px); right: 16px; bottom: 85px; }
+    }
+    @media (max-width: 640px) {
+      .topbar { flex-direction: column; gap: 6px; text-align: center; font-size: 11.5px; }
+      .nav-links { display: none; }
+      .treatments-grid { grid-template-columns: 1fr; }
+      .hero-title { font-size: 34px; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .floating-card { position: static; margin-top: 16px; max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-badge">Edificio Fórum · Granada</span>
+      <span>Calle José Luis Pérez Pujadas, 35</span>
+      <span>958 13 48 58 · 622 88 56 18</span>
+    </div>
+    <div>
+      <span>Primera consulta médica de valoración sin compromiso</span>
+    </div>
+  </div>
+
+  <!-- DEMO PROPOSAL BANNER -->
+  <div class="audit-banner">
+    <span class="audit-tag">Propuesta Digital SendaIA</span>
+    <span>Rediseño de alta conversión para <strong>Clínica Dra. Anastasia Cano</strong>: adiós a plantillas genéricas obsoletas, hola a captación médica interactiva y agendamiento 24/7.</span>
+  </div>
+
+  <!-- NAVIGATION -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="logo">
+        <span class="logo-main">Dra. Anastasia Cano</span>
+        <span class="logo-sub">Medicina Estética Avanzada</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#tratamientos">Tratamientos</a></li>
+        <li><a href="#diagnostico">Pre-Diagnóstico IA</a></li>
+        <li><a href="#doctora">La Doctora</a></li>
+        <li><a href="#opiniones">Opiniones 5.0★</a></li>
+        <li><a href="#contacto">Ubicación</a></li>
+      </ul>
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <button class="btn btn-bronze" onclick="openChatAndBook()">Pedir Cita Online</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <main>
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <span class="hero-eyebrow">Medicina Estética de Precisión en Granada</span>
+          <h1 class="hero-title">
+            Tu belleza natural, <em>potenciada con rigor médico</em> y resultados que no se notan.
+          </h1>
+          <p class="hero-desc">
+            En nuestro centro en el Edificio Fórum de Granada huimos de los cambios artificiales. Diagnosticamos tu anatomía facial de forma individualizada para devolverte la frescura, tersura y descanso a la piel.
+          </p>
+          <div class="hero-actions">
+            <button class="btn btn-bronze" onclick="openChatAndBook()" style="padding: 14px 28px; font-size: 15px;">
+              ✨ Reservar Cita en Agenda (24/7)
+            </button>
+            <a href="#diagnostico" class="btn btn-outline" style="padding: 14px 24px; font-size: 15px;">
+              Pre-diagnóstico en 30s
+            </a>
+          </div>
+          <div class="trust-row">
+            <div class="trust-item">
+              <span class="trust-val">5.0 ★★★★★</span>
+              <span class="trust-label">Google Reviews (100% reales)</span>
+            </div>
+            <div class="trust-item">
+              <span class="trust-val">Col. 18/1812895</span>
+              <span class="trust-label">Médica Colegiada · SEME</span>
+            </div>
+            <div class="trust-item">
+              <span class="trust-val">+12 Años</span>
+              <span class="trust-label">Experiencia en Granada</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-img-wrap">
+            <img src="/images/demo-anastasia-hero.jpg" alt="Consulta médica en Clínica Dra. Anastasia Cano Granada">
+          </div>
+          <div class="floating-card">
+            <div class="floating-badge">
+              <span class="pulse-dot"></span>
+              Agenda Abierta Esta Semana
+            </div>
+            <p class="floating-text">
+              Huecos disponibles en Edificio Fórum con la <strong>Dra. Anastasia Cano</strong>. Valoración médica directa.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TREATMENTS SECTION -->
+    <section id="tratamientos" style="background: #FFFFFF;">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-eyebrow">Tratamientos Médicos</span>
+          <h2 class="section-title">Resultados armónicos y sutiles diseñados para ti</h2>
+          <p class="section-desc">
+            Utilizamos exclusivamente productos de referencia mundial (Ácido hialurónico Juvederm y Teoxane, toxina Bocouture, inductores Radiesse) aplicados con técnica médica milimétrica.
+          </p>
+        </div>
+
+        <div class="tabs-nav">
+          <button class="tab-btn active" onclick="filterTreatments('todos', this)">Todos los tratamientos</button>
+          <button class="tab-btn" onclick="filterTreatments('facial', this)">Armonización Facial</button>
+          <button class="tab-btn" onclick="filterTreatments('antiedad', this)">Rejuvenecimiento & Bótox</button>
+          <button class="tab-btn" onclick="filterTreatments('corporal', this)">Corporal & Silueta</button>
+        </div>
+
+        <div class="treatments-grid" id="treatments-container">
+          <!-- CARD 1 -->
+          <div class="treatment-card" data-cat="facial">
+            <span class="treatment-badge">Armonización Facial</span>
+            <h3 class="treatment-name">Ácido Hialurónico en Labios</h3>
+            <p class="treatment-desc">
+              Hidratación profunda, definición del arco de cupido y volumen armónico. Diseñado para embellecer sin crear efecto artificial ni perder tu propia esencia.
+            </p>
+            <div class="treatment-meta">
+              <span>⏱️ 30-45 minutos</span>
+              <span>💉 Con microcánula</span>
+              <span>🌿 Efecto 9-12 meses</span>
+              <span>💎 1ª Marca médica</span>
+            </div>
+            <button class="btn btn-outline" style="width: 100%;" onclick="bookSpecific('Ácido Hialurónico Labios')">Pedir Cita para Labios</button>
+          </div>
+
+          <!-- CARD 2 -->
+          <div class="treatment-card" data-cat="antiedad">
+            <span class="treatment-badge">Neuromoduladores</span>
+            <h3 class="treatment-name">Bótox para Arrugas de Expresión</h3>
+            <p class="treatment-desc">
+              Relajación sutil de la frente, entrecejo y patas de gallo. Suaviza la mirada cansada o enfadada manteniendo tu expresividad y sonrisa completamente naturales.
+            </p>
+            <div class="treatment-meta">
+              <span>⏱️ 20 minutos</span>
+              <span>🎯 Frente y entrecejo</span>
+              <span>🌿 Efecto 4-6 meses</span>
+              <span>✨ Sin tiempo de baja</span>
+            </div>
+            <button class="btn btn-outline" style="width: 100%;" onclick="bookSpecific('Bótox / Neuromodulador')">Consultar Cita Bótox</button>
+          </div>
+
+          <!-- CARD 3 -->
+          <div class="treatment-card" data-cat="facial">
+            <span class="treatment-badge">Mirada Fresca</span>
+            <h3 class="treatment-name">Relleno de Ojeras con Redensity II</h3>
+            <p class="treatment-desc">
+              Tratamiento médico específico para el surco lagrimal hundido y sombras oscuras. Aporta hidratación, luminosidad y borra el aspecto de fatiga crónica.
+            </p>
+            <div class="treatment-meta">
+              <span>⏱️ 30 minutos</span>
+              <span>👁️ Fórmula patentada</span>
+              <span>🌿 Efecto 12-18 meses</span>
+              <span>✨ Resultados visibles</span>
+            </div>
+            <button class="btn btn-outline" style="width: 100%;" onclick="bookSpecific('Tratamiento de Ojeras')">Valoración de Ojeras</button>
+          </div>
+
+          <!-- CARD 4 -->
+          <div class="treatment-card" data-cat="antiedad">
+            <span class="treatment-badge">Lifting Biológico</span>
+            <h3 class="treatment-name">Inductores de Colágeno (Radiesse)</h3>
+            <p class="treatment-desc">
+              Bioestimulación celular que activa la producción natural de colágeno y elastina. Redefine el óvalo facial y combate la flacidez dérmica sin añadir volumen excesivo.
+            </p>
+            <div class="treatment-meta">
+              <span>⏱️ 45 minutos</span>
+              <span>🧬 Regeneración propia</span>
+              <span>🌿 Efecto hasta 18 meses</span>
+              <span>📐 Definición mandibular</span>
+            </div>
+            <button class="btn btn-outline" style="width: 100%;" onclick="bookSpecific('Inductores de Colágeno')">Consultar Radiesse</button>
+          </div>
+
+          <!-- CARD 5 -->
+          <div class="treatment-card" data-cat="corporal">
+            <span class="treatment-badge">Silueta Médica</span>
+            <h3 class="treatment-name">Criolipólisis Médica</h3>
+            <p class="treatment-desc">
+              Eliminación definitiva de adipocitos resistentes mediante frío controlado. Indicado para abdomen, flancos y cartucheras sin incisiones, anestesia ni quirófano.
+            </p>
+            <div class="treatment-meta">
+              <span>⏱️ 60 min / zona</span>
+              <span>❄️ Grasa localizada</span>
+              <span>📉 Hasta -25% grasa</span>
+              <span>🛡️ Tecnología médica</span>
+            </div>
+            <button class="btn btn-outline" style="width: 100%;" onclick="bookSpecific('Criolipólisis Médica')">Estudio Corporal</button>
+          </div>
+
+          <!-- CARD 6 -->
+          <div class="treatment-card" data-cat="facial">
+            <span class="treatment-badge">Calidad de la Piel</span>
+            <h3 class="treatment-name">Peeling Químico & Láser Manchas</h3>
+            <p class="treatment-desc">
+              Renovación dérmica para eliminar léntigos solares, melasma y poros dilatados. Devuelve una textura uniforme, satinada y suave al rostro y escote.
+            </p>
+            <div class="treatment-meta">
+              <span>⏱️ 30 minutos</span>
+              <span>🌟 Luminosidad pura</span>
+              <span>🎯 Manchas y poros</span>
+              <span>🧴 Piel renovada</span>
+            </div>
+            <button class="btn btn-outline" style="width: 100%;" onclick="bookSpecific('Peeling Médico y Manchas')">Cita para Piel</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRE-DIAGNOSIS INTERACTIVE TOOL -->
+    <section id="diagnostico" style="background: var(--bg-warm);">
+      <div class="container">
+        <div class="diagnostic-box">
+          <div class="diag-grid">
+            <div>
+              <span class="section-eyebrow" style="color: var(--champagne);">Herramienta Interactiva</span>
+              <h2 class="diag-title">¿Qué zona de tu rostro o cuerpo <em>deseas mejorar?</em></h2>
+              <p style="color: #CFC5BC; font-size: 15px; line-height: 1.6; margin-bottom: 24px;">
+                Selecciona tus prioridades en 2 toques. Nuestro asistente médico inteligente te indicará el protocolo más aconsejado para tu objetivo.
+              </p>
+              <div style="background: rgba(255,255,255,0.06); padding: 16px; border-radius: 12px; font-size: 13px; color: #E8DED4;">
+                🔒 Diagnóstico confidencial supervisado por la Dra. Anastasia Cano.
+              </div>
+            </div>
+
+            <div>
+              <p class="diag-options-title">1. Selecciona tu zona prioritaria:</p>
+              <div class="diag-chips">
+                <button class="diag-chip selected" onclick="pickZone('Labios y Peribucal', this)">👄 Labios</button>
+                <button class="diag-chip" onclick="pickZone('Mirada y Ojeras', this)">👁️ Ojeras / Mirada cansada</button>
+                <button class="diag-chip" onclick="pickZone('Frente y Arrugas', this)">✨ Frente / Entrecejo</button>
+                <button class="diag-chip" onclick="pickZone('Flacidez y Óvalo facial', this)">📐 Óvalo / Mandíbula</button>
+                <button class="diag-chip" onclick="pickZone('Grasa localizada corporal', this)">❄️ Grasa localizada</button>
+              </div>
+
+              <p class="diag-options-title">2. ¿Cuál es tu objetivo principal?</p>
+              <div class="diag-chips">
+                <button class="diag-chip selected" onclick="pickGoal('Aspecto descansado y fresco', this)">🌿 Aspecto descansado</button>
+                <button class="diag-chip" onclick="pickGoal('Hidratación y volumen natural', this)">💧 Hidratación y volumen</button>
+                <button class="diag-chip" onclick="pickGoal('Tensión y firmeza sin cirugía', this)">⚡ Firmeza y tensión</button>
+              </div>
+
+              <div class="diag-result" id="diag-recommendation">
+                <p style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--champagne); font-weight: 700;">Protocolo aconsejado:</p>
+                <h4 style="font-size: 22px; color: #fff; margin: 6px 0 8px; font-family: 'Cormorant Garamond', serif;" id="diag-rec-title">
+                  Armonización e Hidratación Labial con Ácido Hialurónico
+                </h4>
+                <p style="font-size: 13px; color: #D6CCC2; line-height: 1.5; margin-bottom: 16px;" id="diag-rec-desc">
+                  Ideal para perfilar y suavizar líneas sin crear exceso. En tu primera cita, la Dra. Anastasia analizará la proporción de tu labio superior e inferior.
+                </p>
+                <button class="btn btn-bronze" style="padding: 10px 20px; font-size: 13px;" onclick="bookFromDiag()">
+                  Agendar Valoración de Este Tratamiento
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DOCTOR PROFILE SECTION -->
+    <section id="doctora" class="doctor-section">
+      <div class="container">
+        <div class="doctor-grid">
+          <div class="doctor-img-wrap">
+            <img src="/images/demo-anastasia-doctora.jpg" alt="Dra. Anastasia Cano - Especialista en Medicina Estética Granada">
+          </div>
+          <div>
+            <span class="section-eyebrow">Dirección Médica</span>
+            <h2 class="section-title">Dra. Anastasia Cano</h2>
+            <p style="color: var(--bronze); font-weight: 600; font-size: 16px; margin-bottom: 8px;">
+              Licenciada en Medicina y Cirugía · Universidad de Granada
+            </p>
+            <div class="quote-box">
+              «La medicina estética bien hecha no busca cambiar quién eres, sino devolver la luz y el descanso a tu mirada. Si alguien nota qué te has hecho, no está bien ejecutado.»
+            </div>
+            <p style="color: var(--text-muted); font-size: 15px; line-height: 1.6; margin-bottom: 16px;">
+              Con más de una década de dedicación exclusiva a la medicina estética y regenerativa en Granada, la Dra. Anastasia Cano atiende a cada paciente de manera personalizada. En nuestra clínica nunca serás un número: realizamos diagnósticos pausados, honestos y transparentes donde te decimos con franqueza qué necesitas y qué no.
+            </p>
+            <ul class="credentials-list">
+              <li>Máster Oficial en Medicina Estética</li>
+              <li>Miembro de la SEME</li>
+              <li>Médica Colegiada en Granada nº 18/1812895</li>
+              <li>Uso exclusivo de aparatología médica CE</li>
+            </ul>
+            <div style="margin-top: 32px;">
+              <button class="btn btn-dark" onclick="openChatAndBook()">Conocer a la Doctora en Consulta</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REAL CLINICAL CASES SECTION -->
+    <section style="background: #FFFFFF;">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-eyebrow">Resultados Reales</span>
+          <h2 class="section-title">El poder de la naturalidad</h2>
+          <p class="section-desc">
+            Cada tratamiento busca una integración perfecta con la mímica de tu rostro. Piel jugosa, contornos definidos y armonía absoluta.
+          </p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 36px;">
+          <div style="border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-md);">
+            <img src="/images/demo-anastasia-tratamiento.jpg" alt="Tratamiento estético facial en Granada" style="width: 100%; display: block;">
+          </div>
+          <div>
+            <span style="font-size: 12px; font-weight: 700; color: var(--bronze); text-transform: uppercase; letter-spacing: 0.1em;">Caso Clínico · Armonización Facial</span>
+            <h3 style="font-size: 32px; color: var(--dark); margin: 8px 0 16px; font-family: 'Cormorant Garamond', serif;">
+              Hidratación y Corrección de Ojeras en Paciente de 38 años
+            </h3>
+            <p style="color: var(--text-muted); font-size: 14.5px; line-height: 1.6; margin-bottom: 20px;">
+              <strong>Objetivo:</strong> Eliminar el aspecto cansado tras jornadas de trabajo intensas, sin ganar volumen artificial en pómulos ni alterar los rasgos.
+            </p>
+            <p style="color: var(--text-muted); font-size: 14.5px; line-height: 1.6; margin-bottom: 24px;">
+              <strong>Protocolo:</strong> 1 vial de Teoxane Redensity II en fosa lagrimal con microcánula y mesoterapia de vitaminas NCTF 135HA. Procedimiento indoloro realizado en 35 minutos.
+            </p>
+            <div style="display: flex; gap: 16px; align-items: center;">
+              <button class="btn btn-bronze" onclick="bookSpecific('Tratamiento de Ojeras')">Quiero un resultado similar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GOOGLE REVIEWS 5.0★ -->
+    <section id="opiniones" style="background: var(--bg-warm);">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-eyebrow">Testimonios Verificados</span>
+          <h2 class="section-title">5.0 Estrellas en Google y Doctoralia</h2>
+          <p class="section-desc">
+            Lo que más valoran nuestras pacientes en Granada: honestidad, calidez humana y resultados impecables.
+          </p>
+        </div>
+
+        <div class="reviews-grid">
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">
+              «Llevaba años queriendo hacerme los labios pero me aterraba quedar exagerada. La Dra. Anastasia me escuchó con muchísima paciencia y me dejó un resultado súper natural y elegante. Todo el mundo me dice qué buena cara tengo.»
+            </p>
+            <div class="review-author">
+              <div class="review-avatar">MC</div>
+              <div>
+                <p class="review-name">María C. Mendoza</p>
+                <p class="review-badge">Paciente de Ácido Hialurónico · Granada</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">
+              «Una profesional de 10. No te intenta vender tratamientos que no te hacen falta, es súper sincera y cercana. El bótox que me pone me quita las patas de gallo pero sigo sonriendo exactamente igual. La clínica es una maravilla.»
+            </p>
+            <div class="review-author">
+              <div class="review-avatar">LR</div>
+              <div>
+                <p class="review-name">Laura Ramos P.</p>
+                <p class="review-badge">Tratamiento Antiarrugas · Edificio Fórum</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">
+              «Tanto la doctora como todo el equipo son encantadores. Las instalaciones son de lujo, con mucha tranquilidad y puntualidad. Me hice el tratamiento de ojeras y parecía que había dormido 10 horas seguidas. 100% recomendable.»
+            </p>
+            <div class="review-author">
+              <div class="review-avatar">EG</div>
+              <div>
+                <p class="review-name">Elena Gómez S.</p>
+                <p class="review-badge">Tratamiento de Ojeras · Paciente habitual</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOCATION & CONTACT -->
+    <section id="contacto" style="background: #FFFFFF;">
+      <div class="container">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;">
+          <div>
+            <span class="section-eyebrow">Visítanos en Granada</span>
+            <h2 class="section-title">Tu espacio de calma y belleza en Edificio Fórum</h2>
+            <p style="color: var(--text-muted); font-size: 15px; line-height: 1.6; margin-bottom: 24px;">
+              Nuestra clínica médica está diseñada para que desconectes desde que cruzas la puerta. Fácil acceso, aparcamiento cómodo y total discreción.
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px;">
+              <div style="display: flex; gap: 12px; align-items: flex-start;">
+                <span style="font-size: 18px;">📍</span>
+                <div>
+                  <strong>Dirección:</strong><br>
+                  <span style="color: var(--text-muted); font-size: 14px;">Calle José Luis Pérez Pujadas, 35 (Edificio Fórum, 18006 Granada)</span>
+                </div>
+              </div>
+              <div style="display: flex; gap: 12px; align-items: flex-start;">
+                <span style="font-size: 18px;">📞</span>
+                <div>
+                  <strong>Teléfonos directos:</strong><br>
+                  <span style="color: var(--text-muted); font-size: 14px;">958 13 48 58 · 622 88 56 18</span>
+                </div>
+              </div>
+              <div style="display: flex; gap: 12px; align-items: flex-start;">
+                <span style="font-size: 18px;">⏰</span>
+                <div>
+                  <strong>Horario de consulta:</strong><br>
+                  <span style="color: var(--text-muted); font-size: 14px;">Lunes a Viernes: 10:00 - 14:00 y 16:30 - 20:30</span>
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-bronze" onclick="openChatAndBook()">Reservar Consulta con Dra. Anastasia</button>
+          </div>
+
+          <div style="background: var(--bg-warm); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 36px; text-align: center;">
+            <span style="font-size: 40px; margin-bottom: 12px; display: inline-block;">✨</span>
+            <h3 style="font-size: 28px; color: var(--dark); font-family: 'Cormorant Garamond', serif; margin-bottom: 12px;">
+              ¿Tienes dudas sobre algún tratamiento?
+            </h3>
+            <p style="color: var(--text-muted); font-size: 14.5px; line-height: 1.6; margin-bottom: 24px;">
+              Nuestro asistente inteligente 24/7 resuelve tus preguntas de recuperación, precios aproximados y te agenda la cita médica en 1 minuto.
+            </p>
+            <button class="btn btn-dark" style="width: 100%;" onclick="toggleChat()">
+              💬 Iniciar Consulta con Asistente Virtual
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <span class="logo-main" style="color: #fff; font-size: 22px;">Dra. Anastasia Cano</span>
+        <p style="font-size: 13px; color: #BBB0A4; margin-top: 8px; line-height: 1.6;">
+          Clínica de Medicina Estética Avanzada en Granada. Especialistas en armonización facial natural, neuromoduladores y rejuvenecimiento dérmico.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Tratamientos</h4>
+        <ul>
+          <li><a href="#tratamientos">Ácido Hialurónico</a></li>
+          <li><a href="#tratamientos">Bótox Facial</a></li>
+          <li><a href="#tratamientos">Relleno de Ojeras</a></li>
+          <li><a href="#tratamientos">Inductores de Colágeno</a></li>
+          <li><a href="#tratamientos">Criolipólisis Médica</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Clínica</h4>
+        <ul>
+          <li><a href="#doctora">La Doctora</a></li>
+          <li><a href="#diagnostico">Pre-Diagnóstico</a></li>
+          <li><a href="#opiniones">Opiniones Google</a></li>
+          <li><a href="#contacto">Dónde Estamos</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <ul>
+          <li><a href="tel:958134858">958 13 48 58</a></li>
+          <li><a href="tel:622885618">622 88 56 18</a></li>
+          <li><a href="mailto:info@anastasiacano.es">info@anastasiacano.es</a></li>
+          <li><a href="#">Edificio Fórum, Granada</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Clínica Dra. Anastasia Cano · Todos los derechos reservados · Granada.</p>
+      <p>Demo tecnológica desarrollada por <a href="https://sendaia.es" style="color: var(--champagne); text-decoration: underline;">SendaIA</a></p>
+    </div>
+  </footer>
+
+  <!-- ── FLOATING CHATBOT WIDGET (APPOINTMENT ENGINE) ── -->
+  <div class="chat-trigger" onclick="toggleChat()">
+    <div class="chat-trigger-avatar">
+      <img src="/images/demo-anastasia-doctora.jpg" alt="Asistente de Dra. Anastasia Cano">
+      <span class="chat-trigger-dot"></span>
+    </div>
+    <div style="display: flex; flex-direction: column;">
+      <span style="font-size: 13.5px; font-weight: 700; line-height: 1.2;">Asistente Médica IA</span>
+      <span style="font-size: 11px; color: #D6CCC2;">Citas & Dudas 24/7</span>
+    </div>
+  </div>
+
+  <!-- CHATBOT MODAL -->
+  <div class="chat-modal" id="chat-modal">
+    <div class="chat-header">
+      <div class="chat-header-info">
+        <div style="position: relative; width: 34px; height: 34px; border-radius: 50%; overflow: hidden; border: 1.5px solid var(--champagne);">
+          <img src="/images/demo-anastasia-doctora.jpg" alt="Dra. Anastasia Cano" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <div>
+          <p style="font-size: 13.5px; font-weight: 700;">Valeria · Asistente IA</p>
+          <p style="font-size: 11px; color: #10B981; font-weight: 600;">● En línea · Dra. Anastasia Cano</p>
+        </div>
+      </div>
+      <button class="chat-close" onclick="toggleChat()">&times;</button>
+    </div>
+
+    <div class="chat-body" id="chat-body">
+      <div class="chat-msg bot">
+        ¡Hola! Soy Valeria, la asistente de la <strong>Dra. Anastasia Cano</strong>. ¿En qué puedo ayudarte hoy en nuestra clínica de Granada?
+        <div class="chat-actions-row">
+          <button class="chat-chip" onclick="startBookingFlow()">📅 Quiero pedir cita médica</button>
+          <button class="chat-chip" onclick="askFaq('¿Los labios quedan naturales o hinchados?')">👄 ¿Cómo quedan los labios?</button>
+          <button class="chat-chip" onclick="askFaq('¿El tratamiento con bótox duele?')">💉 ¿El bótox duele?</button>
+          <button class="chat-chip" onclick="askFaq('¿Cuánto cuesta la primera consulta?')">💶 ¿Cuánto cuesta la valoración?</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="chat-footer">
+      <input type="text" id="chat-input" class="chat-input" placeholder="Escribe tu consulta médica o pide cita..." onkeydown="if(event.key==='Enter') sendChat()">
+      <button class="chat-send" onclick="sendChat()">➤</button>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // FILTER TREATMENTS
+    function filterTreatments(cat, btn) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cards = document.querySelectorAll('.treatment-card');
+      cards.forEach(card => {
+        if (cat === 'todos' || card.getAttribute('data-cat') === cat) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // INTERACTIVE PRE-DIAGNOSIS
+    let selectedZone = 'Labios y Peribucal';
+    let selectedGoal = 'Aspecto descansado y fresco';
+
+    const DIAGNOSTIC_MAP = {
+      'Labios y Peribucal': {
+        title: 'Armonización e Hidratación Labial con Ácido Hialurónico',
+        desc: 'Enfocado en hidratar, recuperar tono y definir el arco sin aumentar de forma desproporcionada. Procedimiento sutil con microcánula y 0 dolor.'
+      },
+      'Mirada y Ojeras': {
+        title: 'Protocolo Mirada Descansada (Redensity II + Bótox Sutil)',
+        desc: 'Tratamiento de elección para surco lagrimal oscuro y líneas perioculares. Elimina el efecto de mirada triste o cansada desde la primera sesión.'
+      },
+      'Frente y Arrugas': {
+        title: 'Neuromodulación de Expresión Relajada (Bótox)',
+        desc: 'Suaviza patas de gallo y entrecejo manteniendo tu sonrisa natural. La Dra. Anastasia busca un resultado fresco, nunca congelado.'
+      },
+      'Flacidez y Óvalo facial': {
+        title: 'Bioestimulación con Inductores de Colágeno (Radiesse)',
+        desc: 'Estimula la producción celular propia de colágeno para compactar la piel y marcar la mandíbula sin meter volúmenes exagerados.'
+      },
+      'Grasa localizada corporal': {
+        title: 'Criolipólisis Médica de Grasa Localizada',
+        desc: 'Eliminación selectiva de células grasas mediante enfriamiento médico controlado en flancos, abdomen o cartucheras.'
+      }
+    };
+
+    function pickZone(zone, el) {
+      el.parentElement.querySelectorAll('.diag-chip').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+      selectedZone = zone;
+      updateDiag();
+    }
+
+    function pickGoal(goal, el) {
+      el.parentElement.querySelectorAll('.diag-chip').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+      selectedGoal = goal;
+      updateDiag();
+    }
+
+    function updateDiag() {
+      const data = DIAGNOSTIC_MAP[selectedZone] || DIAGNOSTIC_MAP['Labios y Peribucal'];
+      document.getElementById('diag-rec-title').textContent = data.title;
+      document.getElementById('diag-rec-desc').textContent = data.desc;
+    }
+
+    function bookFromDiag() {
+      const trat = document.getElementById('diag-rec-title').textContent;
+      bookSpecific(trat);
+    }
+
+    // CHATBOT COPILOT LOGIC
+    let bookingStep = 0;
+    let appointmentData = { treatment: '', slot: '', contact: '' };
+
+    function toggleChat() {
+      const modal = document.getElementById('chat-modal');
+      const isVisible = modal.style.display === 'flex';
+      modal.style.display = isVisible ? 'none' : 'flex';
+    }
+
+    function openChatAndBook() {
+      const modal = document.getElementById('chat-modal');
+      modal.style.display = 'flex';
+      startBookingFlow();
+    }
+
+    function bookSpecific(treatmentName) {
+      const modal = document.getElementById('chat-modal');
+      modal.style.display = 'flex';
+      bookingStep = 2;
+      appointmentData.treatment = treatmentName;
+      appendMsg('user', 'Quiero agendar cita para: ' + treatmentName);
+      setTimeout(() => {
+        let reply = 'Excelente elección. El tratamiento de <strong>' + treatmentName + '</strong> lo realiza siempre directamente la Dra. Anastasia Cano en nuestra clínica de Edificio Fórum.<br><br>Tenemos estos huecos libres esta semana. ¿Cuál te viene mejor?<div class="chat-actions-row">';
+        reply += '<button class="chat-chip" onclick="chooseSlot(\'Mañana Miércoles a las 11:30 h\')">Mañana Miércoles · 11:30 h</button>';
+        reply += '<button class="chat-chip" onclick="chooseSlot(\'Mañana Miércoles a las 17:00 h\')">Mañana Miércoles · 17:00 h</button>';
+        reply += '<button class="chat-chip" onclick="chooseSlot(\'Jueves a las 12:00 h\')">Jueves · 12:00 h</button>';
+        reply += '<button class="chat-chip" onclick="chooseSlot(\'Viernes a las 18:30 h\')">Viernes · 18:30 h</button>';
+        reply += '</div>';
+        appendMsg('bot', reply);
+      }, 350);
+    }
+
+    function startBookingFlow() {
+      bookingStep = 1;
+      appendMsg('user', 'Quiero pedir cita médica');
+      setTimeout(() => {
+        let reply = '¡Perfecto! Te ayudo a bloquear tu cita con la <strong>Dra. Anastasia Cano</strong> en 1 minuto.<br><br>¿Qué zona o tratamiento te interesa valorar?<div class="chat-actions-row">';
+        reply += '<button class="chat-chip" onclick="chooseTreatment(\'Ácido Hialurónico Labios\')">👄 Labios / Hidratación</button>';
+        reply += '<button class="chat-chip" onclick="chooseTreatment(\'Bótox / Arrugas de Expresión\')">✨ Bótox / Frente y Entrecejo</button>';
+        reply += '<button class="chat-chip" onclick="chooseTreatment(\'Tratamiento de Ojeras\')">👁️ Ojeras / Mirada cansada</button>';
+        reply += '<button class="chat-chip" onclick="chooseTreatment(\'Inductores de Colágeno\')">⚡ Flacidez / Radiesse</button>';
+        reply += '<button class="chat-chip" onclick="chooseTreatment(\'Valoración Médica General\')">📋 Primera valoración general</button>';
+        reply += '</div>';
+        appendMsg('bot', reply);
+      }, 350);
+    }
+
+    function chooseTreatment(trat) {
+      appointmentData.treatment = trat;
+      bookingStep = 2;
+      appendMsg('user', 'Interés: ' + trat);
+      setTimeout(() => {
+        let reply = 'Perfecto. Para ' + trat + ', tenemos estos huecos preferentes libres en Edificio Fórum:<div class="chat-actions-row">';
+        reply += '<button class="chat-chip" onclick="chooseSlot(\'Mañana Miércoles a las 11:30 h\')">Mañana Miércoles · 11:30 h</button>';
+        reply += '<button class="chat-chip" onclick="chooseSlot(\'Mañana Miércoles a las 17:00 h\')">Mañana Miércoles · 17:00 h</button>';
+        reply += '<button class="chat-chip" onclick="chooseSlot(\'Jueves a las 12:00 h\')">Jueves · 12:00 h</button>';
+        reply += '<button class="chat-chip" onclick="chooseSlot(\'Viernes a las 18:30 h\')">Viernes · 18:30 h</button>';
+        reply += '</div>';
+        appendMsg('bot', reply);
+      }, 350);
+    }
+
+    function chooseSlot(slot) {
+      appointmentData.slot = slot;
+      bookingStep = 3;
+      appendMsg('user', 'Prefiero: ' + slot);
+      setTimeout(() => {
+        const reply = 'Estupendo, hueco reservado provisionalmente. Por favor, <strong>escribe tu Nombre y Teléfono móvil</strong> (ej: <em>Carmen 612345678</em>) para confirmar la cita en la agenda de la doctora y enviarte la confirmación directa a WhatsApp.';
+        appendMsg('bot', reply);
+      }, 350);
+    }
+
+    function askFaq(question) {
+      appendMsg('user', question);
+      setTimeout(() => {
+        let answer = '';
+        if (question.includes('labios')) {
+          answer = 'En nuestra clínica el objetivo número uno de la Dra. Anastasia es la <strong>naturalidad total</strong>. Utilizamos técnicas de hidratación y perfilado con microcánula que se integran en tu tejido sin volumen excesivo ni rigidez. Tras 24-48 h el resultado es súper sutil y elegante.';
+        } else if (question.includes('duele')) {
+          answer = 'No duele. Se realiza con agujas ultrafinas de calibre microscópico. La sesión dura apenas 15 minutos y puedes volver a tu rutina de inmediato. No deja marcas.';
+        } else if (question.includes('cuesta')) {
+          answer = 'La primera consulta diagnóstica personalizada con la Dra. Anastasia Cano no tiene compromiso. Te examina la anatomía facial, te explica qué opciones tienes y te da un presupuesto exacto y transparente.';
+        } else {
+          answer = 'Por supuesto. Estamos en Edificio Fórum (Calle José Luis Pérez Pujadas 35, Granada), con parking muy fácil y acceso cómodo. Si deseas venir a vernos, podemos reservar tu cita ahora mismo.';
+        }
+        answer += '<br><br><button class="chat-chip" onclick="startBookingFlow()">📅 Reservar cita ahora</button>';
+        appendMsg('bot', answer);
+      }, 400);
+    }
+
+    function sendChat() {
+      const input = document.getElementById('chat-input');
+      const text = input.value.trim();
+      if (!text) return;
+      input.value = '';
+      appendMsg('user', text);
+
+      if (bookingStep === 3) {
+        appointmentData.contact = text;
+        bookingStep = 0;
+        setTimeout(() => {
+          let conf = '🎉 <strong>¡CITA PRE-RESERVADA CON ÉXITO!</strong><br><br>';
+          conf += '📍 <strong>Lugar:</strong> Clínica Dra. Anastasia Cano (Edificio Fórum, Granada)<br>';
+          conf += '💉 <strong>Tratamiento:</strong> ' + (appointmentData.treatment || 'Valoración médica') + '<br>';
+          conf += '⏰ <strong>Horario:</strong> ' + appointmentData.slot + '<br>';
+          conf += '👤 <strong>Paciente:</strong> ' + appointmentData.contact + '<br><br>';
+          conf += 'Hemos registrado tu solicitud. Te enviamos de inmediato un WhatsApp de confirmación con la ubicación exacta y recordatorio.<br><br>';
+          conf += '<a href="https://wa.me/34622885618?text=Hola,%20he%20solicitado%20cita%20con%20la%20Dra.%20Anastasia%20Cano%20para%20' + encodeURIComponent(appointmentData.treatment) + '" target="_blank" class="btn btn-bronze" style="display:inline-block; font-size:12px; padding:8px 16px;">📲 Abrir confirmación en WhatsApp</a>';
+          appendMsg('bot', conf);
+        }, 500);
+      } else {
+        setTimeout(() => {
+          let reply = 'Gracias por tu consulta. Para este caso te recomiendo que la Dra. Anastasia te examine directamente en clínica para ver tu tipo de piel y anatomía.<br><br>';
+          reply += '<button class="chat-chip" onclick="startBookingFlow()">📅 Agendar consulta diagnóstica</button>';
+          appendMsg('bot', reply);
+        }, 400);
+      }
+    }
+
+    function appendMsg(sender, html) {
+      const body = document.getElementById('chat-body');
+      const msg = document.createElement('div');
+      msg.className = 'chat-msg ' + sender;
+      msg.innerHTML = html;
+      body.appendChild(msg);
+      body.scrollTop = body.scrollHeight;
+    }
+  </script>
+</body>
+</html>
