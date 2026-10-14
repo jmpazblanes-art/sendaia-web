@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 
 export async function POST() {
   try {
-    const res = await fetch('https://api.retellai.com/v2/create-web-call', {
+    const res = await fetch('https://api.retellai.com/v3/create-web-call', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${process.env.RETELL_API_KEY}`,
@@ -20,7 +20,12 @@ export async function POST() {
     }
 
     const data = await res.json()
-    return NextResponse.json({ access_token: data.access_token })
+    return NextResponse.json({
+      access_token: data.access_token,
+      call_id: data.call_id,
+      transport: data.transport,
+      ice_servers: data.ice_servers,
+    })
   } catch {
     return NextResponse.json({ error: 'Error de conexión' }, { status: 500 })
   }

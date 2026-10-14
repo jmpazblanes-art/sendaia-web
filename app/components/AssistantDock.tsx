@@ -165,7 +165,12 @@ function AssistantDock() {
       client.on('call_started', () => setVStatus('active'))
       client.on('call_ended', () => { setVStatus('idle'); retellClientRef.current = null })
       client.on('error', () => { setVStatus('error'); retellClientRef.current = null })
-      await client.startCall({ accessToken: data.access_token })
+      await client.startCall({
+        accessToken: data.access_token,
+        callId: data.call_id,
+        transport: data.transport,
+        iceServers: data.ice_servers,
+      })
     } catch {
       setVStatus('error')
       setTimeout(() => setVStatus('idle'), 3000)
