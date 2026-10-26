@@ -100,6 +100,7 @@ function AssistantDock() {
 
   // ── Voz (Retell) ──
   const [vStatus, setVStatus] = useState<'idle' | 'connecting' | 'active' | 'error'>('idle')
+  const [vAviso, setVAviso] = useState<string | null>(null)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const retellClientRef = useRef<any>(null)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -156,6 +157,18 @@ function AssistantDock() {
   async function startCall() {
     if (!RetellWebClient) return
     setVStatus('connecting')
+    setVAviso(null)
+    // El micrófono se pide ANTES de crear la llamada: si se deniega, la llamada
+    // quedaba creada en Retell sin nadie (error_user_not_joined) y el botón no decía nada.
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
+      stream.getTracks().forEach(t => t.stop())
+    } catch {
+      setVStatus('error')
+      setVAviso('Activa el micrófono o llama al 858 215 026')
+      setTimeout(() => { setVStatus('idle'); setVAviso(null) }, 8000)
+      return
+    }
     try {
       const res = await fetch('/api/voice', { method: 'POST' })
       const data = await res.json()
@@ -173,7 +186,8 @@ function AssistantDock() {
       })
     } catch {
       setVStatus('error')
-      setTimeout(() => setVStatus('idle'), 3000)
+      setVAviso('No se pudo conectar · llama al 858 215 026')
+      setTimeout(() => { setVStatus('idle'); setVAviso(null) }, 8000)
     }
   }
 
@@ -384,7 +398,7 @@ function AssistantDock() {
               {vActive ? 'En llamada' : 'Agente de voz'}
             </span>
             <span className="text-[10px] sm:text-[11px]" style={{ color: vActive ? 'rgba(252,165,165,0.8)' : 'var(--accent-light)' }}>
-              {vStatus === 'connecting' ? 'Conectando…' : vActive ? 'Pulsa para colgar' : 'Llámanos · IA 24/7'}
+              {vAviso ?? (vStatus === 'connecting' ? 'Conectando…' : vActive ? 'Pulsa para colgar' : 'Llámanos · IA 24/7')}
             </span>
           </span>
           <span
