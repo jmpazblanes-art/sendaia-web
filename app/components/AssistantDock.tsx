@@ -172,6 +172,13 @@ function AssistantDock() {
     try {
       const res = await fetch('/api/voice', { method: 'POST' })
       const data = await res.json()
+      // Límite de llamadas desde la web (3 al día por conexión): se dice claro, no «Reintentar».
+      if (res.status === 429) {
+        setVStatus('error')
+        setVAviso('Por hoy ya no hay más llamadas desde la web · llámanos al 858 215 026')
+        setTimeout(() => { setVStatus('idle'); setVAviso(null) }, 10000)
+        return
+      }
       if (!data.access_token) throw new Error('No token')
       const client = new RetellWebClient()
       retellClientRef.current = client
