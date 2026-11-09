@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { isIP } from 'node:net'
 
 // Crea la llamada web con Carolina (botón «Habla con nuestro agente»).
 // Pachi, 09/11/2026: antes no había ningún filtro. Ahora:
@@ -8,24 +9,31 @@ import { NextResponse } from 'next/server'
 const CRM_VOZ_WEB_URL =
   process.env.CRM_VOZ_WEB_URL || 'https://crm.sendaia.es/api/webhooks/voz-web'
 
+// Clave del visitante para el límite. IPv4 tal cual; IPv4 dentro de IPv6 (::ffff:1.2.3.4)
+// se pasa a IPv4; IPv6 se cuenta por su /64 (un móvil cambia de dirección dentro de él).
 function ipDe(request: Request): string {
   // En Vercel, x-forwarded-for lo pone la plataforma; el primero es el visitante.
   const xff = request.headers.get('x-forwarded-for') || ''
-  const ip = xff.split(',')[0].trim() || request.headers.get('x-real-ip') || ''
-  // IPv6: un móvil cambia de dirección dentro de su /64; se cuenta por el /64 para que
-  // no se esquive el límite cambiando de dirección.
-  if (ip.includes(':')) {
-    const partes = ip.split('%')[0].split('::')
-    const izq = partes[0] ? partes[0].split(':') : []
-    const der = partes.length > 1 && partes[1] ? partes[1].split(':') : []
-    const llena = partes.length > 1 ? [...izq, ...Array(Math.max(0, 8 - izq.length - der.length)).fill('0'), ...der] : izq
-    return llena.slice(0, 4).map((g) => (g || '0').toLowerCase()).join(':') + '::/64'
-  }
-  return ip
+  let ip = (xff.split(',')[0].trim() || request.headers.get('x-real-ip') || '').split('%')[0]
+  const mapeada = ip.match(/^::ffff:(\d{1,3}(?:\.\d{1,3}){3})$/i)
+  if (mapeada) ip = mapeada[1]
+  const tipo = isIP(ip)
+  if (tipo === 4) return ip
+  if (tipo !== 6) return ''
+  const [izq, der = ''] = ip.split('::')
+  const a = izq ? izq.split(':') : []
+  const b = ip.includes('::') && der ? der.split(':') : []
+  const llena = ip.includes('::') ? [...a, ...Array(8 - a.length - b.length).fill('0'), ...b] : a
+  return llena.slice(0, 4).map((g) => (g || '0').toLowerCase().replace(/^0+(?=.)/, '')).join(':') + '::/64'
 }
 
-async function puedeLlamar(ip: string): Promise<boolean> {
-  if (!ip || !process.env.CRM_WEBHOOK_SECRET) return true
+// Falla en CERRADO (revisión Codex 09/11): si no se puede comprobar el límite, no se crea
+// la llamada (un bot podría gastar el saldo de Retell). El visitante ve el teléfono para llamar.
+async function puedeLlamar(ip: string): Promise<'ok' | 'limite' | 'fallo'> {
+  if (!ip || !process.env.CRM_WEBHOOK_SECRET) {
+    console.error('voz-web: sin IP o sin CRM_WEBHOOK_SECRET; no se crea la llamada')
+    return 'fallo'
+  }
   try {
     const res = await fetch(CRM_VOZ_WEB_URL, {
       method: 'POST',
@@ -35,21 +43,22 @@ async function puedeLlamar(ip: string): Promise<boolean> {
     })
     if (!res.ok) {
       console.error('voz-web: el CRM respondió', res.status)
-      return true // si el CRM falla, no se le cierra la puerta a un cliente
+      return 'fallo'
     }
     const d = await res.json()
-    return d.permitida !== false
+    return d.permitida === true ? 'ok' : d.permitida === false ? 'limite' : 'fallo'
   } catch (e) {
     console.error('voz-web: sin respuesta del CRM', e)
-    return true
+    return 'fallo'
   }
 }
 
 export async function POST(request: Request) {
   try {
-    if (!(await puedeLlamar(ipDe(request)))) {
-      return NextResponse.json({ error: 'limite' }, { status: 429 })
-    }
+    const permiso = await puedeLlamar(ipDe(request))
+    if (permiso === 'limite') return NextResponse.json({ error: 'limite' }, { status: 429 })
+    // El widget enseña «No se pudo conectar · llama al 858 215 026».
+    if (permiso === 'fallo') return NextResponse.json({ error: 'No se pudo iniciar la llamada' }, { status: 503 })
 
     const res = await fetch('https://api.retellai.com/v3/create-web-call', {
       method: 'POST',
