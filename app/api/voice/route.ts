@@ -12,9 +12,10 @@ const CRM_VOZ_WEB_URL =
 // Clave del visitante para el límite. IPv4 tal cual; IPv4 dentro de IPv6 (::ffff:1.2.3.4)
 // se pasa a IPv4; IPv6 se cuenta por su /64 (un móvil cambia de dirección dentro de él).
 function ipDe(request: Request): string {
-  // En Vercel, x-forwarded-for lo pone la plataforma; el primero es el visitante.
-  const xff = request.headers.get('x-forwarded-for') || ''
-  let ip = (xff.split(',')[0].trim() || request.headers.get('x-real-ip') || '').split('%')[0]
+  // Solo cabeceras que pone Vercel (el visitante no las puede falsear): x-vercel-forwarded-for
+  // y x-real-ip. NUNCA el primer valor de x-forwarded-for, que el cliente puede rellenar.
+  const vercel = request.headers.get('x-vercel-forwarded-for') || request.headers.get('x-real-ip') || ''
+  let ip = vercel.split(',')[0].trim().split('%')[0]
   const mapeada = ip.match(/^::ffff:(\d{1,3}(?:\.\d{1,3}){3})$/i)
   if (mapeada) ip = mapeada[1]
   const tipo = isIP(ip)
