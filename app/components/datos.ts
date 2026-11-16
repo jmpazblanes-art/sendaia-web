@@ -75,7 +75,7 @@ export const CASOS = [
   {
     id: 'climatizacion',
     sector: 'Climatización / Instalaciones',
-    contexto: 'Instaladora de climatización · 83 trabajadores · Granada · en marcha desde mayo de 2026',
+    contexto: 'Instaladora de climatización · 83 trabajadores · en marcha desde mayo de 2026',
     titulo: 'De hojas de Excel sueltas a un sistema que cuadra solo',
     problema:
       'Llevaban obras, horas y facturas de proveedor en Excels dispersos. Cada factura se imputaba a mano a su obra; los descuadres aparecían meses después y nadie sabía el margen real de cada proyecto hasta que era tarde.',

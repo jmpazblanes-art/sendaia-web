@@ -332,7 +332,7 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:items-center">
             <div className="aparece">
-              <p className="eyebrow">Caso real · Granada</p>
+              <p className="eyebrow">Caso real</p>
               <h2 className="mt-4 text-3xl font-semibold leading-[1.08] text-azul sm:text-5xl">
                 932 facturas procesadas solas.
               </h2>
